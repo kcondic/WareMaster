@@ -23,8 +23,7 @@ namespace WareMaster.Domain.Repositories
             var activityLogList = new List<ActivityLog>();
 
             foreach (var user in userList)
-                foreach (var activity in user.ActivityLogs)
-                    activityLogList.Add(activity);
+                    activityLogList.AddRange(user.ActivityLogs);
 
             return activityLogList;
         }
