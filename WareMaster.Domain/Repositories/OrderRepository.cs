@@ -11,36 +11,34 @@ namespace WareMaster.Domain.Repositories
 {
     public class OrderRepository
     {
-        public List<Order> GetAll()
+        public OrderRepository()
         {
-            using (var context = new WarehouseContext())
-                return context.Orders.ToList();
+            _companyRepository = new CompanyRepository();
         }
 
-        public List<Order> GetAllCreated()
+        private readonly CompanyRepository _companyRepository;
+
+        public List<Order> GetAllFromACompany(int companyId)
         {
-            using (var context = new WarehouseContext())
-                return context.Orders
-                    //.Include(order => order.AssignedUsers)
-                    //.Include(order => order.Products)
+                return _companyRepository.GetCompanyById(companyId).Orders.ToList();
+        }
+
+        public List<Order> GetAllCreatedFromACompany(int companyId)
+        {
+                return _companyRepository.GetCompanyById(companyId).Orders
                     .Where(order => order.Status == Status.Created).ToList();
         }
 
-        public List<Order> GetAllInProgress()
+        public List<Order> GetAllInProgressFromACompany(int companyId)
         {
             using (var context = new WarehouseContext())
-                return context.Orders
-                    //.Include(order => order.AssignedUsers)
-                    //.Include(order => order.Products)
+                return _companyRepository.GetCompanyById(companyId).Orders
                     .Where(order => order.Status == Status.InProgress).ToList();
         }
 
-        public List<Order> GetAllFinished()
+        public List<Order> GetAllFinishedFromACompany(int companyId)
         {
-            using (var context = new WarehouseContext())
-                return context.Orders
-                    //.Include(order => order.AssignedUsers)
-                    //.Include(order => order.Products)
+                return _companyRepository.GetCompanyById(companyId).Orders
                     .Where(order => order.Status == Status.Finished).ToList();
         }
 

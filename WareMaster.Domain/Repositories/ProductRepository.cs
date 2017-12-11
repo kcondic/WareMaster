@@ -11,10 +11,16 @@ namespace WareMaster.Domain.Repositories
 {
     public class ProductRepository
     {
-        public List<Product> GetAllProducts()
+        public ProductRepository()
         {
-            using (var context = new WarehouseContext())
-                return context.Products.ToList();
+            _companyRepository = new CompanyRepository();
+        }
+
+        private readonly CompanyRepository _companyRepository;
+
+        public List<Product> GetAllProductsFromACompany(int companyId)
+        {
+                return _companyRepository.GetCompanyById(companyId).Products.ToList();
         }
 
         /*public List<Product> GetAllProductsByCategory()
@@ -79,12 +85,12 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
             {
-                var productToDelete = context.Orders.FirstOrDefault(product => product.Id == productId);
+                var productToDelete = context.Products.FirstOrDefault(product => product.Id == productId);
 
                 if (productToDelete == null)
                     return;
 
-                context.Orders.Remove(productToDelete);
+                context.Products.Remove(productToDelete);
                 context.SaveChanges();
             }
         }

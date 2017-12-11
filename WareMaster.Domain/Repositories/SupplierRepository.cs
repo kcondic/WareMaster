@@ -11,10 +11,16 @@ namespace WareMaster.Domain.Repositories
 {
     public class SupplierRepository
     {
-        public List<Supplier> GetAllSuppliers()
+        public SupplierRepository()
         {
-            using (var context = new WarehouseContext())
-                return context.Suppliers.ToList();
+            _company = new CompanyRepository();
+        }
+
+        private readonly CompanyRepository _company;
+
+        public List<Supplier> GetAllSuppliersForACompany(int companyId)
+        {
+                return _company.GetCompanyById(companyId).Suppliers.ToList();
         }
 
         public Supplier GetSupplier(int supplierId)
@@ -27,7 +33,7 @@ namespace WareMaster.Domain.Repositories
         }
 
         public void AddNewSupplier(Supplier supplier)
-        {
+        {          
             using (var context = new WarehouseContext())
             {
                 context.Companies.Attach(supplier.Company);
