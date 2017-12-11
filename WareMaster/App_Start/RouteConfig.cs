@@ -12,7 +12,7 @@ namespace WareMaster
             routes.MapRoute(
                 name: "Default",
                 url: "{*url}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Shell", id = UrlParameter.Optional }
             );
         }
     }
