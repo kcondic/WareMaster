@@ -76,6 +76,7 @@ namespace WareMaster.Domain.Repositories
                 productToEdit.Orders = editedProduct.Orders;
                 productToEdit.Suppliers = editedProduct.Suppliers;
                 productToEdit.Company = editedProduct.Company;
+                productToEdit.Counter = productToEdit.Counter;
 
                 context.SaveChanges();
             }
