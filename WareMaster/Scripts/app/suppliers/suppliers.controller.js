@@ -1,4 +1,4 @@
-﻿angular.module('app').controller('DashboardController',
+﻿angular.module('app').controller('SuppliersController',
     function ($scope, suppliersRepository) {
         $scope.suppliers = [];
 

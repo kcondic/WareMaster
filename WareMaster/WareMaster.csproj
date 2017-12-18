@@ -144,6 +144,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SuppliersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -160,6 +161,10 @@
     <Content Include="Scripts\app\signin\signin.controller.js" />
     <Content Include="Scripts\app\signin\signin.state.js" />
     <Content Include="Scripts\app\signin\signin.template.html" />
+    <Content Include="Scripts\app\suppliers\suppliers.controller.js" />
+    <Content Include="Scripts\app\suppliers\suppliers.state.js" />
+    <Content Include="Scripts\app\suppliers\suppliers.template.html" />
+    <Content Include="Scripts\services\suppliersRepository.js" />
     <Content Include="Scripts\vendor\angular.min.js" />
     <Content Include="Scripts\vendor\angular-ui-router.min.js" />
     <Content Include="Scripts\vendor\underscore.min.js" />
@@ -173,7 +178,9 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Shell.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

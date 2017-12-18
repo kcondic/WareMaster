@@ -22,23 +22,23 @@ namespace WareMaster.Data.Models
             modelBuilder.Entity<User>()
                 .HasRequired(x => x.Company)
                 .WithMany(x => x.EmployeesManagers)
-                .HasForeignKey(x => x.Company.Id);
+                .HasForeignKey(x => x.CompanyId);
             modelBuilder.Entity<Product>()
                 .HasRequired(x => x.Company)
                 .WithMany(x => x.Products)
-                .HasForeignKey(x => x.Company.Id);
+                .HasForeignKey(x => x.CompanyId);
             modelBuilder.Entity<Order>()
                 .HasRequired(x => x.Company)
                 .WithMany(x => x.Orders)
-                .HasForeignKey(x => x.Company.Id);
+                .HasForeignKey(x => x.CompanyId);
             modelBuilder.Entity<Supplier>()
                 .HasRequired(x => x.Company)
                 .WithMany(x => x.Suppliers)
-                .HasForeignKey(x => x.Company.Id);
+                .HasForeignKey(x => x.CompanyId);
             modelBuilder.Entity<ActivityLog>()
                 .HasRequired(x => x.User)
                 .WithMany(x => x.ActivityLogs)
-                .HasForeignKey(x => x.User.Id);
+                .HasForeignKey(x => x.UserId);
             base.OnModelCreating(modelBuilder);
         }
     }
