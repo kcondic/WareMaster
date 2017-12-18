@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using WareMaster.Data.Models.Entities;
 
 namespace WareMaster.Data.Models
@@ -19,6 +20,7 @@ namespace WareMaster.Data.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Entity<User>()
                 .HasRequired(x => x.Company)
                 .WithMany(x => x.EmployeesManagers)
