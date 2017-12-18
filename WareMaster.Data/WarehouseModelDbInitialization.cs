@@ -14,9 +14,11 @@ namespace WareMaster.Data
         protected override void Seed(WarehouseContext context)
         {
             var testUser = new User() {FirstName = "Test", LastName = "Testic", Role = Role.Manager};
-            context.Users.Add(testUser);
             var testCompany = new Company() {Name = "TestKompanija"};
             testCompany.EmployeesManagers.Add(testUser);
+
+            context.Users.Add(testUser);
+            context.Companies.Add(testCompany);
             base.Seed(context);
         }
     }
