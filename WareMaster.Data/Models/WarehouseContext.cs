@@ -7,7 +7,8 @@ namespace WareMaster.Data.Models
     {
         public WarehouseContext() : base("WareMasterDatabase")
         {
-            Database.SetInitializer(new CreateDatabaseIfNotExists<WarehouseContext>());
+            Database.SetInitializer(new WarehouseModelDbInitialization());
+            
         }
 
         public virtual DbSet<Company> Companies { get; set; }

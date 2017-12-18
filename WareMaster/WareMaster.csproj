@@ -152,8 +152,16 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\app.config.js" />
+    <Content Include="Scripts\app\app.module.js" />
+    <Content Include="Scripts\app\dashboard\dashboard.controller.js" />
+    <Content Include="Scripts\app\dashboard\dashboard.state.js" />
+    <Content Include="Scripts\app\dashboard\dashboard.template.html" />
+    <Content Include="Scripts\app\signin\signin.controller.js" />
+    <Content Include="Scripts\app\signin\signin.state.js" />
+    <Content Include="Scripts\app\signin\signin.template.html" />
     <Content Include="Scripts\vendor\angular.min.js" />
+    <Content Include="Scripts\vendor\angular-ui-router.min.js" />
     <Content Include="Scripts\vendor\underscore.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
