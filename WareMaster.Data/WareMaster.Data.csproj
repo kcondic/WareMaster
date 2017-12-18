@@ -57,6 +57,7 @@
     <Compile Include="Models\Entities\User.cs" />
     <Compile Include="Models\WarehouseContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WarehouseModelDbInitialization.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

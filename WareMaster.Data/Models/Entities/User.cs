@@ -15,6 +15,7 @@ namespace WareMaster.Data.Models.Entities
         public Role Role { get; set; }
         public ICollection<Order> Orders { get; set; }
         public Company Company { get; set; }
+        public int CompanyId { get; set; }
         public ICollection<ActivityLog> ActivityLogs { get; set; }
     }
 }

@@ -8,5 +8,6 @@ namespace WareMaster.Data.Models.Entities
         public string Name { get; set; }
         public ICollection<Product> Products { get; set; }
         public Company Company { get; set; }
+        public int CompanyId { get; set; }
     }
 }

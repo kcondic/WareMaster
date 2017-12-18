@@ -17,5 +17,6 @@ namespace WareMaster.Data.Models.Entities
         public DateTime TimeOfCreation { get; set; }
         public Status Status { get; set; }
         public Company Company { get; set; }
+        public int CompanyId { get; set; }
     }
 }
