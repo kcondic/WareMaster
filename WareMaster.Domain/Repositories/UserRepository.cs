@@ -73,9 +73,8 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
             {
+                userToAdd.Company = _companyRepository.GetCompanyById(1);
                 context.Companies.Attach(userToAdd.Company);
-                foreach (var order in userToAdd.Orders)
-                    context.Orders.Attach(order);
 
                 context.Users.Add(userToAdd);
                 context.SaveChanges();

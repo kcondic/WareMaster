@@ -153,6 +153,9 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\app\addemployee\addemployee.controller.js" />
+    <Content Include="Scripts\app\addemployee\addemployee.state.js" />
+    <Content Include="Scripts\app\addemployee\addemployee.template.html" />
     <Content Include="Scripts\app\app.config.js" />
     <Content Include="Scripts\app\app.module.js" />
     <Content Include="Scripts\app\common\employees.repository.js" />
