@@ -5,9 +5,12 @@
             $scope.allEmployees = employees.data;
         });
 
-        $scope.deleteEmployee = function (id) {
-            employeesRepository.deleteEmployee(id);
-            $scope.allEmployees.splice($scope.allEmployees
-                               .findIndex(employee => employee.Id === id), 1);
+        $scope.deleteEmployee = function (id, firstName, lastName) {
+            if (confirm(`Jeste li sigurni da želite izbrisati zaposlenika ${firstName} ${lastName}?`))
+            {
+                employeesRepository.deleteEmployee(id);
+                $scope.allEmployees.splice($scope.allEmployees
+                    .findIndex(employee => employee.Id === id), 1);
+            }         
         }
     });
