@@ -8,6 +8,12 @@ namespace WareMaster
         {
             config.Formatters.Remove(config.Formatters.XmlFormatter);
             config.MapHttpAttributeRoutes();
+
+            var json = config.Formatters.JsonFormatter;
+            json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+
+            json.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
         }
     }
 }

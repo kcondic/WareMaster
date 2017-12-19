@@ -20,7 +20,11 @@ namespace WareMaster.Domain.Repositories
 
         public List<Supplier> GetAllSuppliersForACompany(int companyId)
         {
-                return _company.GetCompanyById(companyId).Suppliers.ToList();
+            //return _company.GetCompanyById(companyId).Suppliers.ToList();
+            using (var context = new WarehouseContext())
+            {
+                return context.Suppliers.Where(supplier => supplier.CompanyId == companyId).ToList();
+            }
         }
 
         public Supplier GetSupplier(int supplierId)

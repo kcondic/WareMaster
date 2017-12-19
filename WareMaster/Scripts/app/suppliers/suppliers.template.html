@@ -1,5 +1,9 @@
-﻿<button ui-sref="dashboard">BACK</button>
+﻿<button ui-sref="dashboard">NATRAG</button>
 <span>Suppliers</span>
-<div ng-repeat="supplier in suppliers">
+<input ng-model="search" placeholder="Search"/>
+<div ng-repeat="supplier in suppliers| filter: search" ng-click="showSupplierDetails(supplier)">
     {{supplier.Name}}
 </div>
+<button>Dodaj</button>
+<button>Uredi</button>
+<button>Izbriši</button>
