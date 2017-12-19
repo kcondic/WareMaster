@@ -2,6 +2,7 @@
     {{employee.FirstName}}
     {{employee.LastName}}
     <button ui-sref="editemployee({id: employee.Id})">Uredi</button>
+    <button ng-click="deleteEmployee(employee.Id)">Izbriši</button>
 </div>
 <button ui-sref="addemployee">Dodaj zaposlenika</button> 
 <div ui-view></div>

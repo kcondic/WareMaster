@@ -10,7 +10,20 @@
         }
 
         function getEmployeeToEdit(id) {
-            return $http.get('api/employees/edit',
+            return $http.get('api/employees/edit', 
+                {
+                params: {
+                    id: id
+                }
+            });
+        }
+
+        function editEmployee(editedEmployee) {
+            return $http.post('api/employees/edit', editedEmployee);
+        }
+
+        function deleteEmployee(id) {
+            return $http.delete('api/employees/delete',
                 {
                     params: {
                         id: id
@@ -18,14 +31,11 @@
                 });
         }
 
-        function editEmployee(editedEmployee) {
-            return $http.post('api/employees/edit', editedEmployee);
-        }
-
         return {
             getAllEmployees: getAllEmployees,
             addEmployee: addEmployee,
             getEmployeeToEdit: getEmployeeToEdit,
-            editEmployee: editEmployee
+            editEmployee: editEmployee,
+            deleteEmployee: deleteEmployee
         }
     });

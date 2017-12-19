@@ -42,5 +42,13 @@ namespace WareMaster.Controllers
             _employeeRepository.EditUser(editedEmployee);
             return Ok();
         }
+
+        [HttpDelete]
+        [Route("delete")]
+        public IHttpActionResult DeleteEmployee(int id)
+        {
+            _employeeRepository.DeleteUser(id);
+            return Ok();
+        }
     }
 }
