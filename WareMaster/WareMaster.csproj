@@ -162,6 +162,9 @@
     <Content Include="Scripts\app\dashboard\dashboard.controller.js" />
     <Content Include="Scripts\app\dashboard\dashboard.state.js" />
     <Content Include="Scripts\app\dashboard\dashboard.template.html" />
+    <Content Include="Scripts\app\editemployee\editemployee.controller.js" />
+    <Content Include="Scripts\app\editemployee\editemployee.state.js" />
+    <Content Include="Scripts\app\editemployee\editemployee.template.html" />
     <Content Include="Scripts\app\employees\employees.controller.js" />
     <Content Include="Scripts\app\employees\employees.state.js" />
     <Content Include="Scripts\app\employees\employees.template.html" />

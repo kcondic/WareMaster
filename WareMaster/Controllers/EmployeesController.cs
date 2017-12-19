@@ -27,5 +27,20 @@ namespace WareMaster.Controllers
             _employeeRepository.AddUser(employeeToAdd);
             return Ok();
         }
+
+        [HttpGet]
+        [Route("edit")]
+        public IHttpActionResult GetEmployeeToEdit(int id)
+        {
+            return Ok(_employeeRepository.GetUser(id));
+        }
+
+        [HttpPost]
+        [Route("edit")]
+        public IHttpActionResult EditEmployee(User editedEmployee)
+        {
+            _employeeRepository.EditUser(editedEmployee);
+            return Ok();
+        }
     }
 }
