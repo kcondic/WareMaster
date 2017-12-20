@@ -18,46 +18,26 @@ namespace WareMaster.Domain.Repositories
         }
 
         private readonly CompanyRepository _companyRepository;
-
-        public List<User> GetAllUsers()
+        public List<User> GetAllUsers(int companyId)
         {
-            using(var context = new WarehouseContext())
-                return context.Users.ToList();
+            using (var context = new WarehouseContext())
+                return context.Users.Where(user => user.CompanyId == companyId).ToList();
         }
 
-        public List<User> GetAllUsersFromACompany(int companyId)
-        {
-                return _companyRepository.GetCompanyById(companyId).EmployeesManagers.ToList();
-        }
-
-        public List<User> GetAllEmployees()
+        public List<User> GetAllEmployees(int companyId)
         {
             using (var context = new WarehouseContext())
                 return context.Users
-                    //.Include(user => user.Orders)
-                    //.Include(user => user.ActivityLogs)
-                    .Where(user => user.Role == Role.Employee).ToList();
+                    .Where(user => user.Role == Role.Employee
+                            && user.CompanyId == companyId).ToList();
         }
 
-        public List<User> GetAllEmployeesFromACompany(int companyId)
-        {
-            //return _context.Users
-              //  .Where(user => user.Company.Id == companyId && user.Role == Role.Employee).ToList();
-            return _companyRepository.GetCompanyById(companyId).EmployeesManagers.Where(user => user.Role == Role.Employee).ToList();
-        }
 
         public List<User> GetAllManagers()
         {
             using (var context = new WarehouseContext())
                 return context.Users
-                    //.Include(user => user.Orders)
-                    //.Include(user => user.ActivityLogs)
                     .Where(user => user.Role == Role.Manager).ToList();
-        }
-
-        public List<User> GetAllManagersFromACompany(int companyId)
-        {
-                return _companyRepository.GetCompanyById(companyId).EmployeesManagers.Where(user => user.Role == Role.Manager).ToList();
         }
 
         public User GetUser(int userId)

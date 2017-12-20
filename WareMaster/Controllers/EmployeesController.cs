@@ -17,7 +17,7 @@ namespace WareMaster.Controllers
         [Route("")]
         public IHttpActionResult GetAllEmployees()
         {
-            return Ok(_employeeRepository.GetAllEmployees());
+            return Ok(_employeeRepository.GetAllEmployees(1));
         }
 
         [HttpPost]
@@ -25,7 +25,7 @@ namespace WareMaster.Controllers
         public IHttpActionResult AddEmployee(User employeeToAdd)
         {
             _employeeRepository.AddUser(employeeToAdd);
-            return Ok();
+            return Ok(true);
         }
 
         [HttpGet]
@@ -40,7 +40,7 @@ namespace WareMaster.Controllers
         public IHttpActionResult EditEmployee(User editedEmployee)
         {
             _employeeRepository.EditUser(editedEmployee);
-            return Ok();
+            return Ok(true);
         }
 
         [HttpDelete]
@@ -48,7 +48,7 @@ namespace WareMaster.Controllers
         public IHttpActionResult DeleteEmployee(int id)
         {
             _employeeRepository.DeleteUser(id);
-            return Ok();
+            return Ok(true);
         }
     }
 }

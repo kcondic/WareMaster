@@ -19,7 +19,7 @@ namespace WareMaster.Domain.Repositories
 
         public List<ActivityLog> GetAllActivityLogsForACompany(int companyId)
         {
-            var userList = _userRepository.GetAllUsersFromACompany(companyId).ToList();
+            var userList = _userRepository.GetAllUsers(companyId).ToList();
             var activityLogList = new List<ActivityLog>();
 
             foreach (var user in userList)
