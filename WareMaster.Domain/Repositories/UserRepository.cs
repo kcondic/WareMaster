@@ -73,9 +73,8 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
             {
+                userToAdd.Company = _companyRepository.GetCompanyById(1);
                 context.Companies.Attach(userToAdd.Company);
-                foreach (var order in userToAdd.Orders)
-                    context.Orders.Attach(order);
 
                 context.Users.Add(userToAdd);
                 context.SaveChanges();
@@ -87,14 +86,7 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
             {
-                context.Companies.Attach(editedUser.Company);
-                foreach (var order in editedUser.Orders)
-                    context.Orders.Attach(order);
-
                 var userToEdit = context.Users
-                    .Include(user => user.Orders)
-                    .Include(user => user.ActivityLogs)
-                    .Include(user => user.Company)
                     .SingleOrDefault(user => user.Id == editedUser.Id);
 
                 if (userToEdit == null)
@@ -103,9 +95,6 @@ namespace WareMaster.Domain.Repositories
                 userToEdit.FirstName = editedUser.FirstName;
                 userToEdit.LastName = editedUser.LastName;
                 userToEdit.Role = editedUser.Role;
-                userToEdit.Orders = editedUser.Orders;
-                userToEdit.Company = editedUser.Company;
-                userToEdit.ActivityLogs = editedUser.ActivityLogs;
 
                 context.SaveChanges();
             }
