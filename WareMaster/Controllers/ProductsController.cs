@@ -30,7 +30,7 @@ namespace WareMaster.Controllers
         public IHttpActionResult AddProduct(Product productToAdd)
         {
             _productRepository.AddProduct(productToAdd);
-            return Ok();
+            return Ok(true);
         }
 
         [HttpGet]
@@ -45,7 +45,7 @@ namespace WareMaster.Controllers
         public IHttpActionResult EditProduct(Product editedProduct)
         {
             _productRepository.EditProduct(editedProduct);
-            return Ok();
+            return Ok(true);
         }
 
         [HttpDelete]
@@ -53,7 +53,7 @@ namespace WareMaster.Controllers
         public IHttpActionResult DeleteProduct(int id)
         {
             _productRepository.DeleteProduct(id);
-            return Ok();
+            return Ok(true);
         }
     }
 }
