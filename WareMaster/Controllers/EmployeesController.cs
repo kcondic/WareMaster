@@ -17,7 +17,7 @@ namespace WareMaster.Controllers
         [Route("")]
         public IHttpActionResult GetAllEmployees()
         {
-            return Ok(_employeeRepository.GetAllEmployees());
+            return Ok(_employeeRepository.GetAllEmployees(1));
         }
 
         [HttpPost]

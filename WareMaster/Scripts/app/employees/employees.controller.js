@@ -6,7 +6,7 @@
         });
 
         $scope.deleteEmployee = function (id, firstName, lastName) {
-            if (confirm(`Jeste li sigurni da želite izbrisati zaposlenika ${firstName} ${lastName}?`))
+            if (confirm(`Jeste li sigurni da želite izbrisati zaposlenika ${firstName} ${lastName}?\nTime će njegovo ime i aktivnosti nestati iz sustava.`))
             {
                 employeesRepository.deleteEmployee(id);
                 $scope.allEmployees.splice($scope.allEmployees
