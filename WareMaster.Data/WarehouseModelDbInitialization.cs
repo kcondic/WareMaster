@@ -15,7 +15,6 @@ namespace WareMaster.Data
         {
             var testUser = new User() {FirstName = "Test", LastName = "Testic", Role = Role.Manager};
             var testCompany = new Company() {Name = "TestKompanija"};
-
             testUser.Company = testCompany;
 
             context.Users.Add(testUser);
