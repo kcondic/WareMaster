@@ -18,37 +18,27 @@ namespace WareMaster.Domain.Repositories
 
         private readonly CompanyRepository _companyRepository;
 
-        public List<Product> GetAllProductsFromACompany(int companyId)
+        public List<Product> GetAllProducts(int companyId)
         {
-                return _companyRepository.GetCompanyById(companyId).Products.ToList();
+            using (var context = new WarehouseContext())
+                return context.Products.Where(product => product.CompanyId == companyId).ToList();
         }
-
-        /*public List<Product> GetAllProductsByCategory()
-        {
-
-        }*/
 
         public Product GetProduct(int productId)
         {
             using (var context = new WarehouseContext())
                 return context.Products
-                    .Include(product => product.Orders)
-                    .Include(product => product.Suppliers)
-                    .Include(product => product.Company)
                     .SingleOrDefault(product => product.Id == productId);
         }
 
-        public void CreateNewProduct(Product product)
+        public void AddProduct(Product productToAdd)
         {
             using (var context = new WarehouseContext())
             {
-                context.Companies.Attach(product.Company);
-                foreach (var order in product.Orders)
-                    context.Orders.Attach(order);
-                foreach (var supplier in product.Suppliers)
-                    context.Suppliers.Attach(supplier);
+                productToAdd.Company = _companyRepository.GetCompanyById(1);
+                context.Companies.Attach(productToAdd.Company);
 
-                context.Products.Add(product);
+                context.Products.Add(productToAdd);
                 context.SaveChanges();
             }
         }
@@ -57,26 +47,14 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
             {
-                context.Companies.Attach(editedProduct.Company);
-                foreach (var order in editedProduct.Orders)
-                    context.Orders.Attach(order);
-                foreach (var supplier in editedProduct.Suppliers)
-                    context.Suppliers.Attach(supplier);
-
                 var productToEdit = context.Products
-                    .Include(product => product.Orders)
-                    .Include(product => product.Suppliers)
-                    .Include(product => product.Company)
                     .SingleOrDefault(product => product.Id == editedProduct.Id);
 
                 if (productToEdit == null)
                     return;
 
                 productToEdit.Name = editedProduct.Name;
-                productToEdit.Orders = editedProduct.Orders;
-                productToEdit.Suppliers = editedProduct.Suppliers;
-                productToEdit.Company = editedProduct.Company;
-                productToEdit.Counter = productToEdit.Counter;
+                productToEdit.Counter = editedProduct.Counter;
 
                 context.SaveChanges();
             }

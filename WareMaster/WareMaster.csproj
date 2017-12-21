@@ -143,8 +143,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -156,8 +158,16 @@
     <Content Include="Scripts\app\addSupplier\addSupplier.state.js" />
     <Content Include="Scripts\app\addSupplier\addSupplier.template.html" />
     <Content Include="Scripts\app\addSupplier\addSuppliers.controller.js" />
+    <Content Include="Scripts\app\addemployee\addemployee.controller.js" />
+    <Content Include="Scripts\app\addemployee\addemployee.state.js" />
+    <Content Include="Scripts\app\addemployee\addemployee.template.html" />
+    <Content Include="Scripts\app\addproduct\addproduct.controller.js" />
+    <Content Include="Scripts\app\addproduct\addproduct.state.js" />
+    <Content Include="Scripts\app\addproduct\addproduct.template.html" />
     <Content Include="Scripts\app\app.config.js" />
     <Content Include="Scripts\app\app.module.js" />
+    <Content Include="Scripts\app\common\employees.repository.js" />
+    <Content Include="Scripts\app\common\products.repository.js" />
     <Content Include="Scripts\app\dashboard\dashboard.controller.js" />
     <Content Include="Scripts\app\dashboard\dashboard.state.js" />
     <Content Include="Scripts\app\dashboard\dashboard.template.html" />
@@ -172,7 +182,23 @@
     <Content Include="Scripts\app\suppliers\suppliers.template.html" />
     <Content Include="Scripts\services\suppliersRepository.js" />
     <Content Include="Scripts\vendor\angular.min.js" />
+    <Content Include="Scripts\app\editemployee\editemployee.controller.js" />
+    <Content Include="Scripts\app\editemployee\editemployee.state.js" />
+    <Content Include="Scripts\app\editemployee\editemployee.template.html" />
+    <Content Include="Scripts\app\editproduct\editproduct.controller.js" />
+    <Content Include="Scripts\app\editproduct\editproduct.state.js" />
+    <Content Include="Scripts\app\editproduct\editproduct.template.html" />
+    <Content Include="Scripts\app\employees\employees.controller.js" />
+    <Content Include="Scripts\app\employees\employees.state.js" />
+    <Content Include="Scripts\app\employees\employees.template.html" />
+    <Content Include="Scripts\app\products\products.controller.js" />
+    <Content Include="Scripts\app\products\products.state.js" />
+    <Content Include="Scripts\app\products\products.template.html" />
+    <Content Include="Scripts\app\signin\signin.controller.js" />
+    <Content Include="Scripts\app\signin\signin.state.js" />
+    <Content Include="Scripts\app\signin\signin.template.html" />
     <Content Include="Scripts\vendor\angular-ui-router.min.js" />
+    <Content Include="Scripts\vendor\angular.min.js" />
     <Content Include="Scripts\vendor\underscore.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
