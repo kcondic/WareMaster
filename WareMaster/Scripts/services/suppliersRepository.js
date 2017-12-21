@@ -5,7 +5,12 @@
             return $http.get('/api/suppliers');
         }
 
+        function addNewSupplier(newSupplier) {
+            return $http.post('/api/suppliers/add', newSupplier);
+        }
+
         return {
-            getAllSuppliers: getAllSuppliers
+            getAllSuppliers: getAllSuppliers,
+            addNewSupplier: addNewSupplier
         }
     });

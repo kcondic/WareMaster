@@ -40,9 +40,10 @@ namespace WareMaster.Domain.Repositories
         {          
             using (var context = new WarehouseContext())
             {
+                supplier.Company = context.Companies.FirstOrDefault(x => x.Id == 1);
                 context.Companies.Attach(supplier.Company);
-                foreach (var product in supplier.Products)
-                    context.Products.Attach(product);
+                /*foreach (var product in supplier.Products)
+                    context.Products.Attach(product);*/
 
                 context.Suppliers.Add(supplier);
                 context.SaveChanges();

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WareMaster.Data.Models.Entities;
 using WareMaster.Domain.Repositories;
 
 namespace WareMaster.Controllers
@@ -32,6 +33,14 @@ namespace WareMaster.Controllers
             var supplierDetails = _supplierRepository.GetSupplier(id);
             //var supplier = MovieDto.FromMovie(movieDetails);
             return Ok(supplierDetails);
+        }
+
+        [HttpPost]
+        [Route("add")]
+        public IHttpActionResult AddNewSupplier(Supplier supplierToAdd)
+        {
+            _supplierRepository.AddNewSupplier(supplierToAdd);
+            return Ok();
         }
     }
 }

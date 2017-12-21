@@ -153,11 +153,17 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\app\addSupplier\addSupplier.state.js" />
+    <Content Include="Scripts\app\addSupplier\addSupplier.template.html" />
+    <Content Include="Scripts\app\addSupplier\addSuppliers.controller.js" />
     <Content Include="Scripts\app\app.config.js" />
     <Content Include="Scripts\app\app.module.js" />
     <Content Include="Scripts\app\dashboard\dashboard.controller.js" />
     <Content Include="Scripts\app\dashboard\dashboard.state.js" />
     <Content Include="Scripts\app\dashboard\dashboard.template.html" />
+    <Content Include="Scripts\app\editSupplier\editSupplier.controller.js" />
+    <Content Include="Scripts\app\editSupplier\editSupplier.state.js" />
+    <Content Include="Scripts\app\editSupplier\editSupplier.template.html" />
     <Content Include="Scripts\app\signin\signin.controller.js" />
     <Content Include="Scripts\app\signin\signin.state.js" />
     <Content Include="Scripts\app\signin\signin.template.html" />

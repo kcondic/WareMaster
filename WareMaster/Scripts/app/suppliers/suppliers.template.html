@@ -1,9 +1,10 @@
 ﻿<button ui-sref="dashboard">NATRAG</button>
 <span>Suppliers</span>
 <input ng-model="search" placeholder="Search"/>
-<div ng-repeat="supplier in suppliers| filter: search" ng-click="showSupplierDetails(supplier)">
+<div ng-repeat="supplier in suppliers| filter: search">
     {{supplier.Name}}
 </div>
-<button>Dodaj</button>
+<button ui-sref="addsupplier">Dodaj</button>
 <button>Uredi</button>
 <button>Izbriši</button>
+<div ui-view></div>
