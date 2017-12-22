@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using WareMaster.Data.Models.Entities;
 using WareMaster.Domain.Repositories;
+using Newtonsoft.Json.Linq;
 
 namespace WareMaster.Controllers
 {
@@ -23,7 +24,7 @@ namespace WareMaster.Controllers
         [Route("")]
         public IHttpActionResult GetAllSuppliers()//dodat int id od tvrtke
         {
-            return Ok(_supplierRepository.GetAllSuppliersForACompany(1));
+            return Ok(_supplierRepository.GetAllSuppliers(1));
         }
 
         [HttpPost]
@@ -43,10 +44,9 @@ namespace WareMaster.Controllers
 
         [HttpPost]
         [Route("edit")]
-        public IHttpActionResult EditSupplier(Newtonsoft.Json.Linq.JObject data)
+        public IHttpActionResult EditSupplier(JObject data)
         {
             Supplier supplier = data["supplier"].ToObject<Supplier>();
-            //List<Product> products = data["products"].ToObject<List<Product>>();
             List<Product>products = new List<Product>();
             var temp = data["products"].First;
             if (temp != null)

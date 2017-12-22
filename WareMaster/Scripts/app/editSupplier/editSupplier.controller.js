@@ -1,8 +1,5 @@
 ﻿angular.module('app').controller('EditSupplierController',
     function ($scope, $state, $stateParams, suppliersRepository, productsRepository) {
-        $scope.name = '';
-        $scope.products = [];
-        $scope.allProducts = [];
 
         suppliersRepository.getSupplierToEdit($stateParams.id).then(function (supplier) {
             $scope.supplierToEdit = supplier.data;
@@ -10,12 +7,9 @@
             $scope.products = $scope.supplierToEdit.Products;
 
             productsRepository.getAllProducts().then(function (allproducts) {
-            $scope.allProducts = allproducts.data;
-            for (var i = 0; i < $scope.products.length; i++)
-                for (var j = 0; j < $scope.allProducts.length; j++)
-                    if ($scope.products[i].Name === $scope.allProducts[j].Name) {
-                        $scope.allProducts.splice(j, 1);
-                    }
+                $scope.allProducts = allproducts.data.filter(function (el) {
+                    return ($scope.products.findIndex(x=> x.Id === el.Id) === -1);
+                });
             });
         });
 

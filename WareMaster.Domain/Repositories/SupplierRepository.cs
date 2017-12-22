@@ -18,7 +18,7 @@ namespace WareMaster.Domain.Repositories
 
         private readonly CompanyRepository _company;
 
-        public List<Supplier> GetAllSuppliersForACompany(int companyId)
+        public List<Supplier> GetAllSuppliers(int companyId)
         {
             using (var context = new WarehouseContext())
             {

@@ -1,8 +1,6 @@
 ﻿angular.module('app').controller('AddSupplierController',
     function ($scope, $state, suppliersRepository, productsRepository) {
-        $scope.name = '';
         $scope.productsSelected = [];
-        $scope.products = [];
 
         productsRepository.getAllProducts().then(function (allProducts) {
             $scope.products = allProducts.data;
