@@ -20,7 +20,6 @@ namespace WareMaster.Domain.Repositories
 
         public List<Supplier> GetAllSuppliersForACompany(int companyId)
         {
-            //return _company.GetCompanyById(companyId).Suppliers.ToList();
             using (var context = new WarehouseContext())
             {
                 return context.Suppliers.Where(supplier => supplier.CompanyId == companyId).ToList();
@@ -31,7 +30,6 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
                 return context.Suppliers
-                    .Include(supplier => supplier.Company)
                     .Include(supplier => supplier.Products)
                     .SingleOrDefault(supplier => supplier.Id == supplierId);
         }
@@ -42,8 +40,8 @@ namespace WareMaster.Domain.Repositories
             {
                 supplier.Company = context.Companies.FirstOrDefault(x => x.Id == 1);
                 context.Companies.Attach(supplier.Company);
-                /*foreach (var product in supplier.Products)
-                    context.Products.Attach(product);*/
+                foreach (var product in supplier.Products)
+                    context.Products.Attach(product);
 
                 context.Suppliers.Add(supplier);
                 context.SaveChanges();
@@ -54,12 +52,10 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
             {
-                context.Companies.Attach(editedSupplier.Company);
                 foreach (var product in editedSupplier.Products)
                     context.Products.Attach(product);
 
                 var supplierToEdit = context.Suppliers
-                    .Include(supplier => supplier.Company)
                     .Include(supplier => supplier.Products)
                     .SingleOrDefault(supplier => supplier.Id == editedSupplier.Id);
 
@@ -68,7 +64,6 @@ namespace WareMaster.Domain.Repositories
 
                 supplierToEdit.Name = editedSupplier.Name;
                 supplierToEdit.Products = editedSupplier.Products;
-                supplierToEdit.Company = editedSupplier.Company;
 
                 context.SaveChanges();
             }

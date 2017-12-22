@@ -7,11 +7,15 @@
         var allSuppliersPromise = suppliersRepository.getAllSuppliers();
 
         allSuppliersPromise.then(function (allSuppliers) {
-            $scope.suppliers = allSuppliers.data; //.Suppliers;
+            $scope.suppliers = allSuppliers.data; 
         });
 
-        $scope.showSupplierDetails = function(supplier) {
-            alert(supplier.Name);
-        };
+        $scope.deleteSupplier = function (id, name) {
+            if (confirm("Jeste li sigurni da želite izbrisati dobavljača " + name + "?")) {
+                suppliersRepository.deleteSupplier(id);
+                $scope.suppliers.splice($scope.suppliers
+                    .findIndex(supplier => supplier.Id === id), 1);
+            }
+        }
 
     });

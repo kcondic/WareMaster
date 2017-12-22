@@ -3,8 +3,8 @@
 <input ng-model="search" placeholder="Search"/>
 <div ng-repeat="supplier in suppliers| filter: search">
     {{supplier.Name}}
+    <button ui-sref="editsupplier({id: supplier.Id})">Uredi</button>
+    <button ng-click="deleteSupplier(supplier.Id, supplier.Name)">Izbriši</button>
 </div>
 <button ui-sref="addsupplier">Dodaj</button>
-<button>Uredi</button>
-<button>Izbriši</button>
 <div ui-view></div>

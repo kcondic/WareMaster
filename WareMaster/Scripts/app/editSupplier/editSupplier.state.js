@@ -5,6 +5,6 @@
                 parent: 'suppliers',
                 url: '/edit/:id',
                 controller: 'EditSupplierController',
-                templateUrl: '/Scripts/app/editSupplier/editSupplier.template.html'
+                templateUrl: '/Scripts/app/editsupplier/editsupplier.template.html'
             });
 });
