@@ -25,9 +25,7 @@
 
         $scope.editSupplier = function () {
             $scope.supplierToEdit.Name = $scope.name;
-            $scope.supplierToEdit.Products = [];
-            for (var i = 0; i < $scope.products.length; i++)
-                $scope.supplierToEdit.Products.push($scope.products[i]);
+            $scope.supplierToEdit.Products = $scope.products;
             suppliersRepository.editSupplier($scope.supplierToEdit).then(function () {
                 $state.go('suppliers', {}, { reload: true });
             });
