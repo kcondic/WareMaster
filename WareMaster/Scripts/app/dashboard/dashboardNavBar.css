@@ -1,0 +1,125 @@
+﻿*{
+    margin: 0;
+    padding: 0;
+}
+
+/* OPĆENITO DIZAJN ZA HEADER */
+header{
+    display: flex;
+    width: 100%;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    right: 0;
+    justify-content:space-between;
+    background-color: rgb(34, 34, 34);
+    color: white;
+}
+
+/* DIZAJN DIJELA HEADERA S LOGOM I NASLOVOM */
+header .logo-container{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    padding: 0.3em;
+    padding-left: 0.5em;
+}
+
+.logo-container .logo-img{
+    width: 42px;
+    height: 42px;
+    display: block;
+    margin: auto;
+    box-shadow: 0 0 2px white;
+    border-radius: 50%;
+}
+
+.logo-container .app-title{
+    display: block;
+    margin: auto;
+    margin-left: 10px;
+    font-size: 24px;
+    font-weight:500;
+    padding-bottom: 0.1em;
+}
+/* DIZAJN DIJELA HEADERA S INFORMACIJAMA O PRIJAVLJENOM KORISNIKU */
+.user-info article{
+    display: flex;
+    justify-content: space-around;
+    padding: 0.05em;
+    padding-top: 0.85em;
+    font-size: 18px;
+}
+/* DIZAJN DIJELA HEADERA S DROPDOWN IKONAMA */
+header ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0.2em;
+    overflow: hidden;
+    font-size: 20px;
+    justify-content: space-between;
+}
+
+header ul li{
+    float: left;
+    justify-content: space-between;
+    margin-bottom: -4px;
+}
+
+header li .icon-button{
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-top: 0.3em;
+    display: inline-block;
+    margin: auto;
+    position: relative;
+    font-size: 26px;
+}
+
+.icon-button span,
+.icon-button .menu-icon{
+    cursor: pointer;
+}
+
+.dropdown .button-content{
+    display: none;
+    position: absolute;
+    background-color: rgb(249,249,249);
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 4px rgba(0, 0, 0, 0.2);
+    z-index: 3;
+    color: black;
+    font-size: 15px;
+}
+
+.dropdown .notification-content{
+    min-width: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.dropdown:hover .button-content{
+    display: block;
+    right: 0;
+    top: 52px;
+    height: 1000px;
+}
+
+.button-content .button-content-item{
+    padding: 0.8em;
+    cursor: pointer;
+}
+
+.button-content .button-content-item:hover{
+    background-color: rgb(232,232,232);
+}
+
+.menu-bar {
+    width: 24px;
+    height: 3px;
+    border-radius: 20%;
+    background-color: white;
+    margin: 5px 0;
+}

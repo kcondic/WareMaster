@@ -152,8 +152,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\logos\logo.png" />
+    <Content Include="Images\logos\logo1616.png" />
+    <Content Include="Images\logos\logo2525.png" />
+    <Content Include="Images\logos\logo300300.png" />
+    <Content Include="Images\logos\logo3030.png" />
+    <Content Include="Images\logos\logo3232.png" />
+    <Content Include="Images\logos\logo4040.png" />
+    <Content Include="Images\logos\logo4848.png" />
+    <Content Include="Images\logos\logo6060.png" />
+    <Content Include="Images\logos\logo6262.png" />
     <Content Include="Scripts\app\addemployee\addemployee.controller.js" />
     <Content Include="Scripts\app\addemployee\addemployee.state.js" />
     <Content Include="Scripts\app\addemployee\addemployee.template.html" />
@@ -167,6 +180,8 @@
     <Content Include="Scripts\app\dashboard\dashboard.controller.js" />
     <Content Include="Scripts\app\dashboard\dashboard.state.js" />
     <Content Include="Scripts\app\dashboard\dashboard.template.html" />
+    <Content Include="Scripts\app\dashboard\dashboardMain.css" />
+    <Content Include="Scripts\app\dashboard\dashboardNavBar.css" />
     <Content Include="Scripts\app\editemployee\editemployee.controller.js" />
     <Content Include="Scripts\app\editemployee\editemployee.state.js" />
     <Content Include="Scripts\app\editemployee\editemployee.template.html" />
@@ -195,9 +210,26 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Shell.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="fonts\FontAwesome.otf" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\fontawesome-webfont.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\fontawesome-webfont.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width" />
     <title>WareMaster</title>
 
+    <!-- Link za učitavanje font-awesome.css za ikone -->
+    <link href="~/Content/font-awesome.css" type="text/css" rel="stylesheet" />
+
+    <!-- Stylesheets -->
+    <link href="~/Scripts/app/dashboard/dashboardNavBar.css" type="text/css" rel="stylesheet" />
+    <link href="~/Scripts/app/dashboard/dashboardMain.css" type="text/css" rel="stylesheet" />
+
+    <!-- Scripts -->
     <script src="~/Scripts/vendor/angular.min.js"></script>
     <script src="~/Scripts/vendor/underscore.min.js"></script>
     <script src="~/Scripts/vendor/angular-ui-router.min.js"></script>
@@ -40,9 +48,9 @@
     
     <base href="/">
 </head>
-<body>
-<div>
-    <div ui-view></div>
-</div>
+<body style="background-color: white;">
+    <div>
+        <div ui-view></div>
+    </div>
 </body>
 </html>

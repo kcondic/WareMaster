@@ -1,7 +1,131 @@
-﻿<button ui-sref="products">Proizvodi</button>
-<button ui-sref="orders">Narudžbe</button>
-<button ui-sref="employees">Radnici</button>
-<button ui-sref="suppliers">Dobavljači</button>
-<div ng-repeat="activity in recentActivities">
-    {{activity.Text}}
+﻿<div id="dashboard">
+<header>
+    <div class="logo-container">
+        <img class="logo-img" src="../../../images/logos/logo6262.png" alt="logo" />
+        <label class="app-title"><span class="uppercase-title-letter">W</span>are<span class="uppercase-title-letter">M</span>aster</label>
+    </div>
+
+    <div class="user-info">
+        <article>
+            <label>Korisnik:<span class="user-name">{Ime Prezime}</span>     ID:<span class="user-id">{ID korisnika}</span></label>
+        </article>
+    </div>
+
+    <ul>
+        <li class="dropdown">
+            <div class="icon-button">
+                <span class="notification-icon" aria-hidden="true">
+                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                </span>
+            </div>
+            <div class="button-content notification-content">
+                <div class="button-content-item"><p>Ovo je 1. obavijest</p></div>
+                <div class="button-content-item"><p>Ovo je 2. obavijest</p></div>
+                <div class="button-content-item"><p>Ovo je 3. obavijest</p></div>
+            </div>
+        </li>
+        <li class="dropdown">
+            <div class="icon-button">
+                <span class="help-icon" aria-hidden="true">
+                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                </span>
+            </div>
+            <div class="button-content">
+                <div class="button-content-item">Pomoć</div>
+                <div class="button-content-item">O WareMasteru</div>
+            </div>
+        </li>
+        <li class="dropdown">
+            <div class="icon-button">
+                <div class="menu-icon">
+                    <div class="menu-bar bar1"></div>
+                    <div class="menu-bar bar2"></div>
+                    <div class="menu-bar bar3"></div>
+                </div>
+            </div>
+            <div class="button-content">
+                <div class="button-content-item">Promijeni lozinku</div>
+                <div class="button-content-item">Promijeni temu</div>
+                <div class="button-content-item">Odjava</div>
+            </div>
+        </li>
+    </ul>
+</header>
+<div class="dashboard-main">
+    <div class="left-column">
+        <div class="button-container">
+                <button ui-sref="products">Proizvodi</button>
+                <button ui-sref="orders">Narudžbe</button>
+                <button ui-sref="employees">Radnici</button>
+                <button ui-sref="suppliers">Dobavljači</button>
+        </div>
+        <div class="useful-info-container">
+            <div class="percent-circles-container">
+                <div class="left-circle">
+                    <div class="percent-circle-header"><div>ULAZNE NARUDŽBE</div></div>
+                    <div class="circle-item">
+                        <div class="inner-circle">
+                            <label class="orders-number">NN</label>
+                        </div>
+                    </div>
+                    <div class="circle-description">
+                        <div class="color-row">
+                            <div class="grey-color"></div>
+                            <div class="circle-text">Planirane <span>xx%</span></div>
+                        </div>
+                        <div class="color-row">
+                            <div class="light-red-color"></div>
+                            <div class="circle-text">U tijeku <span>xx%</span></div>
+                        </div>
+                        <div class="color-row">
+                            <div class="red-color"></div>
+                            <div class="circle-text">Izvršene <span>xx%</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-circle">
+                    <div class="percent-circle-header"><div>IZLAZNE NARUDŽBE</div></div>
+                    <div class="circle-item">
+                        <div class="inner-circle">
+                            <label class="orders-number">NN</label>
+                        </div>
+                    </div>
+                    <div class="circle-description">
+                        <div class="color-row">
+                            <div class="grey-color"></div>
+                            <div class="circle-text">Planirane <span>xx%</span></div>
+                        </div>
+                        <div class="color-row">
+                            <div class="light-blue-color"></div>
+                            <div class="circle-text">U tijeku <span>xx%</span></div>
+                        </div>
+                        <div class="color-row">
+                            <div class="blue-color"></div>
+                            <div class="circle-text">Izvršene <span>xx%</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="current-numbers-container">
+                    <ul>
+                        <li>Broj proizvoda u skladištu <span>NN</span></li>
+                        <li>Broj dobavljača <span>NN</span></li>
+                        <li>Broj radnika <span>NN</span></li>
+                        <li>Ukupan broj narudžbi <span>NN</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="orders-bar-chart-container"></div>
+        </div>
+    </div>
+    <div class="right-column">
+        <div class="activity-column">
+            <div class="activity-header"><div>NEDAVNE AKTIVNOSTI</div></div>
+            <div class="activity-container">
+                <div class="activity-content">
+                    <div ng-repeat="activity in recentActivities">{{activity.Text}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
