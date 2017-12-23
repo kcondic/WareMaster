@@ -19,10 +19,10 @@
         }
 
         function editSupplier(editedSupplier) {
-            var products = editedSupplier.Products;
+            /*var products = editedSupplier.Products;
             editedSupplier.Products = [];
-            var data = { 'supplier': editedSupplier, 'products': products };
-            return $http.post('api/suppliers/edit', data);
+            var data = { 'supplier': editedSupplier, 'products': products };*/
+            return $http.post('api/suppliers/edit', editedSupplier);
         }
 
         function deleteSupplier(id) {

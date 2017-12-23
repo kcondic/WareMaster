@@ -44,9 +44,9 @@ namespace WareMaster.Controllers
 
         [HttpPost]
         [Route("edit")]
-        public IHttpActionResult EditSupplier(JObject data)
+        public IHttpActionResult EditSupplier(Supplier editedSupplier)
         {
-            Supplier supplier = data["supplier"].ToObject<Supplier>();
+            /*Supplier supplier = data["supplier"].ToObject<Supplier>();
             List<Product>products = new List<Product>();
             var temp = data["products"].First;
             if (temp != null)
@@ -59,8 +59,8 @@ namespace WareMaster.Controllers
                 }
             }
 
-            supplier.Products = products;
-            _supplierRepository.EditSupplier(supplier);
+            supplier.Products = products;*/
+            _supplierRepository.EditSupplier(editedSupplier);
 
             return Ok(true);
         }
