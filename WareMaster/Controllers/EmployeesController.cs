@@ -1,4 +1,7 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.IO;
+using System.Web;
+using System.Web.Http;
 using WareMaster.Data.Models.Entities;
 using WareMaster.Domain.Repositories;
 
@@ -49,6 +52,14 @@ namespace WareMaster.Controllers
         {
             _employeeRepository.DeleteUser(id);
             return Ok(true);
+        }
+
+        [HttpPost]
+        public IHttpActionResult UploadImage(HttpPostedFile file)
+        {
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            file.SaveAs(path);
+            return Ok();
         }
     }
 }
