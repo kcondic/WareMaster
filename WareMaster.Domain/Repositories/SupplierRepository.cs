@@ -55,7 +55,9 @@ namespace WareMaster.Domain.Repositories
                 foreach (var product in editedSupplier.Products)
                     context.Products.Attach(product);
 
-                var supplierToEdit = context.Suppliers.SingleOrDefault(supplier => supplier.Id == editedSupplier.Id);
+                var supplierToEdit = context.Suppliers
+                    .Include(supplier => supplier.Products)
+                    .SingleOrDefault(supplier => supplier.Id == editedSupplier.Id);
 
                 if (supplierToEdit == null)
                     return;

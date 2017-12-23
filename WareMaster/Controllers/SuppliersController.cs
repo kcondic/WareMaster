@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Web.Http;
 using WareMaster.Data.Models.Entities;
 using WareMaster.Domain.Repositories;
-using Newtonsoft.Json.Linq;
 
 namespace WareMaster.Controllers
 {
@@ -46,22 +45,7 @@ namespace WareMaster.Controllers
         [Route("edit")]
         public IHttpActionResult EditSupplier(Supplier editedSupplier)
         {
-            /*Supplier supplier = data["supplier"].ToObject<Supplier>();
-            List<Product>products = new List<Product>();
-            var temp = data["products"].First;
-            if (temp != null)
-            {
-                products.Add(temp.ToObject<Product>());
-                while (temp.Next != null)
-                {
-                    temp = temp.Next;
-                    products.Add(temp.ToObject<Product>());
-                }
-            }
-
-            supplier.Products = products;*/
             _supplierRepository.EditSupplier(editedSupplier);
-
             return Ok(true);
         }
 
