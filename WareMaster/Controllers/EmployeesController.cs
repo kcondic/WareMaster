@@ -79,9 +79,10 @@ namespace WareMaster.Controllers
                     var companyName = _companyRepository.GetCompanyById(1).Name;
                     var uploadsFolder = HttpContext.Current.Server.MapPath("\\Uploads");
                     Directory.CreateDirectory(uploadsFolder + "\\" + companyName + "\\Zaposlenici");
-                    var path = uploadsFolder + "\\" + companyName + "\\Zaposlenici\\" + file.FileName;
-                    if(File.Exists(path))
-                        File.Delete(path);
+                    var companyFolder = Path.Combine(uploadsFolder, companyName);
+                    var employeeFolder = Path.Combine(companyFolder, "Zaposlenici");
+                    var path = Path.Combine(employeeFolder, file.FileName);
+
                     file.SaveAs(path);
                     file.InputStream.Close();
             }

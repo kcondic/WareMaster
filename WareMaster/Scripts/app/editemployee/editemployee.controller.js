@@ -10,9 +10,9 @@
         $scope.editEmployee = function() {
             $scope.employeeToEdit.FirstName = $scope.firstName;
             $scope.employeeToEdit.LastName = $scope.lastName;
-            functionsRepository.uploadImage($scope.file, $scope.firstName, $scope.lastName);
             employeesRepository.editEmployee($scope.employeeToEdit).then(
-                function() {
+                function () {
+                    functionsRepository.uploadImage($scope.file, $scope.firstName, $scope.lastName);
                     $state.go('employees', {}, { reload: true });
                 });
         }
