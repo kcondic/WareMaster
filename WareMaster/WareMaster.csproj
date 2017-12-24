@@ -157,7 +157,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\app\addsupplier\addsupplier.state.js" />
     <Content Include="Scripts\app\addsupplier\addsupplier.template.html" />
-    <Content Include="Scripts\app\addsupplier\addsuppliers.controller.js" />
+    <Content Include="Scripts\app\addsupplier\addsupplier.controller.js" />
     <Content Include="Scripts\app\addemployee\addemployee.controller.js" />
     <Content Include="Scripts\app\addemployee\addemployee.state.js" />
     <Content Include="Scripts\app\addemployee\addemployee.template.html" />

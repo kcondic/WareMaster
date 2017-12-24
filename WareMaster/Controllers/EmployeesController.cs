@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
+using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using WareMaster.Data.Models.Entities;
 using WareMaster.Domain.Repositories;
+using System.Linq;
 
 namespace WareMaster.Controllers
 {
@@ -13,8 +15,10 @@ namespace WareMaster.Controllers
         public EmployeesController()
         {
             _employeeRepository = new UserRepository();
+            _companyRepository = new CompanyRepository();
         }
         private readonly UserRepository _employeeRepository;
+        private readonly CompanyRepository _companyRepository;
 
         [HttpGet]
         [Route("")]
@@ -27,6 +31,9 @@ namespace WareMaster.Controllers
         [Route("add")]
         public IHttpActionResult AddEmployee(User employeeToAdd)
         {
+            employeeToAdd.ImageUrl = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\" +
+                                     _companyRepository.GetCompanyById(1).Name + "\\Zaposlenici\\1"+
+                                     employeeToAdd.FirstName + employeeToAdd.LastName;
             _employeeRepository.AddUser(employeeToAdd);
             return Ok(true);
         }
@@ -55,10 +62,19 @@ namespace WareMaster.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult UploadImage(HttpPostedFile file)
+        [Route("upload")]
+        public IHttpActionResult UploadImage()
         {
-            var path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            file.SaveAs(path);
+            if (HttpContext.Current.Request.Files.Count>0)
+            {
+                var file = HttpContext.Current.Request.Files[0];
+                var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                var companyName = _companyRepository.GetCompanyById(1).Name;
+                Directory.CreateDirectory(desktop + "\\" + companyName +"\\Zaposlenici");
+                var path = desktop + "\\" + companyName + "\\Zaposlenici\\" + file.FileName;
+                file.SaveAs(path);
+            }
+       
             return Ok();
         }
     }
