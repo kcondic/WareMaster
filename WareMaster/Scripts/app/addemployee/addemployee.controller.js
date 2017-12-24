@@ -15,10 +15,12 @@
         }
 
         $scope.uploadImage = function (file) {
-            Upload.rename(file, $scope.firstName + $scope.lastName + '.jpg');
-            Upload.upload({
-                url: 'api/employees/upload',
-                file: file
-            });
+            if (file) {
+                Upload.rename(file, $scope.firstName + $scope.lastName + '.jpg');
+                Upload.upload({
+                    url: 'api/employees/upload',
+                    file: file
+                });
+            }
         }
     });

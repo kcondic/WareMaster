@@ -181,7 +181,6 @@
     <Content Include="Scripts\app\suppliers\suppliers.state.js" />
     <Content Include="Scripts\app\suppliers\suppliers.template.html" />
     <Content Include="Scripts\app\common\services\suppliersrepository.js" />
-    <Content Include="Scripts\vendor\angular.min.js" />
     <Content Include="Scripts\app\editemployee\editemployee.controller.js" />
     <Content Include="Scripts\app\editemployee\editemployee.state.js" />
     <Content Include="Scripts\app\editemployee\editemployee.template.html" />
@@ -194,9 +193,6 @@
     <Content Include="Scripts\app\products\products.controller.js" />
     <Content Include="Scripts\app\products\products.state.js" />
     <Content Include="Scripts\app\products\products.template.html" />
-    <Content Include="Scripts\app\signin\signin.controller.js" />
-    <Content Include="Scripts\app\signin\signin.state.js" />
-    <Content Include="Scripts\app\signin\signin.template.html" />
     <Content Include="Scripts\vendor\angular-ui-router.min.js" />
     <Content Include="Scripts\vendor\angular.min.js" />
     <Content Include="Scripts\vendor\ng-file-upload-shim.min.js" />

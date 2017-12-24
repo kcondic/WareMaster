@@ -31,9 +31,8 @@ namespace WareMaster.Controllers
         [Route("add")]
         public IHttpActionResult AddEmployee(User employeeToAdd)
         {
-            employeeToAdd.ImageUrl = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\" +
-                                     _companyRepository.GetCompanyById(1).Name + "\\Zaposlenici\\1"+
-                                     employeeToAdd.FirstName + employeeToAdd.LastName;
+            employeeToAdd.ImageUrl = "Uploads\\" + _companyRepository.GetCompanyById(1).Name + 
+                                    "\\Zaposlenici\\" + employeeToAdd.FirstName + employeeToAdd.LastName + ".jpg";
             _employeeRepository.AddUser(employeeToAdd);
             return Ok(true);
         }
@@ -68,13 +67,12 @@ namespace WareMaster.Controllers
             if (HttpContext.Current.Request.Files.Count>0)
             {
                 var file = HttpContext.Current.Request.Files[0];
-                var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 var companyName = _companyRepository.GetCompanyById(1).Name;
-                Directory.CreateDirectory(desktop + "\\" + companyName +"\\Zaposlenici");
-                var path = desktop + "\\" + companyName + "\\Zaposlenici\\" + file.FileName;
+                var uploadsFolder = HttpContext.Current.Server.MapPath("\\Uploads");
+                Directory.CreateDirectory(uploadsFolder + "\\" + companyName + "\\Zaposlenici");
+                var path = uploadsFolder + "\\" + companyName + "\\Zaposlenici\\" + file.FileName; 
                 file.SaveAs(path);
-            }
-       
+            }       
             return Ok();
         }
     }
