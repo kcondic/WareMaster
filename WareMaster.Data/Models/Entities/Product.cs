@@ -6,7 +6,8 @@ namespace WareMaster.Data.Models.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        //public ICollection<Order> Orders { get; set; }
+        public ICollection<ProductOrders> ProductOrders { get; set; }
         public ICollection<Supplier> Suppliers { get; set; }
         public Company Company { get; set; }
         public int CompanyId { get; set; }

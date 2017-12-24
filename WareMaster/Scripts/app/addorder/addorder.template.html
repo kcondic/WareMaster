@@ -1,0 +1,21 @@
+﻿Stvori narudžbu:
+<div>
+    Radnici:
+    <span ng-click="deselectEmployee(employee)" ng-repeat="employee in selectedEmployees">{{employee.FirstName}} {{employee.LastName}} </span>
+</div>
+<div>
+    Svi radnici:
+    <span ng-click="selectEmployee(employee)" ng-repeat="employee in allEmployees">{{employee.FirstName}} {{employee.LastName}} </span>
+</div>
+<div>
+    Proizvodi:
+    <span ng-repeat="product in selectedProducts">
+        <span ng-click="deselectProduct(product)">{{product.Name}}</span>
+        Količina: <input type="number" min="0" value="0"/>
+    </span>
+</div>
+<div>
+    Svi proizvodi:
+    <span ng-click="selectProduct(product)" ng-repeat="product in allProducts">{{product.Name}} </span>
+</div>
+<button ng-click="addNewOrder()">Stvori</button>

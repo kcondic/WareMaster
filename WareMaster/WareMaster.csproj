@@ -145,6 +145,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -155,6 +156,8 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\app\addorder\addorder.state.js" />
+    <Content Include="Scripts\app\addorder\addorder.template.html" />
     <Content Include="Scripts\app\addsupplier\addsupplier.state.js" />
     <Content Include="Scripts\app\addsupplier\addsupplier.template.html" />
     <Content Include="Scripts\app\addsupplier\addsuppliers.controller.js" />
@@ -167,6 +170,7 @@
     <Content Include="Scripts\app\app.config.js" />
     <Content Include="Scripts\app\app.module.js" />
     <Content Include="Scripts\app\common\services\employees.repository.js" />
+    <Content Include="Scripts\app\common\services\orders.repository.js" />
     <Content Include="Scripts\app\common\services\products.repository.js" />
     <Content Include="Scripts\app\dashboard\dashboard.controller.js" />
     <Content Include="Scripts\app\dashboard\dashboard.state.js" />
@@ -174,13 +178,16 @@
     <Content Include="Scripts\app\editsupplier\editsupplier.controller.js" />
     <Content Include="Scripts\app\editsupplier\editsupplier.state.js" />
     <Content Include="Scripts\app\editsupplier\editsupplier.template.html" />
+    <Content Include="Scripts\app\orders\orders.controller.js" />
+    <Content Include="Scripts\app\orders\orders.state.js" />
+    <Content Include="Scripts\app\orders\orders.template.html" />
     <Content Include="Scripts\app\signin\signin.controller.js" />
     <Content Include="Scripts\app\signin\signin.state.js" />
     <Content Include="Scripts\app\signin\signin.template.html" />
     <Content Include="Scripts\app\suppliers\suppliers.controller.js" />
     <Content Include="Scripts\app\suppliers\suppliers.state.js" />
     <Content Include="Scripts\app\suppliers\suppliers.template.html" />
-    <Content Include="Scripts\app\common\services\suppliersrepository.js" />
+    <Content Include="Scripts\app\common\services\suppliers.repository.js" />
     <Content Include="Scripts\vendor\angular.min.js" />
     <Content Include="Scripts\app\editemployee\editemployee.controller.js" />
     <Content Include="Scripts\app\editemployee\editemployee.state.js" />
@@ -215,6 +222,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\app\addorder\addorder.controller.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

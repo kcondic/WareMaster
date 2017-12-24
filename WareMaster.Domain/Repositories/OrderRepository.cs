@@ -18,25 +18,25 @@ namespace WareMaster.Domain.Repositories
 
         private readonly CompanyRepository _companyRepository;
 
-        public List<Order> GetAllFromACompany(int companyId)
+        public List<Order> GetAllOrders(int companyId)
         {
                 return _companyRepository.GetCompanyById(companyId).Orders.ToList();
         }
 
-        public List<Order> GetAllCreatedFromACompany(int companyId)
+        public List<Order> GetAllCreatedOrders(int companyId)
         {
                 return _companyRepository.GetCompanyById(companyId).Orders
                     .Where(order => order.Status == Status.Created).ToList();
         }
 
-        public List<Order> GetAllInProgressFromACompany(int companyId)
+        public List<Order> GetAllInProgressOrders(int companyId)
         {
             using (var context = new WarehouseContext())
                 return _companyRepository.GetCompanyById(companyId).Orders
                     .Where(order => order.Status == Status.InProgress).ToList();
         }
 
-        public List<Order> GetAllFinishedFromACompany(int companyId)
+        public List<Order> GetAllFinishedOrders(int companyId)
         {
                 return _companyRepository.GetCompanyById(companyId).Orders
                     .Where(order => order.Status == Status.Finished).ToList();
@@ -47,7 +47,7 @@ namespace WareMaster.Domain.Repositories
             using (var context = new WarehouseContext())
                 return context.Orders
                     .Include(order => order.AssignedUsers)
-                    .Include(order => order.Products)
+                    //.Include(order => order.Products)
                     .Include(order => order.Company)
                     .SingleOrDefault(order => order.Id == orderId);
         }
@@ -56,12 +56,32 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
             {
-                foreach (var product in order.Products)
-                    context.Products.Attach(product);
+                foreach (var productOrder in order.ProductOrders)
+                    context.ProductOrders.Attach(productOrder);
                 foreach (var user in order.AssignedUsers)
                     context.Users.Attach(user);
 
-                context.Orders.Add(order);
+                var newOrder = new Order()
+                {
+                    Id = order.Id,
+                    AssignedUsers = order.AssignedUsers,
+                    TimeOfCreation = DateTime.Now,
+                    Status = order.Status,
+                    CompanyId = 1,
+                    ProductOrders = new List<ProductOrders>()
+                };
+
+                foreach (var productOrder in order.ProductOrders)
+                {
+                    newOrder.ProductOrders.Add(new ProductOrders()
+                    {
+                        OrderId = newOrder.Id,
+                        ProductId = productOrder.ProductId,
+                        ProductQuantity = productOrder.ProductQuantity
+                    });
+                }
+            
+                context.Orders.Add(newOrder);
                 context.SaveChanges();
             }
         }
@@ -70,14 +90,14 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
             {
-                foreach (var product in editedOrder.Products)
-                    context.Products.Attach(product);
+                //foreach (var product in editedOrder.Products)
+                    //context.Products.Attach(product);
                 foreach (var user in editedOrder.AssignedUsers)
                     context.Users.Attach(user);
 
                 var orderToEdit = context.Orders
                     .Include(order => order.AssignedUsers)
-                    .Include(order => order.Products)
+                    //.Include(order => order.Products)
                     .Include(order => order.Company)
                     .SingleOrDefault(order => order.Id == editedOrder.Id);
 
@@ -85,7 +105,7 @@ namespace WareMaster.Domain.Repositories
                     return;
 
                 orderToEdit.AssignedUsers = editedOrder.AssignedUsers;
-                orderToEdit.Products = editedOrder.Products;
+                //orderToEdit.Products = editedOrder.Products;
                 orderToEdit.TimeOfCreation = editedOrder.TimeOfCreation;
                 orderToEdit.Status = editedOrder.Status;
                 orderToEdit.Company = editedOrder.Company;
