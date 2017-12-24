@@ -48,6 +48,8 @@ namespace WareMaster.Controllers
         [Route("edit")]
         public IHttpActionResult EditEmployee(User editedEmployee)
         {
+            editedEmployee.ImageUrl = "Uploads\\" + _companyRepository.GetCompanyById(1).Name +
+                                     "\\Zaposlenici\\" + editedEmployee.FirstName + editedEmployee.LastName + ".jpg";
             _employeeRepository.EditUser(editedEmployee);
             return Ok(true);
         }
