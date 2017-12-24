@@ -6,6 +6,7 @@ using System.Web.Http;
 using WareMaster.Data.Models.Entities;
 using WareMaster.Domain.Repositories;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace WareMaster.Controllers
 {
@@ -48,8 +49,14 @@ namespace WareMaster.Controllers
         [Route("edit")]
         public IHttpActionResult EditEmployee(User editedEmployee)
         {
+            var uploadsFolder = HttpContext.Current.Server.MapPath("\\Uploads");
+            var oldUrlOfImage = Path.Combine(Directory.GetParent(uploadsFolder).ToString(), editedEmployee.ImageUrl);
+            var newUrlForImage = uploadsFolder + "\\" + _companyRepository.GetCompanyById(1).Name +
+                                 "\\Zaposlenici\\" + editedEmployee.FirstName + editedEmployee.LastName + ".jpg";
+            if (File.Exists(oldUrlOfImage))
+            File.Move(oldUrlOfImage, newUrlForImage);
             editedEmployee.ImageUrl = "Uploads\\" + _companyRepository.GetCompanyById(1).Name +
-                                     "\\Zaposlenici\\" + editedEmployee.FirstName + editedEmployee.LastName + ".jpg";
+                                      "\\Zaposlenici\\" + editedEmployee.FirstName + editedEmployee.LastName + ".jpg";
             _employeeRepository.EditUser(editedEmployee);
             return Ok(true);
         }
@@ -66,16 +73,19 @@ namespace WareMaster.Controllers
         [Route("upload")]
         public IHttpActionResult UploadImage()
         {
-            if (HttpContext.Current.Request.Files.Count>0)
+            if (HttpContext.Current.Request.Files.Count > 0)
             {
-                var file = HttpContext.Current.Request.Files[0];
-                var companyName = _companyRepository.GetCompanyById(1).Name;
-                var uploadsFolder = HttpContext.Current.Server.MapPath("\\Uploads");
-                Directory.CreateDirectory(uploadsFolder + "\\" + companyName + "\\Zaposlenici");
-                var path = uploadsFolder + "\\" + companyName + "\\Zaposlenici\\" + file.FileName; 
-                file.SaveAs(path);
-            }       
-            return Ok();
+                    var file = HttpContext.Current.Request.Files[0];
+                    var companyName = _companyRepository.GetCompanyById(1).Name;
+                    var uploadsFolder = HttpContext.Current.Server.MapPath("\\Uploads");
+                    Directory.CreateDirectory(uploadsFolder + "\\" + companyName + "\\Zaposlenici");
+                    var path = uploadsFolder + "\\" + companyName + "\\Zaposlenici\\" + file.FileName;
+                    if(File.Exists(path))
+                        File.Delete(path);
+                    file.SaveAs(path);
+                    file.InputStream.Close();
+            }
+            return Ok(true);
         }
     }
 }
