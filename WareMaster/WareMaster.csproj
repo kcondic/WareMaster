@@ -145,6 +145,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SuppliersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -167,6 +168,10 @@
     <Content Include="Images\logos\logo4848.png" />
     <Content Include="Images\logos\logo6060.png" />
     <Content Include="Images\logos\logo6262.png" />
+    
+    <Content Include="Scripts\app\addsupplier\addsupplier.state.js" />
+    <Content Include="Scripts\app\addsupplier\addsupplier.template.html" />
+    <Content Include="Scripts\app\addsupplier\addsuppliers.controller.js" />
     <Content Include="Scripts\app\addemployee\addemployee.controller.js" />
     <Content Include="Scripts\app\addemployee\addemployee.state.js" />
     <Content Include="Scripts\app\addemployee\addemployee.template.html" />
@@ -175,17 +180,31 @@
     <Content Include="Scripts\app\addproduct\addproduct.template.html" />
     <Content Include="Scripts\app\app.config.js" />
     <Content Include="Scripts\app\app.module.js" />
-    <Content Include="Scripts\app\common\employees.repository.js" />
-    <Content Include="Scripts\app\common\products.repository.js" />
+    <Content Include="Scripts\app\common\services\employees.repository.js" />
+    <Content Include="Scripts\app\common\services\products.repository.js" />
     <Content Include="Scripts\app\dashboard\dashboard.controller.js" />
     <Content Include="Scripts\app\dashboard\dashboard.state.js" />
     <Content Include="Scripts\app\dashboard\dashboard.template.html" />
+    
     <Content Include="Scripts\app\dashboard\dashboardMain.css" />
     <Content Include="Scripts\app\employees\employeesMain.css" />
     <Content Include="Scripts\app\fontPlayfairDisplay.css" />
     <Content Include="Scripts\app\products\productsMain.css" />
     <Content Include="Scripts\app\signin\signinMain.css" />
     <Content Include="Scripts\app\common\mainNavBar.css" />
+    
+    <Content Include="Scripts\app\editsupplier\editsupplier.controller.js" />
+    <Content Include="Scripts\app\editsupplier\editsupplier.state.js" />
+    <Content Include="Scripts\app\editsupplier\editsupplier.template.html" />
+    <Content Include="Scripts\app\signin\signin.controller.js" />
+    <Content Include="Scripts\app\signin\signin.state.js" />
+    <Content Include="Scripts\app\signin\signin.template.html" />
+    <Content Include="Scripts\app\suppliers\suppliers.controller.js" />
+    <Content Include="Scripts\app\suppliers\suppliers.state.js" />
+    <Content Include="Scripts\app\suppliers\suppliers.template.html" />
+    <Content Include="Scripts\app\common\services\suppliersrepository.js" />
+    <Content Include="Scripts\vendor\angular.min.js" />
+    
     <Content Include="Scripts\app\editemployee\editemployee.controller.js" />
     <Content Include="Scripts\app\editemployee\editemployee.state.js" />
     <Content Include="Scripts\app\editemployee\editemployee.template.html" />
@@ -216,6 +235,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\FontAwesome.otf" />
+
+    <Folder Include="App_Data\" />
+
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
