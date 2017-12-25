@@ -4,12 +4,22 @@
             return $http.get('api/orders');
         }
 
+        function getOrder(id) {
+            return $http.get('api/orders/details',
+                {
+                    params: {
+                        id: id
+                    }                       
+                });
+        }
+
         function addNewOrder(order) {
             return $http.post('api/orders/add', order);
         }
 
         return {
             getAllOrders: getAllOrders,
-            addNewOrder: addNewOrder
+            addNewOrder: addNewOrder,
+            getOrder: getOrder
         }
     });

@@ -1,0 +1,9 @@
+﻿<div>Narudžba {{order.Id}}</div>
+<div>Dobavljač: {{order.Supplier.Name}}</div>
+<div>Stvorena: {{order.TimeOfCreation}}</div>
+<div>
+    Proizvodi:<br/>
+    <div ng-repeat="productOrder in order.ProductOrders">
+        {{productOrder.Product.Name}} Količina: {{productOrder.ProductQuantity}}
+    </div>
+</div>

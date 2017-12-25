@@ -32,5 +32,12 @@ namespace WareMaster.Controllers
             _orderRepository.AddNewOrder(order);
             return Ok(true);
         }
+
+        [HttpGet]
+        [Route("details")]
+        public IHttpActionResult GetOrder(int id)
+        {
+            return Ok(_orderRepository.GetOrderDetails(id));
+        }
     }
 }

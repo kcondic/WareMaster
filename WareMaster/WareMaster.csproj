@@ -178,6 +178,9 @@
     <Content Include="Scripts\app\editsupplier\editsupplier.controller.js" />
     <Content Include="Scripts\app\editsupplier\editsupplier.state.js" />
     <Content Include="Scripts\app\editsupplier\editsupplier.template.html" />
+    <Content Include="Scripts\app\orderdetails\orderdetails.controller.js" />
+    <Content Include="Scripts\app\orderdetails\orderdetails.state.js" />
+    <Content Include="Scripts\app\orderdetails\orderdetails.template.html" />
     <Content Include="Scripts\app\orders\orders.controller.js" />
     <Content Include="Scripts\app\orders\orders.state.js" />
     <Content Include="Scripts\app\orders\orders.template.html" />
