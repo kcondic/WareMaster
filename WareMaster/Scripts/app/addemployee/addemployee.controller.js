@@ -7,9 +7,9 @@
                 LastName: $scope.lastName,
                 ImageUrl: '',
                 Role: 0
-            };
-            functionsRepository.uploadImage($scope.file,$scope.firstName,$scope.lastName);
-            employeesRepository.addEmployee(newEmployee).then(function() {
+            };     
+            employeesRepository.addEmployee(newEmployee).then(function () {
+                functionsRepository.uploadImage($scope.file, $scope.firstName, $scope.lastName);
                 $state.go('employees', {}, { reload: true });
             });
         }
