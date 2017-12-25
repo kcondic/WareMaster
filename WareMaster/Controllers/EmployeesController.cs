@@ -32,8 +32,9 @@ namespace WareMaster.Controllers
         [Route("add")]
         public IHttpActionResult AddEmployee(User employeeToAdd)
         {
-            employeeToAdd.ImageUrl = "Uploads\\" + _companyRepository.GetCompanyById(1).Name + 
-                                    "\\Zaposlenici\\" + employeeToAdd.FirstName + employeeToAdd.LastName + ".jpg";
+            var companyName = _companyRepository.GetCompanyById(1).Name;
+            employeeToAdd.ImageUrl = "Uploads\\" + companyName + "\\Zaposlenici\\" + 
+                                      employeeToAdd.FirstName + employeeToAdd.LastName + ".jpg";
             _employeeRepository.AddUser(employeeToAdd);
             return Ok(true);
         }
@@ -50,13 +51,16 @@ namespace WareMaster.Controllers
         public IHttpActionResult EditEmployee(User editedEmployee)
         {
             var uploadsFolder = HttpContext.Current.Server.MapPath("\\Uploads");
+            var companyName = _companyRepository.GetCompanyById(1).Name;
             var oldUrlOfImage = Path.Combine(Directory.GetParent(uploadsFolder).ToString(), editedEmployee.ImageUrl);
-            var newUrlForImage = uploadsFolder + "\\" + _companyRepository.GetCompanyById(1).Name +
-                                 "\\Zaposlenici\\" + editedEmployee.FirstName + editedEmployee.LastName + ".jpg";
-            if (File.Exists(oldUrlOfImage))
-            File.Move(oldUrlOfImage, newUrlForImage);
-            editedEmployee.ImageUrl = "Uploads\\" + _companyRepository.GetCompanyById(1).Name +
-                                      "\\Zaposlenici\\" + editedEmployee.FirstName + editedEmployee.LastName + ".jpg";
+            var newUrlForImage = Path.Combine(Path.Combine(Path.Combine(uploadsFolder, companyName), "Zaposlenici"), 
+                                 editedEmployee.FirstName + editedEmployee.LastName + ".jpg");
+
+            if (File.Exists(oldUrlOfImage) && oldUrlOfImage!=newUrlForImage)
+                File.Move(oldUrlOfImage, newUrlForImage);
+
+            editedEmployee.ImageUrl = "Uploads\\" + companyName + "\\Zaposlenici\\" + 
+                                       editedEmployee.FirstName + editedEmployee.LastName + ".jpg";
             _employeeRepository.EditUser(editedEmployee);
             return Ok(true);
         }
@@ -78,10 +82,8 @@ namespace WareMaster.Controllers
                     var file = HttpContext.Current.Request.Files[0];
                     var companyName = _companyRepository.GetCompanyById(1).Name;
                     var uploadsFolder = HttpContext.Current.Server.MapPath("\\Uploads");
-                    Directory.CreateDirectory(uploadsFolder + "\\" + companyName + "\\Zaposlenici");
-                    var companyFolder = Path.Combine(uploadsFolder, companyName);
-                    var employeeFolder = Path.Combine(companyFolder, "Zaposlenici");
-                    var path = Path.Combine(employeeFolder, file.FileName);
+                    Directory.CreateDirectory(Path.Combine(Path.Combine(uploadsFolder, companyName), "Zaposlenici"));
+                    var path = Path.Combine(Path.Combine(Path.Combine(uploadsFolder, companyName), "Zaposlenici"), file.FileName);
 
                     file.SaveAs(path);
                     file.InputStream.Close();
