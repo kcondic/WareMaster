@@ -1,4 +1,9 @@
-﻿<div ng-repeat="employee in allEmployees">
+﻿<div id="employees">
+    <div class="employees-main">
+        <div class="sub-header"></div>
+    </div>
+</div>
+<div ng-repeat="employee in allEmployees">
     {{employee.FirstName}}
     {{employee.LastName}}
     <button ui-sref="editemployee({id: employee.Id})">Uredi</button>

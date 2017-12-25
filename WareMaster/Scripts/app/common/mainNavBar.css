@@ -40,7 +40,8 @@ header .logo-container{
     margin: auto;
     margin-left: 10px;
     font-size: 24px;
-    font-weight:500;
+    font-weight:700;
+    font-family: 'Playfair Display', serif, sans-serif;
     padding-bottom: 0.1em;
 }
 /* DIZAJN DIJELA HEADERA S INFORMACIJAMA O PRIJAVLJENOM KORISNIKU */
@@ -48,7 +49,7 @@ header .logo-container{
     display: flex;
     justify-content: space-around;
     padding: 0.05em;
-    padding-top: 0.85em;
+    padding-top: 0.8em;
     font-size: 18px;
 }
 /* DIZAJN DIJELA HEADERA S DROPDOWN IKONAMA */
@@ -75,7 +76,17 @@ header li .icon-button{
     display: inline-block;
     margin: auto;
     position: relative;
-    font-size: 26px;
+    font-size: 27px;
+}
+
+@-moz-document url-prefix(){
+    header li .icon-button{
+        padding-top: 0.1em;
+    }
+
+    .menu-icon{
+        padding-top: 0.26em;
+    }
 }
 
 .icon-button span,
@@ -107,6 +118,12 @@ header li .icon-button{
     height: 1000px;
 }
 
+@-moz-document url-prefix(){
+    .dropdown:hover .button-content{
+        top: 54px;
+    }
+}
+
 .button-content .button-content-item{
     padding: 0.8em;
     cursor: pointer;
@@ -114,6 +131,10 @@ header li .icon-button{
 
 .button-content .button-content-item:hover{
     background-color: rgb(232,232,232);
+}
+
+.menu-icon{
+    margin-top: -1px;
 }
 
 .menu-bar {

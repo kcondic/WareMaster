@@ -1,57 +1,5 @@
 ﻿<div id="dashboard">
-<header>
-    <div class="logo-container">
-        <img class="logo-img" src="../../../images/logos/logo6262.png" alt="logo" />
-        <label class="app-title"><span class="uppercase-title-letter">W</span>are<span class="uppercase-title-letter">M</span>aster</label>
-    </div>
-
-    <div class="user-info">
-        <article>
-            <label>Korisnik:<span class="user-name">{Ime Prezime}</span>     ID:<span class="user-id">{ID korisnika}</span></label>
-        </article>
-    </div>
-
-    <ul>
-        <li class="dropdown">
-            <div class="icon-button">
-                <span class="notification-icon" aria-hidden="true">
-                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                </span>
-            </div>
-            <div class="button-content notification-content">
-                <div class="button-content-item"><p>Ovo je 1. obavijest</p></div>
-                <div class="button-content-item"><p>Ovo je 2. obavijest</p></div>
-                <div class="button-content-item"><p>Ovo je 3. obavijest</p></div>
-            </div>
-        </li>
-        <li class="dropdown">
-            <div class="icon-button">
-                <span class="help-icon" aria-hidden="true">
-                    <i class="fa fa-question-circle" aria-hidden="true"></i>
-                </span>
-            </div>
-            <div class="button-content">
-                <div class="button-content-item">Pomoć</div>
-                <div class="button-content-item">O WareMasteru</div>
-            </div>
-        </li>
-        <li class="dropdown">
-            <div class="icon-button">
-                <div class="menu-icon">
-                    <div class="menu-bar bar1"></div>
-                    <div class="menu-bar bar2"></div>
-                    <div class="menu-bar bar3"></div>
-                </div>
-            </div>
-            <div class="button-content">
-                <div class="button-content-item">Promijeni lozinku</div>
-                <div class="button-content-item">Promijeni temu</div>
-                <div class="button-content-item">Odjava</div>
-            </div>
-        </li>
-    </ul>
-</header>
-<div class="dashboard-main">
+   <div class="dashboard-main">
     <div class="left-column">
         <div class="button-container">
                 <button ui-sref="products">Proizvodi</button>
@@ -107,14 +55,20 @@
                 </div>
                 <div class="current-numbers-container">
                     <ul>
-                        <li>Broj proizvoda u skladištu <span>NN</span></li>
-                        <li>Broj dobavljača <span>NN</span></li>
-                        <li>Broj radnika <span>NN</span></li>
-                        <li>Ukupan broj narudžbi <span>NN</span></li>
+                        <li><span>523</span></li>
+                        <li>Broj proizvoda u skladištu</li>
+                        <li><span>87</span></li>
+                        <li>Broj dobavljača</li>
+                        <li><span>124</span></li>
+                        <li>Broj radnika</li>
+                        <li><span>583</span></li>
+                        <li>Ukupan broj narudžbi</li>
                     </ul>
                 </div>
             </div>
-            <div class="orders-bar-chart-container"></div>
+            <div class="orders-bar-chart-container">
+                <canvas id="bar-chart" width="600" height="200"></canvas>
+            </div>
         </div>
     </div>
     <div class="right-column">

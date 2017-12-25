@@ -1,4 +1,7 @@
-﻿/* OBLIKOVANJE MAIN DASHBOARD PROZORA */
+﻿body{
+    overflow: hidden;
+}
+/* OBLIKOVANJE MAIN DASHBOARD PROZORA */
 #dashboard .dashboard-main{
     height: 92.2vh;
     margin-top: 52px;
@@ -6,7 +9,7 @@
     display: flex;
 }
 /* LIJEVI STUPAC */
-.left-column{
+#dashboard .left-column{
     position: relative;
     height: inherit;
     width: 80%;
@@ -14,13 +17,13 @@
     display: flex;
 }
 /* LINKOVI DO RADNIKA, NARUDŽBI, PROIZVODA I DOBAVLJAČA */
-.button-container{
+#dashboard .button-container{
     width: 30%;
     height: 100%;
     display: block;
 }
 
-.button-container button{
+#dashboard .button-container button{
     display: block;
     margin: auto;
     margin-top: 12px;
@@ -33,69 +36,73 @@
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     color: black;
     font-size: 21px;
+    font-weight: 400;
+    font-family: 'Playfair Display', serif, sans-serif;
     text-transform: uppercase;
     cursor: pointer;
     transition-delay: 0.1s;
     transition-duration: 0.5s;
 }
 
-.button-container button:hover{
+#dashboard .button-container button:hover{
     border-right: solid 25px steelblue;
 }
 
-.button-container button:not(:hover){
+#dashboard .button-container button:not(:hover){
     border-right: solid 0px;
 }
 
 /* GRAFOVI I BROJKE */
-.useful-info-container{
+#dashboard .useful-info-container{
     width: 70%;
     display: block;
     justify-content: space-around;
 }
 
-.percent-circles-container{
+/* KRUGOVI S POSTOTCIMA */
+#dashboard .percent-circles-container{
     height: auto;
     display: flex;
     position:relative;
 }
 
-.left-circle,
-.right-circle{
+#dashboard .left-circle,
+#dashboard .right-circle{
     margin-top: 10px;
     margin-bottom: 5px;
     width: 270px;
     height: 290px;
     background-color: white;
+    color: black;
     box-shadow: 0px 5px 16px 0px rgba(0, 0, 0, 0.2);
     border-radius: 2.5px;
     overflow: hidden;
 }
 
-.left-circle{
+#dashboard .left-circle{
     margin-left: 0px;
     margin-right: 5px;
 }
 
-.right-circle{
+#dashboard .right-circle{
     margin-left: 5px;
     margin-right: 5px;
 }
 
-.percent-circle-header{
+#dashboard .percent-circle-header{
     height: 50px;
     width: 100%;
     background-color: rgb(34,34,34);
     text-align: center;
 }
 
-.percent-circle-header div{
+#dashboard .percent-circle-header div{
     padding-top: 15px;
     font-size: 21px;
     color: white;
 }
 
-.circle-item{
+#dashboard .circle-item{
     display: block;
     margin:auto;
     margin-top:10px;
@@ -111,7 +118,7 @@
         linear-gradient(80deg, #A2ECFB 50%, rgb(220,220,220) 50%);
 }
 
-.inner-circle{
+#dashboard .inner-circle{
     display: block;
     margin:auto;
     position: relative;
@@ -125,20 +132,20 @@
     text-align: center;
 }
 
-.circle-item .orders-number{
+#dashboard .circle-item .orders-number{
     font-size: 30px;
     display: block;
     margin: auto;
-    margin-top: +26px;
+    margin-top: +21px;
     z-index: 5;
 }
 
-.circle-description{
+#dashboard .circle-description{
     height: 50px;
     display: block;
 }
 
-.color-row{
+#dashboard .color-row{
     display: block;
     margin:auto;
     margin-top: 5px;
@@ -149,17 +156,17 @@
     text-align: center;
 }
 
-.circle-text{
+#dashboard .circle-text{
     display: block;
-    margin-top: -14px;
+    margin-top: -17.5px;
     font-size: 15px;
 }
 
-.grey-color,
-.red-color,
-.blue-color,
-.light-blue-color,
-.light-red-color{
+#dashboard .grey-color,
+#dashboard .red-color,
+#dashboard .blue-color,
+#dashboard .light-blue-color,
+#dashboard .light-red-color{
     width: 15px;
     height: 15px;
     border-radius: 50%;
@@ -187,7 +194,7 @@
 }
 
 /* PRIKAZ TRENUTNOG BROJA PROIZVODA U SKLADIŠTU, DOBAVLJAČA, ZAPOSLENIH RADNIKA, UKUPNOG BROJA NARUDŽBI */
-.current-numbers-container{
+#dashboard .current-numbers-container{
     display: block;
     margin-left: 5px;
     margin-top: 10px;
@@ -199,7 +206,35 @@
     border-radius: 2.5px;
 }
 
-.orders-bar-chart-container{
+#dashboard .current-numbers-container ul{
+    list-style: none;
+    display: inline-block;
+    margin-top: -4px;
+    width: 100%;
+}
+
+#dashboard .current-numbers-container li{
+    display: block;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 2px;
+    text-transform: uppercase;
+    color: black;
+}
+
+#dashboard .current-numbers-container li span{
+    font-size: 32px;
+    border-bottom: dashed 1px darkslategrey;
+    color: steelblue;
+}
+
+@-moz-document url-prefix(){
+    #dashboard .current-numbers-container li{
+        margin-top: 1px;
+    }
+}
+/* GRAF S POSTOTCIMA IZVRŠENIH NARUDŽBI PO DANU */
+#dashboard .orders-bar-chart-container{
     display: block;
     margin-top: 5px;
     margin-bottom: 10px;
@@ -210,15 +245,17 @@
     border-radius: 2.5px;
 }
 
+
+
 /* DESNI STUPAC */
-.right-column{
+#dashboard .right-column{
     height: inherit;
     width: 20%;
     background-color: rgb(240,240,240);
     z-index: 1;
 }
 /* DIZAJN ZA NEDAVNE AKTIVNOSTI */
-.activity-column{
+#dashboard .activity-column{
    background-color: white;
    color: black;
    height:inherit;
@@ -226,22 +263,21 @@
    box-shadow: 0px 8px 16px 4px rgba(0, 0, 0, 0.2);
 }
 
-.activity-header{
-    border-bottom: rgb(128,29,29) 1px solid;
-    color: black;
+#dashboard .activity-header{
+    border-bottom: steelblue 1px solid;
+    color: rgb(34,34,34);
     height: 4.5%;
     width: 100%;
     text-align: center;
     justify-content: center;
-    font-size: 18px;
+    font-size: 20px;
 }
 
-.activity-header div{
-    padding-top: 5px;
+#dashboard .activity-header div{
     height: 20px;
 }
 
-.activity-container{
+#dashboard .activity-container{
     height: 95%;
     width: 100%;
     overflow-y: scroll;

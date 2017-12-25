@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@{ Layout = "../Shared/_MainNavigationLayout.cshtml"; }
+<!DOCTYPE html>
 
 <html ng-app="app">
 <head>
@@ -8,9 +9,15 @@
     <!-- Link za učitavanje font-awesome.css za ikone -->
     <link href="~/Content/font-awesome.css" type="text/css" rel="stylesheet" />
 
+    <!-- Link za učitavanje css datoteke koja sadrži font "Playfair display" za tekst stranice -->
+    <link href="~/Scripts/app/fontPlayfairDisplay.css" type="text/css" rel="stylesheet" />
+
     <!-- Stylesheets -->
-    <link href="~/Scripts/app/dashboard/dashboardNavBar.css" type="text/css" rel="stylesheet" />
+    <link href="~/Scripts/app/common/mainNavBar.css" type="text/css" rel="stylesheet" />
+    <link href="~/Scripts/app/signin/signinMain.css" type="text/css" rel="stylesheet" />
     <link href="~/Scripts/app/dashboard/dashboardMain.css" type="text/css" rel="stylesheet" />
+    <link href="~/Scripts/app/products/productsMain.css" type="text/css" rel="stylesheet" />
+    <link href="~/Scripts/app/employees/employeesMain.css" type="text/css" rel="stylesheet" />
 
     <!-- Scripts -->
     <script src="~/Scripts/vendor/angular.min.js"></script>

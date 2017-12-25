@@ -4,6 +4,6 @@
             {
                 url: '/',
                 controller: 'SigninController',
-                templateUrl: '/Scripts/app/signin/signin.template.html'
+                templateUrl: '/Scripts/app/signin/signin.template.html',
             });
 });
