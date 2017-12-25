@@ -68,19 +68,18 @@ namespace WareMaster.Domain.Repositories
                     TimeOfCreation = DateTime.Now,
                     Status = order.Status,
                     CompanyId = 1,
+                    SupplierId = order.SupplierId,
                     ProductOrders = new List<ProductOrders>()
                 };
 
                 foreach (var productOrder in order.ProductOrders)
-                {
                     newOrder.ProductOrders.Add(new ProductOrders()
                     {
                         OrderId = newOrder.Id,
                         ProductId = productOrder.ProductId,
                         ProductQuantity = productOrder.ProductQuantity
                     });
-                }
-            
+
                 context.Orders.Add(newOrder);
                 context.SaveChanges();
             }

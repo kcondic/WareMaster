@@ -9,7 +9,7 @@ using WareMaster.Data.Models.Entities;
 
 namespace WareMaster.Data
 {
-    public class WarehouseModelDbInitialization : DropCreateDatabaseAlways<WarehouseContext>
+    public class WarehouseModelDbInitialization : CreateDatabaseIfNotExists<WarehouseContext>
     {
         protected override void Seed(WarehouseContext context)
         {

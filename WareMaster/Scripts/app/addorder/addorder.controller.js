@@ -1,7 +1,6 @@
 ﻿angular.module('app').controller('AddOrderController',
-    function ($scope, $state, employeesRepository, productsRepository, ordersRepository) {
+    function ($scope, $state, employeesRepository, productsRepository, ordersRepository, suppliersRepository) {
 
-        //$scope.quantity = [];
         $scope.selectedEmployees = [];
         $scope.selectedProducts = [];
 
@@ -12,6 +11,16 @@
         productsRepository.getAllProducts().then(function(products) {
             $scope.allProducts = products.data;
         });
+
+        suppliersRepository.getAllSuppliers().then(function (suppliers) {
+            $scope.allSuppliers = suppliers.data;
+        });
+
+        $scope.suppliersFilter = function (selectedProducts) {
+            return function (supplier) {
+                return (!selectedProducts.some(val => !supplier.Products.some(x => x.Id === val.Id)));
+            }
+        }
 
         $scope.selectEmployee = function (employee) {
             $scope.selectedEmployees.push(employee);
@@ -41,12 +50,15 @@
                     ProductQuantity: $scope.selectedProducts[i].Counter
             });
             }
+
             const newOrder = {
                 AssignedUsers: $scope.selectedEmployees,
                 ProductOrders: productOrder,
-                Status: 0
+                Status: 0,
+                SupplierId: document.getElementById("supplierSelect").options[document.getElementById("supplierSelect")
+                    .selectedIndex].value
             };
-            console.log(newOrder);
+
             ordersRepository.addNewOrder(newOrder).then(function () {
                 $state.go('orders', {}, { reload: true });
             });

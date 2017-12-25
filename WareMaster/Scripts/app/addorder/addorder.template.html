@@ -11,8 +11,11 @@
     Proizvodi:
     <span ng-repeat="product in selectedProducts">
         <span ng-click="deselectProduct(product)">{{product.Name}}</span>
-        Količina: <input type="number" min="0" value="0"/>
+        Količina: <input type="number" min="0" value="0" ng-model="product.Counter"/>
     </span>
+    <select id="supplierSelect">
+        <option value={{supplier.Id}} ng-repeat="supplier in allSuppliers | filter: suppliersFilter(selectedProducts)">{{supplier.Name}}</option>
+    </select>
 </div>
 <div>
     Svi proizvodi:
