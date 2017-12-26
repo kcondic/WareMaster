@@ -33,6 +33,7 @@ header .logo-container{
     margin: auto;
     box-shadow: 0 0 2px white;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .logo-container .app-title{
