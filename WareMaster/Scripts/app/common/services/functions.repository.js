@@ -1,6 +1,6 @@
 ﻿angular.module('app').service('functionsRepository', function(Upload) {
 
-    function uploadImage(file, firstName, lastName, id) {
+    function uploadEmployeeImage(file, firstName, lastName, id) {
         if (file) {
             Upload.rename(file, firstName + lastName + id + '.jpg');
             Upload.upload({
@@ -10,7 +10,18 @@
         }
     }
 
+    function uploadProductImage(file, name, id) {
+        if (file) {
+            Upload.rename(file, name + id + '.jpg');
+            Upload.upload({
+                url: 'api/products/upload',
+                file: file
+            });
+        }
+    }
+
     return {
-        uploadImage: uploadImage
+        uploadEmployeeImage: uploadEmployeeImage,
+        uploadProductImage: uploadProductImage
     }
 })

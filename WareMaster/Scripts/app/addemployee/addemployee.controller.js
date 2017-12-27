@@ -1,5 +1,5 @@
 ﻿angular.module('app').controller('AddEmployeeController',
-    function ($scope, $state, Upload, employeesRepository, functionsRepository) {
+    function ($scope, $state, employeesRepository, functionsRepository) {
 
         $scope.addNewEmployee = function() {
             const newEmployee = {
@@ -12,7 +12,7 @@
                 employeesRepository.getIdNeededForImageName().then(function(id) {
                     $scope.id = id.data;
                 }).then(function() {
-                    functionsRepository.uploadImage($scope.file, $scope.firstName, $scope.lastName, $scope.id);
+                    functionsRepository.uploadEmployeeImage($scope.file, $scope.firstName, $scope.lastName, $scope.id);
                     $state.go('employees', {}, { reload: true });
                 });
             });

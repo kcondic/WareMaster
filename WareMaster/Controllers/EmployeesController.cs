@@ -42,11 +42,10 @@ namespace WareMaster.Controllers
             var companyName = _companyRepository.GetCompanyById(1).Name;
             _employeeRepository.AddUser(employeeToAdd);
             var lastId = _employeeRepository.GetLastEmployeeId();
-            var sameEmployee = _employeeRepository.GetUser(lastId);
-            sameEmployee.ImageUrl = "Uploads\\" + companyName + "\\Zaposlenici\\" + 
+            employeeToAdd.ImageUrl = "Uploads\\" + companyName + "\\Zaposlenici\\" + 
                                       employeeToAdd.FirstName + employeeToAdd.LastName + 
                                       lastId + ".jpg";
-            _employeeRepository.EditUser(sameEmployee);
+            _employeeRepository.EditUser(employeeToAdd);
             return Ok(true);
         }
 

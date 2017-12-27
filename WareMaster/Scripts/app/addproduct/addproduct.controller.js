@@ -1,5 +1,5 @@
 ﻿angular.module('app').controller('AddProductController',
-    function ($scope, $state, productsRepository) {
+    function ($scope, $state, productsRepository, functionsRepository) {
 
         $scope.addNewProduct = function () {
             const newProduct = {
@@ -7,7 +7,12 @@
                 Counter: $scope.quantity
             };
             productsRepository.addProduct(newProduct).then(function () {
-                $state.go('products', {}, { reload: true });
+                productsRepository.getIdNeededForImageName().then(function(id) {
+                    $scope.id = id.data;
+                }).then(function() {
+                    functionsRepository.uploadProductImage($scope.file, $scope.name, $scope.id);
+                    $state.go('products', {}, { reload: true });
+                });
             });
         }
     });

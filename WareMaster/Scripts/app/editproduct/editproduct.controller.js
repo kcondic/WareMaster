@@ -1,5 +1,5 @@
 ﻿angular.module('app').controller('EditProductController',
-    function ($scope, $state, $stateParams, productsRepository) {
+    function ($scope, $state, $stateParams, productsRepository, functionsRepository) {
 
         productsRepository.getProductToEdit($stateParams.id).then(function (product) {
             $scope.productToEdit = product.data;
@@ -11,6 +11,7 @@
             $scope.productToEdit.Name = $scope.name;
             $scope.productToEdit.Counter = $scope.quantity;
             productsRepository.editProduct($scope.productToEdit).then(function () {
+                functionsRepository.uploadProductImage($scope.file, $scope.name, $scope.productToEdit.Id);
                 $state.go('products', {}, { reload: true });
             });
         }

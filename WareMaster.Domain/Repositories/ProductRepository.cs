@@ -31,6 +31,12 @@ namespace WareMaster.Domain.Repositories
                     .SingleOrDefault(product => product.Id == productId);
         }
 
+        public int GetLastProductId()
+        {
+            using (var context = new WarehouseContext())
+                return context.Products.OrderByDescending(user => user.Id).First().Id;
+        }
+
         public void AddProduct(Product productToAdd)
         {
             using (var context = new WarehouseContext())
@@ -55,6 +61,7 @@ namespace WareMaster.Domain.Repositories
 
                 productToEdit.Name = editedProduct.Name;
                 productToEdit.Counter = editedProduct.Counter;
+                productToEdit.ImageUrl = editedProduct.ImageUrl;
 
                 context.SaveChanges();
             }
