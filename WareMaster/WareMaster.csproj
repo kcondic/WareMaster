@@ -175,6 +175,9 @@
     <Content Include="Scripts\app\dashboard\dashboard.controller.js" />
     <Content Include="Scripts\app\dashboard\dashboard.state.js" />
     <Content Include="Scripts\app\dashboard\dashboard.template.html" />
+    <Content Include="Scripts\app\editorder\editorder.controller.js" />
+    <Content Include="Scripts\app\editorder\editorder.state.js" />
+    <Content Include="Scripts\app\editorder\editorder.template.html" />
     <Content Include="Scripts\app\editsupplier\editsupplier.controller.js" />
     <Content Include="Scripts\app\editsupplier\editsupplier.state.js" />
     <Content Include="Scripts\app\editsupplier\editsupplier.template.html" />

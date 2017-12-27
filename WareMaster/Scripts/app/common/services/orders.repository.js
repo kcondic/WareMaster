@@ -17,9 +17,15 @@
             return $http.post('api/orders/add', order);
         }
 
+        function editOrder(editedOrder) {
+            console.log(editedOrder);
+            return $http.post('api/orders/edit', editedOrder);
+        }
+
         return {
             getAllOrders: getAllOrders,
             addNewOrder: addNewOrder,
-            getOrder: getOrder
+            getOrder: getOrder,
+            editOrder: editOrder
         }
     });

@@ -39,5 +39,13 @@ namespace WareMaster.Controllers
         {
             return Ok(_orderRepository.GetOrderDetails(id));
         }
+
+        [HttpPost]
+        [Route("edit")]
+        public IHttpActionResult EditOrder(Order editedOrder)
+        {
+            _orderRepository.EditOrder(editedOrder);
+            return Ok(true);
+        }
     }
 }
