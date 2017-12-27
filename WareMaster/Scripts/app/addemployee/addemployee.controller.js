@@ -8,12 +8,13 @@
                 ImageUrl: '',
                 Role: 0
             };
-            employeesRepository.getIdNeededForImageName().then(function (id) {
-                $scope.id = id.data;
-            });
             employeesRepository.addEmployee(newEmployee).then(function () {
-                functionsRepository.uploadImage($scope.file, $scope.firstName, $scope.lastName, $scope.id);
-                $state.go('employees', {}, { reload: true });
+                employeesRepository.getIdNeededForImageName().then(function(id) {
+                    $scope.id = id.data;
+                }).then(function() {
+                    functionsRepository.uploadImage($scope.file, $scope.firstName, $scope.lastName, $scope.id);
+                    $state.go('employees', {}, { reload: true });
+                });
             });
         }
     });

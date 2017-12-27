@@ -32,7 +32,7 @@ namespace WareMaster.Controllers
         [Route("add")]
         public IHttpActionResult GetIdNeededForImageName()
         {
-            return Ok(_employeeRepository.GetLastId());
+            return Ok(_employeeRepository.GetLastEmployeeId());
         }
 
         [HttpPost]
@@ -40,11 +40,13 @@ namespace WareMaster.Controllers
         public IHttpActionResult AddEmployee(User employeeToAdd)
         {
             var companyName = _companyRepository.GetCompanyById(1).Name;
-            var newId = _employeeRepository.GetLastId();
-            employeeToAdd.ImageUrl = "Uploads\\" + companyName + "\\Zaposlenici\\" + 
-                                      employeeToAdd.FirstName + employeeToAdd.LastName + 
-                                      newId + ".jpg";
             _employeeRepository.AddUser(employeeToAdd);
+            var lastId = _employeeRepository.GetLastEmployeeId();
+            var sameEmployee = _employeeRepository.GetUser(lastId);
+            sameEmployee.ImageUrl = "Uploads\\" + companyName + "\\Zaposlenici\\" + 
+                                      employeeToAdd.FirstName + employeeToAdd.LastName + 
+                                      lastId + ".jpg";
+            _employeeRepository.EditUser(sameEmployee);
             return Ok(true);
         }
 
@@ -79,6 +81,13 @@ namespace WareMaster.Controllers
         [Route("delete")]
         public IHttpActionResult DeleteEmployee(int id)
         {
+            var companyName = _companyRepository.GetCompanyById(1).Name;
+            var uploadsFolder = HttpContext.Current.Server.MapPath("\\Uploads");
+            var companyFolder = Path.Combine(Path.Combine(uploadsFolder, companyName), "Zaposlenici");
+            var fileToDeleteFilter = @"*" + id + ".jpg";
+            var fileToDelete = Directory.GetFiles(companyFolder, fileToDeleteFilter);
+            if(fileToDelete.Any())
+                File.Delete(fileToDelete[0]);
             _employeeRepository.DeleteUser(id);
             return Ok(true);
         }

@@ -5,7 +5,7 @@
             $scope.allEmployees = employees.data;
 
             for (let employee of $scope.allEmployees) {
-                var random = (new Date()).toString();
+                const random = (new Date()).toString();
                 employee.ImageUrl = employee.ImageUrl + '?cb=' + random;
             }
         });

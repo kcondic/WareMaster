@@ -49,10 +49,10 @@ namespace WareMaster.Domain.Repositories
                     .FirstOrDefault(user => user.Id == userId);
         }
 
-        public int GetLastId()
+        public int GetLastEmployeeId()
         {
             using (var context = new WarehouseContext())
-                return context.Users.OrderByDescending(user => user.Id).First().Id+1;
+                return context.Users.Where(user => user.Role == Role.Employee).OrderByDescending(user => user.Id).First().Id;
         }
 
         public void AddUser(User userToAdd)
