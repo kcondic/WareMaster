@@ -45,11 +45,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -153,11 +153,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\font-awesome.css" />
-    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Assets\fontstyles\font-awesome.css" />
+    <Content Include="Assets\fontstyles\font-awesome.min.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="Assets\fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
+<<<<<<< HEAD
     <Content Include="Images\logos\logo.png" />
     <Content Include="Images\logos\logo1616.png" />
     <Content Include="Images\logos\logo2525.png" />
@@ -169,6 +170,18 @@
     <Content Include="Images\logos\logo6060.png" />
     <Content Include="Images\logos\logo6262.png" />
     
+=======
+    <Content Include="Assets\images\logos\logo.png" />
+    <Content Include="Assets\images\logos\logo1616.png" />
+    <Content Include="Assets\images\logos\logo2525.png" />
+    <Content Include="Assets\images\logos\logo300300.png" />
+    <Content Include="Assets\images\logos\logo3030.png" />
+    <Content Include="Assets\images\logos\logo3232.png" />
+    <Content Include="Assets\images\logos\logo4040.png" />
+    <Content Include="Assets\images\logos\logo4848.png" />
+    <Content Include="Assets\images\logos\logo6060.png" />
+    <Content Include="Assets\images\logos\logo6262.png" />
+>>>>>>> 44741772ed0f90a9c28078a5779cb466c15a4427
     <Content Include="Scripts\app\addsupplier\addsupplier.state.js" />
     <Content Include="Scripts\app\addsupplier\addsupplier.template.html" />
     <Content Include="Scripts\app\addsupplier\addsuppliers.controller.js" />
@@ -185,6 +198,7 @@
     <Content Include="Scripts\app\dashboard\dashboard.controller.js" />
     <Content Include="Scripts\app\dashboard\dashboard.state.js" />
     <Content Include="Scripts\app\dashboard\dashboard.template.html" />
+<<<<<<< HEAD
     
     <Content Include="Scripts\app\dashboard\dashboardMain.css" />
     <Content Include="Scripts\app\employees\employeesMain.css" />
@@ -193,6 +207,14 @@
     <Content Include="Scripts\app\signin\signinMain.css" />
     <Content Include="Scripts\app\common\mainNavBar.css" />
     
+=======
+    <Content Include="Assets\styles\dashboardMain.css" />
+    <Content Include="Assets\styles\employeesMain.css" />
+    <Content Include="Assets\fontstyles\fontPlayfairDisplay.css" />
+    <Content Include="Assets\styles\productsMain.css" />
+    <Content Include="Assets\styles\signinMain.css" />
+    <Content Include="Assets\styles\mainNavBar.css" />
+>>>>>>> 44741772ed0f90a9c28078a5779cb466c15a4427
     <Content Include="Scripts\app\editsupplier\editsupplier.controller.js" />
     <Content Include="Scripts\app\editsupplier\editsupplier.state.js" />
     <Content Include="Scripts\app\editsupplier\editsupplier.template.html" />
@@ -203,8 +225,11 @@
     <Content Include="Scripts\app\suppliers\suppliers.state.js" />
     <Content Include="Scripts\app\suppliers\suppliers.template.html" />
     <Content Include="Scripts\app\common\services\suppliersrepository.js" />
+<<<<<<< HEAD
     <Content Include="Scripts\vendor\angular.min.js" />
     
+=======
+>>>>>>> 44741772ed0f90a9c28078a5779cb466c15a4427
     <Content Include="Scripts\app\editemployee\editemployee.controller.js" />
     <Content Include="Scripts\app\editemployee\editemployee.state.js" />
     <Content Include="Scripts\app\editemployee\editemployee.template.html" />
@@ -217,9 +242,6 @@
     <Content Include="Scripts\app\products\products.controller.js" />
     <Content Include="Scripts\app\products\products.state.js" />
     <Content Include="Scripts\app\products\products.template.html" />
-    <Content Include="Scripts\app\signin\signin.controller.js" />
-    <Content Include="Scripts\app\signin\signin.state.js" />
-    <Content Include="Scripts\app\signin\signin.template.html" />
     <Content Include="Scripts\vendor\angular-ui-router.min.js" />
     <Content Include="Scripts\vendor\angular.min.js" />
     <Content Include="Scripts\vendor\underscore.min.js" />
@@ -234,25 +256,29 @@
     <Content Include="Views\Home\Shell.cshtml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Content Include="fonts\FontAwesome.otf" />
 
     <Folder Include="App_Data\" />
 
+=======
+    <Content Include="Assets\fonts\FontAwesome.otf" />
+>>>>>>> 44741772ed0f90a9c28078a5779cb466c15a4427
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="Assets\fonts\fontawesome-webfont.woff2" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="Assets\fonts\fontawesome-webfont.woff" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="Assets\fonts\fontawesome-webfont.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Assets\fonts\fontawesome-webfont.eot" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -262,11 +288,11 @@
     <Content Include="Views\Shared\_MainNavigationLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\PlayfairDisplay-Black.ttf" />
-    <Content Include="fonts\PlayfairDisplay-Bold.ttf" />
-    <Content Include="fonts\PlayfairDisplay-BoldItalic.ttf" />
-    <Content Include="fonts\PlayfairDisplay-Italic.ttf" />
-    <Content Include="fonts\PlayfairDisplay-Regular.ttf" />
+    <Content Include="Assets\fonts\PlayfairDisplay-Black.ttf" />
+    <Content Include="Assets\fonts\PlayfairDisplay-Bold.ttf" />
+    <Content Include="Assets\fonts\PlayfairDisplay-BoldItalic.ttf" />
+    <Content Include="Assets\fonts\PlayfairDisplay-Italic.ttf" />
+    <Content Include="Assets\fonts\PlayfairDisplay-Regular.ttf" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

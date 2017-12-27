@@ -162,11 +162,11 @@
     font-size: 15px;
 }
 
-#dashboard .grey-color,
-#dashboard .red-color,
-#dashboard .blue-color,
-#dashboard .light-blue-color,
-#dashboard .light-red-color{
+#dashboard .order-planned-color,
+#dashboard .order-finished-red-color,
+#dashboard .order-finished-blue-color,
+#dashboard .order-active-blue-color,
+#dashboard .order-active-red-color{
     width: 15px;
     height: 15px;
     border-radius: 50%;
@@ -177,19 +177,19 @@
     background-color: grey;
 }
 
-.red-color{
+.order-finished-red-color{
     background-color: rgb(128,29,29);
 }
 
-.blue-color{
+.order-finished-blue-color{
     background-color: steelblue;
 }
 
-.light-blue-color{
+.order-active-blue-color{
     background-color: lightblue;
 }
 
-.light-red-color{
+.order-active-red-color{
     background-color: indianred;
 }
 
