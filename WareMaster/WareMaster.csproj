@@ -158,7 +158,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Assets\fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
-<<<<<<< HEAD
     <Content Include="Images\logos\logo.png" />
     <Content Include="Images\logos\logo1616.png" />
     <Content Include="Images\logos\logo2525.png" />
@@ -169,8 +168,6 @@
     <Content Include="Images\logos\logo4848.png" />
     <Content Include="Images\logos\logo6060.png" />
     <Content Include="Images\logos\logo6262.png" />
-    
-=======
     <Content Include="Assets\images\logos\logo.png" />
     <Content Include="Assets\images\logos\logo1616.png" />
     <Content Include="Assets\images\logos\logo2525.png" />
@@ -181,7 +178,6 @@
     <Content Include="Assets\images\logos\logo4848.png" />
     <Content Include="Assets\images\logos\logo6060.png" />
     <Content Include="Assets\images\logos\logo6262.png" />
->>>>>>> 44741772ed0f90a9c28078a5779cb466c15a4427
     <Content Include="Scripts\app\addsupplier\addsupplier.state.js" />
     <Content Include="Scripts\app\addsupplier\addsupplier.template.html" />
     <Content Include="Scripts\app\addsupplier\addsuppliers.controller.js" />
@@ -198,23 +194,18 @@
     <Content Include="Scripts\app\dashboard\dashboard.controller.js" />
     <Content Include="Scripts\app\dashboard\dashboard.state.js" />
     <Content Include="Scripts\app\dashboard\dashboard.template.html" />
-<<<<<<< HEAD
-    
     <Content Include="Scripts\app\dashboard\dashboardMain.css" />
     <Content Include="Scripts\app\employees\employeesMain.css" />
     <Content Include="Scripts\app\fontPlayfairDisplay.css" />
     <Content Include="Scripts\app\products\productsMain.css" />
     <Content Include="Scripts\app\signin\signinMain.css" />
     <Content Include="Scripts\app\common\mainNavBar.css" />
-    
-=======
     <Content Include="Assets\styles\dashboardMain.css" />
     <Content Include="Assets\styles\employeesMain.css" />
     <Content Include="Assets\fontstyles\fontPlayfairDisplay.css" />
     <Content Include="Assets\styles\productsMain.css" />
     <Content Include="Assets\styles\signinMain.css" />
     <Content Include="Assets\styles\mainNavBar.css" />
->>>>>>> 44741772ed0f90a9c28078a5779cb466c15a4427
     <Content Include="Scripts\app\editsupplier\editsupplier.controller.js" />
     <Content Include="Scripts\app\editsupplier\editsupplier.state.js" />
     <Content Include="Scripts\app\editsupplier\editsupplier.template.html" />
@@ -225,11 +216,7 @@
     <Content Include="Scripts\app\suppliers\suppliers.state.js" />
     <Content Include="Scripts\app\suppliers\suppliers.template.html" />
     <Content Include="Scripts\app\common\services\suppliersrepository.js" />
-<<<<<<< HEAD
     <Content Include="Scripts\vendor\angular.min.js" />
-    
-=======
->>>>>>> 44741772ed0f90a9c28078a5779cb466c15a4427
     <Content Include="Scripts\app\editemployee\editemployee.controller.js" />
     <Content Include="Scripts\app\editemployee\editemployee.state.js" />
     <Content Include="Scripts\app\editemployee\editemployee.template.html" />
@@ -256,14 +243,10 @@
     <Content Include="Views\Home\Shell.cshtml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Content Include="fonts\FontAwesome.otf" />
 
     <Folder Include="App_Data\" />
-
-=======
     <Content Include="Assets\fonts\FontAwesome.otf" />
->>>>>>> 44741772ed0f90a9c28078a5779cb466c15a4427
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
