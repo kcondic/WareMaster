@@ -1,4 +1,9 @@
-﻿<div ng-repeat="product in allProducts">
+﻿<div id="products">
+    <div class="products-main">
+        <div class="sub-header"></div>
+    </div>
+</div>
+<div ng-repeat="product in allProducts">
     {{product.Name}}
     Količina u skladištu: {{product.Counter}}
     <img ng-src="{{product.ImageUrl}}" ng-model="image" alt="Proizvod nema sliku" />
