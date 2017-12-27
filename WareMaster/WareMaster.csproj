@@ -153,11 +153,25 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\fontstyles\font-awesome.css" />
+    <Content Include="Assets\fontstyles\font-awesome.min.css" />
+    <Content Include="Assets\styles\suppliersMain.css" />
     <Content Include="favicon.ico" />
+    <Content Include="Assets\fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Assets\images\logos\logo.png" />
+    <Content Include="Assets\images\logos\logo1616.png" />
+    <Content Include="Assets\images\logos\logo2525.png" />
+    <Content Include="Assets\images\logos\logo300300.png" />
+    <Content Include="Assets\images\logos\logo3030.png" />
+    <Content Include="Assets\images\logos\logo3232.png" />
+    <Content Include="Assets\images\logos\logo4040.png" />
+    <Content Include="Assets\images\logos\logo4848.png" />
+    <Content Include="Assets\images\logos\logo6060.png" />
+    <Content Include="Assets\images\logos\logo6262.png" />
     <Content Include="Scripts\app\addsupplier\addsupplier.state.js" />
     <Content Include="Scripts\app\addsupplier\addsupplier.template.html" />
-    <Content Include="Scripts\app\addsupplier\addsuppliers.controller.js" />
+    <Content Include="Scripts\app\addsupplier\addsupplier.controller.js" />
     <Content Include="Scripts\app\addemployee\addemployee.controller.js" />
     <Content Include="Scripts\app\addemployee\addemployee.state.js" />
     <Content Include="Scripts\app\addemployee\addemployee.template.html" />
@@ -171,6 +185,12 @@
     <Content Include="Scripts\app\dashboard\dashboard.controller.js" />
     <Content Include="Scripts\app\dashboard\dashboard.state.js" />
     <Content Include="Scripts\app\dashboard\dashboard.template.html" />
+    <Content Include="Assets\styles\dashboardMain.css" />
+    <Content Include="Assets\styles\employeesMain.css" />
+    <Content Include="Assets\fontstyles\fontPlayfairDisplay.css" />
+    <Content Include="Assets\styles\productsMain.css" />
+    <Content Include="Assets\styles\signinMain.css" />
+    <Content Include="Assets\styles\mainNavBar.css" />
     <Content Include="Scripts\app\editsupplier\editsupplier.controller.js" />
     <Content Include="Scripts\app\editsupplier\editsupplier.state.js" />
     <Content Include="Scripts\app\editsupplier\editsupplier.template.html" />
@@ -180,8 +200,7 @@
     <Content Include="Scripts\app\suppliers\suppliers.controller.js" />
     <Content Include="Scripts\app\suppliers\suppliers.state.js" />
     <Content Include="Scripts\app\suppliers\suppliers.template.html" />
-    <Content Include="Scripts\app\common\services\suppliersrepository.js" />
-    <Content Include="Scripts\vendor\angular.min.js" />
+    <Content Include="Scripts\app\common\services\suppliers.repository.js" />
     <Content Include="Scripts\app\editemployee\editemployee.controller.js" />
     <Content Include="Scripts\app\editemployee\editemployee.state.js" />
     <Content Include="Scripts\app\editemployee\editemployee.template.html" />
@@ -194,9 +213,6 @@
     <Content Include="Scripts\app\products\products.controller.js" />
     <Content Include="Scripts\app\products\products.state.js" />
     <Content Include="Scripts\app\products\products.template.html" />
-    <Content Include="Scripts\app\signin\signin.controller.js" />
-    <Content Include="Scripts\app\signin\signin.state.js" />
-    <Content Include="Scripts\app\signin\signin.template.html" />
     <Content Include="Scripts\vendor\angular-ui-router.min.js" />
     <Content Include="Scripts\vendor\angular.min.js" />
     <Content Include="Scripts\vendor\underscore.min.js" />
@@ -211,10 +227,36 @@
     <Content Include="Views\Home\Shell.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Content Include="Assets\fonts\FontAwesome.otf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\fonts\fontawesome-webfont.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\fonts\fontawesome-webfont.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\fonts\fontawesome-webfont.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\fonts\fontawesome-webfont.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\Default\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_MainNavigationLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\fonts\PlayfairDisplay-Black.ttf" />
+    <Content Include="Assets\fonts\PlayfairDisplay-Bold.ttf" />
+    <Content Include="Assets\fonts\PlayfairDisplay-BoldItalic.ttf" />
+    <Content Include="Assets\fonts\PlayfairDisplay-Italic.ttf" />
+    <Content Include="Assets\fonts\PlayfairDisplay-Regular.ttf" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

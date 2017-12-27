@@ -1,10 +1,26 @@
-﻿<!DOCTYPE html>
+@{ Layout = "../Shared/_MainNavigationLayout.cshtml"; }
+<!DOCTYPE html>
 
 <html ng-app="app">
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>WareMaster</title>
 
+    <!-- Link za učitavanje font-awesome.css za ikone -->
+    <link href="~/Assets/fontstyles/font-awesome.css" type="text/css" rel="stylesheet" />
+
+    <!-- Link za učitavanje css datoteke koja sadrži font "Playfair display" za tekst stranice -->
+    <link href="~/Assets/fontstyles/fontPlayfairDisplay.css" type="text/css" rel="stylesheet" />
+
+    <!-- Stylesheets -->
+    <link href="~/Assets/styles/mainNavBar.css" type="text/css" rel="stylesheet" />
+    <link href="~/Assets/styles/signinMain.css" type="text/css" rel="stylesheet" />
+    <link href="~/Assets/styles/dashboardMain.css" type="text/css" rel="stylesheet" />
+    <link href="~/Assets/styles/productsMain.css" type="text/css" rel="stylesheet" />
+    <link href="~/Assets/styles/employeesMain.css" type="text/css" rel="stylesheet" />
+    <link href="~/Assets/styles/suppliersMain.css" type="text/css" rel="stylesheet" />
+
+    <!-- Scripts -->
     <script src="~/Scripts/vendor/angular.min.js"></script>
     <script src="~/Scripts/vendor/underscore.min.js"></script>
     <script src="~/Scripts/vendor/angular-ui-router.min.js"></script>
@@ -38,18 +54,19 @@
     <script src="~/Scripts/app/editproduct/editproduct.state.js"></script>
     <script src="~/Scripts/app/editproduct/editproduct.controller.js"></script>
     
-    <script src="~/Scripts/app/common/services/suppliersrepository.js"></script>
+    <script src="~/Scripts/app/common/services/suppliers.repository.js"></script>
     <script src="~/Scripts/app/suppliers/suppliers.state.js"></script>
     <script src="~/Scripts/app/suppliers/suppliers.controller.js"></script>
     
     <script src="~/Scripts/app/addsupplier/addsupplier.state.js"></script>
-    <script src="~/Scripts/app/addsupplier/addsuppliers.controller.js"></script>
+    <script src="~/Scripts/app/addsupplier/addsupplier.controller.js"></script>
     
     <script src="~/Scripts/app/editsupplier/editsupplier.state.js"></script>
     <script src="~/Scripts/app/editsupplier/editsupplier.controller.js"></script>
 
     <base href="/">
 </head>
+
 <body>
     <div>
         <div ui-view></div>
