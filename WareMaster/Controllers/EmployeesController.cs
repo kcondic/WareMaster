@@ -28,13 +28,22 @@ namespace WareMaster.Controllers
             return Ok(_employeeRepository.GetAllEmployees(1));
         }
 
+        [HttpGet]
+        [Route("add")]
+        public IHttpActionResult GetIdNeededForImageName()
+        {
+            return Ok(_employeeRepository.GetLastId());
+        }
+
         [HttpPost]
         [Route("add")]
         public IHttpActionResult AddEmployee(User employeeToAdd)
         {
             var companyName = _companyRepository.GetCompanyById(1).Name;
+            var newId = _employeeRepository.GetLastId();
             employeeToAdd.ImageUrl = "Uploads\\" + companyName + "\\Zaposlenici\\" + 
-                                      employeeToAdd.FirstName + employeeToAdd.LastName + ".jpg";
+                                      employeeToAdd.FirstName + employeeToAdd.LastName + 
+                                      newId + ".jpg";
             _employeeRepository.AddUser(employeeToAdd);
             return Ok(true);
         }
@@ -54,13 +63,14 @@ namespace WareMaster.Controllers
             var companyName = _companyRepository.GetCompanyById(1).Name;
             var oldUrlOfImage = Path.Combine(Directory.GetParent(uploadsFolder).ToString(), editedEmployee.ImageUrl);
             var newUrlForImage = Path.Combine(Path.Combine(Path.Combine(uploadsFolder, companyName), "Zaposlenici"), 
-                                 editedEmployee.FirstName + editedEmployee.LastName + ".jpg");
+                                 editedEmployee.FirstName + editedEmployee.LastName + editedEmployee.Id + ".jpg");
 
-            if (File.Exists(oldUrlOfImage) && oldUrlOfImage!=newUrlForImage)
+            if (File.Exists(oldUrlOfImage) && oldUrlOfImage != newUrlForImage)
                 File.Move(oldUrlOfImage, newUrlForImage);
 
             editedEmployee.ImageUrl = "Uploads\\" + companyName + "\\Zaposlenici\\" + 
-                                       editedEmployee.FirstName + editedEmployee.LastName + ".jpg";
+                                       editedEmployee.FirstName + editedEmployee.LastName
+                                       + editedEmployee.Id + ".jpg";
             _employeeRepository.EditUser(editedEmployee);
             return Ok(true);
         }

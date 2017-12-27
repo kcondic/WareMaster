@@ -49,6 +49,12 @@ namespace WareMaster.Domain.Repositories
                     .FirstOrDefault(user => user.Id == userId);
         }
 
+        public int GetLastId()
+        {
+            using (var context = new WarehouseContext())
+                return context.Users.OrderByDescending(user => user.Id).First().Id+1;
+        }
+
         public void AddUser(User userToAdd)
         {
             using (var context = new WarehouseContext())
