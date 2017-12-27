@@ -3,6 +3,11 @@
 
         employeesRepository.getAllEmployees().then(function (employees) {
             $scope.allEmployees = employees.data;
+
+            for (let employee of $scope.allEmployees) {
+                const random = (new Date()).toString();
+                employee.ImageUrl = employee.ImageUrl + '?cb=' + random;
+            }
         });
 
         $scope.deleteEmployee = function (id, firstName, lastName) {

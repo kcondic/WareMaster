@@ -49,6 +49,12 @@ namespace WareMaster.Domain.Repositories
                     .FirstOrDefault(user => user.Id == userId);
         }
 
+        public int GetLastEmployeeId()
+        {
+            using (var context = new WarehouseContext())
+                return context.Users.Where(user => user.Role == Role.Employee).OrderByDescending(user => user.Id).First().Id;
+        }
+
         public void AddUser(User userToAdd)
         {
             using (var context = new WarehouseContext())
@@ -74,6 +80,7 @@ namespace WareMaster.Domain.Repositories
 
                 userToEdit.FirstName = editedUser.FirstName;
                 userToEdit.LastName = editedUser.LastName;
+                userToEdit.ImageUrl = editedUser.ImageUrl;
                 userToEdit.Role = editedUser.Role;
 
                 context.SaveChanges();

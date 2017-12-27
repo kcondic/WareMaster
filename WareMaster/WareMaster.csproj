@@ -180,6 +180,7 @@
     <Content Include="Scripts\app\addproduct\addproduct.template.html" />
     <Content Include="Scripts\app\app.config.js" />
     <Content Include="Scripts\app\app.module.js" />
+    <Content Include="Scripts\app\common\services\functions.repository.js" />
     <Content Include="Scripts\app\common\services\employees.repository.js" />
     <Content Include="Scripts\app\common\services\products.repository.js" />
     <Content Include="Scripts\app\dashboard\dashboard.controller.js" />
@@ -215,6 +216,8 @@
     <Content Include="Scripts\app\products\products.template.html" />
     <Content Include="Scripts\vendor\angular-ui-router.min.js" />
     <Content Include="Scripts\vendor\angular.min.js" />
+    <Content Include="Scripts\vendor\ng-file-upload-shim.min.js" />
+    <Content Include="Scripts\vendor\ng-file-upload.min.js" />
     <Content Include="Scripts\vendor\underscore.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
