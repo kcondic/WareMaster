@@ -21,10 +21,20 @@
             return $http.post('api/orders/edit', editedOrder);
         }
 
+        function deleteOrder(id) {
+            return $http.delete('api/orders/delete',
+                {
+                    params: {
+                        id: id
+                    }
+                });
+        }
+
         return {
             getAllOrders: getAllOrders,
             addNewOrder: addNewOrder,
             getOrder: getOrder,
-            editOrder: editOrder
+            editOrder: editOrder,
+            deleteOrder: deleteOrder
         }
     });

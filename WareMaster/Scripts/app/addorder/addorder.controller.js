@@ -64,6 +64,10 @@
                 alert("Morate naručiti barem jedan proizvod");
                 return;
             }
+            else if (!$scope.incomingSelect && $scope.selectEmployee === null) {
+                alert("Niste dodijelili radnika");
+                return;
+            }
 
             var productOrder = [];
             for (var i=0;i< $scope.selectedProducts.length;i++) {

@@ -121,7 +121,9 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
             {
-                var orderToDelete = context.Orders.FirstOrDefault(order => order.Id == orderId);
+                var orderToDelete = context.Orders
+                    .Include(order => order.ProductOrders)
+                    .FirstOrDefault(order => order.Id == orderId);
 
                 if (orderToDelete == null)
                     return;

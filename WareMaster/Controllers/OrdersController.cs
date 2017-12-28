@@ -45,7 +45,14 @@ namespace WareMaster.Controllers
         public IHttpActionResult EditOrder(Order editedOrder)
         {
             _orderRepository.EditOrder(editedOrder);
-            //_orderRepository.EditOrderProducts(editedOrder);
+            return Ok(true);
+        }
+
+        [HttpDelete]
+        [Route("delete")]
+        public IHttpActionResult DeleteEmployee(int id)
+        {
+            _orderRepository.DeleteOrder(id);
             return Ok(true);
         }
     }
