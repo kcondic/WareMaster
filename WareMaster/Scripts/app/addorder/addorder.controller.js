@@ -64,7 +64,7 @@
                 alert("Morate naručiti barem jedan proizvod");
                 return;
             }
-            else if (!$scope.incomingSelect && $scope.selectEmployee === null) {
+            else if (!$scope.incomingSelect && $scope.selectedEmployee === null) {
                 alert("Niste dodijelili radnika");
                 return;
             }
