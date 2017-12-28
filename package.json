@@ -1,0 +1,20 @@
+{
+  "name": "WareMaster",
+  "version": "1.0.0",
+  "description": "A web application that enables a warehouse manager to oversee and control business. In development together with a mobile app for employees.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kcondic/WareMaster.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kcondic/WareMaster/issues"
+  },
+  "homepage": "https://github.com/kcondic/WareMaster#readme"
+}

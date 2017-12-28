@@ -1,6 +1,12 @@
-﻿<div ng-repeat="employee in allEmployees">
+﻿<div id="employees">
+    <div class="employees-main">
+        <div class="sub-header"></div>
+    </div>
+</div>
+<div ng-repeat="employee in allEmployees">
     {{employee.FirstName}}
     {{employee.LastName}}
+    <img ng-src="{{employee.ImageUrl}}" ng-model="image" alt="Korisnik nema sliku" />
     <button ui-sref="editemployee({id: employee.Id})">Uredi</button>
     <button ng-click="deleteEmployee(employee.Id, employee.FirstName, employee.LastName)">Izbriši</button>
 </div>

@@ -1,8 +1,15 @@
-﻿<div ng-repeat="product in allProducts">
+﻿<div id="products">
+    <div class="products-main">
+        <div class="sub-header"></div>
+    </div>
+</div>
+<div ng-repeat="product in allProducts">
     {{product.Name}}
     Količina u skladištu: {{product.Counter}}
+    <img ng-src="{{product.ImageUrl}}" ng-model="image" alt="Proizvod nema sliku" />
     <button ui-sref="editproduct({id: product.Id})">Uredi</button>
     <button ng-click="deleteProduct(product.Id, product.Name)">Izbriši</button>
+
 </div>
 <button ui-sref="addproduct">Dodaj proizvod</button>
 <div ui-view></div>

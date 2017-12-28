@@ -1,4 +1,9 @@
-﻿<button ui-sref="dashboard">NATRAG</button>
+﻿<div id="suppliers">
+    <div class="suppliers-main">
+        <div class="sub-header"></div>
+    </div>
+</div>
+<button ui-sref="dashboard">NATRAG</button>
 <span>Suppliers</span>
 <input ng-model="search" placeholder="Search"/>
 <div ng-repeat="supplier in suppliers| filter: search">

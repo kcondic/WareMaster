@@ -1,1 +1,25 @@
-﻿<button ui-sref="dashboard">Nemamo još prijavu, odvedi me na dashboard</button>
+﻿<div id="signin">
+    <div class="signin-main">
+        <div class="signin-form-column">
+            <div class="signin-logo-container">
+                <img src="/Assets/images/logos/logo300300.png" alt="WareMaster logo">
+            </div>
+            <div class="signin-form-container">
+                <div class="signin-form-header">WareMaster</div>
+                <div class="signin-form-content">
+                    <div class="input-box">
+                        <input type="text" placeholder="Korisničko ime">
+                    </div>
+                    <div class="input-box">
+                        <input type="password" placeholder="Lozinka">
+                    </div>
+                </div>
+                <div class="signin-button">
+                    <button ui-sref="dashboard">Prijava</button>
+                    <div id="snackbar">Prijava još nije napravljena, kliknite za ići na dashboard</div>
+                </div>
+                <div class="forgot-password">Zaboravili ste lozinku?</div>
+            </div>
+        </div>
+    </div>
+</div>

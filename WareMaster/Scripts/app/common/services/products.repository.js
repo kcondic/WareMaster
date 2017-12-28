@@ -5,6 +5,10 @@
             return $http.get('/api/products');
         }
 
+        function getIdNeededForImageName() {
+            return $http.get('/api/products/add');
+        }
+
         function addProduct(newProduct) {
             return $http.post('/api/products/add', newProduct);
         }
@@ -33,6 +37,7 @@
 
         return {
             getAllProducts: getAllProducts,
+            getIdNeededForImageName: getIdNeededForImageName,
             addProduct: addProduct,
             getProductToEdit: getProductToEdit,
             editProduct: editProduct,

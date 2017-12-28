@@ -3,6 +3,11 @@
 
         productsRepository.getAllProducts().then(function (products) {
             $scope.allProducts = products.data;
+
+            for (let product of $scope.allProducts) {
+                const random = (new Date()).toString();
+                product.ImageUrl = product.ImageUrl + '?cb=' + random;
+            }
         });
 
         $scope.deleteProduct = function (id, name) {

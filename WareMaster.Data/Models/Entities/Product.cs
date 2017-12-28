@@ -12,5 +12,6 @@ namespace WareMaster.Data.Models.Entities
         public Company Company { get; set; }
         public int CompanyId { get; set; }
         public int Counter { get; set; }
+        public string ImageUrl { get; set; }
     }
 }
