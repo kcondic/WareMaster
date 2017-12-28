@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.Entity.Migrations;
 using System.Security.Cryptography.X509Certificates;
 using WareMaster.Data.Models;
@@ -48,7 +49,7 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
                 return context.Orders
-                    .Include(order => order.AssignedUsers)
+                    .Include(order => order.AssignedUser)
                     .Include(order => order.ProductOrders)
                     .Include(order => order.ProductOrders.Select(x => x.Product))
                     .Include(order => order.Company)
@@ -63,13 +64,15 @@ namespace WareMaster.Domain.Repositories
             {
                 foreach (var productOrder in order.ProductOrders)
                     context.ProductOrders.Attach(productOrder);
-                foreach (var user in order.AssignedUsers)
-                    context.Users.Attach(user);
+
+                if(order.AssignedUser != null)
+                    context.Users.Attach(order.AssignedUser);
 
                 var newOrder = new Order()
                 {
                     Id = order.Id,
-                    AssignedUsers = order.AssignedUsers,
+                    AssignedUserId = order.AssignedUserId,
+                    AssignedManagerId = order.AssignedManagerId,
                     TimeOfCreation = DateTime.Now,
                     Status = order.Status,
                     CompanyId = 1,
@@ -95,41 +98,21 @@ namespace WareMaster.Domain.Repositories
             using (var context = new WarehouseContext())
             {
                 var orderToEdit = context.Orders
-                    .Include(order => order.AssignedUsers)
                     .Include(order => order.ProductOrders)
+                    .Include(order => order.AssignedUser)
                     .SingleOrDefault(order => order.Id == editedOrder.Id);
 
                 if (orderToEdit == null)
                     return;
-
-                foreach (var user in editedOrder.AssignedUsers)
+                if (orderToEdit.AssignedUser != null && orderToEdit.AssignedUser.Id != editedOrder.AssignedUser.Id)
                 {
-                    //if(context.Users.Local.All(e => e.Id != user.Id))
-                    try
-                    {
-                        context.Users.Attach(user);
-                    }
-                    catch { }
+                    context.Users.Attach(editedOrder.AssignedUser);
+                    orderToEdit.AssignedUserId = editedOrder.AssignedUserId;
+                    orderToEdit.AssignedUser = editedOrder.AssignedUser;
                 }
-                /*foreach (var productOrder in editedOrder.ProductOrders)
-                {
-                    try
-                    {
-                        context.Products.Attach(productOrder.Product);                     
-                    }
-                    catch { }
-                    try
-                    {
-                        context.ProductOrders.Attach(productOrder);
-                    }
-                    catch { }
-                }*/
-                orderToEdit.ProductOrders = editedOrder.ProductOrders;
-                //orderToEdit.AssignedUsers = editedOrder.AssignedUsers;
-                /*foreach (var user in orderToEdit.AssignedUsers)
-                {
-                    user.Orders.Add(orderToEdit);
-                }*/
+
+                orderToEdit.ProductOrders = editedOrder.ProductOrders;                
+
                 context.SaveChanges();
             }
         }

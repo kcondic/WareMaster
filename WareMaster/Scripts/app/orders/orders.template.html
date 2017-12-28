@@ -1,4 +1,5 @@
-﻿<div ng-repeat="order in allOrders">
+﻿<button ui-sref="dashboard">NATRAG</button><br/>
+<div ng-repeat="order in allOrders">
     <span ui-sref="orderdetails({id: order.Id})">Narudžba {{order.Id}}.</span>
 </div>
 <button ui-sref="addorder">Nova narudžba</button>

@@ -1,7 +1,9 @@
 ﻿angular.module('app').controller('AddOrderController',
     function ($scope, $state, employeesRepository, productsRepository, ordersRepository, suppliersRepository) {
 
-        $scope.selectedEmployees = [];
+        $scope.incomingSelected = false;
+        $scope.outgoingSelected = false;
+        $scope.selectedEmployee = null;
         $scope.selectedProducts = [];
 
         employeesRepository.getAllEmployees().then(function (employees) {
@@ -10,6 +12,9 @@
 
         productsRepository.getAllProducts().then(function(products) {
             $scope.allProducts = products.data;
+            for (var i = 0; i < $scope.allProducts.length; i++) {
+                $scope.allProducts[i].Counter = 1;
+            }
         });
 
         suppliersRepository.getAllSuppliers().then(function (suppliers) {
@@ -22,14 +27,26 @@
             }
         }
 
+        $scope.incomingSelect = function() {
+            $scope.incomingSelected = true;
+        }
+
+        $scope.outgoingSelect = function () {
+            $scope.outgoingSelected = true;
+        }
+
         $scope.selectEmployee = function (employee) {
-            $scope.selectedEmployees.push(employee);
+            if ($scope.selectedEmployee !== null) {
+                alert("Već je odabran radnik");
+                return;
+            }
+            $scope.selectedEmployee = employee;
             $scope.allEmployees.splice($scope.allEmployees.indexOf(employee), 1);
         }
 
         $scope.deselectEmployee = function(employee) {
             $scope.allEmployees.push(employee);
-            $scope.selectedEmployees.splice($scope.selectedEmployees.indexOf(employee), 1);
+            $scope.selectedEmployee = null;
         }
 
         $scope.selectProduct = function (product) {
@@ -43,6 +60,11 @@
         }
 
         $scope.addNewOrder = function () {
+            if ($scope.selectedProducts.length === 0) {
+                alert("Morate naručiti barem jedan proizvod");
+                return;
+            }
+
             var productOrder = [];
             for (var i=0;i< $scope.selectedProducts.length;i++) {
                 productOrder.push({
@@ -50,13 +72,20 @@
                     ProductQuantity: $scope.selectedProducts[i].Counter
             });
             }
-
+            var supplierId;
+            if ($scope.incomingSelected)
+                supplierId = document.getElementById("supplierSelect").options[document
+                    .getElementById("supplierSelect")
+                    .selectedIndex].value;
+            else
+                supplierId = null;
+            var assignedUserId = $scope.selectedEmployee === null ? null : $scope.selectedEmployee.Id;
+            
             const newOrder = {
-                AssignedUsers: $scope.selectedEmployees,
+                AssignedUserId: assignedUserId,
                 ProductOrders: productOrder,
                 Status: 0,
-                SupplierId: document.getElementById("supplierSelect").options[document.getElementById("supplierSelect")
-                    .selectedIndex].value
+                SupplierId: supplierId
             };
 
             ordersRepository.addNewOrder(newOrder).then(function () {

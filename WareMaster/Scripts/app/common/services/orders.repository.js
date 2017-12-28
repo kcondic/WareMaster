@@ -18,7 +18,6 @@
         }
 
         function editOrder(editedOrder) {
-            console.log(editedOrder);
             return $http.post('api/orders/edit', editedOrder);
         }
 

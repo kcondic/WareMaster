@@ -1,36 +1,63 @@
 ﻿angular.module('app').controller('EditOrderController',
-    function ($scope, $state, $stateParams, ordersRepository, employeesRepository, productsRepository, suppliersRepository) {
+    function ($scope, $state, $stateParams, ordersRepository, employeesRepository, productsRepository) {
         $scope.selectedProducts = [];
 
         ordersRepository.getOrder($stateParams.id).then(function (order) {
             $scope.order = order.data;
-            
-            $scope.selectedEmployees = $scope.order.AssignedUsers;
+
+            $scope.incomingOrder = true;
+            if ($scope.order.Supplier === null)
+                $scope.incomingOrder = false;
+
+            $scope.selectedEmployee = $scope.order.AssignedUser;
             $scope.order.ProductOrders.forEach(function(item) {
                 $scope.selectedProducts.push(item.Product);
             });
 
-            $scope.allProducts = $scope.order.Supplier.Products;
-            $scope.selectedProducts.forEach(function (item) {
-                $scope.allProducts.splice($scope.allProducts.map(function (val) { return val.Id }).indexOf(item.Id), 1);
-            });
-
-            employeesRepository.getAllEmployees().then(function (employees) {
-                $scope.allEmployees = employees.data;
-                $scope.selectedEmployees.forEach(function (item) {
-                    $scope.allEmployees.splice($scope.allEmployees.indexOf(item), 1);
+            if ($scope.order.Supplier !== null) {
+                $scope.allProducts = $scope.order.Supplier.Products;
+                $scope.selectedProducts.forEach(function (item) {
+                    $scope.allProducts.splice($scope.allProducts.map(function (val) { return val.Id }).indexOf(item.Id), 1);
                 });
-            });
+                for (var i = 0; i < $scope.allProducts.length; i++) {
+                    $scope.allProducts[i].Counter = 1;
+                }
+            }
+            else
+                productsRepository.getAllProducts().then(function (products) {
+                    $scope.allProducts = products.data;
+                    $scope.selectedProducts.forEach(function (item) {
+                        $scope.allProducts.splice($scope.allProducts.map(function (val) { return val.Id }).indexOf(item.Id), 1);
+                    });
+                    for (var i = 0; i < $scope.allProducts.length; i++) {
+                        $scope.allProducts[i].Counter = 1;
+                    }
+                });
+
+            for (var j = 0; j < $scope.selectedProducts.length; j++) {
+                $scope.selectedProducts[j].Counter = $scope.order.ProductOrders.find(function (productOrder) {
+                    return (productOrder.ProductId === $scope.selectedProducts[j].Id);
+                }).ProductQuantity;
+            }
+            if($scope.selectedEmployee !== null)
+                employeesRepository.getAllEmployees().then(function (employees) {
+                    $scope.allEmployees = employees.data;
+                    $scope.allEmployees.splice($scope.allEmployees.map(function(val){return val.Id}).indexOf($scope.selectedEmployee.Id), 1);
+                });
         });
 
         $scope.selectEmployee = function (employee) {
-            $scope.selectedEmployees.push(employee);
+            if ($scope.selectedEmployee !== null) {
+                alert("Već je odabran radnik");
+                return;
+            }
+            $scope.selectedEmployee = employee;
             $scope.allEmployees.splice($scope.allEmployees.indexOf(employee), 1);
         }
 
         $scope.deselectEmployee = function (employee) {
             $scope.allEmployees.push(employee);
-            $scope.selectedEmployees.splice($scope.selectedEmployees.indexOf(employee), 1);
+            $scope.selectedEmployee = null;
         }
 
         $scope.selectProduct = function (product) {
@@ -43,7 +70,12 @@
             $scope.selectedProducts.splice($scope.selectedProducts.indexOf(product), 1);
         }
 
-        $scope.editOrder = function() {
+        $scope.editOrder = function () {
+            if ($scope.selectedProducts.length === 0) {
+                alert("Morate naručiti barem jedan proizvod");
+                return;
+            }
+
             var productOrder = [];
             for (var i = 0; i < $scope.selectedProducts.length; i++) {
                 productOrder.push({
@@ -54,9 +86,8 @@
             }
 
             $scope.order.ProductOrders = productOrder;
-            $scope.order.AssignedUsers = $scope.selectedEmployees;
-            console.log($scope.order);
-            console.log($scope.selectedEmployees);
+            $scope.order.AssignedUser = $scope.selectedEmployee;
+
             ordersRepository.editOrder($scope.order).then(function () {
                 $state.go('orders', {}, { reload: true });
             });

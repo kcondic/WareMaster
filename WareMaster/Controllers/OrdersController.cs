@@ -45,6 +45,7 @@ namespace WareMaster.Controllers
         public IHttpActionResult EditOrder(Order editedOrder)
         {
             _orderRepository.EditOrder(editedOrder);
+            //_orderRepository.EditOrderProducts(editedOrder);
             return Ok(true);
         }
     }
