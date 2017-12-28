@@ -156,6 +156,7 @@
   <ItemGroup>
     <Content Include="Assets\fontstyles\font-awesome.css" />
     <Content Include="Assets\fontstyles\font-awesome.min.css" />
+    <Content Include="Assets\styles\ordersMain.css" />
     <Content Include="Assets\styles\suppliersMain.css" />
     <Content Include="favicon.ico" />
     <Content Include="Assets\fonts\fontawesome-webfont.svg" />
