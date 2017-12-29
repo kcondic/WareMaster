@@ -1,13 +1,11 @@
 ﻿angular.module('app')
-    .config(function Config($httpProvider, localStorageService, jwtOptionsProvider) {
+    .config(function Config($httpProvider, jwtOptionsProvider) {
         jwtOptionsProvider.config({
-            tokenGetter: [
-                function () {
-                    return localStorageService.get('bearerToken');
+            tokenGetter: [function () {
+                console.log("pozva je interceptora");
+                    console.log(localStorage.getItem('bearerToken'));
+                    return localStorage.getItem('bearerToken');
                 }
-            ],
-            whiteListedDomains: [
-                'localhost'
             ]
         });
 

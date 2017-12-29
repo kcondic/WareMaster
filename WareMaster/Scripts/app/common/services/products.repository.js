@@ -1,8 +1,8 @@
 ﻿angular.module('app').service('productsRepository',
-    function ($http) {
+    function($http) {
 
         function getAllProducts() {
-            return $http.get('/api/products');
+            return $http.get('/api/products', { withCredentials: true });
         }
 
         function getIdNeededForImageName() {

@@ -7,7 +7,7 @@
                 password: password
             }).then(function (response) {
                 console.log(response);
-                localStorageService.set('bearerToken', response);
+                localStorage.setItem('bearerToken', response.data);
                 const decoded = jwtHelper.decodeToken(response.data);
                 localStorageService.set('authDetails', JSON.stringify(decoded));
             });
