@@ -13,7 +13,11 @@ namespace WareMaster.Data
     {
         protected override void Seed(WarehouseContext context)
         {
-            var testUser = new User() {FirstName = "Test", LastName = "Testic", Role = Role.Manager};
+            var testUser = new User()
+            {
+                FirstName = "Test", LastName = "Testic", Role = Role.Manager,
+                Username = "test", Password = "test"
+            };
             var testCompany = new Company() {Name = "TestKompanija"};
             testUser.Company = testCompany;
 

@@ -49,6 +49,13 @@ namespace WareMaster.Domain.Repositories
                     .FirstOrDefault(user => user.Id == userId);
         }
 
+        public User GetManagerByUsername(string username)
+        {
+            using (var context = new WarehouseContext())
+                return context.Users.SingleOrDefault(user => 
+                user.Username == username && user.Role == Role.Manager);
+        }
+
         public int GetLastEmployeeId()
         {
             using (var context = new WarehouseContext())
