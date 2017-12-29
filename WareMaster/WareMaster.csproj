@@ -221,6 +221,8 @@
     <Content Include="Scripts\app\products\products.controller.js" />
     <Content Include="Scripts\app\products\products.state.js" />
     <Content Include="Scripts\app\products\products.template.html" />
+    <Content Include="Scripts\vendor\angular-jwt.js" />
+    <Content Include="Scripts\vendor\angular-local-storage.js" />
     <Content Include="Scripts\vendor\angular-ui-router.min.js" />
     <Content Include="Scripts\vendor\angular.min.js" />
     <Content Include="Scripts\vendor\ng-file-upload-shim.min.js" />

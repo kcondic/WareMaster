@@ -2,7 +2,7 @@
     function ($scope, $state, loginRepository) {
 
         $scope.login = function () {
-            loginRepository.login($scope.userName, $scope.password)
+            loginRepository.login($scope.username, $scope.password)
                 .then(function () {
                     $state.go('dashboard');
                 }, function () {

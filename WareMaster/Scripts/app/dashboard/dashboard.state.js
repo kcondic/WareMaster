@@ -4,6 +4,9 @@
             {
                 url: '/dashboard',
                 controller: 'DashboardController',
-                templateUrl: '/Scripts/app/dashboard/dashboard.template.html'
+                templateUrl: '/Scripts/app/dashboard/dashboard.template.html',
+                data: {
+                    requiresLogin: true
+                }
             });
 });

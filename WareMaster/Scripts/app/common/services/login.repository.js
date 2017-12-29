@@ -1,29 +1,30 @@
 ﻿angular.module('app').service('loginRepository',
-    function($http) {
+    function ($http, localStorageService, jwtHelper) {
 
-        function login(email, password) {
-            return $http.post('/api/login',
-                {
-                    email: email,
-                    password: password
-                }).success(function(response) {
-                localStorage.setItem('bearerToken', response);
-                const decoded = jwt_decode(response);
-                localStorage.setItem('authDetails', JSON.stringify(decoded));
+        function login(username, password) {
+            return $http.post('/api/login', {
+                username: username,
+                password: password
+            }).then(function (response) {
+                console.log(response);
+                localStorageService.set('bearerToken', response);
+                const decoded = jwtHelper.decodeToken(response);
+                console.log(decoded);
+                localStorageService.set('authDetails', JSON.stringify(decoded));
             });
         }
 
         function logout() {
-            localStorage.removeItem('bearerToken');
-            localStorage.removeItem('authDetails');
+            localStorageService.remove('bearerToken');
+            localStorageService.remove('authDetails');
         }
 
         function isAuthenticated() {
-            return !!localStorage.getItem('bearerToken');
+            return !!localStorageService.get('bearerToken');
         }
 
         function getAuthDetails() {
-            return JSON.parse(localStorage.getItem('authDetails'));
+            return JSON.parse(localStorageService.get('authDetails'));
         }
 
         return {
