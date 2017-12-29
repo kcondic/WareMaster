@@ -1,4 +1,6 @@
 ﻿angular.module('app').controller('SigninController',
-    function () {
+    function ($scope, $rootScope) {
 
+        $rootScope.headerdisplayed = false;
+        $rootScope.displaysubheader = false;
     });

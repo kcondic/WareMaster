@@ -1,0 +1,32 @@
+﻿/* DESIGN FOR PRODUCTS, EMPLOYEES AND SUPPLIERS FORMS */
+#products,
+#employees,
+#suppliers{
+    height: 85.8vh;
+    width: 100%;
+    margin-top: 94px;
+    position: fixed;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: transparent;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+/* MAIN FRAME THAT SURROUNDS FORM CONTENT(LIST OF PRODUCTS, ETC.) */
+.main-frame{
+    position: relative;
+    height: 97%;
+    width: 97%;
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+}
+
+.frame-content{
+    background-color: white;
+    height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}

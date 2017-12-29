@@ -1,5 +1,15 @@
 ﻿angular.module('app').controller('SuppliersController',
-    function ($scope, suppliersRepository) {
+    function ($scope, suppliersRepository, $rootScope) {
+
+        $rootScope.global = {
+            search: ''
+        };
+
+        $rootScope.headerdisplayed = true;
+        $rootScope.displaysubheader = true;
+        $rootScope.productsdisplayed = false;
+        $rootScope.employeesdisplayed = false;
+        $rootScope.suppliersdisplayed = true;
 
         var allSuppliersPromise = suppliersRepository.getAllSuppliers();
 

@@ -1,0 +1,76 @@
+﻿/* SUBHEADER DESIGN */
+#subheader{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 42px;
+    position: fixed;
+    z-index: 2;
+    top: 56px;
+    left: 0;
+    right: 0;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    color: black;
+    font-family: inherit;
+    user-select: none;
+}
+/* DASHBOARD LINK ARROW DESIGN */
+#subheader .link-to-dashboard-box{
+    display: inline;
+    width: auto;
+}
+/* BUTTON, BREADCRUMBS BOX, SORT BOX AND SEARCH BOX DESIGN */
+#subheader button,
+#subheader .breadcrumbs-box,
+#subheader .sort-by-box .sort-button,
+#subheader .search-content-box{
+    background-color: white;
+    height: 80%;
+    width: auto;
+    padding: 0px 16px;
+    border-radius: 3px;
+    color: rgb(34,34,34);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    font-family: inherit;
+}
+
+#subheader button{
+    border: none;
+    cursor: pointer;
+}
+
+#subheader .link-to-dashboard-box button{
+    display: block;
+    width: 100px;
+    font-size: 28px;
+    margin-left: 18px;
+    padding: 0;
+}
+
+#subheader .breadcrumbs-box .breadcrumb-sign{
+    padding: 0px 5px;
+}
+
+/* SEARCH BOX DESIGN */
+#subheader .search-content-box{
+    margin-right: 18px;
+}
+
+#subheader .search-content-box input{
+    font-size: 18px;
+    font-family: inherit;
+    border: none;
+    margin-right: 5px;
+}
+
+#subheader .search-content-box .search-icon{
+    font-size: 20px;
+    cursor: pointer;
+    user-select: none;
+}

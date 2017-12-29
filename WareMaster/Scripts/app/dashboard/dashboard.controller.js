@@ -1,4 +1,6 @@
 ﻿angular.module('app').controller('DashboardController',
-    function () {
-        
+    function ($scope, $rootScope) {
+
+        $rootScope.headerdisplayed = true;
+        $rootScope.displaysubheader = false;
     });

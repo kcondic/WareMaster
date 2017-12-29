@@ -1,15 +1,23 @@
 ﻿<div id="products">
-    <div class="products-main">
-        <div class="sub-header"></div>
+    <div class="main-frame">
+        <div class="frame-header">
+            <span>Proizvodi</span>
+        </div>
+        <div class="frame-columns">
+            <label>Slika</label>
+            <label>Naziv</label>
+            <label>Količina u skladištu</label>
+            <input ng-model="search" placeholder="Pretraži..." />
+        </div>
+        <div class="frame-content">
+            <div ng-repeat="product in allProducts| filter: global.search">
+                {{product.Name}}
+                Količina u skladištu: {{product.Counter}}
+                <img ng-src="{{product.ImageUrl}}" ng-model="image" alt="Proizvod nema sliku" />
+                <button ui-sref="editproduct({id: product.Id})">Uredi</button>
+                <button ng-click="deleteProduct(product.Id, product.Name)">Izbriši</button>
+            </div>
+            <div ui-view></div>
+        </div>
     </div>
 </div>
-<div ng-repeat="product in allProducts">
-    {{product.Name}}
-    Količina u skladištu: {{product.Counter}}
-    <img ng-src="{{product.ImageUrl}}" ng-model="image" alt="Proizvod nema sliku" />
-    <button ui-sref="editproduct({id: product.Id})">Uredi</button>
-    <button ng-click="deleteProduct(product.Id, product.Name)">Izbriši</button>
-
-</div>
-<button ui-sref="addproduct">Dodaj proizvod</button>
-<div ui-view></div>

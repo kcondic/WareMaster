@@ -1,5 +1,15 @@
 ﻿angular.module('app').controller('ProductsController',
-    function ($scope, $state, productsRepository) {
+    function ($scope, $state, productsRepository, $rootScope) {
+
+        $rootScope.headerdisplayed = true;
+        $rootScope.displaysubheader = true;
+        $rootScope.productsdisplayed = true;
+        $rootScope.employeesdisplayed = false;
+        $rootScope.suppliersdisplayed = false;
+
+        $rootScope.global = {
+            search: ''
+        };
 
         productsRepository.getAllProducts().then(function (products) {
             $scope.allProducts = products.data;

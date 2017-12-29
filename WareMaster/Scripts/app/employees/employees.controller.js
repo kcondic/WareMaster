@@ -1,5 +1,15 @@
 ﻿angular.module('app').controller('EmployeesController',
-    function ($scope, $state, employeesRepository) {
+    function ($scope, $state, employeesRepository, $rootScope) {
+
+        $rootScope.global = {
+            search: ''
+        };
+
+        $rootScope.headerdisplayed = true;
+        $rootScope.displaysubheader = true;
+        $rootScope.productsdisplayed = false;
+        $rootScope.employeesdisplayed = true;
+        $rootScope.suppliersdisplayed = false;
 
         employeesRepository.getAllEmployees().then(function (employees) {
             $scope.allEmployees = employees.data;
