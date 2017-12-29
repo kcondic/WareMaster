@@ -8,8 +8,7 @@
             }).then(function (response) {
                 console.log(response);
                 localStorageService.set('bearerToken', response);
-                const decoded = jwtHelper.decodeToken(response);
-                console.log(decoded);
+                const decoded = jwtHelper.decodeToken(response.data);
                 localStorageService.set('authDetails', JSON.stringify(decoded));
             });
         }
