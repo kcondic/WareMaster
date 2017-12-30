@@ -10,6 +10,7 @@
         $rootScope.productsdisplayed = false;
         $rootScope.employeesdisplayed = true;
         $rootScope.suppliersdisplayed = false;
+        $rootScope.choicedisplayed = false;
 
         employeesRepository.getAllEmployees().then(function (employees) {
             $scope.allEmployees = employees.data;

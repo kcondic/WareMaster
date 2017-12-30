@@ -2,6 +2,12 @@
     overflow: hidden;
 }
 /* OBLIKOVANJE MAIN DASHBOARD PROZORA */
+
+#dashboard{
+    -moz-user-select: none;
+    user-select: none;
+}
+
 #dashboard .dashboard-main{
     height: 92.2vh;
     margin-top: 52px;
@@ -50,6 +56,10 @@
 
 #dashboard .button-container button:not(:hover){
     border-right: solid 0px;
+}
+
+#dashboard .button-container button:focus{
+    outline: none;
 }
 
 /* GRAFOVI I BROJKE */
@@ -209,7 +219,6 @@
 #dashboard .current-numbers-container ul{
     list-style: none;
     display: inline-block;
-    margin-top: -4px;
     width: 100%;
 }
 

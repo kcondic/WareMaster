@@ -9,9 +9,9 @@
     display: flex;
     flex-wrap: wrap;
     background-color: transparent;
-    overflow: hidden;
     justify-content: center;
     align-items: center;
+    font-family: inherit;
 }
 /* MAIN FRAME THAT SURROUNDS FORM CONTENT(LIST OF PRODUCTS, ETC.) */
 .main-frame{
@@ -20,13 +20,181 @@
     width: 97%;
     border-radius: 3px;
     overflow: hidden;
+    -ms-overflow-style: none;
+    background-color: transparent;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
 }
-
+/* FRAME CONTENT DESIGN */
 .frame-content{
-    background-color: white;
-    height: 100vh;
+    height: 100%;
+    width: 97.1vw;
+    border-collapse: collapse;
+    font-family: inherit;
+}
+
+/* FRAME HEADER DESIGN */
+.content-header{
+    height: 90px;
     width: 100%;
+    background-color: rgb(34, 34, 34);
+    color: white;
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    cursor: default;
+}
+
+.template-title-row,
+.template-title,
+.title-label,
+.column-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* TEMPLATE TITLE DESIGN */
+.template-title-row{
+    height: 45px;
+    width: 100%;
+    font-size: 21px;
+}
+
+.template-title{
+    width: 98%;
+    height: 100%;
+    border-bottom: solid 1.2px white;
+    z-index: 2;
+}
+
+.title-label{
+    width: 90%;
+    height: 100%;
+}
+
+/* COLUMNS TITLES DESIGN */
+.columns-titles{
+    height: 45px;
+    width: 100%;
+    display: flex;
+    z-index: 1;
+}
+
+.column-title{
+    height: 100%;
+    width: 50%;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.column-title:not(.empty-title){
+    cursor: pointer;
+}
+
+.column-title-label{
+    width: 100%;
+    border-right: solid 1px white;
+    cursor: pointer;
+}
+
+.column-title:not(.empty-title):active{
+    background-color: rgb(47, 47, 47);
+}
+
+
+
+/* FRAME BODY DESIGN */
+.content-body{
+    height: 84%;
+    width: 100%;
+    background-color: white;
+    color: black;
+    display: block;
     overflow-x: hidden;
     overflow-y: scroll;
+    -ms-overflow-style: scrollbar;
+}
+
+/* FRAME ROW DESIGN */
+.content-row{
+    height: 100px;
+    width: 100%;
+    background-color: white;
+    display: flex;
+}
+
+.content-row:nth-child(2n+2){
+    background-color: rgb(240, 240, 240);
+}
+
+.content-row:last-child{
+    border-bottom: solid 2px rgba(0, 0, 0, 0.1);
+}
+
+.row-element{
+    height: 100%;
+    width: 50.5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+}
+
+.amount-element{
+    font-size: 23px;
+}
+
+.row-element:last-of-type{
+    width: 49.5%;
+}
+
+/* FRAME ROW BUTTONS DESIGN */
+
+.row-element button{
+    height: 45%;
+    font-family: inherit;
+    font-size: 18px;
+    padding: 0px 21px;
+    margin-left: 10px;
+    background-color: rgb(34,34,34);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    cursor: pointer;
+    transition-delay: 0.05s;
+    transition-duration: 0.5s;
+}
+
+.row-element button:hover{
+    background-color: steelblue;
+    box-shadow: 3px 8px 16px 0px rgba(0, 0, 0, 0.4);
+}
+
+.row-element button:focus{
+    outline: none;
+}
+
+/* FRAME IMAGE DESIGN */
+.row-image-container{
+    overflow: hidden;
+    width: 40%;
+    height: 95%;
+    max-width: 60%;
+    overflow: hidden;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.row-image-container img{
+    width: 80%;
+    height: auto;
+    image-rendering: auto;
+    image-resolution: from-image;
 }

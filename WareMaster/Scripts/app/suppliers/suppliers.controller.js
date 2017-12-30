@@ -10,6 +10,7 @@
         $rootScope.productsdisplayed = false;
         $rootScope.employeesdisplayed = false;
         $rootScope.suppliersdisplayed = true;
+        $rootScope.choicedisplayed = true;
 
         var allSuppliersPromise = suppliersRepository.getAllSuppliers();
 

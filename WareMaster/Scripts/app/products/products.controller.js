@@ -1,22 +1,25 @@
 ﻿angular.module('app').controller('ProductsController',
     function ($scope, $state, productsRepository, $rootScope) {
 
+        $rootScope.global = {
+            search: ''
+        };
+
         $rootScope.headerdisplayed = true;
         $rootScope.displaysubheader = true;
         $rootScope.productsdisplayed = true;
         $rootScope.employeesdisplayed = false;
         $rootScope.suppliersdisplayed = false;
-
-        $rootScope.global = {
-            search: ''
-        };
+        $rootScope.choicedisplayed = true;
 
         productsRepository.getAllProducts().then(function (products) {
             $scope.allProducts = products.data;
 
             for (let product of $scope.allProducts) {
                 const random = (new Date()).toString();
-                product.ImageUrl = product.ImageUrl + '?cb=' + random;
+                    product.ImageUrl = product.ImageUrl + '?cb=' + random;
+                    $scope.image = true;
+                    $scope.alternateimage = false;
             }
         });
 

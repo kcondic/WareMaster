@@ -1,23 +1,37 @@
 ﻿<div id="employees">
     <div class="main-frame">
-        <div class="frame-header">
-            <span>Radnici</span>
-        </div>
-        <div class="frame-columns">
-            <label>Slika</label>
-            <label>Naziv</label>
-            <label>Količina u skladištu</label>
-            <input ng-model="search" placeholder="Pretraži..." size="15" />
-        </div>
         <div class="frame-content">
-            <div ng-repeat="employee in allEmployees| filter: global.search">
-                {{employee.FirstName}}
-                {{employee.LastName}}
-                <img ng-src="{{employee.ImageUrl}}" ng-model="image" alt="Korisnik nema sliku" />
-                <button ui-sref="editemployee({id: employee.Id})">Uredi</button>
-                <button ng-click="deleteEmployee(employee.Id, employee.FirstName, employee.LastName)">Izbriši</button>
+            <div class="content-header">
+                <div class="template-title-row">
+                    <div class="template-title"><label class="title-label">Radnici</label></div>
+                </div>
+                <div class="columns-titles">
+                    <div class="column-title"><label class="column-title-label">Slika</label></div>
+                    <div class="column-title"><label class="column-title-label">Ime</label></div>
+                    <div class="column-title"><label class="column-title-label">Prezime</label></div>
+                    <div class="column-title empty-title"></div>
+                </div>
             </div>
-            <div ui-view></div>
+            <div class="content-body">
+                <div ng-repeat="employee in allEmployees| filter: global.search" class="content-row">
+                    <div class="row-element">
+                        <div class="row-image-container">
+                            <img ng-src="{{employee.ImageUrl}}" ng-model="image" alt="Korisnik nema sliku" onerror="this.src = '../../../Assets/Images/thumbnails/defaultemployee.png'" />
+                        </div>
+                    </div>
+                    <div class="row-element">
+                        {{employee.FirstName}}
+                    </div>
+                    <div class="row-element">
+                        {{employee.LastName}}
+                    </div>
+                    <div class="row-element">
+                        <button ui-sref="editemployee({id: employee.Id})">Uredi</button>
+                        <button ng-click="deleteEmployee(employee.Id, employee.FirstName, employee.LastName)">Izbriši</button>
+                        <div ui-view></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

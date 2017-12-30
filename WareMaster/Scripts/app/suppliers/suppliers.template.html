@@ -1,19 +1,25 @@
 ﻿<div id="suppliers">
     <div class="main-frame">
-        <div class="frame-header">
-            <span>Dobavljači</span>
-        </div>
-        <div class="frame-columns">
-            <label>Naziv</label>
-            <input ng-model="search" placeholder="Pretraži..." size="15" />
-        </div>
         <div class="frame-content">
-            <div ng-repeat="supplier in suppliers| filter: global.search">
-                {{supplier.Name}}
-                <button ui-sref="editsupplier({id: supplier.Id})">Uredi</button>
-                <button ng-click="deleteSupplier(supplier.Id, supplier.Name)">Izbriši</button>
+            <div class="content-header">
+                <div class="template-title-row">
+                    <div class="template-title"><label class="title-label">Dobavljači</label></div>
+                </div>
+                <div class="columns-titles">
+                    <div class="column-title"><label class="column-title-label">Naziv</label></div>
+                    <div class="column-title empty-title"></div>
+                </div>
             </div>
-            <div ui-view></div>
+            <div class="content-body">
+                <div ng-repeat="supplier in suppliers| filter: global.search" class="content-row">
+                    <div class="row-element">{{supplier.Name}}</div>
+                    <div class="row-element">
+                        <button ui-sref="editsupplier({id: supplier.Id})">Uredi</button>
+                        <button ng-click="deleteSupplier(supplier.Id, supplier.Name)">Izbriši</button>
+                        <div ui-view></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

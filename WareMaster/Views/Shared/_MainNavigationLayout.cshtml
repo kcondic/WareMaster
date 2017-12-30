@@ -98,9 +98,11 @@
             </div>
             <div class="button-content">
                 <div class="button-content-item selected-sort-choice">Vremenu dodavanja</div>
-                <div class="button-content-item">Nazivu</div>
-                <div class="button-content-item">Količini</div>
-                <div class="button-content-item">Dobavljaču</div>
+                <div ng-model="employeesdisplayed" ng-init="false" ng-if="employeesdisplayed" class="button-content-item">Imenu</div>
+                <div ng-model="employeesdisplayed" ng-init="false" ng-if="employeesdisplayed" class="button-content-item">Prezimenu</div>
+                <div ng-model="choicedisplayed" ng-init="false" ng-if="choicedisplayed" class="button-content-item">Nazivu</div>
+                <div ng-model="productsdisplayed" ng-init="false" ng-if="productsdisplayed" class="button-content-item">Količini</div>
+                <div ng-model="productsdisplayed" ng-init="false" ng-if="productsdisplayed" class="button-content-item">Dobavljaču</div>
             </div>
         </div>
     </div>

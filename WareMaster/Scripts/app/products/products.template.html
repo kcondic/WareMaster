@@ -1,23 +1,37 @@
 ﻿<div id="products">
     <div class="main-frame">
-        <div class="frame-header">
-            <span>Proizvodi</span>
-        </div>
-        <div class="frame-columns">
-            <label>Slika</label>
-            <label>Naziv</label>
-            <label>Količina u skladištu</label>
-            <input ng-model="search" placeholder="Pretraži..." />
-        </div>
         <div class="frame-content">
-            <div ng-repeat="product in allProducts| filter: global.search">
-                {{product.Name}}
-                Količina u skladištu: {{product.Counter}}
-                <img ng-src="{{product.ImageUrl}}" ng-model="image" alt="Proizvod nema sliku" />
-                <button ui-sref="editproduct({id: product.Id})">Uredi</button>
-                <button ng-click="deleteProduct(product.Id, product.Name)">Izbriši</button>
+            <div class="content-header">
+                <div class="template-title-row">
+                    <div class="template-title"><label class="title-label">Proizvodi</label></div>
+                </div>
+                <div class="columns-titles">
+                    <div class="column-title"><label class="column-title-label">Slika</label></div>
+                    <div class="column-title"><label class="column-title-label">Naziv</label></div>
+                    <div class="column-title"><label class="column-title-label">Količina u skladištu</label></div>
+                    <div class="column-title empty-title"></div>
+                </div>
             </div>
-            <div ui-view></div>
+            <div class="content-body">
+                <div ng-repeat="product in allProducts| filter: global.search" class="content-row">
+                    <div class="row-element">
+                        <div class="row-image-container">
+                            <img ng-src="{{product.ImageUrl}}" ng-model="image" alt="Proizvod nema sliku" onerror="this.src = '../../../Assets/Images/thumbnails/defaultproduct.png'" />
+                        </div>
+                    </div>
+                    <div class="row-element">
+                        {{product.Name}}
+                    </div>
+                    <div class="row-element amount-element">
+                        {{product.Counter}}
+                    </div>
+                    <div class="row-element">
+                        <button ui-sref="editproduct({id: product.Id})">Uredi</button>
+                        <button ng-click="deleteProduct(product.Id, product.Name)">Izbriši</button>
+                        <div ui-view></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

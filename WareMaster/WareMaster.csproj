@@ -155,9 +155,11 @@
   <ItemGroup>
     <Content Include="Assets\fontstyles\font-awesome.css" />
     <Content Include="Assets\fontstyles\font-awesome.min.css" />
+    <Content Include="Assets\images\thumbnails\defaultemployee.png" />
+    <Content Include="Assets\images\thumbnails\defaultproduct.png" />
     <Content Include="Assets\styles\addModal.css" />
-    <Content Include="Assets\styles\editModal.css" />
     <Content Include="Assets\styles\mainFrame.css" />
+    <Content Include="Assets\styles\editModal.css" />
     <Content Include="Assets\styles\subHeader.css" />
     <Content Include="favicon.ico" />
     <Content Include="Assets\fonts\fontawesome-webfont.svg" />
