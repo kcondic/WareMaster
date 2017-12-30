@@ -12,7 +12,7 @@ namespace WareMaster
 {
     public class Startup
     {
-        public void Configuration(IApplicationBuilder app)
+        public void Configuration(IAppBuilder app)
         {
 
             // The key length needs to be of sufficient length, or otherwise an error will occur.
@@ -31,7 +31,7 @@ namespace WareMaster
             app.UseJwtBearerAuthentication(new JwtBearerOptions
             {
                 AutomaticAuthenticate = true,
-                TokenValidationParameters = tokenValidationParameters,
+                TokenValidationParameters = tokenValidationParameters
             });
         }
     }
