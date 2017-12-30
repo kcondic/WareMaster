@@ -9,6 +9,7 @@
                 console.log(response);
                 localStorage.setItem('bearerToken', response.data);
                 const decoded = jwtHelper.decodeToken(response.data);
+                console.log(decoded);
                 localStorageService.set('authDetails', JSON.stringify(decoded));
             });
         }

@@ -379,7 +379,6 @@
     <Content Include="Scripts\app\app.module.js" />
     <Content Include="Scripts\app\common\services\functions.repository.js" />
     <Content Include="Scripts\app\common\services\employees.repository.js" />
-    <Content Include="Scripts\app\common\services\gettoken.service.js" />
     <Content Include="Scripts\app\common\services\login.repository.js" />
     <Content Include="Scripts\app\common\services\products.repository.js" />
     <Content Include="Scripts\app\dashboard\dashboard.controller.js" />
