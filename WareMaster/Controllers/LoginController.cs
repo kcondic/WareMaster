@@ -36,6 +36,8 @@ namespace WareMaster.Controllers
             var timestamp = DateTimeOffset.UtcNow.Ticks;
             var payload = new Dictionary<string, string>()
             {
+                {"iss", "http://localhost:64748" },
+                {"aud", "test" },
                 {"role", user.Role.ToString()},
                 {"id", user.Id.ToString()},
                 {"username", user.Username},
