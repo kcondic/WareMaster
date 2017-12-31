@@ -1,2 +1,221 @@
-﻿body {
+﻿/* MAIN MODAL OVERLAY DESIGN */
+.modal-overlay{
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(34, 34, 34, 0.5);
+    left: 0px;
+    top: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    animation: fadein 0.5s linear 0.5s forwards normal;
+}
+
+/* MODAL WINDOW DESIGN */
+.modal-box{
+    height: 450px;
+    width: 500px;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border-collapse: collapse;
+    display: flex;
+    flex-flow: column;
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    opacity: 0;
+    animation: fadein 0.5s linear 0s forwards normal;
+}
+
+@keyframes fadein{
+    0% {opacity: 0;}
+    100% { opacity: 1;}
+}
+
+/* MODAL HEADER DESIGN */
+.modal-header{
+    width: 100%;
+    height: 11%;
+    background-color: steelblue;
+    color: white;
+    display: flex;
+}
+
+.modal-header-row,
+.modal-title{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.modal-title label{
+    width: 100%;
+    height: 100%;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+}
+/* MODAL CONTENT DESIGN */
+.modal-content{
+    width: 100%;
+    height: 77%;
+    background-color: white;
+    display: flex;
+    flex-flow: column;
+}
+
+.modal-content-row{
+    height: 18%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content-row:last-of-type{
+    height: 46%;
+}
+
+.modal-row-element{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.modal-row-element:nth-child(2n+1){
+    height: 100%;
+    width: 40%;
+}
+
+.modal-row-element:nth-child(2n+2){
+    height: 100%;
+    width: 50%;
+}
+
+.modal-row-element input{
+    width: 90%;
+    font-size: 18px;
+    font-family: inherit;
+    border: solid 1px cadetblue;
+    border-radius: 3px;
+}
+
+.modal-row-element input:focus{
+    outline: none;
+}
+
+.modal-row-element .image-upload-button,
+.single-button button{
+    background-color: rgb(34, 34, 34);
+    color: white;
+    font-size: 18px;
+    padding: 5px 16px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition-delay: 0.05s;
+    transition-duration: 0.5s;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.image-upload-button:hover,
+.single-button button:hover{
+    background-color: steelblue;
+    box-shadow: 3px 8px 16px 0px rgba(0, 0, 0, 0.4);
+}
+
+.cancel-button button:hover{
+    background-color: darkred;
+}
+
+.modal-row-image{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.modal-row-image img{
+    min-height: 100px;
+    width: auto;
+    image-rendering: auto;
+    image-resolution: from-image;
+}
+
+.row-search-icon{
+    padding-left: 5px;
+}
+
+.modal-box .products-row{
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.products-row .products-container{
+    background-color: lightblue;
+    border-radius: 3px;
+    width: 90%;
+    height: 90%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.products-container .single-product{
+    width: 100%;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.products-container .single-product:nth-child(2n+1){
+    background-color: lightblue;
+}
+
+.products-container .single-product:nth-child(2n+2){
+    background-color: rgb(240, 240, 240);
+}
+
+.products-container .single-product:last-child{
+    border-bottom: solid 1.5px rgb(235,235,235);
+}
+
+/* MODAL FOOTER DESIGN */
+.modal-footer{
+    width: 100%;
+    height: 12%;
+    background-color: rgb(235,235,235);
+    display: flex;
+}
+
+.modal-footer .modal-buttons{
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+.modal-buttons .single-button{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.single-button button{
+    font-family: inherit;
+    font-size: 20px;
+    height: 80%;
+    width: 65%;
+    border: none;
 }

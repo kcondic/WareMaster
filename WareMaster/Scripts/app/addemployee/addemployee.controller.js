@@ -1,5 +1,5 @@
 ﻿angular.module('app').controller('AddEmployeeController',
-    function ($scope, $state, employeesRepository, functionsRepository) {
+    function ($scope, $state, employeesRepository, functionsRepository, $rootScope) {
 
         $scope.addNewEmployee = function() {
             const newEmployee = {

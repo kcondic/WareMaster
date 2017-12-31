@@ -75,6 +75,10 @@
     box-shadow: 3px 8px 16px 0px rgba(0, 0, 0, 0.4);
 }
 
+button:focus{
+    outline: none;
+}
+
 /* DASHBOARD LINK ARROW DESIGN */
 #subheader .link-to-dashboard-box{
     display: inline;
