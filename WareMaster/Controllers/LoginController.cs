@@ -8,6 +8,8 @@ using System.Net;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
+using System.Linq;
 using System.Text;
 using WareMaster.Data.Models.Entities;
 
@@ -62,6 +64,7 @@ namespace WareMaster.Controllers
             var companyName = dataToRegister["companyName"].ToObject<string>();
             var managerFirstName = dataToRegister["managerFirstName"].ToObject<string>();
             var managerLastName = dataToRegister["managerLastName"].ToObject<string>();
+            var username = dataToRegister["username"].ToObject<string>();
             var password = dataToRegister["password"].ToObject<string>();
 
             var companyId = _companyRepository.AddNewCompany(companyName);
@@ -71,7 +74,7 @@ namespace WareMaster.Controllers
                 LastName = managerLastName,
                 Company = _companyRepository.GetCompanyById(companyId),
                 Role = Role.Manager,
-                Username = managerFirstName[0] + managerLastName,
+                Username = username,
                 Password = HashHelper.HashPassword(password)
             };
             _userRepository.AddUser(manager);
