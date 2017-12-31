@@ -396,6 +396,8 @@
     <Content Include="Scripts\app\login\login.controller.js" />
     <Content Include="Scripts\app\login\login.state.js" />
     <Content Include="Scripts\app\login\login.template.html" />
+    <Content Include="Scripts\app\logout\logout.controller.js" />
+    <Content Include="Scripts\app\logout\logout.state.js" />
     <Content Include="Scripts\app\suppliers\suppliers.controller.js" />
     <Content Include="Scripts\app\suppliers\suppliers.state.js" />
     <Content Include="Scripts\app\suppliers\suppliers.template.html" />
@@ -413,7 +415,6 @@
     <Content Include="Scripts\app\products\products.state.js" />
     <Content Include="Scripts\app\products\products.template.html" />
     <Content Include="Scripts\vendor\angular-jwt.js" />
-    <Content Include="Scripts\vendor\angular-local-storage.js" />
     <Content Include="Scripts\vendor\angular-ui-router.min.js" />
     <Content Include="Scripts\vendor\angular.js" />
     <Content Include="Scripts\vendor\angular.min.js" />

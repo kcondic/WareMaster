@@ -10,6 +10,7 @@ using WareMaster.Domain.Repositories;
 namespace WareMaster.Controllers
 {
     [RoutePrefix("api/suppliers")]
+    [Authorize]
     public class SuppliersController : ApiController
     {
         public SuppliersController()

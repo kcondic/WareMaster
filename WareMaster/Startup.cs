@@ -28,7 +28,7 @@ namespace WareMaster
                 IssuerSecurityTokenProviders = new IIssuerSecurityTokenProvider[]
                     {
                         new SymmetricKeyIssuerSecurityTokenProvider(issuer, tokenSecretKey)
-                    }
+                    }      
             });
         }
     }

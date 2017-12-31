@@ -9,4 +9,10 @@
                     alert('Neispravni korisnički podaci.');
                 });
         }
+
+        $scope.logout = function() {
+            loginRepository.logout().then(function() {
+                $state.go('login');
+            });
+        }
     });

@@ -2,7 +2,7 @@
     function($http) {
 
         function getAllProducts() {
-            return $http.get('/api/products', { withCredentials: true });
+            return $http.get('/api/products');
         }
 
         function getIdNeededForImageName() {

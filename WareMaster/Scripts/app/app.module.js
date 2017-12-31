@@ -1,1 +1,1 @@
-﻿angular.module('app', ['ui.router', 'ngFileUpload', 'LocalStorageModule', 'angular-jwt']);
+﻿angular.module('app', ['ui.router', 'ngFileUpload', 'angular-jwt']);

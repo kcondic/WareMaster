@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 namespace WareMaster.Controllers
 {
     [RoutePrefix("api/employees")]
+    [Authorize]
     public class EmployeesController : ApiController
     {
         public EmployeesController()

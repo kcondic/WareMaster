@@ -33,17 +33,16 @@ namespace WareMaster.Controllers
             var areCredentialsValid = password == user.Password;
             if (!areCredentialsValid) return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
 
-            var span = DateTime.Now.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc));
+            var span = DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc));
             var timestamp = Math.Round(span.TotalSeconds);
             var payload = new Dictionary<string, string>()
             {
                 {"iss", "http://localhost:64748" },
                 {"aud", "test" },
-                {"exp", (timestamp + 10000).ToString()},
+                {"exp", (timestamp + 245000).ToString()},
                 {"role", user.Role.ToString()},
                 {"id", user.Id.ToString()},
-                {"username", user.Username},
-                {"iat", timestamp.ToString()}
+                {"username", user.Username}
             };
 
             var token = JWT.Encode(payload, Encoding.UTF8.GetBytes("sTymnoTaSvFX6aI6Z86o9eh9IDbE8jCVwji7ypO5BmZUOF2jnCusXMjJWSbBQKf"), JwsAlgorithm.HS256);
