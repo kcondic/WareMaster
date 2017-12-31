@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -16,10 +17,9 @@ namespace WareMaster
     {
         public void Configuration(IAppBuilder app)
         {
-            var issuer = "http://localhost:64748";
-            var audienceId = "test";
-            // The key length needs to be of sufficient length, or otherwise an error will occur.
-            var tokenSecretKey = Encoding.UTF8.GetBytes("sTymnoTaSvFX6aI6Z86o9eh9IDbE8jCVwji7ypO5BmZUOF2jnCusXMjJWSbBQKf");
+            var issuer = ConfigurationManager.AppSettings["as:IssuerId"];
+            var audienceId = ConfigurationManager.AppSettings["as:AudienceId"];
+            var tokenSecretKey = Encoding.UTF8.GetBytes(ConfigurationManager.AppSettings["as:SecretToken"]);
 
             app.UseJwtBearerAuthentication(new JwtBearerAuthenticationOptions
             {
