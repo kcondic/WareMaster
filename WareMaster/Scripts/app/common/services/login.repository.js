@@ -12,17 +12,18 @@
             });
         }
 
-        function isAuthenticated() {
-            return !!localStorage.getItem('bearerToken');
-        }
-
-        function getAuthDetails() {
-            return JSON.parse(localStorage.getItem('authDetails'));
+        function registerNew(companyName, managerFirstName, managerLastName, password) {
+            return $http.post('/api/register',
+                {
+                    companyName: companyName,
+                    managerFirstName: managerFirstName,
+                    managerLastName: managerLastName,
+                    password: password
+                });
         }
 
         return {
             login: login,
-            isAuthenticated: isAuthenticated,
-            getAuthDetails: getAuthDetails
+            registerNew: registerNew
         };
     });

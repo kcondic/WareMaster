@@ -45,6 +45,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net, Version=0.1.5073.29922, Culture=neutral, PublicKeyToken=6bcd409ee6bc9292, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt-Official.0.1.109\lib\BCrypt.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -346,12 +350,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HashHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\fontstyles\font-awesome.css" />
     <Content Include="Assets\fontstyles\font-awesome.min.css" />
+    <Content Include="Assets\styles\registrationMain.css" />
     <Content Include="Assets\styles\suppliersMain.css" />
     <Content Include="favicon.ico" />
     <Content Include="Assets\fonts\fontawesome-webfont.svg" />
@@ -366,6 +372,7 @@
     <Content Include="Assets\images\logos\logo4848.png" />
     <Content Include="Assets\images\logos\logo6060.png" />
     <Content Include="Assets\images\logos\logo6262.png" />
+    <Content Include="LICENSE.txt" />
     <Content Include="Scripts\app\addsupplier\addsupplier.state.js" />
     <Content Include="Scripts\app\addsupplier\addsupplier.template.html" />
     <Content Include="Scripts\app\addsupplier\addsupplier.controller.js" />
@@ -401,6 +408,9 @@
     <Content Include="Scripts\app\login\login.template.html" />
     <Content Include="Scripts\app\logout\logout.controller.js" />
     <Content Include="Scripts\app\logout\logout.state.js" />
+    <Content Include="Scripts\app\register\register.controller.js" />
+    <Content Include="Scripts\app\register\register.state.js" />
+    <Content Include="Scripts\app\register\register.template.html" />
     <Content Include="Scripts\app\suppliers\suppliers.controller.js" />
     <Content Include="Scripts\app\suppliers\suppliers.state.js" />
     <Content Include="Scripts\app\suppliers\suppliers.template.html" />

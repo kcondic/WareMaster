@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Text;
+using WareMaster.Data.Models.Entities;
 
 namespace WareMaster.Controllers
 {
@@ -18,8 +19,10 @@ namespace WareMaster.Controllers
         public SigninController()
         {
             _userRepository = new UserRepository();
+            _companyRepository = new CompanyRepository();
         }
         private readonly UserRepository _userRepository;
+        private readonly CompanyRepository _companyRepository;
 
         [HttpPost]
         [Route("login")]
@@ -31,7 +34,7 @@ namespace WareMaster.Controllers
             var user = _userRepository.GetManagerByUsername(userName);
             if (user == null) return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.NotFound));
 
-            var areCredentialsValid = password == user.Password;
+            var areCredentialsValid = HashHelper.ValidatePassword(password, user.Password);
             if (!areCredentialsValid) return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
 
             var issuer = ConfigurationManager.AppSettings["as:IssuerId"];
@@ -50,6 +53,29 @@ namespace WareMaster.Controllers
 
             var token = JWT.Encode(payload, Encoding.UTF8.GetBytes(secret), JwsAlgorithm.HS256);
             return Ok(token);
+        }
+
+        [HttpPost]
+        [Route("register")]
+        public IHttpActionResult Register(JObject dataToRegister)
+        {
+            var companyName = dataToRegister["companyName"].ToObject<string>();
+            var managerFirstName = dataToRegister["managerFirstName"].ToObject<string>();
+            var managerLastName = dataToRegister["managerLastName"].ToObject<string>();
+            var password = dataToRegister["password"].ToObject<string>();
+
+            var companyId = _companyRepository.AddNewCompany(companyName);
+            var manager = new User()
+            {
+                FirstName = managerFirstName,
+                LastName = managerLastName,
+                Company = _companyRepository.GetCompanyById(companyId),
+                Role = Role.Manager,
+                Username = managerFirstName[0] + managerLastName,
+                Password = HashHelper.HashPassword(password)
+            };
+            _userRepository.AddUser(manager);
+            return Ok(true);
         }
     }
 }

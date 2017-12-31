@@ -13,17 +13,17 @@ namespace WareMaster.Data
     {
         protected override void Seed(WarehouseContext context)
         {
-            var testUser = new User()
-            {
-                FirstName = "Test", LastName = "Testic", Role = Role.Manager,
-                Username = "test", Password = "test"
-            };
-            var testCompany = new Company() {Name = "TestKompanija"};
-            testUser.Company = testCompany;
+            //var testUser = new User()
+            //{
+            //    FirstName = "Test", LastName = "Testic", Role = Role.Manager,
+            //    Username = "test", Password = "test"
+            //};
+            //var testCompany = new Company() {Name = "TestKompanija"};
+            //testUser.Company = testCompany;
 
-            context.Users.Add(testUser);
-            context.Companies.Add(testCompany);
-            base.Seed(context);
+            //context.Users.Add(testUser);
+            //context.Companies.Add(testCompany);
+            //base.Seed(context);
         }
     }
 }
