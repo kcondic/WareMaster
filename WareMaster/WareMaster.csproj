@@ -337,6 +337,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -377,6 +378,8 @@
     <Content Include="Scripts\app\app.config.js" />
     <Content Include="Scripts\app\app.interceptor.js" />
     <Content Include="Scripts\app\app.module.js" />
+    <Content Include="Scripts\app\app.run.js" />
+    <Content Include="Scripts\app\common\services\dashboard.repository.js" />
     <Content Include="Scripts\app\common\services\functions.repository.js" />
     <Content Include="Scripts\app\common\services\employees.repository.js" />
     <Content Include="Scripts\app\common\services\login.repository.js" />

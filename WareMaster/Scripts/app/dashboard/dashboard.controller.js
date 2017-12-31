@@ -1,4 +1,4 @@
 ﻿angular.module('app').controller('DashboardController',
-    function () {
-        
+    function ($scope, $state, dashboardRepository) {
+        dashboardRepository.getActivities();
     });
