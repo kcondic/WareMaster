@@ -3,6 +3,5 @@
 
         ordersRepository.getOrder($stateParams.id).then(function (order) {
             $scope.order = order.data;
-            $scope.incomingOrder = $scope.order.Supplier === null ? false : true;
         });
     });

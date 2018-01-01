@@ -12,9 +12,8 @@
 
         productsRepository.getAllProducts().then(function(products) {
             $scope.allProducts = products.data;
-            for (var i = 0; i < $scope.allProducts.length; i++) {
-                $scope.allProducts[i].Counter = 1;
-            }
+            for (let product of $scope.allProducts)
+                product.Counter = 1;
         });
 
         suppliersRepository.getAllSuppliers().then(function (suppliers) {
@@ -77,12 +76,12 @@
             }
 
             var productOrder = [];
-            for (var i=0;i< $scope.selectedProducts.length;i++) {
+            for (let product of $scope.selectedProducts)
                 productOrder.push({
-                    ProductId: $scope.selectedProducts[i].Id,
-                    ProductQuantity: $scope.selectedProducts[i].Counter
-            });
-            }
+                    ProductId: product.Id,
+                    ProductQuantity: product.Counter
+                });
+
             var supplierId;
             if ($scope.incomingSelected)
                 supplierId = document.getElementById("supplierSelect").options[document

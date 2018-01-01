@@ -10,14 +10,13 @@
                 $scope.selectedProducts.push(item.Product);
             });
 
-            if ($scope.order.Supplier !== null) {
+            if ($scope.order.Type === 0) {
                 $scope.allProducts = $scope.order.Supplier.Products;
                 $scope.selectedProducts.forEach(function (item) {
                     $scope.allProducts.splice($scope.allProducts.map(function (val) { return val.Id }).indexOf(item.Id), 1);
                 });
-                for (var i = 0; i < $scope.allProducts.length; i++) {
-                    $scope.allProducts[i].Counter = 1;
-                }
+                for (let product of $scope.allProducts)
+                    product.Counter = 1;
             }
             else
                 productsRepository.getAllProducts().then(function (products) {
@@ -25,14 +24,13 @@
                     $scope.selectedProducts.forEach(function (item) {
                         $scope.allProducts.splice($scope.allProducts.map(function (val) { return val.Id }).indexOf(item.Id), 1);
                     });
-                    for (var i = 0; i < $scope.allProducts.length; i++) {
-                        $scope.allProducts[i].Counter = 1;
-                    }
+                    for (let product of $scope.allProducts)
+                        product.Counter = 1;
                 });
 
-            for (var j = 0; j < $scope.selectedProducts.length; j++) {
-                $scope.selectedProducts[j].Counter = $scope.order.ProductOrders.find(function (productOrder) {
-                    return (productOrder.ProductId === $scope.selectedProducts[j].Id);
+            for (let product of $scope.selectedProducts) {
+                product.Counter = $scope.order.ProductOrders.find(function (productOrder) {
+                    return (productOrder.ProductId === product.Id);
                 }).ProductQuantity;
             }
             if($scope.order.Type === 1)
@@ -74,13 +72,12 @@
             }
 
             var productOrder = [];
-            for (var i = 0; i < $scope.selectedProducts.length; i++) {
+            for (let product of $scope.selectedProducts) 
                 productOrder.push({
-                    ProductId: $scope.selectedProducts[i].Id,
+                    ProductId: product.Id,
                     OrderId: $scope.order.Id,
-                    ProductQuantity: $scope.selectedProducts[i].Counter
+                    ProductQuantity: product.Counter
                 });
-            }
 
             $scope.order.ProductOrders = productOrder;
             $scope.order.AssignedUser = $scope.selectedEmployee;
