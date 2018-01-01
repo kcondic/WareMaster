@@ -11,7 +11,7 @@
     align-items: center;
     justify-content: center;
     opacity: 0;
-    animation: fadein 0.5s linear 0.5s forwards normal;
+    animation: fadein 0.5s linear 0.1s forwards normal;
 }
 
 /* MODAL WINDOW DESIGN */
@@ -28,7 +28,11 @@
     -ms-user-select: none;
     -moz-user-select: none;
     opacity: 0;
-    animation: fadein 0.5s linear 0s forwards normal;
+    animation: fadein 0.5s linear 0.05s forwards normal;
+}
+
+.edit-supplier-modal-box{
+    width: 600px;
 }
 
 @keyframes fadein{
@@ -65,6 +69,7 @@
     width: 100%;
     height: 77%;
     background-color: white;
+    color: black;
     display: flex;
     flex-flow: column;
 }
@@ -104,6 +109,7 @@
     font-family: inherit;
     border: solid 1px cadetblue;
     border-radius: 3px;
+    padding-left: 5px;
 }
 
 .modal-row-element input:focus{
@@ -160,6 +166,23 @@
     overflow: hidden;
 }
 
+.edit-supplier-modal-box .products-rows-container{
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+}
+
+.edit-supplier-modal-box .products-row{
+    flex-flow: column;
+    width: 50%;
+    justify-content: center;
+}
+
+.edit-supplier-modal-box .products-row .modal-row-element{
+    width: auto;
+    height: 11%;
+}
+
 .products-row .products-container{
     background-color: lightblue;
     border-radius: 3px;
@@ -169,6 +192,10 @@
     overflow-y: scroll;
 }
 
+.edit-supplier-modal-box .products-container{
+    margin: 10px 0px;
+}
+
 .products-container .single-product{
     width: 100%;
     height: 30px;
@@ -176,6 +203,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 15px;
+    opacity: 0;
+    animation: fadein 0.5s linear 0.4s forwards normal;
 }
 
 .products-container .single-product:nth-child(2n+1){

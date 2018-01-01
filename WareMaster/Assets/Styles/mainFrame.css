@@ -125,6 +125,8 @@
     width: 100%;
     background-color: white;
     display: flex;
+    opacity: 0;
+    animation: fadein 0.5s linear 0.1s forwards normal;
 }
 
 .content-row:nth-child(2n+2){
@@ -187,17 +189,21 @@
     overflow: hidden;
     width: 40%;
     height: 95%;
-    max-width: 60%;
+    max-width: 40%;
     overflow: hidden;
     border-radius: 3px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: crimson;
 }
 
 .row-image-container img{
-    width: 80%;
+    width: auto;
     height: auto;
+    max-height: 95%;
     image-rendering: auto;
     image-resolution: from-image;
+    background-size: cover;
+    border-radius: 3px;
 }

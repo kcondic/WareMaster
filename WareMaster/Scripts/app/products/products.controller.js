@@ -18,8 +18,6 @@
             for (let product of $scope.allProducts) {
                 const random = (new Date()).toString();
                     product.ImageUrl = product.ImageUrl + '?cb=' + random;
-                    $scope.image = true;
-                    $scope.alternateimage = false;
             }
         });
 
