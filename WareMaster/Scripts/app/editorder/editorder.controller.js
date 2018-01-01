@@ -5,10 +5,6 @@
         ordersRepository.getOrder($stateParams.id).then(function (order) {
             $scope.order = order.data;
 
-            $scope.incomingOrder = true;
-            if ($scope.order.Supplier === null)
-                $scope.incomingOrder = false;
-
             $scope.selectedEmployee = $scope.order.AssignedUser;
             $scope.order.ProductOrders.forEach(function(item) {
                 $scope.selectedProducts.push(item.Product);
@@ -39,9 +35,10 @@
                     return (productOrder.ProductId === $scope.selectedProducts[j].Id);
                 }).ProductQuantity;
             }
-            if($scope.selectedEmployee !== null)
+            if($scope.order.Type === 1)
                 employeesRepository.getAllEmployees().then(function (employees) {
                     $scope.allEmployees = employees.data;
+                    if($scope.selectedEmployee !== null)
                     $scope.allEmployees.splice($scope.allEmployees.map(function(val){return val.Id}).indexOf($scope.selectedEmployee.Id), 1);
                 });
         });
@@ -73,10 +70,6 @@
         $scope.editOrder = function () {
             if ($scope.selectedProducts.length === 0) {
                 alert("Morate naručiti barem jedan proizvod");
-                return;
-            }
-            else if (!$scope.incomingOrder && $scope.selectedEmployee === null) {
-                alert("Niste dodijelili radnika");
                 return;
             }
 

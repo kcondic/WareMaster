@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 
 namespace WareMaster.Data.Models.Entities
@@ -8,6 +9,12 @@ namespace WareMaster.Data.Models.Entities
         Created,
         InProgress,
         Finished
+    }
+
+    public enum Type
+    {
+        Incoming,
+        Outgoing
     }
     public class Order
     {
@@ -25,6 +32,7 @@ namespace WareMaster.Data.Models.Entities
 
         public DateTime TimeOfCreation { get; set; }
         public Status Status { get; set; }
+        public Type Type { get; set; }
         public Company Company { get; set; }
         public int CompanyId { get; set; }
     }

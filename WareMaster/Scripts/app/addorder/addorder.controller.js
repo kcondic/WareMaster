@@ -64,10 +64,6 @@
                 alert("Morate naručiti barem jedan proizvod");
                 return;
             }
-            else if (!$scope.incomingSelect && $scope.selectedEmployee === null) {
-                alert("Niste dodijelili radnika");
-                return;
-            }
 
             var productOrder = [];
             for (var i=0;i< $scope.selectedProducts.length;i++) {
@@ -89,6 +85,7 @@
                 AssignedUserId: assignedUserId,
                 ProductOrders: productOrder,
                 Status: 0,
+                Type: $scope.incomingSelected ? 0:1,
                 SupplierId: supplierId
             };
 

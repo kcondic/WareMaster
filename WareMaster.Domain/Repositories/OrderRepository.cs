@@ -75,6 +75,7 @@ namespace WareMaster.Domain.Repositories
                     AssignedManagerId = order.AssignedManagerId,
                     TimeOfCreation = DateTime.Now,
                     Status = order.Status,
+                    Type = order.Type,
                     CompanyId = 1,
                     SupplierId = order.SupplierId,
                     ProductOrders = new List<ProductOrders>()
@@ -104,12 +105,15 @@ namespace WareMaster.Domain.Repositories
 
                 if (orderToEdit == null)
                     return;
-                if (orderToEdit.AssignedUser != null && orderToEdit.AssignedUser.Id != editedOrder.AssignedUser.Id)
+                if (orderToEdit.AssignedUser != null && editedOrder.AssignedUser != null
+                    && orderToEdit.AssignedUser.Id != editedOrder.AssignedUser.Id ||
+                    orderToEdit.AssignedUser == null && editedOrder.AssignedUser != null)
                 {
                     context.Users.Attach(editedOrder.AssignedUser);
-                    orderToEdit.AssignedUserId = editedOrder.AssignedUserId;
                     orderToEdit.AssignedUser = editedOrder.AssignedUser;
                 }
+                else if (editedOrder.AssignedUser == null)
+                    orderToEdit.AssignedUser = null;
 
                 orderToEdit.ProductOrders = editedOrder.ProductOrders;                
 

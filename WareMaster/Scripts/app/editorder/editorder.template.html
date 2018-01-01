@@ -1,5 +1,5 @@
 ﻿Uredi narudžbu {{order.Id}}.:
-<div ng-show="incomingOrder">
+<div ng-show="order.Type==0">
     <div>
         Dobavljač: {{order.Supplier.Name}}
     </div>
@@ -17,7 +17,7 @@
     <button ng-click="editOrder()">Uredi</button>
     <button ui-sref="orders">Odustani</button>
 </div>
-<div ng-show="!incomingOrder">
+<div ng-show="order.Type==1">
     <div>
         Proizvodi:
         <span ng-repeat="product in selectedProducts">
