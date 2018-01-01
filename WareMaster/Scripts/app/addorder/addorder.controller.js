@@ -21,10 +21,21 @@
             $scope.allSuppliers = suppliers.data;
         });
 
-        $scope.suppliersFilter = function (selectedProducts) {
-            return function (supplier) {
-                return (!selectedProducts.some(val => !supplier.Products.some(x => x.Id === val.Id)));
+        $scope.productsFilter = function(selectedSupplierId) {
+            return function (product) {
+                if ($scope.allSuppliers && selectedSupplierId)
+                    return($scope.allSuppliers.find(function(supplier) {
+                        return supplier.Id === parseInt(selectedSupplierId);
+                    }).Products.some(val => val.Id === product.Id));
+                else
+                    return false;
             }
+        }
+
+        $scope.updateProductsFilter= function() {
+            for (let product of $scope.selectedProducts)
+                $scope.allProducts.push(product);
+            $scope.selectedProducts = [];
         }
 
         $scope.incomingSelect = function() {

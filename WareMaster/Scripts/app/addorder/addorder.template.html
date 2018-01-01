@@ -7,8 +7,8 @@
 <div ng-show="incomingSelected">
     <div>
         Dobavljač:
-        <select id="supplierSelect">
-            <option value={{supplier.Id}} ng-repeat="supplier in allSuppliers | filter: suppliersFilter(selectedProducts)">{{supplier.Name}}</option>
+        <select id="supplierSelect" ng-model="selectedSupplierId" ng-change="updateProductsFilter()">
+            <option value={{supplier.Id}} ng-repeat="supplier in allSuppliers">{{supplier.Name}}</option>
         </select><br/>
         Proizvodi:
         <div>
@@ -20,7 +20,7 @@
     </div>
     <div>
         Svi proizvodi:
-        <span ng-click="selectProduct(product)" ng-repeat="product in allProducts">{{product.Name}} </span>
+        <span ng-click="selectProduct(product)" ng-repeat="product in allProducts | filter: productsFilter(selectedSupplierId)">{{product.Name}} </span>
     </div>
     <button ng-click="addNewOrder()">Stvori</button>
 </div>
