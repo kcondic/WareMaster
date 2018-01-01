@@ -65,18 +65,15 @@ namespace WareMaster.Domain.Repositories
                 foreach (var productOrder in order.ProductOrders)
                     context.ProductOrders.Attach(productOrder);
 
-                if(order.AssignedUser != null)
-                    context.Users.Attach(order.AssignedUser);
-
+                context.Companies.Attach(_companyRepository.GetCompanyById(1));
                 var newOrder = new Order()
                 {
-                    Id = order.Id,
-                    AssignedUserId = order.AssignedUserId,
-                    AssignedManagerId = order.AssignedManagerId,
+                    AssignedUser = order.AssignedUser,
+                    AssignedManager = order.AssignedManager,
                     TimeOfCreation = DateTime.Now,
                     Status = order.Status,
                     Type = order.Type,
-                    CompanyId = 1,
+                    Company = _companyRepository.GetCompanyById(1),
                     SupplierId = order.SupplierId,
                     ProductOrders = new List<ProductOrders>()
                 };
@@ -84,7 +81,7 @@ namespace WareMaster.Domain.Repositories
                 foreach (var productOrder in order.ProductOrders)
                     newOrder.ProductOrders.Add(new ProductOrders()
                     {
-                        OrderId = newOrder.Id,
+                        Order = newOrder,
                         ProductId = productOrder.ProductId,
                         ProductQuantity = productOrder.ProductQuantity
                     });

@@ -89,10 +89,11 @@
                     .selectedIndex].value;
             else
                 supplierId = null;
-            var assignedUserId = $scope.selectedEmployee === null ? null : $scope.selectedEmployee.Id;
-            
+            var assignedUser = $scope.selectedEmployee === null ? null : $scope.selectedEmployee;
+
             const newOrder = {
-                AssignedUserId: assignedUserId,
+                AssignedUser: assignedUser,
+                AssignedManager: null,
                 ProductOrders: productOrder,
                 Status: 0,
                 Type: $scope.incomingSelected ? 0:1,
