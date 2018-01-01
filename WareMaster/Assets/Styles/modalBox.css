@@ -151,8 +151,12 @@
 .modal-row-image img{
     min-height: 100px;
     width: auto;
+    height: auto;
+    max-height: 100%;
     image-rendering: auto;
     image-resolution: from-image;
+    background-size: cover;
+    border-radius: 4px;
 }
 
 .row-search-icon{

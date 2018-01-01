@@ -22,11 +22,8 @@
                          ngf-resize="{width: 200, height: 200}" class="image-upload-button">Odaberi novu</div>
                 </div>
             </div>
-            <div class="modal-content-row"><!-- OVO ISPOD TREBA NAŠTIMATI DA SE PRIKAZUJE SLIKA TRENUTNA I SVE OSTALO -->
-                <div class="modal-row-image" ng-model="newImage" ng-init="false" ng-if="newImage">
-                    <img ngf-src="file" ng-model="previewPicture" alt="Alternate Text" />
-                </div>
-                <div class="modal-row-image" ng-model="currentImage" ng-init="true" ng-if="currentImage">
+            <div class="modal-content-row">
+                <div class="modal-row-image">
                     <img ngf-src="file" ng-model="previewPicture" alt="Alternate Text" />
                 </div>
             </div>
