@@ -12,14 +12,11 @@
             });
         }
 
-        function registerNew(companyName, managerFirstName, managerLastName, username, password) {
+        function registerNew(companyName, newUser) {
             return $http.post('/api/register',
                 {
                     companyName: companyName,
-                    managerFirstName: managerFirstName,
-                    managerLastName: managerLastName,
-                    username: username,
-                    password: password
+                    newUser: newUser
                 });
         }
 

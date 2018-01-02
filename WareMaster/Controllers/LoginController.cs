@@ -62,22 +62,12 @@ namespace WareMaster.Controllers
         public IHttpActionResult Register(JObject dataToRegister)
         {
             var companyName = dataToRegister["companyName"].ToObject<string>();
-            var managerFirstName = dataToRegister["managerFirstName"].ToObject<string>();
-            var managerLastName = dataToRegister["managerLastName"].ToObject<string>();
-            var username = dataToRegister["username"].ToObject<string>();
-            var password = dataToRegister["password"].ToObject<string>();
+            var userToRegister = dataToRegister["newUser"].ToObject<User>();
 
             var companyId = _companyRepository.AddNewCompany(companyName);
-            var manager = new User()
-            {
-                FirstName = managerFirstName,
-                LastName = managerLastName,
-                Company = _companyRepository.GetCompanyById(companyId),
-                Role = Role.Manager,
-                Username = username,
-                Password = HashHelper.HashPassword(password)
-            };
-            _userRepository.AddUser(manager);
+            userToRegister.Company = _companyRepository.GetCompanyById(companyId);
+            userToRegister.Password = HashHelper.HashPassword(userToRegister.Password);
+            _userRepository.AddUser(userToRegister);
             return Ok(true);
         }
     }
