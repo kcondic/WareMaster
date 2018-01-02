@@ -15,8 +15,10 @@ namespace WareMaster.Controllers
         public OrdersController()
         {
             _orderRepository = new OrderRepository();
+            _companyRepository = new CompanyRepository();
         }
         private readonly OrderRepository _orderRepository;
+        private readonly CompanyRepository _companyRepository;
 
         [HttpGet]
         [Route("")]
@@ -29,6 +31,7 @@ namespace WareMaster.Controllers
         [Route("add")]
         public IHttpActionResult AddNewOrder(Order order)
         {
+            order.Company = _companyRepository.GetCompanyById(1);
             _orderRepository.AddNewOrder(order);
             return Ok(true);
         }

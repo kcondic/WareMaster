@@ -12,23 +12,18 @@
 
         productsRepository.getAllProducts().then(function(products) {
             $scope.allProducts = products.data;
-            for (let product of $scope.allProducts)
-                product.Counter = 1;
         });
 
         suppliersRepository.getAllSuppliers().then(function (suppliers) {
             $scope.allSuppliers = suppliers.data;
+            $scope.selectedSupplier = $scope.allSuppliers[0];
         });
 
-        $scope.productsFilter = function(selectedSupplierId) {
-            return function (product) {
-                if ($scope.allSuppliers && selectedSupplierId)
-                    return($scope.allSuppliers.find(function(supplier) {
-                        return supplier.Id === parseInt(selectedSupplierId);
-                    }).Products.some(val => val.Id === product.Id));
-                else
-                    return false;
-            }
+        $scope.getProductsForSupplier = function () {
+            if ($scope.selectedSupplier)
+                $scope.allProducts = $scope.selectedSupplier.Products;
+            else
+                $scope.allProducts = null;
         }
 
         $scope.updateProductsFilter= function() {
@@ -82,21 +77,19 @@
                     ProductQuantity: product.Counter
                 });
 
-            var supplierId;
+            let supplier;
             if ($scope.incomingSelected)
-                supplierId = document.getElementById("supplierSelect").options[document
-                    .getElementById("supplierSelect")
-                    .selectedIndex].value;
+                supplier = $scope.selectedSupplier;
             else
-                supplierId = null;
-            var assignedUserId = $scope.selectedEmployee === null ? null : $scope.selectedEmployee.Id;
+                supplier = null;
+            const assignedUser = $scope.selectedEmployee === null ? null : $scope.selectedEmployee;
             
             const newOrder = {
-                AssignedUserId: assignedUserId,
+                AssignedUser: assignedUser,
                 ProductOrders: productOrder,
                 Status: 0,
                 Type: $scope.incomingSelected ? 0:1,
-                SupplierId: supplierId
+                Supplier: supplier
             };
 
             ordersRepository.addNewOrder(newOrder).then(function () {

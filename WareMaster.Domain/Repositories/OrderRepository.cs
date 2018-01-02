@@ -62,32 +62,19 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
             {
-                foreach (var productOrder in order.ProductOrders)
-                    context.ProductOrders.Attach(productOrder);
-
-                if(order.AssignedUser != null)
+                if (order.AssignedUser != null)
                     context.Users.Attach(order.AssignedUser);
 
                 var newOrder = new Order()
                 {
-                    Id = order.Id,
-                    AssignedUserId = order.AssignedUserId,
-                    AssignedManagerId = order.AssignedManagerId,
+                    AssignedUser = order.AssignedUser,
                     TimeOfCreation = DateTime.Now,
                     Status = order.Status,
                     Type = order.Type,
                     CompanyId = 1,
-                    SupplierId = order.SupplierId,
-                    ProductOrders = new List<ProductOrders>()
+                    Supplier = order.Supplier,
+                    ProductOrders = order.ProductOrders
                 };
-
-                foreach (var productOrder in order.ProductOrders)
-                    newOrder.ProductOrders.Add(new ProductOrders()
-                    {
-                        OrderId = newOrder.Id,
-                        ProductId = productOrder.ProductId,
-                        ProductQuantity = productOrder.ProductQuantity
-                    });
 
                 context.Orders.Add(newOrder);
                 context.SaveChanges();

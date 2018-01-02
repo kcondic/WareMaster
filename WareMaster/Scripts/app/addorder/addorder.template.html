@@ -7,20 +7,18 @@
 <div ng-show="incomingSelected">
     <div>
         Dobavljač:
-        <select id="supplierSelect" ng-model="selectedSupplierId" ng-change="updateProductsFilter()">
-            <option value={{supplier.Id}} ng-repeat="supplier in allSuppliers">{{supplier.Name}}</option>
-        </select><br/>
+        <select ng-options="supplier as supplier.Name for supplier in allSuppliers track by supplier.Id" ng-model="selectedSupplier" ng-change="getProductsForSupplier()"></select><br/>
         Proizvodi:
         <div>
             <span ng-repeat="product in selectedProducts">
                 <span ng-click="deselectProduct(product)">{{product.Name}}</span>
-                Količina: <input type="number" min="1" value="1" ng-model="product.Counter"/>
+                Količina: <input type="number" min="1" value="1" ng-init="product.Counter=1" ng-model="product.Counter"/>
             </span>
         </div>
     </div>
     <div>
         Svi proizvodi:
-        <span ng-click="selectProduct(product)" ng-repeat="product in allProducts | filter: productsFilter(selectedSupplierId)">{{product.Name}} </span>
+        <span ng-repeat="product in allProducts" ng-click="selectProduct(product)">{{product.Name}} </span>
     </div>
     <button ng-click="addNewOrder()">Stvori</button>
 </div>
@@ -29,7 +27,7 @@
     Proizvodi:
         <span ng-repeat="product in selectedProducts">
             <span ng-click="deselectProduct(product)">{{product.Name}}</span>
-            Količina: <input type="number" min="1" value="1" ng-model="product.Counter"/>
+            Količina: <input type="number" min="1" value="1" ng-init="product.Counter=1" ng-model="product.Counter"/>
         </span>
     </div>
     <div>
