@@ -30,6 +30,9 @@ namespace WareMaster.Controllers
         [Route("login")]
         public IHttpActionResult Login(JObject userCredentials)
         {
+            if(userCredentials["username"] == null || userCredentials["password"] == null)
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.NotFound));
+
             var userName = userCredentials["username"].ToObject<string>();
             var password = userCredentials["password"].ToObject<string>();
 
