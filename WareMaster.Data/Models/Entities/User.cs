@@ -19,5 +19,7 @@ namespace WareMaster.Data.Models.Entities
         public int CompanyId { get; set; }
         public ICollection<ActivityLog> ActivityLogs { get; set; }
         public string ImageUrl { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
 }
