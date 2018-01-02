@@ -63,17 +63,14 @@ namespace WareMaster.Domain.Repositories
             using (var context = new WarehouseContext())
             {
 
-                if (order.AssignedEmployee != null)
-                    context.Users.Attach(order.AssignedEmployee);
-
                 var newOrder = new Order()
                 {
-                    AssignedEmployee = order.AssignedEmployee,
+                    AssignedEmployeeId = order.AssignedEmployeeId,
                     TimeOfCreation = DateTime.Now,
                     Status = order.Status,
                     Type = order.Type,
-                    CompanyId = 1,
-                    Supplier = order.Supplier,
+                    CompanyId = order.CompanyId,
+                    SupplierId = order.SupplierId,
                     ProductOrders = order.ProductOrders
                 };
 

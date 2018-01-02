@@ -31,7 +31,6 @@ namespace WareMaster.Controllers
         [Route("add")]
         public IHttpActionResult AddNewOrder(Order order)
         {
-            order.Company = _companyRepository.GetCompanyById(1);
             _orderRepository.AddNewOrder(order);
             return Ok(true);
         }

@@ -70,27 +70,28 @@
                 return;
             }
 
-            var productOrder = [];
+            const productOrder = [];
             for (let product of $scope.selectedProducts)
                 productOrder.push({
                     ProductId: product.Id,
                     ProductQuantity: product.Counter
                 });
 
-            let supplier;
+            let supplierId;
             if ($scope.incomingSelected)
-                supplier = $scope.selectedSupplier;
+                supplierId = $scope.selectedSupplier.Id;
             else
+                supplierId = null;
 
-                supplier = null;
-            const assignedUser = $scope.selectedEmployee === null ? null : $scope.selectedEmployee;
+            const assignedEmployeeId = !$scope.selectedEmployee ? null : $scope.selectedEmployee.Id;
             
             const newOrder = {
-                AssignedUser: assignedUser,
+                AssignedEmployeeId: assignedEmployeeId,
                 ProductOrders: productOrder,
+                CompanyId: 1,
                 Status: 0,
                 Type: $scope.incomingSelected ? 0:1,
-                Supplier: supplier
+                SupplierId: supplierId
             };
 
             ordersRepository.addNewOrder(newOrder).then(function () {
