@@ -29,10 +29,16 @@
             const details = localStorage.getItem('authDetails');
             return JSON.parse(details).id;
         }
+
+        function isUserAuthenticated() {
+            return localStorage.getItem('bearerToken');
+        }
+
         return {
             login: login,
             registerNew: registerNew,
             getCompanyId: getCompanyId,
-            getManagerId: getManagerId
+            getManagerId: getManagerId,
+            isUserAuthenticated: isUserAuthenticated
         };
     });

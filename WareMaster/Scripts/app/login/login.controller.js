@@ -1,6 +1,9 @@
 ﻿angular.module('app').controller('LoginController',
     function ($scope, $state, loginRepository) {
 
+        if (loginRepository.isUserAuthenticated())
+            $state.go('dashboard');
+
         $scope.login = function () {
             loginRepository.login($scope.username, $scope.password)
                 .then(function () {
