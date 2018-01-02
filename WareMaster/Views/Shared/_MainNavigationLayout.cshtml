@@ -50,7 +50,7 @@
             </li>
         </ul>
     </header>
-<div ng-model="displaysubheader" ng-init="false" ng-if="displaysubheader">
+<div ng-controller="displayLayoutController" ng-model="displaysubheader" ng-init="false" ng-if="displaysubheader">
   <div id="subheader">
     <!-- ARROW BUTTON WITH A LINK TO DASHBOARD -->
     <div class="link-to-dashboard-box">
@@ -66,26 +66,14 @@
         <span class="breadcrumb-sign" aria-hidden="true">
             <i class="fa fa-angle-double-right" aria-hidden="true"></i>
         </span>
-        <label ng-model="productsdisplayed" ng-init="false" ng-if="productsdisplayed">Proizvodi</label>
-        <label ng-model="employeesdisplayed" ng-init="false" ng-if="employeesdisplayed">Radnici</label>
-        <label ng-model="suppliersdisplayed" ng-init="false" ng-if="suppliersdisplayed">Dobavljači</label>
+        <label>{{ templates[currentTemplateIndex].breadcrumbText }}</label>
     </div>
-    <!-- NAVBAR ELEMENTS FOR PRODUCTS FORM -->
-    <div class="template-navbar" ng-model="productsdisplayed" ng-init="false" ng-if="productsdisplayed">
+    <!-- NAVBAR BUTTON ELEMENTS -->
+    <div class="template-navbar">
         <div class="add-button-box">
-            <button ui-sref="addproduct">Dodaj proizvod</button>
-        </div>
-    </div>
-    <!-- NAVBAR ELEMENTS FOR EMPLOYEES FORM -->
-    <div class="template-navbar" ng-model="employeesdisplayed" ng-init="false" ng-if="employeesdisplayed">
-        <div class="add-button-box">
-            <button ui-sref="addemployee">Dodaj zaposlenika</button>
-        </div>
-    </div>
-    <!-- NAVBAR ELEMENTS FOR SUPPLIERS FORM -->
-    <div class="template-navbar" ng-model="suppliersdisplayed" ng-init="false" ng-if="suppliersdisplayed">
-        <div class="add-button-box">
-            <button ui-sref="addsupplier">Dodaj dobavljača</button>
+            <button ui-sref="addproduct" ng-if="getTemplateStatus(currentTemplate, 0)">Dodaj proizvod</button>
+            <button ui-sref="addemployee" ng-if="getTemplateStatus(currentTemplate, 1)">Dodaj zaposlenika</button>
+            <button ui-sref="addsupplier" ng-if="getTemplateStatus(currentTemplate, 2)">Dodaj dobavljača</button>
         </div>
     </div>
     <div class="sort-by-box">
@@ -98,11 +86,15 @@
             </div>
             <div class="button-content">
                 <div class="button-content-item selected-sort-choice">Vremenu dodavanja</div>
-                <div ng-model="employeesdisplayed" ng-init="false" ng-if="employeesdisplayed" class="button-content-item">Imenu</div>
-                <div ng-model="employeesdisplayed" ng-init="false" ng-if="employeesdisplayed" class="button-content-item">Prezimenu</div>
-                <div ng-model="choicedisplayed" ng-init="false" ng-if="choicedisplayed" class="button-content-item">Nazivu</div>
-                <div ng-model="productsdisplayed" ng-init="false" ng-if="productsdisplayed" class="button-content-item">Količini</div>
-                <div ng-model="productsdisplayed" ng-init="false" ng-if="productsdisplayed" class="button-content-item">Dobavljaču</div>
+                <div class="button-content-item">
+                    {{templates[currentTemplateIndex].buttonContentItems.first}}
+                </div>
+                <div class="button-content-item" ng-if="isNotSuppliers(currentTemplate)">
+                    {{templates[currentTemplateIndex].buttonContentItems.second}}
+                </div>
+                <div class="button-content-item" ng-if="getTemplateStatus(currentTemplate, 0)">
+                    {{templates[0].buttonContentItems.third}}
+                </div>
             </div>
         </div>
     </div>

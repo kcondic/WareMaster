@@ -1,5 +1,5 @@
 ﻿angular.module('app').controller('AddSupplierController',
-    function ($scope, $state, suppliersRepository, productsRepository, $rootScope) {
+    function ($scope, $state, suppliersRepository, productsRepository) {
         $scope.productsSelected = [];
 
         productsRepository.getAllProducts().then(function (allProducts) {
@@ -20,5 +20,4 @@
                 $state.go('suppliers', {}, { reload: true });
             });
         }
-
     });

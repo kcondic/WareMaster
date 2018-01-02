@@ -4,13 +4,10 @@
         $rootScope.global = {
             search: ''
         };
-
+        $rootScope.currentTemplate = 'products';
+        $rootScope.currentTemplateIndex = 0;
         $rootScope.headerdisplayed = true;
         $rootScope.displaysubheader = true;
-        $rootScope.productsdisplayed = true;
-        $rootScope.employeesdisplayed = false;
-        $rootScope.suppliersdisplayed = false;
-        $rootScope.choicedisplayed = true;
 
         productsRepository.getAllProducts().then(function (products) {
             $scope.allProducts = products.data;

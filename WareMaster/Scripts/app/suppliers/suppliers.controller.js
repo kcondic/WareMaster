@@ -4,13 +4,10 @@
         $rootScope.global = {
             search: ''
         };
-
+        $rootScope.currentTemplate = 'suppliers';
+        $rootScope.currentTemplateIndex = 2;
         $rootScope.headerdisplayed = true;
         $rootScope.displaysubheader = true;
-        $rootScope.productsdisplayed = false;
-        $rootScope.employeesdisplayed = false;
-        $rootScope.suppliersdisplayed = true;
-        $rootScope.choicedisplayed = true;
 
         var allSuppliersPromise = suppliersRepository.getAllSuppliers();
 

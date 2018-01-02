@@ -4,13 +4,10 @@
         $rootScope.global = {
             search: ''
         };
-
+        $rootScope.currentTemplate = 'employees';
+        $rootScope.currentTemplateIndex = 1;
         $rootScope.headerdisplayed = true;
         $rootScope.displaysubheader = true;
-        $rootScope.productsdisplayed = false;
-        $rootScope.employeesdisplayed = true;
-        $rootScope.suppliersdisplayed = false;
-        $rootScope.choicedisplayed = false;
 
         employeesRepository.getAllEmployees().then(function (employees) {
             $scope.allEmployees = employees.data;
