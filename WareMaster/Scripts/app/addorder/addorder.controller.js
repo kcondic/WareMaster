@@ -81,6 +81,7 @@
             if ($scope.incomingSelected)
                 supplier = $scope.selectedSupplier;
             else
+
                 supplier = null;
             const assignedUser = $scope.selectedEmployee === null ? null : $scope.selectedEmployee;
             

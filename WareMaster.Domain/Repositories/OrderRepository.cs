@@ -62,6 +62,7 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
             {
+
                 if (order.AssignedUser != null)
                     context.Users.Attach(order.AssignedUser);
 
@@ -75,6 +76,7 @@ namespace WareMaster.Domain.Repositories
                     Supplier = order.Supplier,
                     ProductOrders = order.ProductOrders
                 };
+
 
                 context.Orders.Add(newOrder);
                 context.SaveChanges();
