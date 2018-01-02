@@ -25,9 +25,9 @@ namespace WareMaster.Controllers
 
         [HttpGet]
         [Route("")]
-        public IHttpActionResult GetAllProducts()
+        public IHttpActionResult GetAllProducts(int companyId)
         {
-            return Ok(_productRepository.GetAllProducts(1));
+            return Ok(_productRepository.GetAllProducts(companyId));
         }
 
         [HttpGet]
@@ -41,7 +41,7 @@ namespace WareMaster.Controllers
         [Route("add")]
         public IHttpActionResult AddProduct(Product productToAdd)
         {
-            var companyName = _companyRepository.GetCompanyById(1).Name;
+            var companyName = _companyRepository.GetCompanyById(productToAdd.CompanyId).Name;
             _productRepository.AddProduct(productToAdd);
             var lastId = _productRepository.GetLastProductId();
             productToAdd.ImageUrl = "Uploads\\" + companyName + "\\Proizvodi\\" +
@@ -62,7 +62,7 @@ namespace WareMaster.Controllers
         public IHttpActionResult EditProduct(Product editedProduct)
         {
             var uploadsFolder = HttpContext.Current.Server.MapPath("\\Uploads");
-            var companyName = _companyRepository.GetCompanyById(1).Name;
+            var companyName = _companyRepository.GetCompanyById(editedProduct.CompanyId).Name;
             var oldUrlOfImage = Path.Combine(Directory.GetParent(uploadsFolder).ToString(), editedProduct.ImageUrl);
             var newUrlForImage = Path.Combine(Path.Combine(Path.Combine(uploadsFolder, companyName), "Proizvodi"),
                 editedProduct.Name + editedProduct.Id + ".jpg");
@@ -80,7 +80,7 @@ namespace WareMaster.Controllers
         [Route("delete")]
         public IHttpActionResult DeleteProduct(int id)
         {
-            var companyName = _companyRepository.GetCompanyById(1).Name;
+            var companyName = _companyRepository.GetCompanyById(_productRepository.GetProduct(id).CompanyId).Name;
             var uploadsFolder = HttpContext.Current.Server.MapPath("\\Uploads");
             var companyFolder = Path.Combine(Path.Combine(uploadsFolder, companyName), "Proizvodi");
             var fileToDeleteFilter = @"*" + id + ".jpg";
@@ -93,12 +93,12 @@ namespace WareMaster.Controllers
 
         [HttpPost]
         [Route("upload")]
-        public IHttpActionResult UploadImage()
+        public IHttpActionResult UploadImage(int companyId)
         {
             if (HttpContext.Current.Request.Files.Count > 0)
             {
                 var file = HttpContext.Current.Request.Files[0];
-                var companyName = _companyRepository.GetCompanyById(1).Name;
+                var companyName = _companyRepository.GetCompanyById(companyId).Name;
                 var uploadsFolder = HttpContext.Current.Server.MapPath("\\Uploads");
                 Directory.CreateDirectory(Path.Combine(Path.Combine(uploadsFolder, companyName), "Proizvodi"));
                 var path = Path.Combine(Path.Combine(Path.Combine(uploadsFolder, companyName), "Proizvodi"), file.FileName);

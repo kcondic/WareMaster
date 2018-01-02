@@ -17,7 +17,7 @@ namespace WareMaster.Domain.Repositories
 
         private readonly UserRepository _userRepository;
 
-        public List<ActivityLog> GetAllActivityLogsForACompany(int companyId)
+        public List<ActivityLog> GetAllActivityLogs(int companyId)
         {
             var userList = _userRepository.GetAllUsers(companyId).ToList();
             var activityLogList = new List<ActivityLog>();

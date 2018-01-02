@@ -21,9 +21,9 @@ namespace WareMaster.Controllers
 
         [HttpGet]
         [Route("")]
-        public IHttpActionResult GetAllOrders()
+        public IHttpActionResult GetAllOrders(int companyId)
         {
-            return Ok(_orderRepository.GetAllOrders(1));
+            return Ok(_orderRepository.GetAllOrders(companyId));
         }
 
         [HttpPost]

@@ -1,7 +1,11 @@
 ﻿angular.module('app').service('ordersRepository',
     function ($http) {
-        function getAllOrders() {
-            return $http.get('api/orders');
+        function getAllOrders(companyId) {
+            return $http.get('api/orders', {
+                params: {
+                    companyId: companyId
+                }
+            });
         }
 
         function getOrder(id) {

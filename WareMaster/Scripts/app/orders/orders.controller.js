@@ -1,6 +1,6 @@
 ﻿angular.module('app').controller('OrdersController',
-    function ($scope, $state, ordersRepository) {
-        ordersRepository.getAllOrders().then(function (orders) {
+    function ($scope, $state, ordersRepository, loginRepository) {
+        ordersRepository.getAllOrders(loginRepository.getCompanyId()).then(function (orders) {
             $scope.allOrders = orders.data;
         });
 

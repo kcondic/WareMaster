@@ -14,35 +14,31 @@ namespace WareMaster.Domain.Repositories
 {
     public class OrderRepository
     {
-        public OrderRepository()
-        {
-            _companyRepository = new CompanyRepository();
-        }
-
-        private readonly CompanyRepository _companyRepository;
-
         public List<Order> GetAllOrders(int companyId)
         {
-                return _companyRepository.GetCompanyById(companyId).Orders.ToList();
+            using (var context = new WarehouseContext())
+                return context.Orders.Where(order => order.CompanyId == companyId).ToList();
         }
 
         public List<Order> GetAllCreatedOrders(int companyId)
         {
-                return _companyRepository.GetCompanyById(companyId).Orders
-                    .Where(order => order.Status == Status.Created).ToList();
+            using (var context = new WarehouseContext())
+                return context.Orders.Where(order => order.CompanyId == companyId && 
+                                            order.Status == Status.Created).ToList();
         }
 
         public List<Order> GetAllInProgressOrders(int companyId)
         {
             using (var context = new WarehouseContext())
-                return _companyRepository.GetCompanyById(companyId).Orders
-                    .Where(order => order.Status == Status.InProgress).ToList();
+                return context.Orders.Where(order => order.CompanyId == companyId &&
+                                            order.Status == Status.InProgress).ToList();
         }
 
         public List<Order> GetAllFinishedOrders(int companyId)
         {
-                return _companyRepository.GetCompanyById(companyId).Orders
-                    .Where(order => order.Status == Status.Finished).ToList();
+            using (var context = new WarehouseContext())
+                return context.Orders.Where(order => order.CompanyId == companyId &&
+                                            order.Status == Status.Finished).ToList();
         }
 
         public Order GetOrderDetails(int orderId)
@@ -66,6 +62,7 @@ namespace WareMaster.Domain.Repositories
                 var newOrder = new Order()
                 {
                     AssignedEmployeeId = order.AssignedEmployeeId,
+                    AssignedManagerId = order.AssignedManagerId,
                     TimeOfCreation = DateTime.Now,
                     Status = order.Status,
                     Type = order.Type,
@@ -73,7 +70,6 @@ namespace WareMaster.Domain.Repositories
                     SupplierId = order.SupplierId,
                     ProductOrders = order.ProductOrders
                 };
-
 
                 context.Orders.Add(newOrder);
                 context.SaveChanges();

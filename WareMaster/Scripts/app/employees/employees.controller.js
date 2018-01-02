@@ -1,7 +1,7 @@
 ﻿angular.module('app').controller('EmployeesController',
-    function ($scope, $state, employeesRepository) {
+    function ($scope, $state, employeesRepository, loginRepository) {
 
-        employeesRepository.getAllEmployees().then(function (employees) {
+        employeesRepository.getAllEmployees(loginRepository.getCompanyId()).then(function (employees) {
             $scope.allEmployees = employees.data;
 
             for (let employee of $scope.allEmployees) {

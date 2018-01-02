@@ -20,8 +20,19 @@
                 });
         }
 
+        function getCompanyId() {
+            const details = localStorage.getItem('authDetails');
+            return JSON.parse(details).companyid;
+        }
+
+        function getManagerId() {
+            const details = localStorage.getItem('authDetails');
+            return JSON.parse(details).id;
+        }
         return {
             login: login,
-            registerNew: registerNew
+            registerNew: registerNew,
+            getCompanyId: getCompanyId,
+            getManagerId: getManagerId
         };
     });

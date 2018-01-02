@@ -1,12 +1,12 @@
 ﻿angular.module('app').controller('EditSupplierController',
-    function ($scope, $state, $stateParams, suppliersRepository, productsRepository) {
+    function ($scope, $state, $stateParams, suppliersRepository, productsRepository, loginRepository) {
 
         suppliersRepository.getSupplierToEdit($stateParams.id).then(function (supplier) {
             $scope.supplierToEdit = supplier.data;
             $scope.name = $scope.supplierToEdit.Name;
             $scope.products = $scope.supplierToEdit.Products;
 
-            productsRepository.getAllProducts().then(function (allproducts) {
+            productsRepository.getAllProducts(loginRepository.getCompanyId()).then(function (allproducts) {
                 $scope.allProducts = allproducts.data.filter(function (el) {
                     return ($scope.products.findIndex(x=> x.Id === el.Id) === -1);
                 });

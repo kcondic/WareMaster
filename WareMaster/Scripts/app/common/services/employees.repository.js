@@ -1,8 +1,13 @@
 ﻿angular.module('app').service('employeesRepository',
     function ($http) {
 
-        function getAllEmployees() {
-            return $http.get('/api/employees');
+        function getAllEmployees(companyId) {
+            return $http.get('/api/employees',
+                {
+                    params: {
+                        companyId: companyId
+                    }
+                });
         }
 
         function getIdNeededForImageName() {

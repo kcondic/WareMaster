@@ -1,7 +1,7 @@
 ﻿angular.module('app').controller('ProductsController',
-    function ($scope, $state, productsRepository) {
+    function ($scope, $state, productsRepository, loginRepository) {
 
-        productsRepository.getAllProducts().then(function (products) {
+        productsRepository.getAllProducts(loginRepository.getCompanyId()).then(function (products) {
             $scope.allProducts = products.data;
 
             for (let product of $scope.allProducts) {

@@ -11,13 +11,6 @@ namespace WareMaster.Domain.Repositories
 {
     public class ProductRepository
     {
-        public ProductRepository()
-        {
-            _companyRepository = new CompanyRepository();
-        }
-
-        private readonly CompanyRepository _companyRepository;
-
         public List<Product> GetAllProducts(int companyId)
         {
             using (var context = new WarehouseContext())
@@ -41,7 +34,7 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
             {
-                productToAdd.Company = _companyRepository.GetCompanyById(1);
+                productToAdd.Company = context.Companies.Find(productToAdd.CompanyId);
                 context.Companies.Attach(productToAdd.Company);
 
                 context.Products.Add(productToAdd);
