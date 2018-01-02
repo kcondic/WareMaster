@@ -10,15 +10,14 @@ using WareMaster.Domain.Repositories;
 namespace WareMaster.Controllers
 {
     [RoutePrefix("api/orders")]
+    [Authorize]
     public class OrdersController : ApiController
     {
         public OrdersController()
         {
             _orderRepository = new OrderRepository();
-            _companyRepository = new CompanyRepository();
         }
         private readonly OrderRepository _orderRepository;
-        private readonly CompanyRepository _companyRepository;
 
         [HttpGet]
         [Route("")]
@@ -52,7 +51,7 @@ namespace WareMaster.Controllers
 
         [HttpDelete]
         [Route("delete")]
-        public IHttpActionResult DeleteEmployee(int id)
+        public IHttpActionResult DeleteOrder(int id)
         {
             _orderRepository.DeleteOrder(id);
             return Ok(true);
