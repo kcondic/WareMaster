@@ -20,8 +20,8 @@ namespace WareMaster.Data.Models.Entities
     {
         public int Id { get; set; }
 
-        public User AssignedUser { get; set; }
-        public int? AssignedUserId { get; set; }
+        public User AssignedEmployee { get; set; }
+        public int? AssignedEmployeeId { get; set; }
 
         public User AssignedManager { get; set; }
         public int? AssignedManagerId { get; set; }

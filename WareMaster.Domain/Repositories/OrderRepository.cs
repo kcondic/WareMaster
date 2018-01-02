@@ -49,7 +49,7 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
                 return context.Orders
-                    .Include(order => order.AssignedUser)
+                    .Include(order => order.AssignedEmployee)
                     .Include(order => order.ProductOrders)
                     .Include(order => order.ProductOrders.Select(x => x.Product))
                     .Include(order => order.Company)
@@ -63,12 +63,12 @@ namespace WareMaster.Domain.Repositories
             using (var context = new WarehouseContext())
             {
 
-                if (order.AssignedUser != null)
-                    context.Users.Attach(order.AssignedUser);
+                if (order.AssignedEmployee != null)
+                    context.Users.Attach(order.AssignedEmployee);
 
                 var newOrder = new Order()
                 {
-                    AssignedUser = order.AssignedUser,
+                    AssignedEmployee = order.AssignedEmployee,
                     TimeOfCreation = DateTime.Now,
                     Status = order.Status,
                     Type = order.Type,
@@ -89,20 +89,20 @@ namespace WareMaster.Domain.Repositories
             {
                 var orderToEdit = context.Orders
                     .Include(order => order.ProductOrders)
-                    .Include(order => order.AssignedUser)
+                    .Include(order => order.AssignedEmployee)
                     .SingleOrDefault(order => order.Id == editedOrder.Id);
 
                 if (orderToEdit == null)
                     return;
-                if (orderToEdit.AssignedUser != null && editedOrder.AssignedUser != null
-                    && orderToEdit.AssignedUser.Id != editedOrder.AssignedUser.Id ||
-                    orderToEdit.AssignedUser == null && editedOrder.AssignedUser != null)
+                if (orderToEdit.AssignedEmployee != null && editedOrder.AssignedEmployee != null
+                    && orderToEdit.AssignedEmployee.Id != editedOrder.AssignedEmployee.Id ||
+                    orderToEdit.AssignedEmployee == null && editedOrder.AssignedEmployee != null)
                 {
-                    context.Users.Attach(editedOrder.AssignedUser);
-                    orderToEdit.AssignedUser = editedOrder.AssignedUser;
+                    context.Users.Attach(editedOrder.AssignedEmployee);
+                    orderToEdit.AssignedEmployee = editedOrder.AssignedEmployee;
                 }
-                else if (editedOrder.AssignedUser == null)
-                    orderToEdit.AssignedUser = null;
+                else if (editedOrder.AssignedEmployee == null)
+                    orderToEdit.AssignedEmployee = null;
 
                 orderToEdit.ProductOrders = editedOrder.ProductOrders;                
 

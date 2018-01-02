@@ -55,6 +55,17 @@ namespace WareMaster.Data.Models
                 .HasRequired(x => x.Order)
                 .WithMany(x => x.ProductOrders)
                 .HasForeignKey(x => x.OrderId);
+
+            modelBuilder.Entity<Order>()
+                .HasOptional(x => x.AssignedEmployee)
+                .WithMany(x => x.EmployeeOrders)
+                .HasForeignKey(x => x.AssignedEmployeeId);
+
+            modelBuilder.Entity<Order>()
+                .HasOptional(x => x.AssignedManager)
+                .WithMany(x => x.ManagerOrders)
+                .HasForeignKey(x => x.AssignedManagerId);
+
             base.OnModelCreating(modelBuilder);
         }
     }
