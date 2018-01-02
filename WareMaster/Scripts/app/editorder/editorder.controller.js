@@ -5,7 +5,7 @@
         ordersRepository.getOrder($stateParams.id).then(function (order) {
             $scope.order = order.data;
 
-            $scope.selectedEmployee = $scope.order.AssignedUser;
+            $scope.selectedEmployee = $scope.order.AssignedEmployee;
             $scope.order.ProductOrders.forEach(function(item) {
                 $scope.selectedProducts.push(item.Product);
             });
@@ -80,7 +80,7 @@
                 });
 
             $scope.order.ProductOrders = productOrder;
-            $scope.order.AssignedUser = $scope.selectedEmployee;
+            $scope.order.AssignedEmployee = $scope.selectedEmployee;
 
             ordersRepository.editOrder($scope.order).then(function () {
                 $state.go('orders', {}, { reload: true });

@@ -24,11 +24,6 @@
                 $scope.allProducts = $scope.selectedSupplier.Products;
             else
                 $scope.allProducts = null;
-        }
-
-        $scope.updateProductsFilter= function() {
-            for (let product of $scope.selectedProducts)
-                $scope.allProducts.push(product);
             $scope.selectedProducts = [];
         }
 
