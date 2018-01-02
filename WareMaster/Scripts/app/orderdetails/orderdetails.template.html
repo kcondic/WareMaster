@@ -1,0 +1,12 @@
+﻿<div>Narudžba {{order.Id}}</div>
+<div ng-show="order.Type===0">Dobavljač: {{order.Supplier.Name}}</div>
+<div>Stvorena: {{order.TimeOfCreation}}</div>
+<div>
+    Proizvodi:<br/>
+    <div ng-repeat="productOrder in order.ProductOrders">
+        {{productOrder.Product.Name}} Količina: {{productOrder.ProductQuantity}}
+    </div>
+</div>
+<div ng-show="order.Type===1">Radnik: {{order.AssignedEmployee.FirstName}} {{order.AssignedEmployee.LastName}}</div>
+<button ui-sref="editorder({id:order.Id})">Edit</button>
+<button ui-sref="orders">Close</button>

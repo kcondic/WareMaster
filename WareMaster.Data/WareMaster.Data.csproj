@@ -53,6 +53,7 @@
     <Compile Include="Models\Entities\Company.cs" />
     <Compile Include="Models\Entities\Order.cs" />
     <Compile Include="Models\Entities\Product.cs" />
+    <Compile Include="Models\Entities\ProductOrders.cs" />
     <Compile Include="Models\Entities\Supplier.cs" />
     <Compile Include="Models\Entities\User.cs" />
     <Compile Include="Models\WarehouseContext.cs" />
