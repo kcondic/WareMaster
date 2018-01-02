@@ -345,6 +345,7 @@
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -358,10 +359,13 @@
     <Content Include="Assets\fontstyles\font-awesome.css" />
     <Content Include="Assets\fontstyles\font-awesome.min.css" />
     <Content Include="Assets\styles\registrationMain.css" />
+    <Content Include="Assets\styles\ordersMain.css" />
     <Content Include="Assets\styles\suppliersMain.css" />
     <Content Include="favicon.ico" />
     <Content Include="Assets\fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\app\addorder\addorder.state.js" />
+    <Content Include="Scripts\app\addorder\addorder.template.html" />
     <Content Include="Assets\images\logos\logo.png" />
     <Content Include="Assets\images\logos\logo1616.png" />
     <Content Include="Assets\images\logos\logo2525.png" />
@@ -390,10 +394,14 @@
     <Content Include="Scripts\app\common\services\functions.repository.js" />
     <Content Include="Scripts\app\common\services\employees.repository.js" />
     <Content Include="Scripts\app\common\services\login.repository.js" />
+    <Content Include="Scripts\app\common\services\orders.repository.js" />
     <Content Include="Scripts\app\common\services\products.repository.js" />
     <Content Include="Scripts\app\dashboard\dashboard.controller.js" />
     <Content Include="Scripts\app\dashboard\dashboard.state.js" />
     <Content Include="Scripts\app\dashboard\dashboard.template.html" />
+    <Content Include="Scripts\app\editorder\editorder.controller.js" />
+    <Content Include="Scripts\app\editorder\editorder.state.js" />
+    <Content Include="Scripts\app\editorder\editorder.template.html" />
     <Content Include="Assets\styles\dashboardMain.css" />
     <Content Include="Assets\styles\employeesMain.css" />
     <Content Include="Assets\fontstyles\fontPlayfairDisplay.css" />
@@ -411,10 +419,17 @@
     <Content Include="Scripts\app\register\register.controller.js" />
     <Content Include="Scripts\app\register\register.state.js" />
     <Content Include="Scripts\app\register\register.template.html" />
+    <Content Include="Scripts\app\orderdetails\orderdetails.controller.js" />
+    <Content Include="Scripts\app\orderdetails\orderdetails.state.js" />
+    <Content Include="Scripts\app\orderdetails\orderdetails.template.html" />
+    <Content Include="Scripts\app\orders\orders.controller.js" />
+    <Content Include="Scripts\app\orders\orders.state.js" />
+    <Content Include="Scripts\app\orders\orders.template.html" />
     <Content Include="Scripts\app\suppliers\suppliers.controller.js" />
     <Content Include="Scripts\app\suppliers\suppliers.state.js" />
     <Content Include="Scripts\app\suppliers\suppliers.template.html" />
     <Content Include="Scripts\app\common\services\suppliers.repository.js" />
+    <Content Include="Scripts\vendor\angular.min.js" />
     <Content Include="Scripts\app\editemployee\editemployee.controller.js" />
     <Content Include="Scripts\app\editemployee\editemployee.state.js" />
     <Content Include="Scripts\app\editemployee\editemployee.template.html" />
@@ -451,6 +466,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\app\addorder\addorder.controller.js" />
     <Content Include="Assets\fonts\fontawesome-webfont.woff2" />
   </ItemGroup>
   <ItemGroup>

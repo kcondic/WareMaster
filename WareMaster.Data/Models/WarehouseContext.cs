@@ -17,6 +17,7 @@ namespace WareMaster.Data.Models
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<ActivityLog> ActivityLogs { get; set; }
+        public virtual DbSet<ProductOrders> ProductOrders { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -41,6 +42,30 @@ namespace WareMaster.Data.Models
                 .HasRequired(x => x.User)
                 .WithMany(x => x.ActivityLogs)
                 .HasForeignKey(x => x.UserId);
+
+            modelBuilder.Entity<ProductOrders>()
+                .HasKey(x => new { x.ProductId, x.OrderId });
+
+            modelBuilder.Entity<ProductOrders>()
+                .HasRequired(x => x.Product)
+                .WithMany(x => x.ProductOrders)
+                .HasForeignKey(x => x.ProductId);
+
+            modelBuilder.Entity<ProductOrders>()
+                .HasRequired(x => x.Order)
+                .WithMany(x => x.ProductOrders)
+                .HasForeignKey(x => x.OrderId);
+
+            modelBuilder.Entity<Order>()
+                .HasOptional(x => x.AssignedEmployee)
+                .WithMany(x => x.EmployeeOrders)
+                .HasForeignKey(x => x.AssignedEmployeeId);
+
+            modelBuilder.Entity<Order>()
+                .HasOptional(x => x.AssignedManager)
+                .WithMany(x => x.ManagerOrders)
+                .HasForeignKey(x => x.AssignedManagerId);
+
             base.OnModelCreating(modelBuilder);
         }
     }

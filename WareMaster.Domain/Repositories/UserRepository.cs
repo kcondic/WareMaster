@@ -44,7 +44,8 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
                 return context.Users
-                    .Include(user => user.Orders)
+                    .Include(user => user.EmployeeOrders)
+                    .Include(user => user.ManagerOrders)
                     .Include(user => user.ActivityLogs)
                     .FirstOrDefault(user => user.Id == userId);
         }
