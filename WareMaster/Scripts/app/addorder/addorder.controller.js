@@ -31,6 +31,12 @@
 
         $scope.incomingSelect = function() {
             $scope.incomingSelected = true;
+            if ($scope.selectedSupplier)
+                $scope.allProducts = $scope.selectedSupplier.Products;
+            else {
+                alert("Nemate nijednog dobavljača!\nPrije stvaranja ulazne narudžbe morate dodati barem jednog dobavljača");
+                $state.go('orders', {}, { reload: true });
+            }
         }
 
         $scope.outgoingSelect = function () {
