@@ -17,7 +17,10 @@ namespace WareMaster.Domain.Repositories
         public List<Order> GetAllOrders(int companyId)
         {
             using (var context = new WarehouseContext())
-                return context.Orders.Where(order => order.CompanyId == companyId).ToList();
+                return context.Orders
+                    .Include(order => order.AssignedEmployee)
+                    .Include(order => order.Supplier)
+                    .Where(order => order.CompanyId == companyId).ToList();
         }
 
         public List<Order> GetAllCreatedOrders(int companyId)
