@@ -11,6 +11,7 @@ using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using WareMaster.Data.Models.Entities;
 
 namespace WareMaster.Controllers
@@ -72,8 +73,25 @@ namespace WareMaster.Controllers
         [Route("register")]
         public IHttpActionResult Register(JObject dataToRegister)
         {
+            if (dataToRegister["companyName"] == null || dataToRegister["newUser"] == null)
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
             var companyName = dataToRegister["companyName"].ToObject<string>();
             var userToRegister = dataToRegister["newUser"].ToObject<User>();
+
+            var stringsToCheck = new List<string>()
+            {
+                userToRegister.Username,
+                userToRegister.FirstName,
+                userToRegister.LastName,
+                userToRegister.Password
+            };
+
+            if(stringsToCheck.Any(str => str == null || !char.IsLetter(str[0]) || !str.All(char.IsLetterOrDigit) || str.Length < 3))
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+            if(userToRegister.Username.Any(char.IsUpper) || Regex.IsMatch(userToRegister.Username, @"^[a-z0-9]+$"))
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+            if(userToRegister.Password.Length < 6)
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
 
             var companyId = _companyRepository.AddNewCompany(companyName);
             userToRegister.CompanyId = companyId;
