@@ -2,6 +2,6 @@
     function ($scope, $rootScope, $state, dashboardRepository) {
         dashboardRepository.getActivities();
 
-        $rootScope.headerdisplayed = true;
-        $rootScope.displaysubheader = false;
+        $rootScope.currentTemplate = 'dashboard';
+
     });

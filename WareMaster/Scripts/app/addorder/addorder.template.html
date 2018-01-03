@@ -1,47 +1,138 @@
-﻿Stvori narudžbu:
-<div ng-show="!incomingSelected && !outgoingSelected">
-    Odaberi vrstu narudžbe:<br/>
-    <div ng-click="incomingSelect()">Ulazna</div>
-    <div ng-click="outgoingSelect()">Izlazna</div>
-</div>
-<div ng-show="incomingSelected">
-    <div>
-        Dobavljač:
-        <select ng-options="supplier as supplier.Name for supplier in allSuppliers track by supplier.Id" ng-model="selectedSupplier" ng-change="getProductsForSupplier()"></select><br/>
-        Proizvodi:
-        <div>
-            <span ng-repeat="product in selectedProducts">
-                <span ng-click="deselectProduct(product)">{{product.Name}}</span>
-                Količina: <input type="number" min="1" value="1" ng-init="product.Counter=1" ng-model="product.Counter"/>
-            </span>
+﻿<div class="modal-overlay">
+    <div class="modal-box orders-modal-box">
+        <div class="modal-header">
+            <div class="modal-header-row">
+                <div class="modal-title"><label>Stvori narudžbu</label></div>
+            </div>
+        </div>
+        <div class="modal-content">
+            <div class="modal-content-row" ng-show="!incomingSelected && !outgoingSelected">
+                <div class="inner-content-row">
+                    <div class="modal-row-element row-title">Odaberi vrstu narudžbe:</div>
+                </div>
+                <div class="inner-content-row main-choice-buttons-row">
+                    <div class="modal-row-element"><div class="main-choice-button" ng-click="incomingSelect()">Ulazna</div></div>
+                    <div class="modal-row-element"><div class="main-choice-button" ng-click="outgoingSelect()">Izlazna</div></div>
+                </div>
+            </div>
+            <div ng-show="incomingSelected" class="modal-content-row-container">
+                <div class="modal-content-row">
+                    <div class="inner-content-row">
+                        <div class="modal-row-element">Dobavljač:</div>
+                        <div class="modal-row-element modify-size-of-row1">
+                            <select ng-options="supplier as supplier.Name for supplier in allSuppliers track by supplier.Id" ng-model="selectedSupplier" ng-change="getProductsForSupplier()"></select>
+                        </div>
+                    </div>
+                    <div class="inner-content-row products-rows-container">
+                        <div class="modal-content-row products-row">
+                            <div class="modal-row-element">Odabrani proizvodi:</div>
+                            <div class="modal-row-element">
+                                <input ng-model="addedsearch" placeholder="Pretraži..." size="20" />
+                                <span class="row-search-icon" aria-hidden="true">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <div class="products-container">
+                                <div ng-repeat="product in selectedProducts | filter: addedsearch" class="single-product">
+                                    <span>{{product.Name}}</span>
+                                    <div>
+                                        Količina: 
+                                        <input type="number" min="1" value="1" ng-init="product.Counter=1" ng-model="product.Counter" />
+                                    </div>
+                                    <span aria-hidden="true"  ng-click="deselectProduct(product)"><i class="fa fa-times" aria-hidden="true"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-content-row products-row">
+                            <div class="modal-row-element">Svi proizvodi:</div>
+                            <div class="modal-row-element">
+                                <input ng-model="toaddsearch" placeholder="Pretraži..." size="20" />
+                                <span class="row-search-icon" aria-hidden="true">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <div class="products-container">
+                                <span ng-repeat="product in allProducts | filter: toaddsearch" ng-click="selectProduct(product)" class="single-product">{{product.Name}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="outgoingSelected" class="modal-content-row-container">
+                <div class="modal-content-row">
+                    <div class="inner-content-row row-title">Odabir radnika:</div>
+                    <div class="inner-content-row">
+                        <div class="modal-row-element modify-size-of-row3">Radnik:</div>
+                        <div class="modal-row-element modify-size-of-row2">
+                            <div class="employeeNameContainer">
+                                {{selectedEmployee.FirstName}} {{selectedEmployee.LastName}}
+                                <span aria-hidden="true" class="deselect-icon" ng-click="deselectEmployee(selectedEmployee)" ng-if="isEmployeeSelected()">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inner-content-row products-rows-container">
+                        <div class="modal-content-row products-row">
+                            <div class="inner-content-row">
+                                <div class="modal-row-element">Svi radnici:</div>
+                                <div class="modal-row-element">
+                                    <input ng-model="searchemployee" placeholder="Pretraži..." size="20" />
+                                    <span class="row-search-icon" aria-hidden="true">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="products-container">
+                                <span ng-click="selectEmployee(employee)" ng-repeat="employee in allEmployees | filter: searchemployee" class="single-product">{{employee.FirstName}} {{employee.LastName}} </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inner-content-row products-rows-container">
+                        <div class="modal-content-row products-row">
+                            <div class="inner-content-row">
+                                <div class="modal-row-element">Odabrani proizvodi:</div>
+                                <div class="modal-row-element">
+                                    <input ng-model="addedsearch" placeholder="Pretraži..." size="20" />
+                                    <span class="row-search-icon" aria-hidden="true">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="products-container">
+                                <div ng-repeat="product in selectedProducts | filter: addedsearch" class="single-product">
+                                    <span>{{product.Name}}</span>
+                                    <div>
+                                        Količina:
+                                        <input type="number" min="1" value="1" ng-init="product.Counter=1" ng-model="product.Counter" />
+                                    </div>
+                                    <span aria-hidden="true" ng-click="deselectProduct(product)"><i class="fa fa-times" aria-hidden="true"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-content-row products-row">
+                            <div class="inner-content-row">
+                                <div class="modal-row-element">Svi proizvodi:</div>
+                                <div class="modal-row-element">
+                                    <input ng-model="toaddsearch" placeholder="Pretraži..." size="20" />
+                                    <span class="row-search-icon" aria-hidden="true">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="products-container">
+                                <span ng-repeat="product in allProducts | filter: toaddsearch" ng-click="selectProduct(product)" class="single-product">{{product.Name}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-buttons">
+                <div class="single-button"><button ng-click="addNewOrder()">Stvori</button></div>
+                <div class="single-button cancel-button"><button ui-sref="orders">Odustani</button></div>
+            </div>
         </div>
     </div>
-    <div>
-        Svi proizvodi:
-        <span ng-repeat="product in allProducts" ng-click="selectProduct(product)">{{product.Name}} </span>
-    </div>
-    <button ng-click="addNewOrder()">Stvori</button>
-</div>
-<div ng-show="outgoingSelected">
-    <div>
-    Proizvodi:
-        <span ng-repeat="product in selectedProducts">
-            <span ng-click="deselectProduct(product)">{{product.Name}}</span>
-            Količina: <input type="number" min="1" value="1" ng-init="product.Counter=1" ng-model="product.Counter"/>
-        </span>
-    </div>
-    <div>
-        Svi proizvodi:
-        <span ng-click="selectProduct(product)" ng-repeat="product in allProducts">{{product.Name}} </span>
-    </div>
-    Odabir radnika:
-    <div>
-        Radnik:
-        <span ng-click="deselectEmployee(selectedEmployee)">{{selectedEmployee.FirstName}} {{selectedEmployee.LastName}} </span>
-    </div>
-    <div>
-        Svi radnici:
-        <span ng-click="selectEmployee(employee)" ng-repeat="employee in allEmployees">{{employee.FirstName}} {{employee.LastName}} </span>
-    </div>
-    <button ng-click="addNewOrder()">Stvori</button>
 </div>

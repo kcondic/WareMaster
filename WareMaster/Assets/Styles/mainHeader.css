@@ -61,6 +61,12 @@ header .logo-container{
     font-size: 18px;
 }
 
+.user-info .user-name,
+.user-info .company-name{
+    padding-left: 2px;
+    padding-right: 10px;
+}
+
 /* DIZAJN DIJELA HEADERA S DROPDOWN IKONAMA */
 header ul {
     display: flex;

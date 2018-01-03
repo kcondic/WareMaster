@@ -1,13 +1,7 @@
 ﻿angular.module('app').controller('EmployeesController',
     function ($scope, $state, employeesRepository, $rootScope) {
 
-        $rootScope.global = {
-            search: ''
-        };
         $rootScope.currentTemplate = 'employees';
-        $rootScope.currentTemplateIndex = 1;
-        $rootScope.headerdisplayed = true;
-        $rootScope.displaysubheader = true;
 
         employeesRepository.getAllEmployees().then(function (employees) {
             $scope.allEmployees = employees.data;

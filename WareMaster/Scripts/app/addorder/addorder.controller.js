@@ -5,6 +5,7 @@
         $scope.outgoingSelected = false;
         $scope.selectedEmployee = null;
         $scope.selectedProducts = [];
+        $scope.showDeselectX = false;
 
         employeesRepository.getAllEmployees().then(function (employees) {
             $scope.allEmployees = employees.data;
@@ -40,13 +41,19 @@
                 alert("Već je odabran radnik");
                 return;
             }
+            $scope.showDeselectX = true;
             $scope.selectedEmployee = employee;
             $scope.allEmployees.splice($scope.allEmployees.indexOf(employee), 1);
         }
 
-        $scope.deselectEmployee = function(employee) {
+        $scope.deselectEmployee = function (employee) {
+            $scope.showDeselectX = false;
             $scope.allEmployees.push(employee);
             $scope.selectedEmployee = null;
+        }
+
+        $scope.isEmployeeSelected = function () {
+            return $scope.showDeselectX;
         }
 
         $scope.selectProduct = function (product) {

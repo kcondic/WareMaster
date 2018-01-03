@@ -35,6 +35,11 @@
     width: 600px;
 }
 
+.orders-modal-box{
+    width: 1150px;
+    height: 650px;
+}
+
 @keyframes fadein{
     0% {opacity: 0;}
     100% { opacity: 1;}
@@ -74,7 +79,8 @@
     flex-flow: column;
 }
 
-.modal-content-row{
+.modal-content-row,
+.inner-content-row{
     height: 18%;
     width: 100%;
     display: flex;
@@ -84,6 +90,48 @@
 
 .modal-content-row:last-of-type{
     height: 46%;
+}
+
+.orders-modal-box .modal-content-row-container .modify-size-of-row1{
+    margin-left: -180px;
+    width: 30%;
+}
+
+.orders-modal-box .modal-content-row-container .modify-size-of-row2{
+    margin-left: -150px;
+    width: 19%;
+    border-radius: 3px;
+}
+
+.employeeNameContainer{
+    background-color: lightblue;
+    padding: 1px 1px 2px 1px;
+    border-radius: 3px;
+    width: 800px;
+    height: 23px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.deselect-icon{
+    padding-left: 5px;
+    cursor: pointer;
+    font-size: 21px;
+}
+
+.orders-modal-box .modal-content-row-container .modify-size-of-row3{
+    margin-left: -210px;
+}
+
+.orders-modal-box .modal-content-row:first-of-type{
+    flex-flow: column;
+    justify-content: flex-start;
+    height: 100%;
+}
+
+.main-choice-buttons-row{
+    height: 40%;
 }
 
 .modal-row-element{
@@ -103,6 +151,23 @@
     width: 50%;
 }
 
+.main-choice-buttons-row .modal-row-element{
+    width: 50%;
+}
+
+.main-choice-buttons-row .modal-row-element:first-of-type{
+    justify-content: flex-end;
+}
+
+.main-choice-buttons-row .modal-row-element:last-of-type{
+    justify-content: flex-start;
+}
+
+.row-title{
+    font-size: 20px;
+}
+
+.orders-modal-box .single-product input,
 .modal-row-element input{
     width: 90%;
     font-size: 18px;
@@ -110,12 +175,27 @@
     border: solid 1px cadetblue;
     border-radius: 3px;
     padding-left: 5px;
+    margin-left: 5px;
 }
 
+.orders-modal-box .single-product input,
 .modal-row-element input:focus{
     outline: none;
 }
 
+.modal-row-element select{
+    width: 90%;
+    font-family: inherit;
+    font-size: 18px;
+    border-radius: 3px;
+    border: solid 1px cadetblue;
+}
+
+.modal-row-element select:focus{
+    outline: none;
+}
+
+.main-choice-buttons-row .main-choice-button,
 .modal-row-element .image-upload-button,
 .single-button button{
     background-color: rgb(34, 34, 34);
@@ -129,6 +209,7 @@
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
+.main-choice-buttons-row .main-choice-button:hover,
 .image-upload-button:hover,
 .single-button button:hover{
     background-color: steelblue;
@@ -170,18 +251,21 @@
     overflow: hidden;
 }
 
+.orders-modal-box .products-rows-container,
 .edit-supplier-modal-box .products-rows-container{
     height: 100%;
     overflow: hidden;
     display: flex;
 }
 
+.orders-modal-box .products-row,
 .edit-supplier-modal-box .products-row{
     flex-flow: column;
     width: 50%;
     justify-content: center;
 }
 
+.orders-modal-box .products-row .modal-row-element,
 .edit-supplier-modal-box .products-row .modal-row-element{
     width: auto;
     height: 11%;
@@ -196,6 +280,7 @@
     overflow-y: scroll;
 }
 
+.orders-modal-box .products-container,
 .edit-supplier-modal-box .products-container{
     margin: 10px 0px;
 }
@@ -222,6 +307,31 @@
 
 .products-container .single-product:last-child{
     border-bottom: solid 1.5px rgb(235,235,235);
+}
+
+.orders-modal-box .single-product{
+    justify-content: space-around;
+}
+
+.orders-modal-box .single-product input{
+    width: 85px;
+}
+
+.main-choice-buttons-row .main-choice-button{
+    background-color: lightsteelblue;
+    height: 38%;
+    width: 35%;
+    font-size: 24px;
+    padding: 0px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 10px;
+}
+
+.modal-content-row-container{
+    width: 100%;
+    height: 100%;
 }
 
 /* MODAL FOOTER DESIGN */

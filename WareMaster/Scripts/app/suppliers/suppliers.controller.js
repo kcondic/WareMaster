@@ -1,13 +1,7 @@
 ﻿angular.module('app').controller('SuppliersController',
     function ($scope, suppliersRepository, $rootScope) {
 
-        $rootScope.global = {
-            search: ''
-        };
         $rootScope.currentTemplate = 'suppliers';
-        $rootScope.currentTemplateIndex = 2;
-        $rootScope.headerdisplayed = true;
-        $rootScope.displaysubheader = true;
 
         var allSuppliersPromise = suppliersRepository.getAllSuppliers();
 

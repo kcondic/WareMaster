@@ -1,5 +1,7 @@
 ﻿angular.module('app').controller('RegisterController',
-    function ($scope, $state, loginRepository) {
+    function ($scope, $state, loginRepository, $rootScope) {
+
+        $rootScope.currentTemplate = 'register';
 
         $scope.registerNew = function () {
             if ($scope.companyName && $scope.managerFirstName,

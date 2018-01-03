@@ -1,13 +1,7 @@
 ﻿angular.module('app').controller('ProductsController',
     function ($scope, $state, productsRepository, $rootScope) {
 
-        $rootScope.global = {
-            search: ''
-        };
         $rootScope.currentTemplate = 'products';
-        $rootScope.currentTemplateIndex = 0;
-        $rootScope.headerdisplayed = true;
-        $rootScope.displaysubheader = true;
 
         productsRepository.getAllProducts().then(function (products) {
             $scope.allProducts = products.data;
