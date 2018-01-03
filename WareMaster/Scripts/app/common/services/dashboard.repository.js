@@ -1,7 +1,7 @@
 ﻿angular.module('app').service('dashboardRepository',
     function($http) {
-        function getActivities() {
-            return $http.get('/api/dashboard');
+        function getActivities(companyId) {
+            return $http.get('/api/dashboard', companyId);
         }
 
         return {

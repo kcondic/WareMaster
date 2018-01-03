@@ -11,7 +11,8 @@
             $scope.productToEdit.Name = $scope.name;
             $scope.productToEdit.Counter = $scope.quantity;
             productsRepository.editProduct($scope.productToEdit).then(function () {
-                functionsRepository.uploadProductImage($scope.file, $scope.name, $scope.productToEdit.Id);
+                functionsRepository.uploadProductImage($scope.file, $scope.name,
+                    $scope.productToEdit.Id, $scope.productToEdit.CompanyId);
                 $state.go('products', {}, { reload: true });
             });
         }

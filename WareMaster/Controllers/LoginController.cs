@@ -53,6 +53,7 @@ namespace WareMaster.Controllers
                 {"aud", audience},
                 {"exp", (timestamp + 245000).ToString()},
                 {"id", user.Id.ToString()},
+                {"companyid", user.CompanyId.ToString()},
                 {"username", user.Username}
             };
 
@@ -68,7 +69,7 @@ namespace WareMaster.Controllers
             var userToRegister = dataToRegister["newUser"].ToObject<User>();
 
             var companyId = _companyRepository.AddNewCompany(companyName);
-            userToRegister.Company = _companyRepository.GetCompanyById(companyId);
+            userToRegister.CompanyId = companyId;
             userToRegister.Password = HashHelper.HashPassword(userToRegister.Password);
             _userRepository.AddUser(userToRegister);
             return Ok(true);

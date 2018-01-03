@@ -22,9 +22,9 @@ namespace WareMaster.Controllers
 
         [HttpGet]
         [Route("")]
-        public IHttpActionResult GetAllSuppliers()//dodat int id od tvrtke
+        public IHttpActionResult GetAllSuppliers(int companyId)
         {
-            return Ok(_supplierRepository.GetAllSuppliers(1));
+            return Ok(_supplierRepository.GetAllSuppliers(companyId));
         }
 
         [HttpPost]

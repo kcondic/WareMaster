@@ -1,20 +1,22 @@
 ﻿angular.module('app').controller('AddOrderController',
-    function ($scope, $state, employeesRepository, productsRepository, ordersRepository, suppliersRepository) {
+    function ($scope, $state, employeesRepository, productsRepository, ordersRepository, suppliersRepository, loginRepository) {
 
         $scope.incomingSelected = false;
         $scope.outgoingSelected = false;
         $scope.selectedEmployee = null;
         $scope.selectedProducts = [];
 
-        employeesRepository.getAllEmployees().then(function (employees) {
+        const companyId = loginRepository.getCompanyId();
+
+        employeesRepository.getAllEmployees(companyId).then(function (employees) {
             $scope.allEmployees = employees.data;
         });
 
-        productsRepository.getAllProducts().then(function(products) {
+        productsRepository.getAllProducts(companyId).then(function(products) {
             $scope.allProducts = products.data;
         });
 
-        suppliersRepository.getAllSuppliers().then(function (suppliers) {
+        suppliersRepository.getAllSuppliers(companyId).then(function (suppliers) {
             $scope.allSuppliers = suppliers.data;
             $scope.selectedSupplier = $scope.allSuppliers[0];
         });
@@ -79,11 +81,12 @@
                 supplierId = null;
 
             const assignedEmployeeId = !$scope.selectedEmployee ? null : $scope.selectedEmployee.Id;
-            
+
             const newOrder = {
                 AssignedEmployeeId: assignedEmployeeId,
+                AssignedManagerId: loginRepository.getManagerId(),
                 ProductOrders: productOrder,
-                CompanyId: 1,
+                CompanyId: companyId,
                 Status: 0,
                 Type: $scope.incomingSelected ? 0:1,
                 SupplierId: supplierId

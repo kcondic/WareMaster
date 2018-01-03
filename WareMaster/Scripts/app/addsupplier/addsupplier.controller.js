@@ -1,8 +1,9 @@
 ﻿angular.module('app').controller('AddSupplierController',
-    function ($scope, $state, suppliersRepository, productsRepository) {
+    function ($scope, $state, suppliersRepository, productsRepository, loginRepository) {
         $scope.productsSelected = [];
+        const companyId = loginRepository.getCompanyId();
 
-        productsRepository.getAllProducts().then(function (allProducts) {
+        productsRepository.getAllProducts(companyId).then(function (allProducts) {
             $scope.products = allProducts.data;
         });
 
@@ -14,7 +15,8 @@
         $scope.addNewSupplier = function () {
             const newSupplier = {
                 Name: $scope.name,
-                Products: $scope.productsSelected
+                Products: $scope.productsSelected,
+                CompanyId: companyId
         }
             suppliersRepository.addNewSupplier(newSupplier).then(function () {
                 $state.go('suppliers', {}, { reload: true });

@@ -12,12 +12,6 @@ namespace WareMaster.Domain.Repositories
 {
     public class UserRepository
     {
-        public UserRepository()
-        {
-            _companyRepository = new CompanyRepository();
-        }
-
-        private readonly CompanyRepository _companyRepository;
         public List<User> GetAllUsers(int companyId)
         {
             using (var context = new WarehouseContext())
@@ -60,13 +54,15 @@ namespace WareMaster.Domain.Repositories
         public int GetLastEmployeeId()
         {
             using (var context = new WarehouseContext())
-                return context.Users.Where(user => user.Role == Role.Employee).OrderByDescending(user => user.Id).First().Id;
+                return context.Users.Where(user => user.Role == Role.Employee)
+                                    .OrderByDescending(user => user.Id).First().Id;
         }
 
         public void AddUser(User userToAdd)
         {
             using (var context = new WarehouseContext())
             {
+                userToAdd.Company = context.Companies.Find(userToAdd.CompanyId);
                 context.Companies.Attach(userToAdd.Company);
 
                 context.Users.Add(userToAdd);

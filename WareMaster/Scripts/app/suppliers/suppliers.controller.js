@@ -1,9 +1,7 @@
 ﻿angular.module('app').controller('SuppliersController',
-    function ($scope, suppliersRepository) {
+    function ($scope, suppliersRepository, loginRepository) {
 
-        var allSuppliersPromise = suppliersRepository.getAllSuppliers();
-
-        allSuppliersPromise.then(function (allSuppliers) {
+        suppliersRepository.getAllSuppliers(loginRepository.getCompanyId()).then(function (allSuppliers) {
             $scope.suppliers = allSuppliers.data; 
         });
 

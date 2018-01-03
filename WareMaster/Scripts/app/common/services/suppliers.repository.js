@@ -1,8 +1,12 @@
 ﻿angular.module('app').service('suppliersRepository',
     function ($http) {
 
-        function getAllSuppliers() {
-            return $http.get('/api/suppliers');
+        function getAllSuppliers(companyId) {
+            return $http.get('/api/suppliers', {
+                params: {
+                    companyId: companyId
+                }
+            });
         }
 
         function addNewSupplier(newSupplier) {
