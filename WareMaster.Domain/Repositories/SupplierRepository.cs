@@ -71,12 +71,12 @@ namespace WareMaster.Domain.Repositories
             {
                 var supplierToDelete = context.Suppliers.SingleOrDefault(supplier => supplier.Id == supplierId);
 
+                if (supplierToDelete == null)
+                    return;
+
                 var supplierToDeleteOrders = context.Orders.Include(order => order.ProductOrders)
                                                            .Where(order => order.SupplierId == supplierToDelete.Id);
                 context.Orders.RemoveRange(supplierToDeleteOrders);
-
-                if (supplierToDelete == null)
-                    return;
 
                 context.Suppliers.Remove(supplierToDelete);
                 context.SaveChanges();
