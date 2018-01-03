@@ -88,7 +88,7 @@ namespace WareMaster.Controllers
 
             if(stringsToCheck.Any(str => str == null || !char.IsLetter(str[0]) || !str.All(char.IsLetterOrDigit) || str.Length < 3))
                 return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
-            if(userToRegister.Username.Any(char.IsUpper) || Regex.IsMatch(userToRegister.Username, @"^[a-z0-9]+$"))
+            if(userToRegister.Username.Any(char.IsUpper) || !Regex.IsMatch(userToRegister.Username, @"^[a-z0-9]+$"))
                 return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
             if(userToRegister.Password.Length < 6)
                 return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));

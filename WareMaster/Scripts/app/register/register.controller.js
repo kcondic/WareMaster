@@ -14,7 +14,7 @@
         };
 
         $scope.registerNew = function () {
-            if(validateInput()) {
+           // if(validateInput()) {
                 const newUser = {
                     FirstName: $scope.managerFirstName,
                     LastName: $scope.managerLastName,
@@ -26,7 +26,7 @@
                 loginRepository.registerNew($scope.companyName, newUser).then(function () {
                     $state.go('login');
                 });
-            }
+            //}
         }
 
         function validateInput() {
