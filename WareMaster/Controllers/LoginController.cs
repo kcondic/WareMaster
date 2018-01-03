@@ -55,6 +55,7 @@ namespace WareMaster.Controllers
                 {"exp", (timestamp + 245000).ToString()},
                 {"id", user.Id.ToString()},
                 {"companyid", user.CompanyId.ToString()},
+                {"companyname", _companyRepository.GetCompanyById(user.CompanyId).Name},
                 {"username", user.Username}
             };
 

@@ -34,6 +34,10 @@
             return localStorage.getItem('bearerToken');
         }
 
+        function getAuthDetails() {
+            return JSON.parse(localStorage.getItem('authDetails'));
+        }
+
         function checkIfUsernameExists(username) {
             return $http.get('/api/register',
                 {
@@ -49,6 +53,7 @@
             getCompanyId: getCompanyId,
             getManagerId: getManagerId,
             isUserAuthenticated: isUserAuthenticated,
+            getAuthDetails: getAuthDetails,
             checkIfUsernameExists: checkIfUsernameExists
         };
     });
