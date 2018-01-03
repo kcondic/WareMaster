@@ -22,21 +22,19 @@ namespace WareMaster.Domain.Repositories
                     .FirstOrDefault(company => company.Id == companyId);
         }
 
-        public void AddNewCompany(Company companyToAdd)
+        public int AddNewCompany(string companyToAddName)
         {
             using (var context = new WarehouseContext())
             {
-                foreach (var user in companyToAdd.EmployeesManagers)
-                    context.Users.Attach(user);
-                foreach (var product in companyToAdd.Products)
-                    context.Products.Attach(product);
-                foreach (var order in companyToAdd.Orders)
-                    context.Orders.Attach(order);
-                foreach (var supplier in companyToAdd.Suppliers)
-                    context.Suppliers.Attach(supplier);
+                var companyToAdd = new Company
+                {
+                    Name = companyToAddName
+                };
 
                 context.Companies.Add(companyToAdd);
                 context.SaveChanges();
+
+                return companyToAdd.Id;
             }
         }
 

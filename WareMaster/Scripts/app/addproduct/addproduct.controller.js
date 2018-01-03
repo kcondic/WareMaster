@@ -1,5 +1,5 @@
 ﻿angular.module('app').controller('AddProductController',
-    function ($scope, $state, productsRepository, functionsRepository, $rootScope) {
+    function ($scope, $state, productsRepository, functionsRepository, jwtHelper) {
 
         $scope.addNewProduct = function () {
             const newProduct = {

@@ -44,9 +44,17 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
                 return context.Users
-                    .Include(user => user.Orders)
+                    .Include(user => user.EmployeeOrders)
+                    .Include(user => user.ManagerOrders)
                     .Include(user => user.ActivityLogs)
                     .FirstOrDefault(user => user.Id == userId);
+        }
+
+        public User GetManagerByUsername(string username)
+        {
+            using (var context = new WarehouseContext())
+                return context.Users.SingleOrDefault(user => 
+                user.Username == username && user.Role == Role.Manager);
         }
 
         public int GetLastEmployeeId()
@@ -59,13 +67,11 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
             {
-                userToAdd.Company = _companyRepository.GetCompanyById(1);
                 context.Companies.Attach(userToAdd.Company);
 
                 context.Users.Add(userToAdd);
                 context.SaveChanges();
             }
-
         }
 
         public void EditUser(User editedUser)

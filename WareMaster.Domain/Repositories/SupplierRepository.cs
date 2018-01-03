@@ -22,7 +22,9 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
             {
-                return context.Suppliers.Where(supplier => supplier.CompanyId == companyId).ToList();
+                return context.Suppliers
+                    .Include(supplier => supplier.Products)
+                    .Where(supplier => supplier.CompanyId == companyId).ToList();
             }
         }
 

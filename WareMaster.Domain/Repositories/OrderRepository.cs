@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Data.Entity.Core.Metadata.Edm;
+using System.Data.Entity.Migrations;
+using System.Security.Cryptography.X509Certificates;
 using WareMaster.Data.Models;
 using WareMaster.Data.Models.Entities;
 
@@ -18,25 +21,25 @@ namespace WareMaster.Domain.Repositories
 
         private readonly CompanyRepository _companyRepository;
 
-        public List<Order> GetAllFromACompany(int companyId)
+        public List<Order> GetAllOrders(int companyId)
         {
                 return _companyRepository.GetCompanyById(companyId).Orders.ToList();
         }
 
-        public List<Order> GetAllCreatedFromACompany(int companyId)
+        public List<Order> GetAllCreatedOrders(int companyId)
         {
                 return _companyRepository.GetCompanyById(companyId).Orders
                     .Where(order => order.Status == Status.Created).ToList();
         }
 
-        public List<Order> GetAllInProgressFromACompany(int companyId)
+        public List<Order> GetAllInProgressOrders(int companyId)
         {
             using (var context = new WarehouseContext())
                 return _companyRepository.GetCompanyById(companyId).Orders
                     .Where(order => order.Status == Status.InProgress).ToList();
         }
 
-        public List<Order> GetAllFinishedFromACompany(int companyId)
+        public List<Order> GetAllFinishedOrders(int companyId)
         {
                 return _companyRepository.GetCompanyById(companyId).Orders
                     .Where(order => order.Status == Status.Finished).ToList();
@@ -46,9 +49,12 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
                 return context.Orders
-                    .Include(order => order.AssignedUsers)
-                    .Include(order => order.Products)
+                    .Include(order => order.AssignedEmployee)
+                    .Include(order => order.ProductOrders)
+                    .Include(order => order.ProductOrders.Select(x => x.Product))
                     .Include(order => order.Company)
+                    .Include(order => order.Supplier)
+                    .Include(order => order.Supplier.Products)
                     .SingleOrDefault(order => order.Id == orderId);
         }
 
@@ -56,12 +62,20 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
             {
-                foreach (var product in order.Products)
-                    context.Products.Attach(product);
-                foreach (var user in order.AssignedUsers)
-                    context.Users.Attach(user);
 
-                context.Orders.Add(order);
+                var newOrder = new Order()
+                {
+                    AssignedEmployeeId = order.AssignedEmployeeId,
+                    TimeOfCreation = DateTime.Now,
+                    Status = order.Status,
+                    Type = order.Type,
+                    CompanyId = order.CompanyId,
+                    SupplierId = order.SupplierId,
+                    ProductOrders = order.ProductOrders
+                };
+
+
+                context.Orders.Add(newOrder);
                 context.SaveChanges();
             }
         }
@@ -70,25 +84,24 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
             {
-                foreach (var product in editedOrder.Products)
-                    context.Products.Attach(product);
-                foreach (var user in editedOrder.AssignedUsers)
-                    context.Users.Attach(user);
-
                 var orderToEdit = context.Orders
-                    .Include(order => order.AssignedUsers)
-                    .Include(order => order.Products)
-                    .Include(order => order.Company)
+                    .Include(order => order.ProductOrders)
+                    .Include(order => order.AssignedEmployee)
                     .SingleOrDefault(order => order.Id == editedOrder.Id);
 
                 if (orderToEdit == null)
                     return;
+                if (orderToEdit.AssignedEmployee != null && editedOrder.AssignedEmployee != null
+                    && orderToEdit.AssignedEmployee.Id != editedOrder.AssignedEmployee.Id ||
+                    orderToEdit.AssignedEmployee == null && editedOrder.AssignedEmployee != null)
+                {
+                    context.Users.Attach(editedOrder.AssignedEmployee);
+                    orderToEdit.AssignedEmployee = editedOrder.AssignedEmployee;
+                }
+                else if (editedOrder.AssignedEmployee == null)
+                    orderToEdit.AssignedEmployee = null;
 
-                orderToEdit.AssignedUsers = editedOrder.AssignedUsers;
-                orderToEdit.Products = editedOrder.Products;
-                orderToEdit.TimeOfCreation = editedOrder.TimeOfCreation;
-                orderToEdit.Status = editedOrder.Status;
-                orderToEdit.Company = editedOrder.Company;
+                orderToEdit.ProductOrders = editedOrder.ProductOrders;                
 
                 context.SaveChanges();
             }
@@ -98,7 +111,9 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
             {
-                var orderToDelete = context.Orders.FirstOrDefault(order => order.Id == orderId);
+                var orderToDelete = context.Orders
+                    .Include(order => order.ProductOrders)
+                    .FirstOrDefault(order => order.Id == orderId);
 
                 if (orderToDelete == null)
                     return;
