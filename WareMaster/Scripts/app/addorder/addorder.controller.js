@@ -12,7 +12,7 @@
             $scope.allEmployees = employees.data;
         });
 
-        productsRepository.getAllProducts(companyId).then(function(products) {
+        productsRepository.getAllProducts(companyId).then(function (products) {
             $scope.allProducts = products.data;
         });
 
@@ -31,6 +31,13 @@
 
         $scope.incomingSelect = function() {
             $scope.incomingSelected = true;
+
+            if ($scope.allSuppliers.length === 0) {
+                alert("Nemate nijednog dobavljača!\nPrije stvaranja ulazne narudžbe morate dodati barem jednog dobavljača");
+                $state.go('orders', {}, { reload: true });
+            }
+            else
+                $scope.getProductsForSupplier();
         }
 
         $scope.outgoingSelect = function () {
