@@ -34,11 +34,21 @@
             return localStorage.getItem('bearerToken');
         }
 
+        function checkIfUsernameExists(username) {
+            return $http.get('/api/register',
+                {
+                    params: {
+                        username: username
+                    }
+                });
+        }
+
         return {
             login: login,
             registerNew: registerNew,
             getCompanyId: getCompanyId,
             getManagerId: getManagerId,
-            isUserAuthenticated: isUserAuthenticated
+            isUserAuthenticated: isUserAuthenticated,
+            checkIfUsernameExists: checkIfUsernameExists
         };
     });

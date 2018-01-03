@@ -102,5 +102,11 @@ namespace WareMaster.Domain.Repositories
                 context.SaveChanges();
             }
         }
+
+        public bool DoesUsernameExist(string username)
+        {
+            using (var context = new WarehouseContext())
+                return context.Users.Any(user => user.Username == username);
+        }
     }
 }

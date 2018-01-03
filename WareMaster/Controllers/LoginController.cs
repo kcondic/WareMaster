@@ -61,6 +61,13 @@ namespace WareMaster.Controllers
             return Ok(token);
         }
 
+        [HttpGet]
+        [Route("register")]
+        public IHttpActionResult CheckIfUsernameExists(string username)
+        {
+            return Ok(_userRepository.DoesUsernameExist(username));
+        }
+
         [HttpPost]
         [Route("register")]
         public IHttpActionResult Register(JObject dataToRegister)
