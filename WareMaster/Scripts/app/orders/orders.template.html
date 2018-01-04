@@ -20,7 +20,10 @@
                     <div class="column-body">
                         <div ng-repeat="order in allOrders" class="content-row" ng-if="order.Type===orderType">
                             <div class="row-element" ui-sref="orderdetails({id: order.Id})">
-                                Narudžba {{order.Id}}.
+                                {{getOrderName(order.Supplier.Name, order.AssignedEmployee)}}
+                            </div>
+                            <div class="row-element" ui-sref="orderdetails({id: order.Id})">
+                                {{order.TimeOfCreation | date: "dd.MM.yyyy."}}
                             </div>
                             <div class="row-element button-row-element">
                                 <button ng-click="deleteOrder(order.Id)">Otkaži</button>

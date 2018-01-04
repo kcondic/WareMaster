@@ -12,7 +12,8 @@
             $scope.employeeToEdit.LastName = $scope.lastName;
             employeesRepository.editEmployee($scope.employeeToEdit).then(
                 function () {
-                    functionsRepository.uploadEmployeeImage($scope.file, $scope.firstName, $scope.lastName, $scope.employeeToEdit.Id);
+                    functionsRepository.uploadEmployeeImage($scope.file, $scope.firstName,
+                        $scope.lastName, $scope.employeeToEdit.Id, $scope.employeeToEdit.CompanyId);
                     $state.go('employees', {}, { reload: true });
                 });
         }

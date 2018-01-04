@@ -1,9 +1,9 @@
 ﻿angular.module('app').controller('EmployeesController',
-    function ($scope, $state, employeesRepository, $rootScope) {
+function ($scope, $state, employeesRepository, $rootScope, loginRepository) {
 
         $rootScope.currentTemplate = 'employees';
 
-        employeesRepository.getAllEmployees().then(function (employees) {
+        employeesRepository.getAllEmployees(loginRepository.getCompanyId()).then(function (employees) {
             $scope.allEmployees = employees.data;
 
             for (let employee of $scope.allEmployees) {

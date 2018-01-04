@@ -1,8 +1,12 @@
 ﻿angular.module('app').service('productsRepository',
     function($http) {
 
-        function getAllProducts() {
-            return $http.get('/api/products');
+        function getAllProducts(companyId) {
+            return $http.get('/api/products', {
+                params: {
+                    companyId: companyId
+                }
+            });
         }
 
         function getIdNeededForImageName() {

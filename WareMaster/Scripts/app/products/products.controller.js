@@ -1,9 +1,9 @@
 ﻿angular.module('app').controller('ProductsController',
-    function ($scope, $state, productsRepository, $rootScope) {
+function ($scope, $state, productsRepository, $rootScope, loginRepository) {
 
         $rootScope.currentTemplate = 'products';
 
-        productsRepository.getAllProducts().then(function (products) {
+        productsRepository.getAllProducts(loginRepository.getCompanyId()).then(function (products) {
             $scope.allProducts = products.data;
 
             for (let product of $scope.allProducts) {

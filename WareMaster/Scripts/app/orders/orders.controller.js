@@ -1,5 +1,5 @@
 ﻿angular.module('app').controller('OrdersController',
-    function ($scope, $state, ordersRepository, $rootScope) {
+function ($scope, $state, ordersRepository, $rootScope, loginRepository) {
 
         $rootScope.currentTemplate = 'orders';
         $scope.orderType = 0;
@@ -12,7 +12,20 @@
             }
         }
 
-        ordersRepository.getAllOrders().then(function (orders) {
+        $scope.getOrderName = function (supplier, assignedEmployee) {
+            if ($scope.orderType === 0) {
+                return supplier;
+            } else {
+                if (assignedEmployee === null) {
+                    return 'Nije pridijeljen zaposlenik';
+                } else {
+                    $scope.nameOfEmployee = assignedEmployee.FirstName + ' ' + assignedEmployee.LastName;
+                    return $scope.nameOfEmployee;
+                }
+            }
+        }
+
+        ordersRepository.getAllOrders(loginRepository.getCompanyId()).then(function (orders) {
             $scope.allOrders = orders.data;
         });
 
@@ -23,4 +36,4 @@
                     .findIndex(order => order.Id === id), 1);
             }
         }
-    });
+});

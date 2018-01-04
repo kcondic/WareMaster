@@ -11,13 +11,6 @@ namespace WareMaster.Domain.Repositories
 {
     public class SupplierRepository
     {
-        public SupplierRepository()
-        {
-            _company = new CompanyRepository();
-        }
-
-        private readonly CompanyRepository _company;
-
         public List<Supplier> GetAllSuppliers(int companyId)
         {
             using (var context = new WarehouseContext())
@@ -40,7 +33,7 @@ namespace WareMaster.Domain.Repositories
         {          
             using (var context = new WarehouseContext())
             {
-                supplier.Company = context.Companies.FirstOrDefault(x => x.Id == 1);
+                supplier.Company = context.Companies.Find(supplier.CompanyId);
                 context.Companies.Attach(supplier.Company);
                 foreach (var product in supplier.Products)
                     context.Products.Attach(product);
@@ -80,6 +73,10 @@ namespace WareMaster.Domain.Repositories
 
                 if (supplierToDelete == null)
                     return;
+
+                var supplierToDeleteOrders = context.Orders.Include(order => order.ProductOrders)
+                                                           .Where(order => order.SupplierId == supplierToDelete.Id);
+                context.Orders.RemoveRange(supplierToDeleteOrders);
 
                 context.Suppliers.Remove(supplierToDelete);
                 context.SaveChanges();

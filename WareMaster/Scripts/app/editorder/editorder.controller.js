@@ -1,6 +1,8 @@
 ﻿angular.module('app').controller('EditOrderController',
-    function ($scope, $state, $stateParams, ordersRepository, employeesRepository, productsRepository) {
+    function ($scope, $state, $stateParams, ordersRepository, employeesRepository, productsRepository, loginRepository) {
         $scope.selectedProducts = [];
+
+        const companyId = loginRepository.getCompanyId();
 
         ordersRepository.getOrder($stateParams.id).then(function (order) {
             $scope.order = order.data;
@@ -19,7 +21,7 @@
                     product.Counter = 1;
             }
             else
-                productsRepository.getAllProducts().then(function (products) {
+                productsRepository.getAllProducts(companyId).then(function (products) {
                     $scope.allProducts = products.data;
                     $scope.selectedProducts.forEach(function (item) {
                         $scope.allProducts.splice($scope.allProducts.map(function (val) { return val.Id }).indexOf(item.Id), 1);
@@ -34,7 +36,7 @@
                 }).ProductQuantity;
             }
             if($scope.order.Type === 1)
-                employeesRepository.getAllEmployees().then(function (employees) {
+                employeesRepository.getAllEmployees(companyId).then(function (employees) {
                     $scope.allEmployees = employees.data;
                     if($scope.selectedEmployee !== null)
                     $scope.allEmployees.splice($scope.allEmployees.map(function(val){return val.Id}).indexOf($scope.selectedEmployee.Id), 1);
@@ -71,7 +73,7 @@
                 return;
             }
 
-            var productOrder = [];
+            const productOrder = [];
             for (let product of $scope.selectedProducts) 
                 productOrder.push({
                     ProductId: product.Id,

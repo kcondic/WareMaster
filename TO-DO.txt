@@ -1,11 +1,9 @@
 Popis taskova koje još moramo odradit, slobodno nadopišite neki i ako æete radit na nekome zapišite svoje ime pokraj:
 
-Prilagodit sustav da login sad iz tokena uzima tvrtku korisnika pa da se podaci izvlaèe preko toga (KREŠO)
-Ako korisnik ima token preusmjerit ga sa logina na dashboard (KREŠO)
-Implementirat promjenu lozinke nakon registracije i validaciju korisnièkog imena pri registraciji
-Implementirat sustav zapisivanja aktivnosti (npr. kad manager stvori narudžbu to zapisat)
-Dodat rute za detalje entiteta (npr. za zaposlenika na kojim narudžbama trenutno radi, njegove nedavne aktivnosti)
+Implementirat promjenu lozinke nakon registracije i validaciju korisnièkog imena pri registraciji (KREŠO)
+Implementirat sustav zapisivanja aktivnosti (npr. kad manager stvori narudžbu to zapisat) (KREŠO)
+Dodat rute za detalje entiteta (npr. za zaposlenika na kojim narudžbama trenutno radi, njegove nedavne aktivnosti) (IVAN)
 Ogranièit moguænosti editiranja zapisa (npr. ako je ulazna narudžba prihvaæena onemoguæit otkazivanje 
 ili onemoguæit promjenu imena zaposlenika bez njegovog pristanka)
-Proširit postojeæi dizajn na nove rute (registracija, narudžbe)
+Proširit postojeæi dizajn na nove rute (registracija, narudžbe) (AJŠ)
 
