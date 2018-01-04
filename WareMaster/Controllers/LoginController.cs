@@ -11,6 +11,7 @@ using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using WareMaster.Data.Models.Entities;
 
 namespace WareMaster.Controllers
@@ -25,6 +26,46 @@ namespace WareMaster.Controllers
         }
         private readonly UserRepository _userRepository;
         private readonly CompanyRepository _companyRepository;
+
+        [HttpPost]
+        [Route("password")]
+        [Authorize]
+        public IHttpActionResult ChangePassword(JObject dataToChange)
+        {
+            if (dataToChange["oldPassword"] == null || dataToChange["newPassword"] == null || dataToChange["userId"] == null)
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.BadRequest));
+            var oldPassword = dataToChange["oldPassword"].ToObject<string>();
+            var newPassword = dataToChange["newPassword"].ToObject<string>();
+            var userId = dataToChange["userId"].ToObject<int>();
+
+            var userToChangePassword = _userRepository.GetUser(userId);
+            if (HashHelper.ValidatePassword(oldPassword, userToChangePassword.Password) &&
+                char.IsLetter(newPassword[0]) && newPassword.Length >= 6 && Regex.IsMatch(newPassword, @"^[a-zA-Z0-9]+$"))
+            {
+                var hashedNewPassword = HashHelper.HashPassword(newPassword);
+                userToChangePassword.Password = hashedNewPassword;
+                _userRepository.EditUser(userToChangePassword);
+                return Ok(true);
+            }
+            return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+        }
+
+        [HttpGet]
+        [Route("managers")]
+        [Authorize]
+        public IHttpActionResult GetManagers(int companyId)
+        {
+            return Ok(_userRepository.GetAllManagers(companyId));
+        }
+
+        [HttpDelete]
+        [Route("managers")]
+        [Authorize]
+        public IHttpActionResult DeleteManager(int managerId)
+        {
+            _userRepository.DeleteUser(managerId);
+            return Ok(true);
+        }
 
         [HttpPost]
         [Route("login")]
@@ -51,9 +92,10 @@ namespace WareMaster.Controllers
             {
                 {"iss", issuer},
                 {"aud", audience},
-                {"exp", (timestamp + 245000).ToString()},
+                {"exp", (timestamp + 28800).ToString()},
                 {"id", user.Id.ToString()},
                 {"companyid", user.CompanyId.ToString()},
+                {"companyname", _companyRepository.GetCompanyById(user.CompanyId).Name},
                 {"username", user.Username}
             };
 
@@ -61,17 +103,67 @@ namespace WareMaster.Controllers
             return Ok(token);
         }
 
+        [HttpGet]
+        [Route("register")]
+        public IHttpActionResult CheckIfUsernameExists(string username)
+        {
+            return Ok(_userRepository.DoesUsernameExist(username));
+        }
+
         [HttpPost]
         [Route("register")]
         public IHttpActionResult Register(JObject dataToRegister)
         {
+            if (dataToRegister["companyName"] == null || dataToRegister["newUser"] == null)
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
             var companyName = dataToRegister["companyName"].ToObject<string>();
             var userToRegister = dataToRegister["newUser"].ToObject<User>();
+
+            var stringsToCheck = new List<string>()
+            {
+                companyName,
+                userToRegister.Username,
+                userToRegister.FirstName,
+                userToRegister.LastName,
+                userToRegister.Password
+            };
+
+            if(stringsToCheck.Any(str => str == null || !char.IsLetter(str[0]) || !str.All(char.IsLetterOrDigit) || str.Length < 3))
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+            if(userToRegister.Username.Any(char.IsUpper) || !Regex.IsMatch(userToRegister.Username, @"^[a-z0-9]+$"))
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+            if(userToRegister.Password.Length < 6 || !Regex.IsMatch(userToRegister.Password, @"^[a-zA-Z0-9]+$"))
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
 
             var companyId = _companyRepository.AddNewCompany(companyName);
             userToRegister.CompanyId = companyId;
             userToRegister.Password = HashHelper.HashPassword(userToRegister.Password);
             _userRepository.AddUser(userToRegister);
+            return Ok(true);
+        }
+
+        [HttpPost]
+        [Route("registerexisting")]
+        [Authorize]
+        public IHttpActionResult RegisterExisting(User userToRegisterToExistingCompany)
+        {
+            var stringsToCheck = new List<string>()
+            {
+                userToRegisterToExistingCompany.Username,
+                userToRegisterToExistingCompany.FirstName,
+                userToRegisterToExistingCompany.LastName,
+                userToRegisterToExistingCompany.Password
+            };
+
+            if (stringsToCheck.Any(str => str == null || !char.IsLetter(str[0]) || !str.All(char.IsLetterOrDigit) || str.Length < 3))
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+            if (userToRegisterToExistingCompany.Username.Any(char.IsUpper) || !Regex.IsMatch(userToRegisterToExistingCompany.Username, @"^[a-z0-9]+$"))
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+            if (userToRegisterToExistingCompany.Password.Length < 6 || !Regex.IsMatch(userToRegisterToExistingCompany.Password, @"^[a-zA-Z0-9]+$"))
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+
+            userToRegisterToExistingCompany.Password = HashHelper.HashPassword(userToRegisterToExistingCompany.Password);
+            _userRepository.AddUser(userToRegisterToExistingCompany);
             return Ok(true);
         }
     }

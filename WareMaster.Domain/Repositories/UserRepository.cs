@@ -27,11 +27,12 @@ namespace WareMaster.Domain.Repositories
         }
 
 
-        public List<User> GetAllManagers()
+        public List<User> GetAllManagers(int companyId)
         {
             using (var context = new WarehouseContext())
                 return context.Users
-                    .Where(user => user.Role == Role.Manager).ToList();
+                    .Where(user => user.Role == Role.Manager
+                            && user.CompanyId == companyId).ToList();
         }
 
         public User GetUser(int userId)
@@ -82,6 +83,7 @@ namespace WareMaster.Domain.Repositories
 
                 userToEdit.FirstName = editedUser.FirstName;
                 userToEdit.LastName = editedUser.LastName;
+                userToEdit.Password = editedUser.Password;
                 userToEdit.ImageUrl = editedUser.ImageUrl;
                 userToEdit.Role = editedUser.Role;
 
@@ -101,6 +103,12 @@ namespace WareMaster.Domain.Repositories
                 context.Users.Remove(userToDelete);
                 context.SaveChanges();
             }
+        }
+
+        public bool DoesUsernameExist(string username)
+        {
+            using (var context = new WarehouseContext())
+                return context.Users.Any(user => user.Username == username);
         }
     }
 }

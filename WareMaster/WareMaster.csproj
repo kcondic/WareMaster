@@ -390,6 +390,8 @@
     <Content Include="Scripts\app\app.interceptor.js" />
     <Content Include="Scripts\app\app.module.js" />
     <Content Include="Scripts\app\app.run.js" />
+    <Content Include="Scripts\app\common\controllers\header.controller.js" />
+    <Content Include="Scripts\app\common\controllers\mainmenu.controller.js" />
     <Content Include="Scripts\app\common\services\dashboard.repository.js" />
     <Content Include="Scripts\app\common\services\functions.repository.js" />
     <Content Include="Scripts\app\common\services\employees.repository.js" />
@@ -414,8 +416,9 @@
     <Content Include="Scripts\app\login\login.controller.js" />
     <Content Include="Scripts\app\login\login.state.js" />
     <Content Include="Scripts\app\login\login.template.html" />
-    <Content Include="Scripts\app\logout\logout.controller.js" />
-    <Content Include="Scripts\app\logout\logout.state.js" />
+    <Content Include="Scripts\app\registerexisting\registerexisting.controller.js" />
+    <Content Include="Scripts\app\registerexisting\registerexisting.state.js" />
+    <Content Include="Scripts\app\registerexisting\registerexisting.template.html" />
     <Content Include="Scripts\app\register\register.controller.js" />
     <Content Include="Scripts\app\register\register.state.js" />
     <Content Include="Scripts\app\register\register.template.html" />
