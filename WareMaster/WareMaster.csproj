@@ -365,7 +365,6 @@
     <Content Include="Assets\styles\subHeader.css" />
     <Content Include="Assets\styles\registrationMain.css" />
     <Content Include="Assets\styles\ordersMain.css" />
-    <Content Include="Assets\styles\suppliersMain.css" />
     <Content Include="favicon.ico" />
     <Content Include="Assets\fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
@@ -410,7 +409,7 @@
     <Content Include="Scripts\app\editorder\editorder.template.html" />
     <Content Include="Assets\styles\dashboardMain.css" />
     <Content Include="Assets\fontstyles\fontPlayfairDisplay.css" />
-    <Content Include="Assets\styles\signinMain.css" />
+    <Content Include="Assets\styles\loginMain.css" />
     <Content Include="Assets\styles\mainHeader.css" />
     <Content Include="Scripts\app\editsupplier\editsupplier.controller.js" />
     <Content Include="Scripts\app\editsupplier\editsupplier.state.js" />
