@@ -50,7 +50,7 @@
                         <button ng-click="changePassword()">Promijeni</button>
                         <button ng-click="wantsToChangePassword = false">Odustani</button>
                     </div>
-                    <div class="button-content-item" ng-click="wantsToManipulateManagers = true">Upravljaj s menadžerima</div>
+                    <div class="button-content-item" ng-click="loadManagers()">Upravljaj s menadžerima</div>
                     <div ng-show="wantsToManipulateManagers">
                         <div ng-repeat="manager in allManagers">
                             {{manager.FirstName}} {{manager.LastName}}

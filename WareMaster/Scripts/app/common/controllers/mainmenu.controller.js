@@ -3,13 +3,6 @@
         $scope.wantsToChangePassword = false;
         $scope.wantsToManipulateManagers = false;
 
-        const managerId = loginRepository.getManagerId();
-
-        if(managerId)
-        loginRepository.getAllManagers(loginRepository.getCompanyId()).then(function(managers) {
-            $scope.allManagers = managers.data.filter(manager => manager.Id !== parseInt(managerId));
-        });
-
         $scope.changePassword = function () {
             if(validateInput())
             loginRepository.changePassword($scope.oldPassword, $scope.newPassword)
@@ -39,6 +32,14 @@
                 return false;
             }
             return true;
+        }
+
+        $scope.loadManagers = function () {
+            loginRepository.getAllManagers(loginRepository.getCompanyId()).then(function(managers) {
+                $scope.allManagers = managers.data.filter(manager => manager.Id !== parseInt(loginRepository.getManagerId()));
+            }).then(function() {
+                $scope.wantsToManipulateManagers = true;
+            });
         }
 
         $scope.deleteManager = function(id) {
