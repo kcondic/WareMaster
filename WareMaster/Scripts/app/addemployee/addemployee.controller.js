@@ -1,5 +1,5 @@
 ﻿angular.module('app').controller('AddEmployeeController',
-    function ($scope, $state, employeesRepository, functionsRepository, loginRepository) {
+    function ($scope, $state, employeesRepository, functionsRepository, loginRepository, activitylogRepository) {
 
         const companyId = loginRepository.getCompanyId();
 
@@ -12,6 +12,11 @@
                 Role: 0
             };
             employeesRepository.addEmployee(newEmployee).then(function () {
+                activitylogRepository.addActivityLog({
+                    Text: `${loginRepository.getManagerName()} je dodao zaposlenika ${$scope.firstName} ${$scope.lastName}`,
+                    UserId: loginRepository.getManagerId(),
+                    CompanyId: companyId
+                });
                 employeesRepository.getIdNeededForImageName().then(function(id) {
                     $scope.id = id.data;
                 }).then(function() {

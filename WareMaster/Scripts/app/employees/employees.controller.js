@@ -1,7 +1,9 @@
 ﻿angular.module('app').controller('EmployeesController',
-    function ($scope, $state, employeesRepository, loginRepository) {
+    function ($scope, $state, employeesRepository, loginRepository, activitylogRepository) {
 
-        employeesRepository.getAllEmployees(loginRepository.getCompanyId()).then(function (employees) {
+        const companyId = loginRepository.getCompanyId();
+
+        employeesRepository.getAllEmployees(companyId).then(function (employees) {
             $scope.allEmployees = employees.data;
 
             for (let employee of $scope.allEmployees) {
@@ -16,6 +18,11 @@
                 employeesRepository.deleteEmployee(id);
                 $scope.allEmployees.splice($scope.allEmployees
                     .findIndex(employee => employee.Id === id), 1);
+                activitylogRepository.addActivityLog({
+                    Text: `${loginRepository.getManagerName()} je izbrisao zaposlenika ${firstName} ${lastName}`,
+                    UserId: loginRepository.getManagerId(),
+                    CompanyId: companyId
+                });
             }         
         }
     });

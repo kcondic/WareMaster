@@ -1,5 +1,5 @@
 ﻿angular.module('app').controller('AddOrderController',
-    function ($scope, $state, employeesRepository, productsRepository, ordersRepository, suppliersRepository, loginRepository) {
+    function ($scope, $state, employeesRepository, productsRepository, ordersRepository, suppliersRepository, loginRepository, activitylogRepository) {
 
         $scope.incomingSelected = false;
         $scope.outgoingSelected = false;
@@ -100,6 +100,17 @@
             };
 
             ordersRepository.addNewOrder(newOrder).then(function () {
+                if(newOrder.Type === 0)
+                    activitylogRepository.addActivityLog({
+                        Text: `${loginRepository.getManagerName()} je stvorio ulaznu narudžbu`,
+                        UserId: loginRepository.getManagerId(),
+                        CompanyId: companyId
+                    });
+                else
+                    activitylogRepository.addActivityLog({
+                        Text: `${loginRepository.getManagerName()} je stvorio izlaznu narudžbu`,
+                        UserId: loginRepository.getManagerId()
+                    });
                 $state.go('orders', {}, { reload: true });
             });
         }

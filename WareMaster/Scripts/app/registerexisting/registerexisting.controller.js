@@ -1,5 +1,5 @@
 ﻿angular.module('app').controller('RegisterExistingController',
-    function ($scope, $state, loginRepository, $timeout) {
+    function ($scope, $state, $timeout, loginRepository, activitylogRepository) {
 
         var timeoutPromise;
         $scope.checkUsername = function () {
@@ -24,6 +24,11 @@
                     Password: $scope.password
                 };
                 loginRepository.registerExisting(newUser).then(function () {
+                    activitylogRepository.addActivityLog({
+                        Text: `${loginRepository.getManagerName()} je stvorio menadžera ${$scope.managerFirstName} ${$scope.managerLastName}`,
+                        UserId: loginRepository.getManagerId(),
+                        CompanyId: loginRepository.getCompanyId()
+                    });
                     $state.go('dashboard');
                 });
             }

@@ -28,7 +28,7 @@ namespace WareMaster.Domain.Repositories
             return activityLogList;
         }
 
-        public void NewActivityLog(ActivityLog activityLogToAdd)
+        public void AddActivityLog(ActivityLog activityLogToAdd)
         {
             using (var context = new WarehouseContext())
             {

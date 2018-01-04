@@ -9,5 +9,7 @@ namespace WareMaster.Data.Models.Entities
         public DateTime TimeOfActivity { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }
+        public Company Company { get; set; }
+        public int CompanyId { get; set; }
     }
 }
