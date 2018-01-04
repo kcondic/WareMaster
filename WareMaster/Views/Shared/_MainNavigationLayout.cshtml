@@ -57,7 +57,7 @@
                             <button ng-click="deleteManager(manager.Id, manager.FirstName, manager.LastName)">Izbriši</button>
                         </div>
                         <button ng-click="wantsToManipulateManagers = false">Odustani</button>
-                        <button ng-click="wantsToChangePassword = false" ui-sref="registerexisting({companyid: companyId})">Dodaj novoga</button>
+                        <button ng-click="wantsToManipulateManagers = false" ui-sref="registerexisting({companyid: companyId})">Dodaj novoga</button>
                     </div>
                     <div class="button-content-item">Promijeni temu</div>
                     <div class="button-content-item" ng-click="logout()">Odjava</div>
