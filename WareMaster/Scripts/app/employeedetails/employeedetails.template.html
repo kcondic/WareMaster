@@ -1,0 +1,10 @@
+﻿<div>
+    {{employee.FirstName}} {{employee.LastName}}
+</div>
+Narudžbe:
+<div ng-repeat="order in employee.EmployeeOrders">
+    <span ng-if="order.Status===0">U pripremi</span>
+    <span ng-if="order.Status===1">U trajanju</span>
+    <span ng-if="order.Status===2">Završena</span>
+    {{order.TimeOfCreation}}
+</div>
