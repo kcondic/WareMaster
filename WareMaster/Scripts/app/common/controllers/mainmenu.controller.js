@@ -5,12 +5,13 @@
         $scope.changePassword = function () {
             if(validateInput())
             loginRepository.changePassword($scope.oldPassword, $scope.newPassword)
-                .then(function(response) {
+                .then(function () {
+                    alert('Lozinka je uspješno promijenjena.');
                     $scope.wantsToChangePassword = false;
-                }), function(response) {
+                }, function() {
                     alert('Lozinka je neispravna!');
                     $scope.wantsToChangePassword = false;
-            };
+            });
         }
 
         function validateInput() {
