@@ -1,4 +1,4 @@
-﻿angular.module('app').controller('RegisterController',
+﻿angular.module('app').controller('RegisterExistingController',
     function ($scope, $state, loginRepository, $timeout) {
 
         var timeoutPromise;
@@ -13,23 +13,24 @@
             }, 1000);
         };
 
-        $scope.registerNew = function () {
-            if(validateInput()) {
+        $scope.registerExisting = function () {
+            if (validateInput()) {
                 const newUser = {
                     FirstName: $scope.managerFirstName,
                     LastName: $scope.managerLastName,
                     Role: 1,
+                    CompanyId: loginRepository.getCompanyId(),
                     Username: $scope.username,
                     Password: $scope.password
                 };
-                loginRepository.registerNew($scope.companyName, newUser).then(function () {
-                    $state.go('login');
+                loginRepository.registerExisting(newUser).then(function () {
+                    $state.go('dashboard');
                 });
             }
         }
 
         function validateInput() {
-            const inputToValidate = [$scope.companyName, $scope.managerFirstName, $scope.managerLastName, $scope.username, $scope.password];
+            const inputToValidate = [$scope.managerFirstName, $scope.managerLastName, $scope.username, $scope.password];
             if (inputToValidate.includes(undefined)) {
                 alert('Svi podaci su obavezni!');
                 return false;

@@ -2,7 +2,8 @@
     <input type="text" ng-model="companyName" placeholder="Ime tvrtke">
     <input type="text" ng-model="managerFirstName" placeholder="Vaše ime">
     <input type="text" ng-model="managerLastName" placeholder="Vaše prezime">
-    <input type="text" ng-model="username" placeholder="Korisničko ime">
+    <input type="text" ng-model="username" ng-change="checkUsername()" placeholder="Korisničko ime">
+    <div ng-show="userNameExists" ng-init="userNameExists=false">Korisničko ime već postoji</div>
     <input type="password" ng-model="password" placeholder="Lozinka">
-    <button ng-click="registerNew()">Registriraj se</button>
+    <button ng-click="registerNew()" ng-disabled="userNameExists">Registriraj se</button>
 </div>
