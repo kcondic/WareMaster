@@ -28,7 +28,7 @@ namespace WareMaster.Controllers
         private readonly CompanyRepository _companyRepository;
 
         [HttpPost]
-        [Route("")]
+        [Route("password")]
         [Authorize]
         public IHttpActionResult ChangePassword(JObject dataToChange)
         {
@@ -51,11 +51,20 @@ namespace WareMaster.Controllers
         }
 
         [HttpGet]
-        [Route("")]
+        [Route("managers")]
         [Authorize]
         public IHttpActionResult GetManagers(int companyId)
         {
             return Ok(_userRepository.GetAllManagers(companyId));
+        }
+
+        [HttpDelete]
+        [Route("managers")]
+        [Authorize]
+        public IHttpActionResult DeleteManager(int managerId)
+        {
+            _userRepository.DeleteUser(managerId);
+            return Ok(true);
         }
 
         [HttpPost]

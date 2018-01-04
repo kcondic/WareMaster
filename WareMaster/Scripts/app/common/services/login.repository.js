@@ -61,7 +61,7 @@
         }
 
         function changePassword(oldPassword, newPassword) {
-            return $http.post('/api',
+            return $http.post('/api/password',
                 {
                     oldPassword: oldPassword,
                     newPassword: newPassword,
@@ -70,10 +70,19 @@
         }
 
         function getAllManagers(companyId) {
-            return $http.get('/api',
+            return $http.get('/api/managers',
                 {
                     params: {
                         companyId: companyId
+                    }
+                });
+        }
+
+        function deleteManager(managerId) {
+            return $http.delete('/api/managers',
+                {
+                    params: {
+                        managerId: managerId
                     }
                 });
         }
@@ -88,6 +97,7 @@
             getAuthDetails: getAuthDetails,
             checkIfUsernameExists: checkIfUsernameExists,
             changePassword: changePassword,
-            getAllManagers: getAllManagers
+            getAllManagers: getAllManagers,
+            deleteManager: deleteManager
         };
     });

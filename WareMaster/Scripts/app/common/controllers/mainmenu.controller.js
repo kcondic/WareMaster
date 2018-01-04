@@ -42,8 +42,12 @@
             });
         }
 
-        $scope.deleteManager = function(id) {
-            
+        $scope.deleteManager = function (id, firstName, lastName) {
+            if (confirm(`Jeste li sigurni da želite izbrisati menadžera ${firstName} ${lastName}?`)) {
+                loginRepository.deleteManager(id);
+                $scope.allManagers.splice($scope.allManagers.findIndex(manager => manager.Id === id), 1);
+            }
+            $scope.wantsToManipulateManagers = false;
         }
 
         $scope.logout = function() {
