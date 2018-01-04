@@ -22,7 +22,9 @@
 
         function getCompanyId() {
             const details = localStorage.getItem('authDetails');
-            return JSON.parse(details).companyid;
+            if(details)
+                return JSON.parse(details).companyid;
+            return 0;
         }
 
         function getManagerId() {
@@ -31,11 +33,25 @@
         }
 
         function isUserAuthenticated() {
-            return localStorage.getItem('bearerToken');
+            const details = getAuthDetails();
+            if (!details) return false;
+             checkIfUsernameExists(details.username).then(function (doesUsernameExist) {
+                console.log(doesUsernameExist.data);
+                if (!doesUsernameExist.data)
+                    return false;
+                else {
+                    const token = localStorage.getItem('bearerToken');
+                    if (!token) return false;
+                    return !jwtHelper.isTokenExpired(token);
+                }
+            });
         }
 
         function getAuthDetails() {
-            return JSON.parse(localStorage.getItem('authDetails'));
+            const details = localStorage.getItem('authDetails');
+            if(details)
+                return JSON.parse(details);
+            return null;
         }
 
         function checkIfUsernameExists(username) {

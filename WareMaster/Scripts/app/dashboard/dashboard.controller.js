@@ -5,8 +5,6 @@
 
         const authDetails = loginRepository.getAuthDetails();
         if (authDetails) {
-            console.log(authDetails.username);
-            console.log(authDetails.companyname);
             $rootScope.userName = authDetails.username;
             $rootScope.companyName = authDetails.companyname;
         }
