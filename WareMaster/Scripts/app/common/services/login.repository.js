@@ -20,6 +20,10 @@
                 });
         }
 
+        function registerExisting(newUser) {
+            return $http.post('/api/registerexisting', newUser);
+        }
+
         function getCompanyId() {
             const details = localStorage.getItem('authDetails');
             if(details)
@@ -29,7 +33,9 @@
 
         function getManagerId() {
             const details = localStorage.getItem('authDetails');
-            return JSON.parse(details).id;
+            if(details)
+                return JSON.parse(details).id;
+            return null;
         }
 
         function isUserAuthenticated() {
@@ -63,14 +69,25 @@
                 });
         }
 
+        function getAllManagers(companyId) {
+            return $http.get('/api',
+                {
+                    params: {
+                        companyId: companyId
+                    }
+                });
+        }
+
         return {
             login: login,
             registerNew: registerNew,
+            registerExisting: registerExisting,
             getCompanyId: getCompanyId,
             getManagerId: getManagerId,
             isUserAuthenticated: isUserAuthenticated,
             getAuthDetails: getAuthDetails,
             checkIfUsernameExists: checkIfUsernameExists,
-            changePassword: changePassword
+            changePassword: changePassword,
+            getAllManagers: getAllManagers
         };
     });

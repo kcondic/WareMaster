@@ -29,6 +29,7 @@ namespace WareMaster.Controllers
 
         [HttpPost]
         [Route("")]
+        [Authorize]
         public IHttpActionResult ChangePassword(JObject dataToChange)
         {
             if (dataToChange["oldPassword"] == null || dataToChange["newPassword"] == null || dataToChange["userId"] == null)
@@ -47,6 +48,14 @@ namespace WareMaster.Controllers
                 return Ok(true);
             }
             return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+        }
+
+        [HttpGet]
+        [Route("")]
+        [Authorize]
+        public IHttpActionResult GetManagers(int companyId)
+        {
+            return Ok(_userRepository.GetAllManagers(companyId));
         }
 
         [HttpPost]
@@ -103,6 +112,7 @@ namespace WareMaster.Controllers
 
             var stringsToCheck = new List<string>()
             {
+                companyName,
                 userToRegister.Username,
                 userToRegister.FirstName,
                 userToRegister.LastName,
@@ -120,6 +130,31 @@ namespace WareMaster.Controllers
             userToRegister.CompanyId = companyId;
             userToRegister.Password = HashHelper.HashPassword(userToRegister.Password);
             _userRepository.AddUser(userToRegister);
+            return Ok(true);
+        }
+
+        [HttpPost]
+        [Route("registerexisting")]
+        [Authorize]
+        public IHttpActionResult RegisterExisting(User userToRegisterToExistingCompany)
+        {
+            var stringsToCheck = new List<string>()
+            {
+                userToRegisterToExistingCompany.Username,
+                userToRegisterToExistingCompany.FirstName,
+                userToRegisterToExistingCompany.LastName,
+                userToRegisterToExistingCompany.Password
+            };
+
+            if (stringsToCheck.Any(str => str == null || !char.IsLetter(str[0]) || !str.All(char.IsLetterOrDigit) || str.Length < 3))
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+            if (userToRegisterToExistingCompany.Username.Any(char.IsUpper) || !Regex.IsMatch(userToRegisterToExistingCompany.Username, @"^[a-z0-9]+$"))
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+            if (userToRegisterToExistingCompany.Password.Length < 6 || !Regex.IsMatch(userToRegisterToExistingCompany.Password, @"^[a-zA-Z0-9]+$"))
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+
+            userToRegisterToExistingCompany.Password = HashHelper.HashPassword(userToRegisterToExistingCompany.Password);
+            _userRepository.AddUser(userToRegisterToExistingCompany);
             return Ok(true);
         }
     }

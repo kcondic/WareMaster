@@ -50,6 +50,15 @@
                         <button ng-click="changePassword()">Promijeni</button>
                         <button ng-click="wantsToChangePassword = false">Odustani</button>
                     </div>
+                    <div class="button-content-item" ng-click="wantsToManipulateManagers = true">Upravljaj s menadžerima</div>
+                    <div ng-show="wantsToManipulateManagers">
+                        <div ng-repeat="manager in allManagers">
+                            {{manager.FirstName}} {{manager.LastName}}
+                            <button ng-click="deleteManager(manager.Id)">Izbriši</button>
+                        </div>
+                        <button ng-click="wantsToManipulateManagers = false">Odustani</button>
+                        <button ui-sref="registerexisting({companyid: companyId})">Dodaj novoga</button>
+                    </div>
                     <div class="button-content-item">Promijeni temu</div>
                     <div class="button-content-item" ng-click="logout()">Odjava</div>
                 </div>

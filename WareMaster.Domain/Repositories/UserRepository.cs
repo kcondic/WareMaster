@@ -27,11 +27,12 @@ namespace WareMaster.Domain.Repositories
         }
 
 
-        public List<User> GetAllManagers()
+        public List<User> GetAllManagers(int companyId)
         {
             using (var context = new WarehouseContext())
                 return context.Users
-                    .Where(user => user.Role == Role.Manager).ToList();
+                    .Where(user => user.Role == Role.Manager
+                            && user.CompanyId == companyId).ToList();
         }
 
         public User GetUser(int userId)

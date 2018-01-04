@@ -1,0 +1,8 @@
+﻿<div id="registration">
+    <input type="text" ng-model="managerFirstName" placeholder="Ime novog menadžera">
+    <input type="text" ng-model="managerLastName" placeholder="Prezime novog menadžera">
+    <input type="text" ng-model="username" ng-change="checkUsername()" placeholder="Korisničko ime">
+    <div ng-show="userNameExists" ng-init="userNameExists=false">Korisničko ime već postoji</div>
+    <input type="password" ng-model="password" placeholder="Lozinka">
+    <button ng-click="registerExisting()" ng-disabled="userNameExists">Registriraj menadžera</button>
+</div>

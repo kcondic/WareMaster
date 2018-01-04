@@ -1,6 +1,14 @@
 ﻿angular.module('app').controller('MainMenuController',
     function ($scope, $state, loginRepository) {
         $scope.wantsToChangePassword = false;
+        $scope.wantsToManipulateManagers = false;
+
+        const managerId = loginRepository.getManagerId();
+
+        if(managerId)
+        loginRepository.getAllManagers(loginRepository.getCompanyId()).then(function(managers) {
+            $scope.allManagers = managers.data.filter(manager => manager.Id !== parseInt(managerId));
+        });
 
         $scope.changePassword = function () {
             if(validateInput())
@@ -31,6 +39,10 @@
                 return false;
             }
             return true;
+        }
+
+        $scope.deleteManager = function(id) {
+            
         }
 
         $scope.logout = function() {
