@@ -28,6 +28,28 @@ namespace WareMaster.Controllers
         private readonly CompanyRepository _companyRepository;
 
         [HttpPost]
+        [Route("")]
+        public IHttpActionResult ChangePassword(JObject dataToChange)
+        {
+            if (dataToChange["oldPassword"] == null || dataToChange["newPassword"] == null || dataToChange["userId"] == null)
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.BadRequest));
+            var oldPassword = dataToChange["oldPassword"].ToObject<string>();
+            var newPassword = dataToChange["newPassword"].ToObject<string>();
+            var userId = dataToChange["userId"].ToObject<int>();
+
+            var userToChangePassword = _userRepository.GetUser(userId);
+            if (HashHelper.ValidatePassword(oldPassword, userToChangePassword.Password) &&
+                char.IsLetter(newPassword[0]) && newPassword.Length >= 6 && Regex.IsMatch(newPassword, @"^[a-zA-Z0-9]+$"))
+            {
+                var hashedNewPassword = HashHelper.HashPassword(newPassword);
+                userToChangePassword.Password = hashedNewPassword;
+                _userRepository.EditUser(userToChangePassword);
+                return Ok(true);
+            }
+            return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+        }
+
+        [HttpPost]
         [Route("login")]
         public IHttpActionResult Login(JObject userCredentials)
         {
@@ -52,7 +74,7 @@ namespace WareMaster.Controllers
             {
                 {"iss", issuer},
                 {"aud", audience},
-                {"exp", (timestamp + 245000).ToString()},
+                {"exp", (timestamp + 28800).ToString()},
                 {"id", user.Id.ToString()},
                 {"companyid", user.CompanyId.ToString()},
                 {"companyname", _companyRepository.GetCompanyById(user.CompanyId).Name},
@@ -91,7 +113,7 @@ namespace WareMaster.Controllers
                 return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
             if(userToRegister.Username.Any(char.IsUpper) || !Regex.IsMatch(userToRegister.Username, @"^[a-z0-9]+$"))
                 return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
-            if(userToRegister.Password.Length < 6)
+            if(userToRegister.Password.Length < 6 || !Regex.IsMatch(userToRegister.Password, @"^[a-zA-Z0-9]+$"))
                 return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
 
             var companyId = _companyRepository.AddNewCompany(companyName);

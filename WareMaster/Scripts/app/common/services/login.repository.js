@@ -54,6 +54,15 @@
                 });
         }
 
+        function changePassword(oldPassword, newPassword) {
+            return $http.post('/api',
+                {
+                    oldPassword: oldPassword,
+                    newPassword: newPassword,
+                    userId: getManagerId()
+                });
+        }
+
         return {
             login: login,
             registerNew: registerNew,
@@ -61,6 +70,7 @@
             getManagerId: getManagerId,
             isUserAuthenticated: isUserAuthenticated,
             getAuthDetails: getAuthDetails,
-            checkIfUsernameExists: checkIfUsernameExists
+            checkIfUsernameExists: checkIfUsernameExists,
+            changePassword: changePassword
         };
     });

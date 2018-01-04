@@ -43,7 +43,13 @@
                     </div>
                 </div>
                 <div class="button-content" ng-controller="MainMenuController">
-                    <div class="button-content-item">Promijeni lozinku</div>
+                    <div class="button-content-item" ng-click="wantsToChangePassword = true">Promijeni lozinku</div>
+                    <div ng-show="wantsToChangePassword">
+                        Stara lozinka: <input type="password" ng-model="oldPassword"/>
+                        Nova lozinka: <input type="password" ng-model="newPassword"/>
+                        <button ng-click="changePassword()">Promijeni</button>
+                        <button ng-click="wantsToChangePassword = false">Odustani</button>
+                    </div>
                     <div class="button-content-item">Promijeni temu</div>
                     <div class="button-content-item" ng-click="logout()">Odjava</div>
                 </div>
