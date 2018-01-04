@@ -35,16 +35,9 @@
         function isUserAuthenticated() {
             const details = getAuthDetails();
             if (!details) return false;
-             checkIfUsernameExists(details.username).then(function (doesUsernameExist) {
-                console.log(doesUsernameExist.data);
-                if (!doesUsernameExist.data)
-                    return false;
-                else {
-                    const token = localStorage.getItem('bearerToken');
-                    if (!token) return false;
-                    return !jwtHelper.isTokenExpired(token);
-                }
-            });
+            const token = localStorage.getItem('bearerToken');
+            if (!token) return false;
+            return !jwtHelper.isTokenExpired(token);
         }
 
         function getAuthDetails() {
