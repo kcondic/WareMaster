@@ -33,7 +33,7 @@
             name: 'orders',
             breadcrumbText: 'Narudžbe',
             buttonContentItems: {
-
+                first: 'Broju naručenih proizvoda'
             }
         }
     ];

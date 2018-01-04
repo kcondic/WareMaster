@@ -1,7 +1,44 @@
 ﻿<div id="orders">
-<div ng-repeat="order in allOrders">
-    <span ui-sref="orderdetails({id: order.Id})">Narudžba {{order.Id}}.</span>
-    <button ng-click="deleteOrder(order.Id)">OTKAŽI</button>
+    <div class="main-frame">
+        <div class="frame-content">
+            <div class="content-header">
+                <div class="template-title-row">
+                    <div class="template-title"><label class="title-label">Narudžbe</label></div>
+                </div>
+                <div class="columns-titles">
+                    <div class="column-title" ng-click="orderType=0" ng-class="getClass(0)">
+                        <label class="column-title-label">Ulazne</label>
+                    </div>
+                    <div class="column-title" ng-click="orderType=1" ng-class="getClass(1)">
+                        <label class="column-title-label exit-order-label">Izlazne</label>
+                    </div>
+                </div>
+            </div>
+            <div class="content-body">
+                <div class="content-column">
+                    <div class="content-column-title"><label class="column-title-label">Planirane</label></div>
+                    <div class="column-body">
+                        <div ng-repeat="order in allOrders" class="content-row" ng-if="order.Type===orderType">
+                            <div class="row-element" ui-sref="orderdetails({id: order.Id})">
+                                Narudžba {{order.Id}}.
+                            </div>
+                            <div class="row-element button-row-element">
+                                <button ng-click="deleteOrder(order.Id)">Otkaži</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-column">
+                    <div class="content-column-title"><label class="column-title-label">U tijeku</label></div>
+                    <div class="column-body"></div>
+                </div>
+                <div class="content-column">
+                    <div class="content-column-title"><label class="column-title-label">Izvršene</label></div>
+                    <div class="column-body"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<div class="snackbar">Za pogledati detaljnije informacije o narudžbi, pritisnite ID  željene narudžbe</div>
 <div ui-view=""></div>
-</div>

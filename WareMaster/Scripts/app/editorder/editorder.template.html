@@ -1,43 +1,47 @@
-﻿Uredi narudžbu {{order.Id}}.:
-<div ng-show="order.Type===0">
-    <div>
-        Dobavljač: {{order.Supplier.Name}}
+﻿<div class="modal-overlay">
+    <div class="modal-box">
+        Uredi narudžbu {{order.Id}}.:
+        <div ng-show="order.Type===0">
+            <div>
+                Dobavljač: {{order.Supplier.Name}}
+            </div>
+            <div>
+                Proizvodi:
+                <span ng-repeat="product in selectedProducts">
+                    <span ng-click="deselectProduct(product)">{{product.Name}}</span>
+                    Količina: <input type="number" min="1" value="1" ng-model="product.Counter" />
+                </span>
+            </div>
+            <div>
+                Ostali proizvodi dobavljača:
+                <span ng-click="selectProduct(product)" ng-repeat="product in allProducts">{{product.Name}} </span>
+            </div>
+            <button ng-click="editOrder()">Uredi</button>
+            <button ui-sref="orders">Odustani</button>
+        </div>
+        <div ng-show="order.Type===1">
+            <div>
+                Proizvodi:
+                <span ng-repeat="product in selectedProducts">
+                    <span ng-click="deselectProduct(product)">{{product.Name}}</span>
+                    Količina: <input type="number" min="1" value="1" ng-model="product.Counter" />
+                </span>
+            </div>
+            <div>
+                Ostali proizvodi:
+                <span ng-click="selectProduct(product)" ng-repeat="product in allProducts">{{product.Name}} </span>
+            </div>
+            Odabir radnika:
+            <div>
+                Radnik:
+                <span ng-click="deselectEmployee(selectedEmployee)">{{selectedEmployee.FirstName}} {{selectedEmployee.LastName}} </span>
+            </div>
+            <div>
+                Svi radnici:
+                <span ng-click="selectEmployee(employee)" ng-repeat="employee in allEmployees">{{employee.FirstName}} {{employee.LastName}} </span>
+            </div>
+            <button ng-click="editOrder()">Uredi</button>
+            <button ui-sref="orders">Odustani</button>
+        </div>
     </div>
-    <div>
-        Proizvodi:
-        <span ng-repeat="product in selectedProducts">
-            <span ng-click="deselectProduct(product)">{{product.Name}}</span>
-            Količina: <input type="number" min="1" value="1" ng-model="product.Counter" />
-        </span>
-    </div>
-    <div>
-        Ostali proizvodi dobavljača:
-        <span ng-click="selectProduct(product)" ng-repeat="product in allProducts">{{product.Name}} </span>
-    </div>
-    <button ng-click="editOrder()">Uredi</button>
-    <button ui-sref="orders">Odustani</button>
-</div>
-<div ng-show="order.Type===1">
-    <div>
-        Proizvodi:
-        <span ng-repeat="product in selectedProducts">
-            <span ng-click="deselectProduct(product)">{{product.Name}}</span>
-            Količina: <input type="number" min="1" value="1" ng-model="product.Counter" />
-        </span>
-    </div>
-    <div>
-        Ostali proizvodi:
-        <span ng-click="selectProduct(product)" ng-repeat="product in allProducts">{{product.Name}} </span>
-    </div>
-    Odabir radnika:
-    <div>
-        Radnik:
-        <span ng-click="deselectEmployee(selectedEmployee)">{{selectedEmployee.FirstName}} {{selectedEmployee.LastName}} </span>
-    </div>
-    <div>
-        Svi radnici:
-        <span ng-click="selectEmployee(employee)" ng-repeat="employee in allEmployees">{{employee.FirstName}} {{employee.LastName}} </span>
-    </div>
-    <button ng-click="editOrder()">Uredi</button>
-    <button ui-sref="orders">Odustani</button>
 </div>

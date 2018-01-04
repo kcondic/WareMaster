@@ -31,6 +31,7 @@
     animation: fadein 0.5s linear 0.05s forwards normal;
 }
 
+.details-modal-box,
 .edit-supplier-modal-box{
     width: 600px;
 }
@@ -43,6 +44,20 @@
 @keyframes fadein{
     0% {opacity: 0;}
     100% { opacity: 1;}
+}
+
+@keyframes fadeout{
+    0% {opacity: 1;}
+    100% { opacity: 0;}
+}
+
+
+@keyframes fadeinout{
+    0% {opacity: 0;}
+    25% {opacity: 1;}
+    50% {opacity: 1;}
+    75% {opacity: 1;}
+    100% { opacity: 0;}
 }
 
 /* MODAL HEADER DESIGN */
@@ -163,10 +178,16 @@
     justify-content: flex-start;
 }
 
+.creation-time-row,
+.creation-time-row .modal-row-element{
+    width: 100%;
+}
+
 .row-title{
     font-size: 20px;
 }
 
+.product-quantity,
 .orders-modal-box .single-product input,
 .modal-row-element input{
     width: 90%;
@@ -309,8 +330,16 @@
     border-bottom: solid 1.5px rgb(235,235,235);
 }
 
+.details-modal-box .single-product,
 .orders-modal-box .single-product{
     justify-content: space-around;
+}
+
+.product-quantity{
+    padding-left: 10px;
+    background-color: white;
+    width: 20%;
+    font-size: inherit;
 }
 
 .orders-modal-box .single-product input{

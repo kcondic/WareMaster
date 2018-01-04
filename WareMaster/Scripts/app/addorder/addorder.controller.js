@@ -30,10 +30,12 @@
 
         $scope.incomingSelect = function() {
             $scope.incomingSelected = true;
+            $scope.outgoingSelected = false;
         }
 
         $scope.outgoingSelect = function () {
             $scope.outgoingSelected = true;
+            $scope.incomingSelected = false;
         }
 
         $scope.selectEmployee = function (employee) {

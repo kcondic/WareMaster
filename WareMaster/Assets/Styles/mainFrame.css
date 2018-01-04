@@ -1,7 +1,8 @@
 ﻿/* DESIGN FOR PRODUCTS, EMPLOYEES AND SUPPLIERS FORMS */
 #products,
 #employees,
-#suppliers{
+#suppliers,
+#orders{
     height: 85.8vh;
     width: 100%;
     margin-top: 94px;
@@ -29,6 +30,7 @@
     border-radius: 3px;
     border-collapse: collapse;
     font-family: inherit;
+    position: relative;
 }
 
 /* FRAME HEADER DESIGN */
@@ -45,6 +47,7 @@
     border-top-right-radius: 4px;
 }
 
+.content-column-title,
 .template-title-row,
 .template-title,
 .title-label,
@@ -82,6 +85,7 @@
     z-index: 1;
 }
 
+.content-column-title,
 .column-title{
     height: 100%;
     width: 50%;
@@ -89,6 +93,7 @@
     font-weight: 400;
 }
 
+.content-column .content-column-title,
 .column-title:not(.empty-title){
     cursor: pointer;
 }
@@ -99,11 +104,27 @@
     cursor: pointer;
 }
 
+.content-header .exit-order-label{
+    border-right: none;
+}
+
+.content-column .content-column-title:active,
 .column-title:not(.empty-title):active{
     background-color: rgb(47, 47, 47);
 }
 
+#orders .columns-titles .column-title{
+    border-bottom: 0.5px solid white;
+}
 
+.columns-titles .selected{
+    background-color: rgb(47, 47, 47);
+}
+
+#orders .columns-titles .column-title:hover > .column-title-label,
+.selected .column-title-label{
+    text-decoration: underline;
+}
 
 /* FRAME BODY DESIGN */
 .content-body{
@@ -118,6 +139,52 @@
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     position: relative;
+}
+
+#orders .content-body{
+    overflow: hidden;
+    -ms-overflow-style: none;
+    display: flex;
+}
+
+.content-column{
+    height: 100%;
+    width: 33.3%;
+    display: flex;
+    flex-flow: column;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -ms-overflow-style: scrollbar;
+    position: relative;
+    z-index: 2;
+}
+.content-column:last-of-type{
+    width: 33.4%;
+}
+
+.content-column .content-column-title{
+    width: 31.5%;
+    height: 7%;
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    background-color: steelblue;
+    color: white;
+    position: fixed;
+    margin-top: 0;
+    margin-left: 0;
+    z-index: 1;
+}
+
+.content-column .column-title-label{
+    border: none;
+    z-index: 2;
+}
+
+.content-column .column-body{
+    width: 100%;
+    margin-top: 7%;
+    height: 86%;
 }
 
 /* FRAME ROW DESIGN */
@@ -138,6 +205,11 @@
 
 .content-row:last-child{
     border-bottom: solid 2px rgba(0, 0, 0, 0.1);
+}
+
+#orders .content-row{
+    align-items: center;
+    justify-content: space-around;
 }
 
 .row-element{
@@ -163,6 +235,10 @@
 
 .suppliers-button-row-element{
     width: 49.3%;
+}
+
+.column-body .row-element{
+    cursor: pointer;
 }
 
 /* FRAME ROW BUTTONS DESIGN */
@@ -216,4 +292,20 @@
     image-resolution: from-image;
     background-size: cover;
     border-radius: 4px;
+}
+/* SNACKBAR DESIGN*/
+.snackbar {
+    min-width: 250px;
+    background-color: rgba(34,34,34, 0.92);
+    color: white;
+    text-align: center;
+    font-size: 14.45px;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    bottom: 20px;
+    margin-left: 30%;
+    z-index: 10;
+    opacity: 0;
+    animation: fadeinout 8s linear 0s forwards normal;
 }
