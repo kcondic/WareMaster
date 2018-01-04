@@ -33,8 +33,6 @@
         }
 
         function isUserAuthenticated() {
-            const details = getAuthDetails();
-            if (!details) return false;
             const token = localStorage.getItem('bearerToken');
             if (!token) return false;
             return !jwtHelper.isTokenExpired(token);
