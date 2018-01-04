@@ -393,7 +393,7 @@
     <Content Include="Scripts\app\app.run.js" />
     <Content Include="Scripts\app\common\controllers\header.controller.js" />
     <Content Include="Scripts\app\common\controllers\mainmenu.controller.js" />
-    <Content Include="Scripts\app\common\services\dashboard.repository.js" />
+    <Content Include="Scripts\app\common\services\activitylogs.repository.js" />
     <Content Include="Scripts\app\common\services\functions.repository.js" />
     <Content Include="Scripts\app\common\services\employees.repository.js" />
     <Content Include="Scripts\app\common\services\login.repository.js" />
