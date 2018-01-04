@@ -9,10 +9,14 @@
                 .then(function () {
                     alert('Lozinka je uspješno promijenjena.');
                     $scope.wantsToChangePassword = false;
+                    $scope.oldPassword = '';
+                    $scope.newPassword = '';
                 }, function() {
                     alert('Lozinka je neispravna!');
                     $scope.wantsToChangePassword = false;
-            });
+                    $scope.oldPassword = '';
+                    $scope.newPassword = '';
+                });
         }
 
         function validateInput() {
