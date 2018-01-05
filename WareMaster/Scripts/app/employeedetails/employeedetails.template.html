@@ -18,4 +18,5 @@ Narudžbe:
     </div>
 </div>
 <button ui-sref="editemployee({id:employee.Id})">Edit</button>
+<button ng-click="deleteEmployee(employee.Id, employee.FirstName, employee.LastName)">Izbriši</button>
 <button ui-sref="employees">Close</button>

@@ -21,6 +21,7 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
                 return context.Products
+                    .Include(product => product.Suppliers)
                     .SingleOrDefault(product => product.Id == productId);
         }
 

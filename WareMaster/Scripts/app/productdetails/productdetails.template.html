@@ -1,0 +1,11 @@
+﻿<div>
+    {{product.Name}}
+    <img ng-src="{{product.ImageUrl}}" alt="Proizvod nema sliku" />
+</div>
+Dobavljači:
+<div ng-repeat="supplier in product.Suppliers">
+    <span ui-sref="supplierdetails({id:supplier.Id})">{{supplier.Name}}</span>
+</div>
+<button ui-sref="editproduct({id:product.Id})">Edit</button>
+<button ng-click="deleteProduct(product.Id, product.Name)">Izbriši</button>
+<button ui-sref="products">Close</button>

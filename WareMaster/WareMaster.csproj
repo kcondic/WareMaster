@@ -420,6 +420,9 @@
     <Content Include="Scripts\app\login\login.controller.js" />
     <Content Include="Scripts\app\login\login.state.js" />
     <Content Include="Scripts\app\login\login.template.html" />
+    <Content Include="Scripts\app\productdetails\productdetails.controller.js" />
+    <Content Include="Scripts\app\productdetails\productdetails.state.js" />
+    <Content Include="Scripts\app\productdetails\productdetails.template.html" />
     <Content Include="Scripts\app\registerexisting\registerexisting.controller.js" />
     <Content Include="Scripts\app\registerexisting\registerexisting.state.js" />
     <Content Include="Scripts\app\registerexisting\registerexisting.template.html" />
