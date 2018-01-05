@@ -9,4 +9,5 @@
 </div>
 <div ng-show="order.Type===1">Radnik: {{order.AssignedEmployee.FirstName}} {{order.AssignedEmployee.LastName}}</div>
 <button ui-sref="editorder({id:order.Id})">Edit</button>
+<button ng-click="deleteOrder(order.Id)">OTKAŽI</button>
 <button ui-sref="orders">Close</button>

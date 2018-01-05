@@ -414,9 +414,15 @@
     <Content Include="Scripts\app\editsupplier\editsupplier.controller.js" />
     <Content Include="Scripts\app\editsupplier\editsupplier.state.js" />
     <Content Include="Scripts\app\editsupplier\editsupplier.template.html" />
+    <Content Include="Scripts\app\employeedetails\employeedetails.controler.js" />
+    <Content Include="Scripts\app\employeedetails\employeedetails.state.js" />
+    <Content Include="Scripts\app\employeedetails\employeedetails.template.html" />
     <Content Include="Scripts\app\login\login.controller.js" />
     <Content Include="Scripts\app\login\login.state.js" />
     <Content Include="Scripts\app\login\login.template.html" />
+    <Content Include="Scripts\app\productdetails\productdetails.controller.js" />
+    <Content Include="Scripts\app\productdetails\productdetails.state.js" />
+    <Content Include="Scripts\app\productdetails\productdetails.template.html" />
     <Content Include="Scripts\app\registerexisting\registerexisting.controller.js" />
     <Content Include="Scripts\app\registerexisting\registerexisting.state.js" />
     <Content Include="Scripts\app\registerexisting\registerexisting.template.html" />
@@ -429,6 +435,9 @@
     <Content Include="Scripts\app\orders\orders.controller.js" />
     <Content Include="Scripts\app\orders\orders.state.js" />
     <Content Include="Scripts\app\orders\orders.template.html" />
+    <Content Include="Scripts\app\supplierdetails\supplierdetails.controller.js" />
+    <Content Include="Scripts\app\supplierdetails\supplierdetails.state.js" />
+    <Content Include="Scripts\app\supplierdetails\supplierdetails.template.html" />
     <Content Include="Scripts\app\suppliers\suppliers.controller.js" />
     <Content Include="Scripts\app\suppliers\suppliers.state.js" />
     <Content Include="Scripts\app\suppliers\suppliers.template.html" />

@@ -3,8 +3,7 @@
     <div ng-repeat="order in allOrders">
         <span ng-show="order.Type===0" ui-sref="orderdetails({id: order.Id})">{{order.Supplier.Name}} {{order.TimeOfCreation | date: "dd.MM.y"}}</span>
         <span ng-show="order.Type===1 && order.AssignedEmployee!==null" ui-sref="orderdetails({id: order.Id})">{{order.AssignedEmployee.FirstName}} {{order.AssignedEmployee.LastName}} {{order.TimeOfCreation | date: "dd.MM.y"}}</span>
-        <span ng-show="order.Type===1 && order.AssignedEmployee===null" ui-sref="orderdetails({id: order.Id})">Nije pridijeljen zaposlenik {{order.TimeOfCreation | date: "dd.MM.y"}}</span>
-        <button ng-click="deleteOrder(order.Id)">OTKAŽI</button>
+        <span ng-show="order.Type===1 && order.AssignedEmployee===null" ui-sref="orderdetails({id: order.Id})">Nije pridijeljen zaposlenik {{order.TimeOfCreation | date: "dd.MM.y"}}</span><br/>
     </div>
     <button ui-sref="addorder">Nova narudžba</button>
     <div ui-view=""></div>
