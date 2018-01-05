@@ -378,9 +378,9 @@
     <Content Include="Assets\images\logos\logo6060.png" />
     <Content Include="Assets\images\logos\logo6262.png" />
     <Content Include="LICENSE.txt" />
+    <Content Include="Scripts\app\addsupplier\addsupplier.controller.js" />
     <Content Include="Scripts\app\addsupplier\addsupplier.state.js" />
     <Content Include="Scripts\app\addsupplier\addsupplier.template.html" />
-    <Content Include="Scripts\app\addsupplier\addsupplier.controller.js" />
     <Content Include="Scripts\app\addemployee\addemployee.controller.js" />
     <Content Include="Scripts\app\addemployee\addemployee.state.js" />
     <Content Include="Scripts\app\addemployee\addemployee.template.html" />
