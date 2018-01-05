@@ -1,5 +1,5 @@
 ﻿angular.module('app').controller('ProductsController',
-    function ($scope, $state, productsRepository, loginRepository, activitylogRepository) {
+    function ($scope, $state, productsRepository, loginRepository) {
 
         const companyId = loginRepository.getCompanyId();
 

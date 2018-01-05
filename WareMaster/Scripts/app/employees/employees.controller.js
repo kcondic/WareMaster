@@ -1,5 +1,5 @@
 ﻿angular.module('app').controller('EmployeesController',
-    function ($scope, $state, employeesRepository, loginRepository, activitylogRepository) {
+    function ($scope, $state, employeesRepository, loginRepository) {
 
         const companyId = loginRepository.getCompanyId();
 

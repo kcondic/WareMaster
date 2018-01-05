@@ -15,7 +15,6 @@
                         UserId: loginRepository.getManagerId(),
                         CompanyId: companyId
                     });
-                    $scope.allProducts.splice($scope.allProducts.findIndex(product => product.Id === id), 1);
                 });
                 setTimeout(function() { $state.go('products', {}, { reload: true }) }, 50);
             }
