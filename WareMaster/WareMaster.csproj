@@ -364,7 +364,6 @@
     <Content Include="Assets\styles\mainFrame.css" />
     <Content Include="Assets\styles\subHeader.css" />
     <Content Include="Assets\styles\registrationMain.css" />
-    <Content Include="Assets\styles\ordersMain.css" />
     <Content Include="favicon.ico" />
     <Content Include="Assets\fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
