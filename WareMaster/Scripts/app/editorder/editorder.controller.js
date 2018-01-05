@@ -1,5 +1,5 @@
 ﻿angular.module('app').controller('EditOrderController',
-    function ($scope, $state, $stateParams, ordersRepository, employeesRepository, productsRepository, loginRepository) {
+    function ($scope, $state, $stateParams, ordersRepository, employeesRepository, productsRepository, loginRepository, activitylogRepository) {
         $scope.selectedProducts = [];
 
         const companyId = loginRepository.getCompanyId();
@@ -85,6 +85,18 @@
             $scope.order.AssignedEmployee = $scope.selectedEmployee;
 
             ordersRepository.editOrder($scope.order).then(function () {
+                if ($scope.order.Type === 0)
+                    activitylogRepository.addActivityLog({
+                        Text: `${loginRepository.getManagerName()} je uredio ulaznu narudžbu`,
+                        UserId: loginRepository.getManagerId(),
+                        CompanyId: companyId
+                    });
+                else
+                    activitylogRepository.addActivityLog({
+                        Text: `${loginRepository.getManagerName()} je uredio izlaznu narudžbu`,
+                        UserId: loginRepository.getManagerId(),
+                        CompanyId: companyId
+                    });
                 $state.go('orders', {}, { reload: true });
             });
         }

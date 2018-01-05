@@ -39,9 +39,13 @@ namespace WareMaster.Data.Models
                 .WithMany(x => x.Suppliers)
                 .HasForeignKey(x => x.CompanyId);
             modelBuilder.Entity<ActivityLog>()
-                .HasRequired(x => x.User)
+                .HasOptional(x => x.User)
                 .WithMany(x => x.ActivityLogs)
                 .HasForeignKey(x => x.UserId);
+            modelBuilder.Entity<ActivityLog>()
+                .HasRequired(x => x.Company)
+                .WithMany(x => x.ActivityLogs)
+                .HasForeignKey(x => x.CompanyId);
 
             modelBuilder.Entity<ProductOrders>()
                 .HasKey(x => new { x.ProductId, x.OrderId });

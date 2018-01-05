@@ -96,7 +96,9 @@ namespace WareMaster.Controllers
                 {"id", user.Id.ToString()},
                 {"companyid", user.CompanyId.ToString()},
                 {"companyname", _companyRepository.GetCompanyById(user.CompanyId).Name},
-                {"username", user.Username}
+                {"username", user.Username},
+                {"firstname", user.FirstName},
+                {"lastname", user.LastName}
             };
 
             var token = JWT.Encode(payload, Encoding.UTF8.GetBytes(secret), JwsAlgorithm.HS256);

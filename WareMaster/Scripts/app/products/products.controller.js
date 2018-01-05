@@ -1,7 +1,9 @@
 ﻿angular.module('app').controller('ProductsController',
-    function ($scope, $state, productsRepository, loginRepository) {
+    function ($scope, $state, productsRepository, loginRepository, activitylogRepository) {
 
-        productsRepository.getAllProducts(loginRepository.getCompanyId()).then(function (products) {
+        const companyId = loginRepository.getCompanyId();
+
+        productsRepository.getAllProducts(companyId).then(function (products) {
             $scope.allProducts = products.data;
 
             for (let product of $scope.allProducts) {
@@ -12,9 +14,14 @@
 
         $scope.deleteProduct = function (id, name) {
             if (confirm(`Jeste li sigurni da želite izbrisati proizvod ${name}?\nTime će se izbrisati i njegova količina.`)) {
-                productsRepository.deleteProduct(id);
-                $scope.allProducts.splice($scope.allProducts
-                    .findIndex(product => product.Id === id), 1);
+                productsRepository.deleteProduct(id).then(function() {
+                    activitylogRepository.addActivityLog({
+                        Text: `${loginRepository.getManagerName()} je izbrisao proizvod ${name}`,
+                        UserId: loginRepository.getManagerId(),
+                        CompanyId: companyId
+                    });
+                    $scope.allProducts.splice($scope.allProducts.findIndex(product => product.Id === id), 1);
+                });
             }
         }
     });

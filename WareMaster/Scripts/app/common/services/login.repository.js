@@ -38,6 +38,12 @@
             return null;
         }
 
+        function getManagerName() {
+            const details = localStorage.getItem('authDetails');
+            if (details)
+                return JSON.parse(details).firstname + ' ' + JSON.parse(details).lastname;
+        }
+
         function isUserAuthenticated() {
             const token = localStorage.getItem('bearerToken');
             if (!token) return false;
@@ -93,6 +99,7 @@
             registerExisting: registerExisting,
             getCompanyId: getCompanyId,
             getManagerId: getManagerId,
+            getManagerName: getManagerName,
             isUserAuthenticated: isUserAuthenticated,
             getAuthDetails: getAuthDetails,
             checkIfUsernameExists: checkIfUsernameExists,

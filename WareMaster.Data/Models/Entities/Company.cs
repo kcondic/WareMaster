@@ -10,5 +10,6 @@ namespace WareMaster.Data.Models.Entities
         public ICollection<Product> Products { get; set; }
         public ICollection<Order> Orders { get; set; }
         public ICollection<Supplier> Suppliers { get; set; }
+        public ICollection<ActivityLog> ActivityLogs { get; set; }
     }
 }
