@@ -1,10 +1,21 @@
 ﻿<div>
     {{employee.FirstName}} {{employee.LastName}}
+    <img ng-src="{{employee.ImageUrl}}" alt="Korisnik nema sliku" />
 </div>
 Narudžbe:
-<div ng-repeat="order in employee.EmployeeOrders">
-    <span ng-if="order.Status===0">U pripremi</span>
-    <span ng-if="order.Status===1">U trajanju</span>
-    <span ng-if="order.Status===2">Završena</span>
-    {{order.TimeOfCreation}}
+<select ng-model="chosenOrderFilter" ng-change="updateOrderList()">
+    <option value="3">Sve</option>
+    <option value="0">U pripremi</option>
+    <option value="1">U trajanju</option>
+    <option value="2">Završena</option>
+</select>
+<div ng-repeat="order in orders">
+    <div ui-sref="orderdetails({id: order.Id})">
+        <span ng-if="order.Status===0">U pripremi</span>
+        <span ng-if="order.Status===1">U trajanju</span>
+        <span ng-if="order.Status===2">Završena</span>
+        {{order.TimeOfCreation | date: "dd.MM.y"}}
+    </div>
 </div>
+<button ui-sref="editemployee({id:employee.Id})">Edit</button>
+<button ui-sref="employees">Close</button>
