@@ -1,7 +1,9 @@
 ﻿angular.module('app').controller('MainMenuController',
-    function ($scope, $state, loginRepository) {
+    function ($scope, $state, loginRepository, activitylogRepository) {
         $scope.wantsToChangePassword = false;
         $scope.wantsToManipulateManagers = false;
+
+        const companyId = loginRepository.getCompanyId();
 
         $scope.changePassword = function () {
             if(validateInput())
@@ -39,7 +41,7 @@
         }
 
         $scope.loadManagers = function () {
-            loginRepository.getAllManagers(loginRepository.getCompanyId()).then(function(managers) {
+            loginRepository.getAllManagers(companyId).then(function(managers) {
                 $scope.allManagers = managers.data.filter(manager => manager.Id !== parseInt(loginRepository.getManagerId()));
             }).then(function() {
                 $scope.wantsToManipulateManagers = true;
@@ -48,8 +50,14 @@
 
         $scope.deleteManager = function (id, firstName, lastName) {
             if (confirm(`Jeste li sigurni da želite izbrisati menadžera ${firstName} ${lastName}?`)) {
-                loginRepository.deleteManager(id);
-                $scope.allManagers.splice($scope.allManagers.findIndex(manager => manager.Id === id), 1);
+                loginRepository.deleteManager(id).then(function() {
+                    activitylogRepository.addActivityLog({
+                        Text: `${loginRepository.getManagerName()} je izbrisao menadžera ${firstName} ${lastName}`,
+                        UserId: loginRepository.getManagerId(),
+                        CompanyId: companyId
+                    });
+                    $scope.allManagers.splice($scope.allManagers.findIndex(manager => manager.Id === id), 1);
+                });
             }
             $scope.wantsToManipulateManagers = false;
         }

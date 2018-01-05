@@ -1,5 +1,7 @@
 ﻿angular.module('app').controller('DashboardController',
-    function ($scope, $state, dashboardRepository, loginRepository) {
+    function ($scope, $state, loginRepository, activitylogRepository) {
         const companyId = loginRepository.getCompanyId();
-        dashboardRepository.getActivities(companyId);
+        activitylogRepository.getActivityLogs(companyId).then(function(activitylogs) {
+            $scope.ActivityLogs = activitylogs.data;
+        });
     });

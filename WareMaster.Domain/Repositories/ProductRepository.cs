@@ -64,7 +64,8 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WarehouseContext())
             {
-                var productToDelete = context.Products.FirstOrDefault(product => product.Id == productId);
+                var productToDelete = context.Products.Include(product => product.ProductOrders)
+                                                      .FirstOrDefault(product => product.Id == productId);
 
                 if (productToDelete == null)
                     return;
