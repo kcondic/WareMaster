@@ -20,12 +20,14 @@
 
         $scope.deleteEmployee = function (id, firstName, lastName) {
             if (confirm(`Jeste li sigurni da želite izbrisati zaposlenika ${firstName} ${lastName}?\nTime će njegovo ime i aktivnosti nestati iz sustava.`)) {
-                employeesRepository.deleteEmployee(id);
-                activitylogRepository.addActivityLog({
-                    Text: `${loginRepository.getManagerName()} je izbrisao zaposlenika ${firstName} ${lastName}`,
-                    UserId: loginRepository.getManagerId(),
-                    CompanyId: companyId
+                employeesRepository.deleteEmployee(id).then(function() {
+                    activitylogRepository.addActivityLog({
+                        Text: `${loginRepository.getManagerName()} je izbrisao zaposlenika ${firstName} ${lastName}`,
+                        UserId: loginRepository.getManagerId(),
+                        CompanyId: companyId
+                    });
+                    $state.go('employees', {}, { reload: true });
                 });
-                setTimeout(function() { $state.go('employees', {}, { reload: true }) }, 50)};
             }
+        }
     });

@@ -435,6 +435,9 @@
     <Content Include="Scripts\app\orders\orders.controller.js" />
     <Content Include="Scripts\app\orders\orders.state.js" />
     <Content Include="Scripts\app\orders\orders.template.html" />
+    <Content Include="Scripts\app\supplierdetails\supplierdetails.controller.js" />
+    <Content Include="Scripts\app\supplierdetails\supplierdetails.state.js" />
+    <Content Include="Scripts\app\supplierdetails\supplierdetails.template.html" />
     <Content Include="Scripts\app\suppliers\suppliers.controller.js" />
     <Content Include="Scripts\app\suppliers\suppliers.state.js" />
     <Content Include="Scripts\app\suppliers\suppliers.template.html" />

@@ -15,8 +15,8 @@
                         UserId: loginRepository.getManagerId(),
                         CompanyId: companyId
                     });
+                    $state.go('products', {}, { reload: true });
                 });
-                setTimeout(function() { $state.go('products', {}, { reload: true }) }, 50);
             }
         }
     });

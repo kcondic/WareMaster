@@ -1,0 +1,10 @@
+﻿<div>
+    {{supplier.Name}}
+</div>
+Proizvodi:
+<div ng-repeat="product in supplier.Products">
+    <span ui-sref="productdetails({id:product.Id})">{{product.Name}}</span>
+</div>
+<button ui-sref="editsupplier({id:supplier.Id})">Edit</button>
+<button ng-click="deleteSupplier(supplier.Id, supplier.Name)">Izbriši</button>
+<button ui-sref="suppliers">Close</button>
