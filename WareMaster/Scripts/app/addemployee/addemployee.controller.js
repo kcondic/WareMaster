@@ -13,7 +13,7 @@
             };
             employeesRepository.addEmployee(newEmployee).then(function () {
                 activitylogRepository.addActivityLog({
-                    Text: `${loginRepository.getManagerName()} je dodao zaposlenika ${$scope.firstName} ${$scope.lastName}`,
+                    Text: `${loginRepository.getManagerName()} je stvorio zaposlenika ${$scope.firstName} ${$scope.lastName}`,
                     UserId: loginRepository.getManagerId(),
                     CompanyId: companyId
                 });

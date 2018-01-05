@@ -16,7 +16,8 @@
         $scope.addNewSupplier = function () {
             const newSupplier = {
                 Name: $scope.name,
-                Products: $scope.productsSelected
+                Products: $scope.productsSelected,
+                CompanyId: companyId
         }
             suppliersRepository.addNewSupplier(newSupplier).then(function () {
                 activitylogRepository.addActivityLog({

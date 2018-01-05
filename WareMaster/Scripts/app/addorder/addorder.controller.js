@@ -109,7 +109,8 @@
                 else
                     activitylogRepository.addActivityLog({
                         Text: `${loginRepository.getManagerName()} je stvorio izlaznu narudžbu`,
-                        UserId: loginRepository.getManagerId()
+                        UserId: loginRepository.getManagerId(),
+                        CompanyId: companyId
                     });
                 $state.go('orders', {}, { reload: true });
             });

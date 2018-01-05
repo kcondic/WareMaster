@@ -83,6 +83,11 @@ namespace WareMaster.Controllers
             var companyName = _companyRepository.GetCompanyById(_productRepository.GetProduct(id).CompanyId).Name;
             var uploadsFolder = HttpContext.Current.Server.MapPath("\\Uploads");
             var companyFolder = Path.Combine(Path.Combine(uploadsFolder, companyName), "Proizvodi");
+            if (!Directory.Exists(companyFolder))
+            {
+                _productRepository.DeleteProduct(id);
+                return Ok(true);
+            }
             var fileToDeleteFilter = @"*" + id + ".jpg";
             var fileToDelete = Directory.GetFiles(companyFolder, fileToDeleteFilter);
             if (fileToDelete.Any())

@@ -84,6 +84,11 @@ namespace WareMaster.Controllers
             var companyName = _companyRepository.GetCompanyById(_employeeRepository.GetUser(id).CompanyId).Name;
             var uploadsFolder = HttpContext.Current.Server.MapPath("\\Uploads");
             var companyFolder = Path.Combine(Path.Combine(uploadsFolder, companyName), "Zaposlenici");
+            if (!Directory.Exists(companyFolder))
+            {
+                _employeeRepository.DeleteUser(id);
+                return Ok(true);
+            }
             var fileToDeleteFilter = @"*" + id + ".jpg";
             var fileToDelete = Directory.GetFiles(companyFolder, fileToDeleteFilter);
             if(fileToDelete.Any())
