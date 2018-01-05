@@ -18,15 +18,12 @@
                 <div class="content-column">
                     <div class="content-column-title"><label class="column-title-label">Planirane</label></div>
                     <div class="column-body">
-                        <div ng-repeat="order in allOrders" class="content-row" ng-if="order.Type===orderType">
-                            <div class="row-element" ui-sref="orderdetails({id: order.Id})">
+                        <div ng-repeat="order in allOrders" class="content-row" ng-if="order.Type===orderType" ui-sref="orderdetails({id: order.Id})">
+                            <div class="row-element">
                                 {{getOrderName(order.Supplier.Name, order.AssignedEmployee)}}
                             </div>
-                            <div class="row-element" ui-sref="orderdetails({id: order.Id})">
+                            <div class="row-element">
                                 {{order.TimeOfCreation | date: "dd.MM.yyyy."}}
-                            </div>
-                            <div class="row-element button-row-element">
-                                <button ng-click="deleteOrder(order.Id)">Otkaži</button>
                             </div>
                         </div>
                     </div>
@@ -43,5 +40,5 @@
         </div>
     </div>
 </div>
-<div class="snackbar">Za pogledati detaljnije informacije o narudžbi, pritisnite ID  željene narudžbe</div>
+<div class="snackbar">Za pogledati detaljnije informacije o narudžbi, pritisnite na željenu narudžbu</div>
 <div ui-view=""></div>

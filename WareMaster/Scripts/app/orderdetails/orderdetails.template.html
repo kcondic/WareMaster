@@ -28,6 +28,7 @@
         <div class="modal-footer">
             <div class="modal-buttons">
                 <div class="single-button"><button ui-sref="editorder({id:order.Id})">Uredi</button></div>
+                <div class="single-button cancel-button"><button ng-click="deleteOrder(order.Id)">Otkaži</button></div>
                 <div class="single-button cancel-button"><button ui-sref="orders">Zatvori</button></div>
             </div>
         </div>

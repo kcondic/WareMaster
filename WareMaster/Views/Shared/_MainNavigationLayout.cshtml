@@ -5,9 +5,10 @@
             <label class="app-title"><span class="uppercase-title-letter">W</span>are<span class="uppercase-title-letter">M</span>aster</label>
         </div>
 
-        <div class="user-info">
+        <div class="user-info" ng-controller="HeaderController">
             <article>
                 <label>Korisnik:<span class="user-name">{Korisničko ime}</span>     Tvrtka:<span class="company-name">{Ime tvrtke}</span></label>
+                <label>Korisnik:<span class="header-name">{{userName}}</span>     Tvrtka:<span class="header-company">{{companyName}}</span></label>
             </article>
         </div>
 
@@ -43,10 +44,25 @@
                         <div class="menu-bar bar3"></div>
                     </div>
                 </div>
-                <div class="button-content">
-                    <div class="button-content-item">Promijeni lozinku</div>
+                <div class="button-content" ng-controller="MainMenuController">
+                    <div class="button-content-item" ng-click="wantsToChangePassword = true">Promijeni lozinku</div>
+                    <div ng-show="wantsToChangePassword">
+                        Stara lozinka: <input type="password" ng-model="oldPassword"/>
+                        Nova lozinka: <input type="password" ng-model="newPassword"/>
+                        <button ng-click="changePassword()">Promijeni</button>
+                        <button ng-click="wantsToChangePassword = false">Odustani</button>
+                    </div>
+                    <div class="button-content-item" ng-click="loadManagers()">Upravljaj s menadžerima</div>
+                    <div ng-show="wantsToManipulateManagers">
+                        <div ng-repeat="manager in allManagers">
+                            {{manager.FirstName}} {{manager.LastName}}
+                            <button ng-click="deleteManager(manager.Id, manager.FirstName, manager.LastName)">Izbriši</button>
+                        </div>
+                        <button ng-click="wantsToManipulateManagers = false">Odustani</button>
+                        <button ng-click="wantsToManipulateManagers = false" ui-sref="registerexisting({companyid: companyId})">Dodaj novoga</button>
+                    </div>
                     <div class="button-content-item">Promijeni temu</div>
-                    <div class="button-content-item" ui-sref="logout">Odjava</div>
+                    <div class="button-content-item" ng-click="logout()">Odjava</div>
                 </div>
             </li>
         </ul>

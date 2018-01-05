@@ -1,12 +1,14 @@
 ﻿angular.module('app').controller('EditSupplierController',
-    function ($scope, $state, $stateParams, suppliersRepository, productsRepository, loginRepository) {
+    function ($scope, $state, $stateParams, suppliersRepository, productsRepository, loginRepository, activitylogRepository) {
+
+        const companyId = loginRepository.getCompanyId();
 
         suppliersRepository.getSupplierToEdit($stateParams.id).then(function (supplier) {
             $scope.supplierToEdit = supplier.data;
             $scope.name = $scope.supplierToEdit.Name;
             $scope.products = $scope.supplierToEdit.Products;
 
-            productsRepository.getAllProducts(loginRepository.getCompanyId()).then(function (allproducts) {
+            productsRepository.getAllProducts(companyId).then(function (allproducts) {
                 $scope.allProducts = allproducts.data.filter(function (el) {
                     return ($scope.products.findIndex(x=> x.Id === el.Id) === -1);
                 });
@@ -27,8 +29,12 @@
             $scope.supplierToEdit.Name = $scope.name;
             $scope.supplierToEdit.Products = $scope.products;
             suppliersRepository.editSupplier($scope.supplierToEdit).then(function () {
+                activitylogRepository.addActivityLog({
+                    Text: `${loginRepository.getManagerName()} je uredio dobavljača ${$scope.supplierToEdit.Name}`,
+                    UserId: loginRepository.getManagerId(),
+                    CompanyId: companyId
+                });
                 $state.go('suppliers', {}, { reload: true });
             });
         }
-        
     });

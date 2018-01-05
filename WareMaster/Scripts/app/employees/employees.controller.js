@@ -3,7 +3,9 @@ function ($scope, $state, employeesRepository, $rootScope, loginRepository) {
 
         $rootScope.currentTemplate = 'employees';
 
-        employeesRepository.getAllEmployees(loginRepository.getCompanyId()).then(function (employees) {
+        const companyId = loginRepository.getCompanyId();
+
+        employeesRepository.getAllEmployees(companyId).then(function (employees) {
             $scope.allEmployees = employees.data;
 
             for (let employee of $scope.allEmployees) {
@@ -11,13 +13,4 @@ function ($scope, $state, employeesRepository, $rootScope, loginRepository) {
                 employee.ImageUrl = employee.ImageUrl + '?cb=' + random;
             }
         });
-
-        $scope.deleteEmployee = function (id, firstName, lastName) {
-            if (confirm(`Jeste li sigurni da želite izbrisati zaposlenika ${firstName} ${lastName}?\nTime će njegovo ime i aktivnosti nestati iz sustava.`))
-            {
-                employeesRepository.deleteEmployee(id);
-                $scope.allEmployees.splice($scope.allEmployees
-                    .findIndex(employee => employee.Id === id), 1);
-            }         
-        }
     });

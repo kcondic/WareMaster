@@ -1,7 +1,5 @@
-﻿angular.module('app').controller('RegisterController',
-function ($scope, $state, loginRepository, $timeout, $rootScope) {
-
-        $rootScope.currentTemplate = 'register';
+﻿angular.module('app').controller('RegisterExistingController',
+    function ($scope, $state, $timeout, loginRepository, activitylogRepository) {
 
         var timeoutPromise;
         $scope.checkUsername = function () {
@@ -15,24 +13,29 @@ function ($scope, $state, loginRepository, $timeout, $rootScope) {
             }, 1000);
         };
 
-
-        $scope.registerNew = function () {
-            if(validateInput()) {
+        $scope.registerExisting = function () {
+            if (validateInput()) {
                 const newUser = {
                     FirstName: $scope.managerFirstName,
                     LastName: $scope.managerLastName,
                     Role: 1,
+                    CompanyId: loginRepository.getCompanyId(),
                     Username: $scope.username,
                     Password: $scope.password
                 };
-                loginRepository.registerNew($scope.companyName, newUser).then(function () {
-                    $state.go('login');
+                loginRepository.registerExisting(newUser).then(function () {
+                    activitylogRepository.addActivityLog({
+                        Text: `${loginRepository.getManagerName()} je stvorio menadžera ${$scope.managerFirstName} ${$scope.managerLastName}`,
+                        UserId: loginRepository.getManagerId(),
+                        CompanyId: loginRepository.getCompanyId()
+                    });
+                    $state.go('dashboard');
                 });
             }
         }
 
         function validateInput() {
-            const inputToValidate = [$scope.companyName, $scope.managerFirstName, $scope.managerLastName, $scope.username, $scope.password];
+            const inputToValidate = [$scope.managerFirstName, $scope.managerLastName, $scope.username, $scope.password];
             if (inputToValidate.includes(undefined)) {
                 alert('Svi podaci su obavezni!');
                 return false;

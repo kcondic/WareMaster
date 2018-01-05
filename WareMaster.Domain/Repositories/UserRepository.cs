@@ -27,11 +27,12 @@ namespace WareMaster.Domain.Repositories
         }
 
 
-        public List<User> GetAllManagers()
+        public List<User> GetAllManagers(int companyId)
         {
             using (var context = new WarehouseContext())
                 return context.Users
-                    .Where(user => user.Role == Role.Manager).ToList();
+                    .Where(user => user.Role == Role.Manager
+                            && user.CompanyId == companyId).ToList();
         }
 
         public User GetUser(int userId)
@@ -82,6 +83,7 @@ namespace WareMaster.Domain.Repositories
 
                 userToEdit.FirstName = editedUser.FirstName;
                 userToEdit.LastName = editedUser.LastName;
+                userToEdit.Password = editedUser.Password;
                 userToEdit.ImageUrl = editedUser.ImageUrl;
                 userToEdit.Role = editedUser.Role;
 
@@ -98,9 +100,27 @@ namespace WareMaster.Domain.Repositories
                 if (userToDelete == null)
                     return;
 
+                var userToDeleteEmployeeOrders = context.Orders.Where(order => order.AssignedEmployeeId == userToDelete.Id);
+                foreach (var order in userToDeleteEmployeeOrders)
+                    order.AssignedEmployeeId = null;
+
+                var userToDeleteManagerOrders = context.Orders.Where(order => order.AssignedManagerId == userToDelete.Id);
+                foreach (var order in userToDeleteManagerOrders)
+                    order.AssignedManagerId = null;
+
+                var userToDeleteLogs = context.ActivityLogs.Where(log => log.UserId == userToDelete.Id);
+                foreach (var log in userToDeleteLogs)
+                    log.UserId = null;
+
                 context.Users.Remove(userToDelete);
                 context.SaveChanges();
             }
+        }
+
+        public bool DoesUsernameExist(string username)
+        {
+            using (var context = new WarehouseContext())
+                return context.Users.Any(user => user.Username == username);
         }
     }
 }

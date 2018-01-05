@@ -14,8 +14,7 @@
                 <div ng-repeat="supplier in suppliers| filter: global.search" class="content-row">
                     <div class="row-element suppliers-name-row-element">{{supplier.Name}}</div>
                     <div class="row-element suppliers-button-row-element">
-                        <button ui-sref="editsupplier({id: supplier.Id})">Uredi</button>
-                        <button ng-click="deleteSupplier(supplier.Id, supplier.Name)">Izbriši</button>
+                        <button ui-sref="supplierdetails({id: supplier.Id})">Detaljnije...</button>
                     </div>
                 </div>
             </div>

@@ -5,6 +5,10 @@
 
         if (loginRepository.isUserAuthenticated())
             $state.go('dashboard');
+        else {
+            localStorage.removeItem('bearerToken');
+            localStorage.removeItem('authDetails');
+        }
 
         $scope.login = function () {
             loginRepository.login($scope.username, $scope.password)
