@@ -1,11 +1,34 @@
-﻿<div>
-    {{product.Name}}
-    <img ng-src="{{product.ImageUrl}}" alt="Proizvod nema sliku" />
+﻿<div class="modal-overlay">
+    <div class="modal-box details-box">
+        <div class="modal-header">
+            <div class="modal-header-row">
+                <div class="modal-title"><label>Detalji o proizvodu</label></div>
+            </div>
+        </div>
+        <div class="modal-content">
+            <div class="details-columns-row">
+                <div class="details-modal-column">
+                    <div class="order-modal-row">Naziv: {{product.Name}}</div>
+                    <div class="order-modal-row">Dobavljač:</div>
+                    <div class="order-modal-row">
+                        <div ng-repeat="supplier in product.Suppliers" class="details-name-div">
+                            <div ui-sref="supplierdetails({id:supplier.Id})">{{supplier.Name}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-modal-column">
+                    <div class="details-image-container">
+                        <img ng-src="{{product.ImageUrl}}" alt="Proizvod nema sliku" onerror="this.src = '../../../Assets/Images/thumbnails/defaultproduct.png'" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-buttons">
+                <div class="single-button"><button ui-sref="editproduct({id:product.Id})">Uredi</button></div>
+                <div class="single-button cancel-button"><button ng-click="deleteProduct(product.Id, product.Name)">Izbriši</button></div>
+                <div class="single-button cancel-button"><button ui-sref="products">Zatvori</button></div>
+            </div>
+        </div>
+    </div>
 </div>
-Dobavljači:
-<div ng-repeat="supplier in product.Suppliers">
-    <span ui-sref="supplierdetails({id:supplier.Id})">{{supplier.Name}}</span>
-</div>
-<button ui-sref="editproduct({id:product.Id})">Edit</button>
-<button ng-click="deleteProduct(product.Id, product.Name)">Izbriši</button>
-<button ui-sref="products">Close</button>

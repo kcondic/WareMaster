@@ -1,43 +1,91 @@
-﻿Uredi narudžbu {{order.Id}}.:
-<div ng-show="order.Type===0">
-    <div>
-        Dobavljač: {{order.Supplier.Name}}
+﻿<div class="modal-overlay">
+    <div class="modal-box order-modal-box">
+        <div class="modal-header">
+            <div class="modal-header-row">
+                <div class="modal-title"><label>Uredi narudžbu</label></div>
+            </div>
+        </div>
+        <div class="modal-content" ng-show="order.Type===0">
+                <div class="order-modal-row">
+                    Dobavljač: {{order.Supplier.Name}}
+                </div>
+                <div class="order-columns-row">
+                    <div class="order-modal-column">
+                        <div class="order-modal-row">Odabrani proizvodi:</div>
+                        <div class="order-table-container">
+                            <div class="order-table">
+                                <div ng-repeat="product in selectedProducts" class="single-table-row">
+                                    <div>{{product.Name}}</div>
+                                    <div>Količina:<input type="number" min="1" value="1" ng-model="product.Counter" /></div>
+                                    <i class="fa fa-times" aria-hidden="true" ng-click="deselectProduct(product)"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-modal-column">
+                        <div class="order-modal-row">Ostali proizvodi dobavljača:</div>
+                        <div class="order-table-container">
+                            <div class="order-table">
+                                <span ng-click="selectProduct(product)" ng-repeat="product in allProducts" class="single-table-row">{{product.Name}} </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div class="modal-content" ng-show="order.Type===1">
+            <div class="order-modal-row" ng-show="phase===1">
+                Odabir proizvoda:
+            </div>
+            <div class="order-modal-row" ng-show="phase===2">
+                Odabir radnika:
+            </div>
+            <div class="order-modal-row" ng-show="phase===2">
+                Radnik:
+                <span class="selectedEmployeeName">
+                    {{selectedEmployee.FirstName}} {{selectedEmployee.LastName}}
+                    <i class="fa fa-times" aria-hidden="true" ng-click="deselectEmployee(selectedEmployee); showDeselectX=false" ng-if="showDeselectX"></i>
+                </span>
+            </div>
+            <div class="order-columns-row">
+                <div class="order-modal-column worker-column" ng-show="phase===2">
+                    <div class="order-modal-row">Svi radnici:</div>
+                    <div class="order-table-container">
+                        <div class="order-table">
+                            <div ng-repeat="employee in allEmployees" ng-click="selectEmployee(employee)" class="single-table-row">
+                                <span ng-click="showDeselectX=true">{{employee.FirstName}} {{employee.LastName}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-modal-column" ng-show="phase===1">
+                    <div class="order-modal-row">Odabrani proizvodi:</div>
+                    <div class="order-table-container">
+                        <div class="order-table">
+                            <div ng-repeat="product in selectedProducts" class="single-table-row">
+                                <div>{{product.Name}}</div>
+                                <div>Količina:<input type="number" min="1" value="1" ng-model="product.Counter" /></div>
+                                <i class="fa fa-times" aria-hidden="true" ng-click="deselectProduct(product)"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-modal-column" ng-show="phase===1">
+                    <div class="order-modal-row">Ostali proizvodi:</div>
+                    <div class="order-table-container">
+                        <div class="order-table">
+                            <span ng-click="selectProduct(product)" ng-repeat="product in allProducts" class="single-table-row">{{product.Name}} </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-buttons">
+                <div class="single-button" ng-show="(order.Type===1)&&(phase===2)"><button ng-click="phase=1">Natrag</button></div>
+                <div class="single-button" ng-show="(order.Type===1)&&(phase===1)"><button ng-click="phase=2">Dalje</button></div>
+                <div class="single-button" ng-show="!((order.Type===1)&&(phase===1))"><button ng-click="editOrder(); phase=1">Uredi</button></div>
+                <div class="single-button cancel-button"><button ui-sref="orders">Odustani</button></div>
+            </div>
+        </div>
     </div>
-    <div>
-        Proizvodi:
-        <span ng-repeat="product in selectedProducts">
-            <span ng-click="deselectProduct(product)">{{product.Name}}</span>
-            Količina: <input type="number" min="1" value="1" ng-model="product.Counter" />
-        </span>
-    </div>
-    <div>
-        Ostali proizvodi dobavljača:
-        <span ng-click="selectProduct(product)" ng-repeat="product in allProducts">{{product.Name}} </span>
-    </div>
-    <button ng-click="editOrder()">Uredi</button>
-    <button ui-sref="orders">Odustani</button>
-</div>
-<div ng-show="order.Type===1">
-    <div>
-        Proizvodi:
-        <span ng-repeat="product in selectedProducts">
-            <span ng-click="deselectProduct(product)">{{product.Name}}</span>
-            Količina: <input type="number" min="1" value="1" ng-model="product.Counter" />
-        </span>
-    </div>
-    <div>
-        Ostali proizvodi:
-        <span ng-click="selectProduct(product)" ng-repeat="product in allProducts">{{product.Name}} </span>
-    </div>
-    Odabir radnika:
-    <div>
-        Radnik:
-        <span ng-click="deselectEmployee(selectedEmployee)">{{selectedEmployee.FirstName}} {{selectedEmployee.LastName}} </span>
-    </div>
-    <div>
-        Svi radnici:
-        <span ng-click="selectEmployee(employee)" ng-repeat="employee in allEmployees">{{employee.FirstName}} {{employee.LastName}} </span>
-    </div>
-    <button ng-click="editOrder()">Uredi</button>
-    <button ui-sref="orders">Odustani</button>
 </div>

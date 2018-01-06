@@ -1,0 +1,173 @@
+﻿/* SUBHEADER DESIGN */
+#subheader{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 42px;
+    position: fixed;
+    z-index: 2;
+    top: 56px;
+    left: 0;
+    right: 0;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    color: black;
+    font-family: inherit;
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* BUTTON, BREADCRUMBS BOX, SORT BOX AND SEARCH BOX DESIGN */
+#subheader button,
+#subheader .breadcrumbs-box,
+#subheader .sort-by-box .sort-button,
+#subheader .search-content-box{
+    background-color: white;
+    height: 34px;
+    width: auto;
+    padding: 0px 16px;
+    border-radius: 3px;
+    color: rgb(34,34,34);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    font-family: inherit;
+}
+
+/* BREADCRUMBS DESIGN */
+#subheader .breadcrumbs-box .breadcrumb-sign{
+    padding: 0px 10px;
+    cursor: default;
+}
+
+#subheader .breadcrumbs-box label:first-of-type{
+    cursor: pointer;
+}
+
+@keyframes breadcrumbsign {
+    0%  {padding: 0px 10px;}
+    25%  {padding-left: 5px; padding-right: 15px;}
+    50%  {padding: 0px 10px;}
+    75%  {padding-left: 15px; padding-right: 5px;}
+    100%  {padding: 0px 10px;}
+}
+
+#subheader .breadcrumbs-box:hover > .breadcrumb-sign{
+    animation: breadcrumbsign 1s linear 0.05s infinite normal;
+}
+
+/* BUTTON DESIGN */
+#subheader button{
+    border: none;
+    cursor: pointer;
+    justify-content: center;
+    transition-delay: 0.05s;
+    transition-duration: 0.5s;
+}
+
+#subheader button:hover{
+    background-color: rgb(34,34,34);
+    color: white;
+    box-shadow: 3px 8px 16px 0px rgba(0, 0, 0, 0.4);
+}
+
+button:focus{
+    outline: none;
+}
+
+/* DASHBOARD LINK ARROW DESIGN */
+#subheader .link-to-dashboard-box{
+    display: inline;
+    width: auto;
+}
+
+#subheader .link-to-dashboard-box button{
+    width: 100px;
+    font-size: 28px;
+    margin-left: 18px;
+    padding: 0;
+    transition-delay: 0.1s;
+    transition-duration: 0.5s;
+}
+
+#subheader .link-to-dashboard-box button:hover{
+    background-color: rgb(34,34,34);
+    color: white;
+    border-right: solid 30px rgb(34,34,34);
+    box-shadow: 3px 8px 16px 0px rgba(0, 0, 0, 0.4);
+    font-size: 30px;
+}
+
+#subheader .link-to-dashboard-box button:not(:hover){
+    background-color: white;
+    color: rgb(34,34,34);
+    border-right: solid 0px white;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
+}
+
+/* SORT-BY BOX DESIGN */
+#subheader .sort-by-box{
+    position: relative;
+}
+
+#subheader .sort-by-box .sort-type{
+    padding: 0px 5px;
+}
+
+#subheader .sort-by-box .sort-chevron-down{
+    font-size: 15px;
+}
+
+#subheader .sort-by-box .button-content{
+    height: auto;
+    min-width: 185px;
+    margin-top: -17.6px;
+    right: 11px;
+    z-index: 1;
+    box-shadow: 2px 10px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+@-moz-document url-prefix(){
+    #subheader .sort-by-box .button-content{
+        margin-top: -20px;
+    }
+}
+
+#subheader .button-content-item{
+    border-right: solid 4px transparent;
+}
+
+#subheader .selected-sort-choice{
+    border-right: solid 4px steelblue;
+}
+
+#subheader .button-content-item:not(.selected-sort-choice):hover{
+    border-right: solid 4px lightsteelblue;
+}
+
+/* SEARCH BOX DESIGN */
+#subheader .search-content-box{
+    margin-right: 18px;
+}
+
+#subheader .search-content-box input{
+    font-size: 18px;
+    font-family: inherit;
+    border: none;
+    margin-right: 5px;
+}
+
+#subheader .search-content-box input:focus{
+    outline: none;
+}
+
+#subheader .search-content-box .search-icon{
+    font-size: 20px;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+}

@@ -1,5 +1,7 @@
 ﻿angular.module('app').controller('ProductsController',
-    function ($scope, $state, productsRepository, loginRepository) {
+function ($scope, $state, productsRepository, $rootScope, loginRepository) {
+
+        $rootScope.currentTemplate = 'products';
 
         const companyId = loginRepository.getCompanyId();
 
@@ -8,7 +10,7 @@
 
             for (let product of $scope.allProducts) {
                 const random = (new Date()).toString();
-                product.ImageUrl = product.ImageUrl + '?cb=' + random;
+                    product.ImageUrl = product.ImageUrl + '?cb=' + random;
             }
         });
     });

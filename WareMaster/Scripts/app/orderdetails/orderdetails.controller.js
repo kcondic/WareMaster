@@ -5,6 +5,12 @@
 
         ordersRepository.getOrder($stateParams.id).then(function (order) {
             $scope.order = order.data;
+            if($scope.order.Supplier)
+                $scope.nameOfSupplier = $scope.order.Supplier.Name;
+            if ($scope.order.AssignedEmployee)
+                $scope.nameOfEmployee = $scope.order.AssignedEmployee.FirstName + ' ' + $scope.order.AssignedEmployee.LastName;
+            else
+                $scope.nameOfEmployee = 'Nije pridijeljen zaposlenik';
         });
 
         $scope.deleteOrder = function (id) {
@@ -15,7 +21,7 @@
                         UserId: loginRepository.getManagerId(),
                         CompanyId: companyId
                     });
-                    $state.go("orders", {}, { reload: true });
+                    $state.go('orders', {}, { reload: true });
                 });
             }
         }

@@ -1,0 +1,53 @@
+﻿.details-columns-row{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: row;
+}
+
+.details-modal-column{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.details-name-div{
+    width: 200px;
+    height: 20px;
+    padding: 2px 0px;
+    margin-left: 3px;
+    border-radius: 3px;
+    border: solid 1px cadetblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.details-image-container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    -ms-overflow-style: none;
+}
+
+.details-image-container img{
+    width: auto;
+    max-width: 90%;
+    height: auto;
+    image-rendering: auto;
+    image-resolution: from-image;
+    background-size: cover;
+    border-radius: 4px;
+}
+
+.orders-listed{
+    overflow-x: hidden;
+    overflow-y: auto;
+    -ms-overflow-style: auto;
+}

@@ -5,6 +5,8 @@
         $scope.outgoingSelected = false;
         $scope.selectedEmployee = null;
         $scope.selectedProducts = [];
+        $scope.showDeselectX = false;
+        $scope.phase = 1;
 
         const companyId = loginRepository.getCompanyId();
 
@@ -49,13 +51,19 @@
                 alert("Već je odabran radnik");
                 return;
             }
+            $scope.showDeselectX = true;
             $scope.selectedEmployee = employee;
             $scope.allEmployees.splice($scope.allEmployees.indexOf(employee), 1);
         }
 
-        $scope.deselectEmployee = function(employee) {
+        $scope.deselectEmployee = function (employee) {
+            $scope.showDeselectX = false;
             $scope.allEmployees.push(employee);
             $scope.selectedEmployee = null;
+        }
+
+        $scope.isEmployeeSelected = function () {
+            return $scope.showDeselectX;
         }
 
         $scope.selectProduct = function (product) {

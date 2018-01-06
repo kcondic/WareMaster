@@ -1,8 +1,30 @@
-﻿<div id="registration">
-    <input type="text" ng-model="managerFirstName" placeholder="Ime novog menadžera">
-    <input type="text" ng-model="managerLastName" placeholder="Prezime novog menadžera">
-    <input type="text" ng-model="username" ng-change="checkUsername()" placeholder="Korisničko ime">
-    <div ng-show="userNameExists" ng-init="userNameExists=false">Korisničko ime već postoji</div>
-    <input type="password" ng-model="password" placeholder="Lozinka">
-    <button ng-click="registerExisting()" ng-disabled="userNameExists">Registriraj menadžera</button>
+﻿<div class="modal-overlay">
+    <div class="modal-box register-box">
+        <div class="modal-header">
+            <div class="modal-header-row">
+                <div class="modal-title"><label>Registriraj novog upravitelja</label></div>
+            </div>
+        </div>
+        <div class="modal-content">
+            <div class="order-modal-row">
+                <div class="modal-row-element"><input type="text" ng-model="managerFirstName" placeholder="Ime novog upravitelja"></div>
+            </div>
+            <div class="order-modal-row">
+                <div class="modal-row-element"><input type="text" ng-model="managerLastName" placeholder="Prezime novog upravitelja"></div>
+            </div>
+            <div class="order-modal-row">
+                <div class="modal-row-element"><input type="text" ng-model="username" ng-change="checkUsername()" placeholder="Korisničko ime"></div>
+            </div>
+            <div class="order-modal-row">
+                <div class="modal-row-element"><input type="password" ng-model="password" placeholder="Lozinka"></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-buttons">
+                <div class="single-button"><button ng-click="registerExisting()" ng-disabled="userNameExists">Registriraj</button></div>
+                <div class="single-button cancel-button"><button ui-sref="dashboard">Odustani</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="snackbar" ng-show="userNameExists" ng-init="userNameExists=false">Korisničko ime već postoji</div>
 </div>

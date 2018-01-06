@@ -113,21 +113,3 @@
 #signin .forgot-password:hover{
     color: darkred;
 }
-/* SAMO PRIVREMENO DOK SE NE NAPRAVI PRIJAVA */
-#snackbar {
-    display: none;
-    margin-left: -113px;
-    min-width: 250px;
-    background-color: rgba(34,34,34, 0.92);
-    color: white;
-    text-align: center;
-    font-size: 14.45px;
-    border-radius: 2px;
-    padding: 16px;
-    position: fixed;
-    bottom: 30px;
-}
-
-#signin .signin-button:hover > #snackbar{
-    display: block;   
-}

@@ -1,5 +1,7 @@
 ﻿angular.module('app').controller('SuppliersController',
-    function ($scope, suppliersRepository, loginRepository) {
+function ($scope, suppliersRepository, $rootScope, loginRepository) {
+
+        $rootScope.currentTemplate = 'suppliers';
 
         const companyId = loginRepository.getCompanyId();
 

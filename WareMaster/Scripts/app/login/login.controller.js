@@ -1,5 +1,7 @@
 ﻿angular.module('app').controller('LoginController',
-    function ($scope, $state, loginRepository) {
+    function ($scope, $state, loginRepository, $rootScope) {
+
+        $rootScope.currentTemplate = 'login';
 
         if (loginRepository.isUserAuthenticated())
             $state.go('dashboard');

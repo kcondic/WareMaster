@@ -1,5 +1,7 @@
 ﻿angular.module('app').controller('RegisterController',
-    function ($scope, $state, loginRepository, $timeout) {
+function ($scope, $state, loginRepository, $timeout, $rootScope) {
+
+        $rootScope.currentTemplate = 'register';
 
         var timeoutPromise;
         $scope.checkUsername = function () {
@@ -12,6 +14,7 @@
                 });
             }, 1000);
         };
+
 
         $scope.registerNew = function () {
             if(validateInput()) {

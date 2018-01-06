@@ -1,10 +1,44 @@
 ﻿<div id="orders">
-    <button ui-sref="dashboard">NATRAG</button><br/>
-    <div ng-repeat="order in allOrders">
-        <span ng-show="order.Type===0" ui-sref="orderdetails({id: order.Id})">{{order.Supplier.Name}} {{order.TimeOfCreation | date: "dd.MM.y"}}</span>
-        <span ng-show="order.Type===1 && order.AssignedEmployee!==null" ui-sref="orderdetails({id: order.Id})">{{order.AssignedEmployee.FirstName}} {{order.AssignedEmployee.LastName}} {{order.TimeOfCreation | date: "dd.MM.y"}}</span>
-        <span ng-show="order.Type===1 && order.AssignedEmployee===null" ui-sref="orderdetails({id: order.Id})">Nije pridijeljen zaposlenik {{order.TimeOfCreation | date: "dd.MM.y"}}</span><br/>
+    <div class="main-frame">
+        <div class="frame-content">
+            <div class="content-header">
+                <div class="template-title-row">
+                    <div class="template-title"><label class="title-label">Narudžbe</label></div>
+                </div>
+                <div class="columns-titles">
+                    <div class="column-title" ng-click="orderType=0" ng-class="getClass(0)">
+                        <label class="column-title-label">Ulazne</label>
+                    </div>
+                    <div class="column-title" ng-click="orderType=1" ng-class="getClass(1)">
+                        <label class="column-title-label exit-order-label">Izlazne</label>
+                    </div>
+                </div>
+            </div>
+            <div class="content-body">
+                <div class="content-column">
+                    <div class="content-column-title"><label class="column-title-label">Planirane</label></div>
+                    <div class="column-body">
+                        <div ng-repeat="order in allOrders" class="content-row" ng-if="order.Type===orderType" ui-sref="orderdetails({id: order.Id})">
+                            <div class="row-element">
+                                {{getOrderName(order.Supplier.Name, order.AssignedEmployee)}}
+                            </div>
+                            <div class="row-element">
+                                {{order.TimeOfCreation | date: "dd.MM.yyyy."}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-column">
+                    <div class="content-column-title"><label class="column-title-label">U tijeku</label></div>
+                    <div class="column-body"></div>
+                </div>
+                <div class="content-column">
+                    <div class="content-column-title"><label class="column-title-label">Izvršene</label></div>
+                    <div class="column-body"></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <button ui-sref="addorder">Nova narudžba</button>
-    <div ui-view=""></div>
 </div>
+<div class="snackbar">Za pogledati detaljnije informacije o narudžbi, pritisnite na željenu narudžbu</div>
+<div ui-view=""></div>

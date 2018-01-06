@@ -1,5 +1,7 @@
 ﻿angular.module('app').controller('EmployeesController',
-    function ($scope, $state, employeesRepository, loginRepository) {
+function ($scope, $state, employeesRepository, $rootScope, loginRepository) {
+
+        $rootScope.currentTemplate = 'employees';
 
         const companyId = loginRepository.getCompanyId();
 

@@ -2,6 +2,12 @@
     overflow: hidden;
 }
 /* OBLIKOVANJE MAIN DASHBOARD PROZORA */
+
+#dashboard{
+    -moz-user-select: none;
+    user-select: none;
+}
+
 #dashboard .dashboard-main{
     height: 92.2vh;
     margin-top: 52px;
@@ -50,6 +56,10 @@
 
 #dashboard .button-container button:not(:hover){
     border-right: solid 0px;
+}
+
+#dashboard .button-container button:focus{
+    outline: none;
 }
 
 /* GRAFOVI I BROJKE */
@@ -209,7 +219,6 @@
 #dashboard .current-numbers-container ul{
     list-style: none;
     display: inline-block;
-    margin-top: -4px;
     width: 100%;
 }
 
@@ -283,4 +292,25 @@
     overflow-y: scroll;
     overflow-x: hidden;
     background-color: white;
+}
+
+.activity-content{
+    padding: 2px 0px 4px 8px;
+    font-size: 15px;
+}
+
+.activity-content:nth-of-type(2n+1){
+    background-color: white;
+}
+
+.activity-content:nth-of-type(2n+2){
+    background-color: rgb(240,240,240);
+}
+
+.activity-content:last-of-type{
+    border-bottom: 2px solid rgb(220,220,220);
+}
+
+.activity-content span{
+    font-size: 15px;
 }

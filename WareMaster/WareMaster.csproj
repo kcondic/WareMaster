@@ -359,9 +359,13 @@
   <ItemGroup>
     <Content Include="Assets\fontstyles\font-awesome.css" />
     <Content Include="Assets\fontstyles\font-awesome.min.css" />
-    <Content Include="Assets\styles\registrationMain.css" />
-    <Content Include="Assets\styles\ordersMain.css" />
-    <Content Include="Assets\styles\suppliersMain.css" />
+    <Content Include="Assets\images\thumbnails\defaultemployee.png" />
+    <Content Include="Assets\images\thumbnails\defaultproduct.png" />
+    <Content Include="Assets\styles\detailsModalBox.css" />
+    <Content Include="Assets\styles\modalBox.css" />
+    <Content Include="Assets\styles\mainFrame.css" />
+    <Content Include="Assets\styles\orderModalBox.css" />
+    <Content Include="Assets\styles\subHeader.css" />
     <Content Include="favicon.ico" />
     <Content Include="Assets\fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
@@ -390,6 +394,7 @@
     <Content Include="Scripts\app\app.config.js" />
     <Content Include="Scripts\app\app.interceptor.js" />
     <Content Include="Scripts\app\app.module.js" />
+    <Content Include="Scripts\app\subheader\displayLayout.controller.js" />
     <Content Include="Scripts\app\app.run.js" />
     <Content Include="Scripts\app\common\controllers\header.controller.js" />
     <Content Include="Scripts\app\common\controllers\mainmenu.controller.js" />
@@ -406,11 +411,9 @@
     <Content Include="Scripts\app\editorder\editorder.state.js" />
     <Content Include="Scripts\app\editorder\editorder.template.html" />
     <Content Include="Assets\styles\dashboardMain.css" />
-    <Content Include="Assets\styles\employeesMain.css" />
     <Content Include="Assets\fontstyles\fontPlayfairDisplay.css" />
-    <Content Include="Assets\styles\productsMain.css" />
-    <Content Include="Assets\styles\signinMain.css" />
-    <Content Include="Assets\styles\mainNavBar.css" />
+    <Content Include="Assets\styles\loginMain.css" />
+    <Content Include="Assets\styles\mainHeader.css" />
     <Content Include="Scripts\app\editsupplier\editsupplier.controller.js" />
     <Content Include="Scripts\app\editsupplier\editsupplier.state.js" />
     <Content Include="Scripts\app\editsupplier\editsupplier.template.html" />

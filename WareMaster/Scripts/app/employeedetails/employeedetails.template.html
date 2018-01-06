@@ -1,22 +1,48 @@
-﻿<div>
-    {{employee.FirstName}} {{employee.LastName}}
-    <img ng-src="{{employee.ImageUrl}}" alt="Korisnik nema sliku" />
-</div>
-Narudžbe:
-<select ng-model="chosenOrderFilter" ng-change="updateOrderList()">
-    <option value="3">Sve</option>
-    <option value="0">U pripremi</option>
-    <option value="1">U trajanju</option>
-    <option value="2">Završena</option>
-</select>
-<div ng-repeat="order in orders">
-    <div ui-sref="orderdetails({id: order.Id})">
-        <span ng-if="order.Status===0">U pripremi</span>
-        <span ng-if="order.Status===1">U trajanju</span>
-        <span ng-if="order.Status===2">Završena</span>
-        {{order.TimeOfCreation | date: "dd.MM.y"}}
+﻿<div class="modal-overlay">
+    <div class="modal-box details-box">
+        <div class="modal-header">
+            <div class="modal-header-row">
+                <div class="modal-title"><label>Detalji o zaposleniku</label></div>
+            </div>
+        </div>
+        <div class="modal-content">
+            <div class="details-columns-row">
+                <div class="details-modal-column">
+                    <div class="order-modal-row">Ime: {{employee.FirstName}}</div>
+                    <div class="order-modal-row">Prezime: {{employee.LastName}}</div>
+                    <div class="order-modal-row">Narudžbe:</div>
+                    <div class="order-modal-row">
+                        <select ng-model="chosenOrderFilter" ng-change="updateOrderList()">
+                            <option value="3">Sve</option>
+                            <option value="0">U pripremi</option>
+                            <option value="1">U trajanju</option>
+                            <option value="2">Završena</option>
+                        </select>
+                    </div>
+                    <div class="order-modal-row orders-listed">
+                        <div ng-repeat="order in orders" class="details-name-div">
+                            <div ui-sref="orderdetails({id: order.Id})">
+                                <span ng-if="order.Status===0">U pripremi</span>
+                                <span ng-if="order.Status===1">U trajanju</span>
+                                <span ng-if="order.Status===2">Završena</span>
+                                {{order.TimeOfCreation | date: "dd.MM.y"}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-modal-column">
+                    <div class="details-image-container">
+                        <img ng-src="{{employee.ImageUrl}}" alt="Korisnik nema sliku" onerror="this.src = '../../../Assets/Images/thumbnails/defaultemployee.png'" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-buttons">
+                <div class="single-button"><button ui-sref="editemployee({id:employee.Id})">Uredi</button></div>
+                <div class="single-button cancel-button"><button ng-click="deleteEmployee(employee.Id, employee.FirstName, employee.LastName)">Izbriši</button></div>
+                <div class="single-button cancel-button"><button ui-sref="employees">Zatvori</button></div>
+            </div>
+        </div>
     </div>
 </div>
-<button ui-sref="editemployee({id:employee.Id})">Edit</button>
-<button ng-click="deleteEmployee(employee.Id, employee.FirstName, employee.LastName)">Izbriši</button>
-<button ui-sref="employees">Close</button>

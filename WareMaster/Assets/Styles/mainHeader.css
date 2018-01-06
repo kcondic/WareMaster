@@ -4,7 +4,7 @@
 }
 
 body{
-    background-color: white;
+    background-color: rgb(240, 240, 240);
 }
 
 /* OPĆENITO DIZAJN ZA HEADER */
@@ -19,6 +19,9 @@ header{
     justify-content:space-between;
     background-color: rgb(34, 34, 34);
     color: white;
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 /* DIZAJN DIJELA HEADERA S LOGOM I NASLOVOM */
@@ -57,6 +60,13 @@ header .logo-container{
     padding-top: 0.8em;
     font-size: 18px;
 }
+
+.user-info .user-name,
+.user-info .company-name{
+    padding-left: 2px;
+    padding-right: 10px;
+}
+
 /* DIZAJN DIJELA HEADERA S DROPDOWN IKONAMA */
 header ul {
     display: flex;
@@ -116,7 +126,8 @@ header li .icon-button{
     overflow-x: hidden;
 }
 
-.dropdown:hover .button-content{
+.dropdown .button-content-displayed,
+.dropdown:hover .button-content:not(.icon-button-content){
     display: block;
     right: 0;
     top: 52px;
@@ -124,7 +135,8 @@ header li .icon-button{
 }
 
 @-moz-document url-prefix(){
-    .dropdown:hover .button-content{
+    .dropdown button-content-displayed,
+    .dropdown:hover .button-content:not(.icon-button-content){
         top: 54px;
     }
 }
@@ -138,14 +150,28 @@ header li .icon-button{
     background-color: rgb(232,232,232);
 }
 
-.menu-icon{
-    margin-top: -1px;
-}
-
-.menu-bar {
+.bar1,
+.bar2,
+.bar3{
     width: 24px;
     height: 3px;
     border-radius: 20%;
     background-color: white;
     margin: 5px 0;
+    transition: 0.4s;
+}
+
+.bar1changed{
+    transform: rotate(-45deg);
+    margin-top: 12px;
+    margin-bottom: -10px;
+}
+
+.bar2changed{
+    opacity: 0;
+}
+
+.bar3changed{
+    transform: rotate(45deg);
+    margin-top: -6px;
 }

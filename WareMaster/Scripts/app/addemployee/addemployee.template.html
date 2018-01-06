@@ -1,9 +1,37 @@
-﻿Dodaj zaposlenika:
-Ime: <input type="text" ng-model="firstName"/>
-Prezime: <input type="text" ng-model="lastName"/>
-Slika: <div ngf-select name="file" ng-model="file" ngf-pattern="'image/*'"
-            ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"
-            ngf-resize="{width: 100, height: 100}">Odaberi</div>
-<img ngf-src="file" alt="Alternate Text" />
-<button ng-click="addNewEmployee()">Dodaj</button>
+﻿<div class="modal-overlay">
+    <div class="modal-box">
+        <div class="modal-header">
+            <div class="modal-header-row">
+                <div class="modal-title"><label>Dodaj zaposlenika</label></div>
+            </div>
+        </div>
+        <div class="modal-content">
+            <div class="modal-content-row">
+                <div class="modal-row-element">Ime:</div>
+                <div class="modal-row-element"><input type="text" ng-model="firstName" /></div>
+            </div>
+            <div class="modal-content-row">
+                <div class="modal-row-element">Prezime</div>
+                <div class="modal-row-element"><input type="text" ng-model="lastName" /></div>
+            </div>
+            <div class="modal-content-row">
+                <div class="modal-row-element">Slika:</div>
+                <div class="modal-row-element">
+                    <div ngf-select name="file" ng-model="file" ngf-pattern="'image/*'"
+                         ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"
+                         ngf-resize="{width: 200, height: 200}" class="image-upload-button">Odaberi</div>
+                </div>
+            </div>
+            <div class="modal-content-row">
+                <div class="modal-row-image"><img ngf-src="file" alt="Alternate Text" /></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-buttons">
+                <div class="single-button"><button ng-click="addNewEmployee()">Dodaj</button></div>
+                <div class="single-button cancel-button"><button ui-sref="employees">Odustani</button></div>
+            </div>
+        </div>
+    </div>
+</div>
 
