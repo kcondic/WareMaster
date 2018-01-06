@@ -445,7 +445,6 @@
     <Content Include="Scripts\app\suppliers\suppliers.state.js" />
     <Content Include="Scripts\app\suppliers\suppliers.template.html" />
     <Content Include="Scripts\app\common\services\suppliers.repository.js" />
-    <Content Include="Scripts\vendor\angular.min.js" />
     <Content Include="Scripts\app\editemployee\editemployee.controller.js" />
     <Content Include="Scripts\app\editemployee\editemployee.state.js" />
     <Content Include="Scripts\app\editemployee\editemployee.template.html" />
@@ -458,12 +457,8 @@
     <Content Include="Scripts\app\products\products.controller.js" />
     <Content Include="Scripts\app\products\products.state.js" />
     <Content Include="Scripts\app\products\products.template.html" />
-    <Content Include="Scripts\vendor\angular-jwt.js" />
     <Content Include="Scripts\vendor\angular-ui-router.min.js" />
     <Content Include="Scripts\vendor\angular.js" />
-    <Content Include="Scripts\vendor\angular.min.js" />
-    <Content Include="Scripts\vendor\ng-file-upload-shim.min.js" />
-    <Content Include="Scripts\vendor\ng-file-upload.min.js" />
     <Content Include="Scripts\vendor\underscore.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
