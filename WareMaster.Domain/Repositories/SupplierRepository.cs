@@ -61,8 +61,7 @@ namespace WareMaster.Domain.Repositories
                 var productOrdersToDelete = new List<ProductOrders>();
                 foreach (var product in deletedProducts)
                 {
-                    productOrdersToDelete.AddRange(context.ProductOrders.Include(productOrder => productOrder.Order)
-                        .Where(productOrder =>
+                    productOrdersToDelete.AddRange(context.ProductOrders.Where(productOrder =>
                         productOrder.Order.SupplierId == editedSupplier.Id &&
                         productOrder.ProductId == product.Id));
                 }
