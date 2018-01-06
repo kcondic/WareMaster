@@ -1,0 +1,139 @@
+﻿.select-order-type-box{
+    height: 350px;
+}
+
+.order-modal-box{
+    width: 850px;
+}
+
+.select-order-type-box .modal-header{
+    height: 21%;
+}
+
+.select-order-type-box .modal-footer{
+    height: 22%;
+}
+
+.content-buttons-row{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.content-buttons-row .modal-buttons{
+    display: flex;
+    width: 100%;
+    height: 50%;
+}
+
+.order-modal-row{
+    height: 9%;
+    padding: 10px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.order-modal-row select{
+    width: 170px;
+    font-size: inherit;
+    font-family: inherit;
+    border: steelblue solid 1px;
+    margin-left: 7px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.order-columns-row{
+    width: 100%;
+    height: 91%;
+    display: flex;
+    flex-flow: row;
+}
+
+.order-modal-column{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+}
+
+.worker-column{
+    width: 100%;
+}
+
+.selectedEmployeeName{
+    width: 200px;
+    height: 20px;
+    padding: 2px 0px;
+    margin-left: 3px;
+    border-radius: 3px;
+    border: solid 1px cadetblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.selectedEmployeeName .fa-times{
+    font-size: 12px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.order-table-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.order-table{
+    width: 90%;
+    height: 90%;
+    border-radius: 3px;
+    border: steelblue solid 1px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -ms-overflow-style: scrollbar;
+}
+
+.order-modal-column .single-table-row{
+    width: 100%;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 15px;
+    opacity: 0;
+    animation: fadein 0.5s linear 0.4s forwards normal;
+}
+
+.order-modal-column .single-table-row:nth-of-type(2n+1){
+    background-color: lightblue;
+}
+
+.order-modal-column .single-table-row:nth-of-type(2n+2){
+    background-color: rgb(230, 230, 230);
+}
+
+.order-modal-column .single-table-row:last-of-type{
+    border-bottom: solid 2px rgba(0, 0, 0, 0.2);
+}
+
+.order-modal-column .single-table-row input{
+    width: 55px;
+    font-size: 18px;
+    font-family: inherit;
+    border: solid 1px cadetblue;
+    border-radius: 3px;
+    margin-left: 5px;
+}
+
+.order-modal-column .single-table-row input:focus{
+    outline: none;
+}

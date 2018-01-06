@@ -1,8 +1,8 @@
 ﻿<div class="modal-overlay">
-    <div class="modal-box">
+    <div class="modal-box details-box">
         <div class="modal-header">
             <div class="modal-header-row">
-                <div class="modal-title"><label>Narudžba {{order.Id}}</label></div>
+                <div class="modal-title"><label>Detalji o narudžbi</label></div>
             </div>
         </div>
         <div class="modal-content">
@@ -10,8 +10,8 @@
                 <div class="modal-row-element">Stvorena: {{order.TimeOfCreation | date:"dd. MM. yyyy.'god.'  'u'  H:m:s 'sati'"}}</div>
             </div>
             <div class="modal-content-row">
-                <div class="modal-row-element" ng-show="order.Type===0">Dobavljač: {{order.Supplier.Name}}</div>
-                <div class="modal-row-element" ng-show="order.Type===1">Radnik: {{order.AssignedEmployee.FirstName}} {{order.AssignedEmployee.LastName}}</div>
+                <div class="modal-row-element" ng-show="order.Type===0">Dobavljač: {{getName(0, order.Supplier.Name, order.AssignedEmployee)}}</div>
+                <div class="modal-row-element" ng-show="order.Type===1">Radnik: {{getName(1, order.Supplier.Name, order.AssignedEmployee)}}</div>
             </div>
             <div class="modal-content-row">
                 <div class="modal-row-element">Naručeni proizvodi:</div>
@@ -20,7 +20,7 @@
                 <div class="products-container">
                     <div ng-repeat="productOrder in order.ProductOrders" class="single-product">
                         <div>{{productOrder.Product.Name}}</div>
-                        <div class="product-quantity">Količina: {{productOrder.ProductQuantity}}</div>
+                        <div class="selectedEmployeeName">Količina: {{productOrder.ProductQuantity}}</div>
                     </div>
                 </div>
             </div>

@@ -6,6 +6,7 @@
         $scope.selectedEmployee = null;
         $scope.selectedProducts = [];
         $scope.showDeselectX = false;
+        $scope.phase = 1;
 
         const companyId = loginRepository.getCompanyId();
 
@@ -32,7 +33,6 @@
 
         $scope.incomingSelect = function() {
             $scope.incomingSelected = true;
-            $scope.outgoingSelected = false;
 
             if ($scope.allSuppliers.length === 0) {
                 alert("Nemate nijednog dobavljača!\nPrije stvaranja ulazne narudžbe morate dodati barem jednog dobavljača");
@@ -44,7 +44,6 @@
 
         $scope.outgoingSelect = function () {
             $scope.outgoingSelected = true;
-            $scope.incomingSelected = false;
         }
 
         $scope.selectEmployee = function (employee) {

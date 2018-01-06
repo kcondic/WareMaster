@@ -1,6 +1,7 @@
 ﻿angular.module('app').controller('EditOrderController',
     function ($scope, $state, $stateParams, ordersRepository, employeesRepository, productsRepository, loginRepository, activitylogRepository) {
         $scope.selectedProducts = [];
+        $scope.phase = 1;
 
         const companyId = loginRepository.getCompanyId();
 

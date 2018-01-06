@@ -14,12 +14,17 @@
     animation: fadein 0.5s linear 0.1s forwards normal;
 }
 
+.modal-overlay .snackbar{
+    margin-left: 0%;
+}
+
 /* MODAL WINDOW DESIGN */
 .modal-box{
     height: 450px;
     width: 500px;
     border-radius: 4px;
     overflow: hidden;
+    -ms-overflow-style: none;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     border-collapse: collapse;
     display: flex;
@@ -31,14 +36,12 @@
     animation: fadein 0.5s linear 0.05s forwards normal;
 }
 
-.details-modal-box,
 .edit-supplier-modal-box{
     width: 600px;
 }
 
-.orders-modal-box{
-    width: 1150px;
-    height: 650px;
+.register-box{
+    height: 400px;
 }
 
 @keyframes fadein{
@@ -107,15 +110,13 @@
     height: 46%;
 }
 
-.orders-modal-box .modal-content-row-container .modify-size-of-row1{
-    margin-left: -180px;
-    width: 30%;
+.register-box .modal-content{
+    justify-content: center;
 }
 
-.orders-modal-box .modal-content-row-container .modify-size-of-row2{
-    margin-left: -150px;
-    width: 19%;
-    border-radius: 3px;
+.register-box .modal-content-row{
+    height: 29%;
+    width: 100%;
 }
 
 .employeeNameContainer{
@@ -133,16 +134,6 @@
     padding-left: 5px;
     cursor: pointer;
     font-size: 21px;
-}
-
-.orders-modal-box .modal-content-row-container .modify-size-of-row3{
-    margin-left: -210px;
-}
-
-.orders-modal-box .modal-content-row:first-of-type{
-    flex-flow: column;
-    justify-content: flex-start;
-    height: 100%;
 }
 
 .main-choice-buttons-row{
@@ -187,8 +178,10 @@
     font-size: 20px;
 }
 
-.product-quantity,
-.orders-modal-box .single-product input,
+.register-box .modal-row-element{
+    width: 100%;
+}
+
 .modal-row-element input{
     width: 90%;
     font-size: 18px;
@@ -199,7 +192,10 @@
     margin-left: 5px;
 }
 
-.orders-modal-box .single-product input,
+.register-box .modal-row-element input{
+    width: 60%;
+}
+
 .modal-row-element input:focus{
     outline: none;
 }
@@ -248,6 +244,7 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    -ms-overflow-style: none;
 }
 
 .modal-row-image img{
@@ -270,23 +267,22 @@
     height: 100%;
     border-radius: 3px;
     overflow: hidden;
+    -ms-overflow-style: none;
 }
 
-.orders-modal-box .products-rows-container,
 .edit-supplier-modal-box .products-rows-container{
     height: 100%;
     overflow: hidden;
+    -ms-overflow-style: none;
     display: flex;
 }
 
-.orders-modal-box .products-row,
 .edit-supplier-modal-box .products-row{
     flex-flow: column;
     width: 50%;
     justify-content: center;
 }
 
-.orders-modal-box .products-row .modal-row-element,
 .edit-supplier-modal-box .products-row .modal-row-element{
     width: auto;
     height: 11%;
@@ -299,9 +295,14 @@
     height: 90%;
     overflow-x: hidden;
     overflow-y: scroll;
+    -ms-overflow-style: scrollbar;
 }
 
-.orders-modal-box .products-container,
+.products-container .selectedEmployeeName{
+    width: 120px;
+    background-color: white;
+}
+
 .edit-supplier-modal-box .products-container{
     margin: 10px 0px;
 }
@@ -330,20 +331,8 @@
     border-bottom: solid 1.5px rgb(235,235,235);
 }
 
-.details-modal-box .single-product,
-.orders-modal-box .single-product{
+.details-box .single-product{
     justify-content: space-around;
-}
-
-.product-quantity{
-    padding-left: 10px;
-    background-color: white;
-    width: 20%;
-    font-size: inherit;
-}
-
-.orders-modal-box .single-product input{
-    width: 85px;
 }
 
 .main-choice-buttons-row .main-choice-button{
@@ -375,6 +364,7 @@
     height: 100%;
     width: 100%;
     display: flex;
+    justify-content: space-around;
 }
 
 .modal-buttons .single-button{

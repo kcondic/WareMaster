@@ -1,10 +1,39 @@
-﻿<div>
-    {{supplier.Name}}
+﻿<div class="modal-overlay">
+    <div class="modal-box">
+        <div class="modal-header">
+            <div class="modal-header-row">
+                <div class="modal-title"><label>Detalji o dobavljaču</label></div>
+            </div>
+        </div>
+        <div class="modal-content">
+            <div class="modal-content-row">
+                <div class="modal-row-element">Naziv: {{supplier.Name}}</div>
+            </div>
+            <div class="modal-content-row">
+                <div class="modal-row-element">Odaberi proizvode:</div>
+            </div>
+            <div class="modal-content-row">
+                <div class="modal-row-element">
+                    <input ng-model="search" placeholder="Pretraži..." size="20" />
+                    <span class="row-search-icon" aria-hidden="true">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-content-row products-row">
+                <div class="products-container">
+                    <div ng-repeat="product in supplier.Products|filter: search" class="single-product">
+                        <span ui-sref="productdetails({id:product.Id})">{{product.Name}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-buttons">
+                <div class="single-button"><button ui-sref="editsupplier({id:supplier.Id})">Uredi</button></div>
+                <div class="single-button cancel-button"><button ng-click="deleteSupplier(supplier.Id, supplier.Name)">Izbriši</button></div>
+                <div class="single-button cancel-button"><button ui-sref="suppliers">Zatvori</button></div>
+            </div>
+        </div>
+    </div>
 </div>
-Proizvodi:
-<div ng-repeat="product in supplier.Products">
-    <span ui-sref="productdetails({id:product.Id})">{{product.Name}}</span>
-</div>
-<button ui-sref="editsupplier({id:supplier.Id})">Edit</button>
-<button ng-click="deleteSupplier(supplier.Id, supplier.Name)">Izbriši</button>
-<button ui-sref="suppliers">Close</button>

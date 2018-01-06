@@ -33,7 +33,7 @@
             name: 'orders',
             breadcrumbText: 'Narudžbe',
             buttonContentItems: {
-                first: 'Broju naručenih proizvoda'
+                first: 'Dobavljaču/Izvršitelju'
             }
         }
     ];
@@ -85,6 +85,62 @@
         if (templateName === 'login' || templateName === 'register' || templateName === 'dashboard') {
             return false;
         } else {
+            return true;
+        }
+    }
+
+    $scope.clickCounter = 0;
+
+    $scope.iconClicked = function(iconIndex){
+        if($scope.clickCounter===0){
+            if(iconIndex===1)
+                $scope.clickCounter = 1;
+            else if(iconIndex===2)
+                $scope.clickCounter = 2;
+            else 
+                $scope.clickCounter = 3;
+        } else if($scope.clickCounter===1){
+            if (iconIndex === 2)
+                $scope.clickCounter = 2;
+            else if (iconIndex === 3)
+                $scope.clickCounter = 3;
+            else
+                $scope.clickCounter = 0;
+        } else if ($scope.clickCounter === 2) {
+            if (iconIndex === 1)
+                $scope.clickCounter = 1;
+            else if (iconIndex === 3)
+                $scope.clickCounter = 3;
+            else
+                $scope.clickCounter = 0;
+        } else {
+            if (iconIndex === 1)
+                $scope.clickCounter = 1;
+            else if (iconIndex === 2)
+                $scope.clickCounter = 2;
+            else
+                $scope.clickCounter = 0;
+        }
+    }
+
+    $scope.amIDisplayed = function (iconIndex) {
+        if (iconIndex === $scope.clickCounter) {
+            return 'button-content-displayed';
+        } else {
+            return '';
+        }
+    }
+
+    $scope.getMyClass = function () {
+        if ($scope.clickCounter === 3) {
+            $scope.myClass1 = 'bar1changed';
+            $scope.myClass2 = 'bar2changed';
+            $scope.myClass3 = 'bar3changed';
+            return true;
+        } else {
+            $scope.myClass1 = '';
+            $scope.myClass2 = '';
+            $scope.myClass3 = '';
             return true;
         }
     }

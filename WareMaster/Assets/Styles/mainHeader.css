@@ -126,7 +126,8 @@ header li .icon-button{
     overflow-x: hidden;
 }
 
-.dropdown:hover .button-content{
+.dropdown .button-content-displayed,
+.dropdown:hover .button-content:not(.icon-button-content){
     display: block;
     right: 0;
     top: 52px;
@@ -134,7 +135,8 @@ header li .icon-button{
 }
 
 @-moz-document url-prefix(){
-    .dropdown:hover .button-content{
+    .dropdown button-content-displayed,
+    .dropdown:hover .button-content:not(.icon-button-content){
         top: 54px;
     }
 }
@@ -148,14 +150,28 @@ header li .icon-button{
     background-color: rgb(232,232,232);
 }
 
-.menu-icon{
-    margin-top: -1px;
-}
-
-.menu-bar {
+.bar1,
+.bar2,
+.bar3{
     width: 24px;
     height: 3px;
     border-radius: 20%;
     background-color: white;
     margin: 5px 0;
+    transition: 0.4s;
+}
+
+.bar1changed{
+    transform: rotate(-45deg);
+    margin-top: 12px;
+    margin-bottom: -10px;
+}
+
+.bar2changed{
+    opacity: 0;
+}
+
+.bar3changed{
+    transform: rotate(45deg);
+    margin-top: -6px;
 }

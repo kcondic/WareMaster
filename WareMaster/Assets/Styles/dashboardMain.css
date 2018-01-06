@@ -293,3 +293,24 @@
     overflow-x: hidden;
     background-color: white;
 }
+
+.activity-content{
+    padding: 2px 0px 4px 8px;
+    font-size: 15px;
+}
+
+.activity-content:nth-of-type(2n+1){
+    background-color: white;
+}
+
+.activity-content:nth-of-type(2n+2){
+    background-color: rgb(240,240,240);
+}
+
+.activity-content:last-of-type{
+    border-bottom: 2px solid rgb(220,220,220);
+}
+
+.activity-content span{
+    font-size: 15px;
+}
