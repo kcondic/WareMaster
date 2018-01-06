@@ -57,6 +57,17 @@ namespace WareMaster.Domain.Repositories
                 if (supplierToEdit == null)
                     return;
 
+                var deletedProducts = supplierToEdit.Products.Except(editedSupplier.Products).ToArray();
+                var productOrdersToDelete = new List<ProductOrders>();
+                foreach (var product in deletedProducts)
+                {
+                    productOrdersToDelete.AddRange(context.ProductOrders.Include(productOrder => productOrder.Order)
+                        .Where(productOrder =>
+                        productOrder.Order.SupplierId == editedSupplier.Id &&
+                        productOrder.ProductId == product.Id));
+                }
+                context.ProductOrders.RemoveRange(productOrdersToDelete);
+
                 supplierToEdit.Name = editedSupplier.Name;
                 supplierToEdit.Products = editedSupplier.Products;
 
