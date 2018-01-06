@@ -5,6 +5,6 @@
                 parent: 'orders',
                 url: '/details/:id',
                 controller: 'OrderDetailsController',
-                templateUrl: '/Scripts/app/orderdetails/orderdetails.template.html'
+                templateUrl: '/Scripts/app/order/orderdetails/orderdetails.template.html'
             });
 });

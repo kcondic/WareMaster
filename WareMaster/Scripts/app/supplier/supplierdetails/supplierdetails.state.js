@@ -5,6 +5,6 @@
                 parent: 'suppliers',
                 url: '/details/:id',
                 controller: 'SupplierDetailsController',
-                templateUrl: '/Scripts/app/supplierdetails/supplierdetails.template.html'
+                templateUrl: '/Scripts/app/supplier/supplierdetails/supplierdetails.template.html'
             });
 });

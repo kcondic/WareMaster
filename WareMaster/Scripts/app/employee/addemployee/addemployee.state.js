@@ -5,6 +5,6 @@
                 parent: 'employees',
                 url: '/add',
                 controller: 'AddEmployeeController',
-                templateUrl: '/Scripts/app/addemployee/addemployee.template.html'
+                templateUrl: '/Scripts/app/employee/addemployee/addemployee.template.html'
             });
 });

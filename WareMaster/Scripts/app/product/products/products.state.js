@@ -4,6 +4,6 @@
             {
                 url: '/products',
                 controller: 'ProductsController',
-                templateUrl: '/Scripts/app/products/products.template.html'
+                templateUrl: '/Scripts/app/product/products/products.template.html'
             });
 });

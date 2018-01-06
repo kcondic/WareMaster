@@ -5,6 +5,6 @@
                 parent: 'employees',
                 url: '/details/:id',
                 controller: 'EmployeeDetailsController',
-                templateUrl: '/Scripts/app/employeedetails/employeedetails.template.html'
+                templateUrl: '/Scripts/app/employee/employeedetails/employeedetails.template.html'
             });
 });

@@ -4,6 +4,6 @@
             {
                 url: '/orders',
                 controller: 'OrdersController',
-                templateUrl: '/Scripts/app/orders/orders.template.html'
+                templateUrl: '/Scripts/app/order/orders/orders.template.html'
             });
 });

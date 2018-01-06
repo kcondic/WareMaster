@@ -4,6 +4,6 @@
             {
                 url: '/suppliers',
                 controller: 'SuppliersController',
-                templateUrl: '/Scripts/app/suppliers/suppliers.template.html'
+                templateUrl: '/Scripts/app/supplier/suppliers/suppliers.template.html'
             });
 });

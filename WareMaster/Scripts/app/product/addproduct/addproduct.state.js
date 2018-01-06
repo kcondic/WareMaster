@@ -5,6 +5,6 @@
                 parent: 'products',
                 url: '/add',
                 controller: 'AddProductController',
-                templateUrl: '/Scripts/app/addproduct/addproduct.template.html'
+                templateUrl: '/Scripts/app/product/addproduct/addproduct.template.html'
             });
 });

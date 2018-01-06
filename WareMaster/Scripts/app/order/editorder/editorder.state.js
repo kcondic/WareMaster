@@ -5,6 +5,6 @@
                 parent: 'orders',
                 url: '/edit/:id',
                 controller: 'EditOrderController',
-                templateUrl: '/Scripts/app/editorder/editorder.template.html'
+                templateUrl: '/Scripts/app/order/editorder/editorder.template.html'
             });
 });

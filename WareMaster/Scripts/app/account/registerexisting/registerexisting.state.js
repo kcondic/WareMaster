@@ -4,6 +4,6 @@
             {
                 url: '/registerexisting',
                 controller: 'RegisterExistingController',
-                templateUrl: '/Scripts/app/registerexisting/registerexisting.template.html'
+                templateUrl: '/Scripts/app/account/registerexisting/registerexisting.template.html'
             });
 });

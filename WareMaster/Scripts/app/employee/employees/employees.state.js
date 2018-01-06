@@ -4,6 +4,6 @@
             {
                 url: '/employees',
                 controller: 'EmployeesController',
-                templateUrl: '/Scripts/app/employees/employees.template.html'
+                templateUrl: '/Scripts/app/employee/employees/employees.template.html'
             });
 });

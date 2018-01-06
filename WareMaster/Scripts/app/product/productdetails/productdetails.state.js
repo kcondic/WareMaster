@@ -5,6 +5,6 @@
                 parent: 'products',
                 url: '/details/:id',
                 controller: 'ProductDetailsController',
-                templateUrl: '/Scripts/app/productdetails/productdetails.template.html'
+                templateUrl: '/Scripts/app/product/productdetails/productdetails.template.html'
             });
 });

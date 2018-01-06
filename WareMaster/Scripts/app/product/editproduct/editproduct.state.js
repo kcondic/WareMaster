@@ -5,6 +5,6 @@
                 parent: 'products',
                 url: '/edit/:id',
                 controller: 'EditProductController',
-                templateUrl: '/Scripts/app/editproduct/editproduct.template.html'
+                templateUrl: '/Scripts/app/product/editproduct/editproduct.template.html'
             });
 });
