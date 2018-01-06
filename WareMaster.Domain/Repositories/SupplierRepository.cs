@@ -63,7 +63,8 @@ namespace WareMaster.Domain.Repositories
                 {
                     productOrdersToDelete.AddRange(context.ProductOrders.Where(productOrder =>
                         productOrder.Order.SupplierId == editedSupplier.Id &&
-                        productOrder.ProductId == product.Id));
+                        productOrder.ProductId == product.Id &&
+                        productOrder.Order.Status == Status.Created));
                 }
                 context.ProductOrders.RemoveRange(productOrdersToDelete);
 
