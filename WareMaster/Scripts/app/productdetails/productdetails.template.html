@@ -12,7 +12,7 @@
                     <div class="order-modal-row">Dobavljač:</div>
                     <div class="order-modal-row">
                         <div ng-repeat="supplier in product.Suppliers" class="details-name-div">
-                            <span ui-sref="supplierdetails({id:supplier.Id})">{{supplier.Name}}</span>
+                            <div ui-sref="supplierdetails({id:supplier.Id})">{{supplier.Name}}</div>
                         </div>
                     </div>
                 </div>

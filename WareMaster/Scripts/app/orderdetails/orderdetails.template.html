@@ -10,8 +10,8 @@
                 <div class="modal-row-element">Stvorena: {{order.TimeOfCreation | date:"dd. MM. yyyy.'god.'  'u'  H:m:s 'sati'"}}</div>
             </div>
             <div class="modal-content-row">
-                <div class="modal-row-element" ng-show="order.Type===0">Dobavljač: {{getName(0, order.Supplier.Name, order.AssignedEmployee)}}</div>
-                <div class="modal-row-element" ng-show="order.Type===1">Radnik: {{getName(1, order.Supplier.Name, order.AssignedEmployee)}}</div>
+                <div class="modal-row-element" ng-show="order.Type===0">Dobavljač: {{nameOfSupplier}}</div>
+                <div class="modal-row-element" ng-show="order.Type===1">Radnik: {{nameOfEmployee}}</div>
             </div>
             <div class="modal-content-row">
                 <div class="modal-row-element">Naručeni proizvodi:</div>
