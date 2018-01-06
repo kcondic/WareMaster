@@ -32,10 +32,10 @@
     <script src="~/Scripts/vendor/ng-file-upload-shim.min.js"></script>
     
     <!-- General app scripts -->
-    <script src="~/Scripts/app/app.module.js"></script>
-    <script src="~/Scripts/app/app.config.js"></script>
-    <script src="~/Scripts/app/app.interceptor.js"></script>
-    <script src="~/Scripts/app/app.run.js"></script>
+    <script src="~/Scripts/app/main/app.module.js"></script>
+    <script src="~/Scripts/app/main/app.config.js"></script>
+    <script src="~/Scripts/app/main/app.interceptor.js"></script>
+    <script src="~/Scripts/app/main/app.run.js"></script>
     
     <!-- Repositories -->
     <script src="~/Scripts/app/common/services/login.repository.js"></script>
@@ -49,60 +49,59 @@
     <!-- Common controllers -->
     <script src="~/Scripts/app/common/controllers/header.controller.js"></script>
     <script src="~/Scripts/app/common/controllers/mainmenu.controller.js"></script>
+    <script src="~/Scripts/app/common/controllers/displaylayout.controller.js"></script>
     
     <!-- Login and registration -->
-    <script src="~/Scripts/app/login/login.state.js"></script>
-    <script src="~/Scripts/app/login/login.controller.js"></script>
-    <script src="~/Scripts/app/register/register.state.js"></script>
-    <script src="~/Scripts/app/register/register.controller.js"></script>
-    <script src="~/Scripts/app/registerexisting/registerexisting.state.js"></script>
-    <script src="~/Scripts/app/registerexisting/registerexisting.controller.js"></script>
+    <script src="~/Scripts/app/account/login/login.state.js"></script>
+    <script src="~/Scripts/app/account/login/login.controller.js"></script>
+    <script src="~/Scripts/app/account/register/register.state.js"></script>
+    <script src="~/Scripts/app/account/register/register.controller.js"></script>
+    <script src="~/Scripts/app/account/registerexisting/registerexisting.state.js"></script>
+    <script src="~/Scripts/app/account/registerexisting/registerexisting.controller.js"></script>
     
     <!-- Dashboard -->
     <script src="~/Scripts/app/dashboard/dashboard.state.js"></script>
     <script src="~/Scripts/app/dashboard/dashboard.controller.js"></script>
     
     <!-- Employees -->
-    <script src="~/Scripts/app/employees/employees.state.js"></script>
-    <script src="~/Scripts/app/employees/employees.controller.js"></script>
-    <script src="~/Scripts/app/addemployee/addemployee.state.js"></script>
-    <script src="~/Scripts/app/addemployee/addemployee.controller.js"></script>
-    <script src="~/Scripts/app/editemployee/editemployee.state.js"></script>
-    <script src="~/Scripts/app/editemployee/editemployee.controller.js"></script>
-    <script src="~/Scripts/app/employeedetails/employeedetails.state.js"></script>
-    <script src="~/Scripts/app/employeedetails/employeedetails.controler.js"></script>
+    <script src="~/Scripts/app/employee/employees/employees.state.js"></script>
+    <script src="~/Scripts/app/employee/employees/employees.controller.js"></script>
+    <script src="~/Scripts/app/employee/addemployee/addemployee.state.js"></script>
+    <script src="~/Scripts/app/employee/addemployee/addemployee.controller.js"></script>
+    <script src="~/Scripts/app/employee/editemployee/editemployee.state.js"></script>
+    <script src="~/Scripts/app/employee/editemployee/editemployee.controller.js"></script>
+    <script src="~/Scripts/app/employee/employeedetails/employeedetails.state.js"></script>
+    <script src="~/Scripts/app/employee/employeedetails/employeedetails.controler.js"></script>
     
     <!-- Products -->
-    <script src="~/Scripts/app/products/products.state.js"></script>
-    <script src="~/Scripts/app/products/products.controller.js"></script>
-    <script src="~/Scripts/app/addproduct/addproduct.state.js"></script>
-    <script src="~/Scripts/app/addproduct/addproduct.controller.js"></script>
-    <script src="~/Scripts/app/editproduct/editproduct.state.js"></script>
-    <script src="~/Scripts/app/editproduct/editproduct.controller.js"></script>
-    <script src="~/Scripts/app/productdetails/productdetails.state.js"></script>
-    <script src="~/Scripts/app/productdetails/productdetails.controller.js"></script>
+    <script src="~/Scripts/app/product/products/products.state.js"></script>
+    <script src="~/Scripts/app/product/products/products.controller.js"></script>
+    <script src="~/Scripts/app/product/addproduct/addproduct.state.js"></script>
+    <script src="~/Scripts/app/product/addproduct/addproduct.controller.js"></script>
+    <script src="~/Scripts/app/product/editproduct/editproduct.state.js"></script>
+    <script src="~/Scripts/app/product/editproduct/editproduct.controller.js"></script>
+    <script src="~/Scripts/app/product/productdetails/productdetails.state.js"></script>
+    <script src="~/Scripts/app/product/productdetails/productdetails.controller.js"></script>
     
     <!-- Suppliers -->
-    <script src="~/Scripts/app/suppliers/suppliers.state.js"></script>
-    <script src="~/Scripts/app/suppliers/suppliers.controller.js"></script>  
-    <script src="~/Scripts/app/addsupplier/addsupplier.state.js"></script>
-    <script src="~/Scripts/app/addsupplier/addsupplier.controller.js"></script>  
-    <script src="~/Scripts/app/editsupplier/editsupplier.state.js"></script>
-    <script src="~/Scripts/app/editsupplier/editsupplier.controller.js"></script>
-    <script src="~/Scripts/app/supplierdetails/supplierdetails.state.js"></script>
-    <script src="~/Scripts/app/supplierdetails/supplierdetails.controller.js"></script>
+    <script src="~/Scripts/app/supplier/suppliers/suppliers.state.js"></script>
+    <script src="~/Scripts/app/supplier/suppliers/suppliers.controller.js"></script>  
+    <script src="~/Scripts/app/supplier/addsupplier/addsupplier.state.js"></script>
+    <script src="~/Scripts/app/supplier/addsupplier/addsupplier.controller.js"></script>  
+    <script src="~/Scripts/app/supplier/editsupplier/editsupplier.state.js"></script>
+    <script src="~/Scripts/app/supplier/editsupplier/editsupplier.controller.js"></script>
+    <script src="~/Scripts/app/supplier/supplierdetails/supplierdetails.state.js"></script>
+    <script src="~/Scripts/app/supplier/supplierdetails/supplierdetails.controller.js"></script>
     
     <!-- Orders -->
-    <script src="~/Scripts/app/orders/orders.state.js"></script>
-    <script src="~/Scripts/app/orders/orders.controller.js"></script>    
-    <script src="~/Scripts/app/addorder/addorder.state.js"></script>
-    <script src="~/Scripts/app/addorder/addorder.controller.js"></script>   
-    <script src="~/Scripts/app/editorder/editorder.state.js"></script>
-    <script src="~/Scripts/app/editorder/editorder.controller.js"></script>
-    <script src="~/Scripts/app/orderdetails/orderdetails.state.js"></script>
-    <script src="~/Scripts/app/orderdetails/orderdetails.controller.js"></script>   
-
-    <script src="~/Scripts/app/subheader/displayLayout.controller.js"></script>
+    <script src="~/Scripts/app/order/orders/orders.state.js"></script>
+    <script src="~/Scripts/app/order/orders/orders.controller.js"></script>    
+    <script src="~/Scripts/app/order/addorder/addorder.state.js"></script>
+    <script src="~/Scripts/app/order/addorder/addorder.controller.js"></script>   
+    <script src="~/Scripts/app/order/editorder/editorder.state.js"></script>
+    <script src="~/Scripts/app/order/editorder/editorder.controller.js"></script>
+    <script src="~/Scripts/app/order/orderdetails/orderdetails.state.js"></script>
+    <script src="~/Scripts/app/order/orderdetails/orderdetails.controller.js"></script>   
 
     <base href="/">
 </head>
