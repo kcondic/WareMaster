@@ -3,7 +3,7 @@ namespace WareMaster.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class initialcreate : DbMigration
     {
         public override void Up()
         {
@@ -95,6 +95,7 @@ namespace WareMaster.Data.Migrations
                         CompanyId = c.Int(nullable: false),
                         Counter = c.Int(nullable: false),
                         ImageUrl = c.String(),
+                        Barcode = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Companies", t => t.CompanyId)

@@ -10,7 +10,6 @@ namespace WareMaster.Data.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "WareMaster.Data.Models.WarehouseContext";
         }
 
         protected override void Seed(WareMaster.Data.Models.WarehouseContext context)
