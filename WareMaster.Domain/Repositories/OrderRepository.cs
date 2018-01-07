@@ -16,7 +16,7 @@ namespace WareMaster.Domain.Repositories
     {
         public List<Order> GetAllOrders(int companyId)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
                 return context.Orders
                     .Include(order => order.AssignedEmployee)
                     .Include(order => order.Supplier)
@@ -25,28 +25,28 @@ namespace WareMaster.Domain.Repositories
 
         public List<Order> GetAllCreatedOrders(int companyId)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
                 return context.Orders.Where(order => order.CompanyId == companyId && 
                                             order.Status == Status.Created).ToList();
         }
 
         public List<Order> GetAllInProgressOrders(int companyId)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
                 return context.Orders.Where(order => order.CompanyId == companyId &&
                                             order.Status == Status.InProgress).ToList();
         }
 
         public List<Order> GetAllFinishedOrders(int companyId)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
                 return context.Orders.Where(order => order.CompanyId == companyId &&
                                             order.Status == Status.Finished).ToList();
         }
 
         public Order GetOrderDetails(int orderId)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
                 return context.Orders
                     .Include(order => order.AssignedEmployee)
                     .Include(order => order.ProductOrders)
@@ -59,7 +59,7 @@ namespace WareMaster.Domain.Repositories
 
         public void AddNewOrder(Order order)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
             {
 
                 var newOrder = new Order()
@@ -81,7 +81,7 @@ namespace WareMaster.Domain.Repositories
 
         public void EditOrder(Order editedOrder)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
             {
                 var orderToEdit = context.Orders
                     .Include(order => order.ProductOrders)
@@ -108,7 +108,7 @@ namespace WareMaster.Domain.Repositories
 
         public void DeleteOrder(int orderId)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
             {
                 var orderToDelete = context.Orders
                     .Include(order => order.ProductOrders)

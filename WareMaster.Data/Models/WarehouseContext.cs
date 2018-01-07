@@ -4,11 +4,11 @@ using WareMaster.Data.Models.Entities;
 
 namespace WareMaster.Data.Models
 {
-    public class WarehouseContext : DbContext
+    public class WareMasterContext : DbContext
     {
-        public WarehouseContext() : base("WareMasterDatabase")
+        public WareMasterContext() : base("WareMasterDatabase")
         {
-            Database.SetInitializer(new WarehouseModelDbInitialization());  
+            Database.SetInitializer(new CreateDatabaseIfNotExists<WareMasterContext>());  
         }
 
         public virtual DbSet<Company> Companies { get; set; }

@@ -14,13 +14,13 @@ namespace WareMaster.Domain.Repositories
     {
         public List<User> GetAllUsers(int companyId)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
                 return context.Users.Where(user => user.CompanyId == companyId).ToList();
         }
 
         public List<User> GetAllEmployees(int companyId)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
                 return context.Users
                     .Where(user => user.Role == Role.Employee
                             && user.CompanyId == companyId).ToList();
@@ -29,7 +29,7 @@ namespace WareMaster.Domain.Repositories
 
         public List<User> GetAllManagers(int companyId)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
                 return context.Users
                     .Where(user => user.Role == Role.Manager
                             && user.CompanyId == companyId).ToList();
@@ -37,7 +37,7 @@ namespace WareMaster.Domain.Repositories
 
         public User GetUser(int userId)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
                 return context.Users
                     .Include(user => user.EmployeeOrders)
                     .Include(user => user.ManagerOrders)
@@ -47,21 +47,21 @@ namespace WareMaster.Domain.Repositories
 
         public User GetManagerByUsername(string username)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
                 return context.Users.SingleOrDefault(user => 
                 user.Username == username && user.Role == Role.Manager);
         }
 
         public int GetLastEmployeeId()
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
                 return context.Users.Where(user => user.Role == Role.Employee)
                                     .OrderByDescending(user => user.Id).First().Id;
         }
 
         public void AddUser(User userToAdd)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
             {
                 userToAdd.Company = context.Companies.Find(userToAdd.CompanyId);
                 context.Companies.Attach(userToAdd.Company);
@@ -73,7 +73,7 @@ namespace WareMaster.Domain.Repositories
 
         public void EditUser(User editedUser)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
             {
                 var userToEdit = context.Users
                     .SingleOrDefault(user => user.Id == editedUser.Id);
@@ -93,7 +93,7 @@ namespace WareMaster.Domain.Repositories
 
         public void DeleteUser(int userId)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
             {
                 var userToDelete = context.Users.FirstOrDefault(user => user.Id == userId);
 
@@ -119,7 +119,7 @@ namespace WareMaster.Domain.Repositories
 
         public bool DoesUsernameExist(string username)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
                 return context.Users.Any(user => user.Username == username);
         }
     }
