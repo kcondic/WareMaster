@@ -12,7 +12,7 @@ namespace WareMaster.Domain.Repositories
     {
         public List<ActivityLog> GetAllActivityLogs(int companyId)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
                 return context.ActivityLogs.Where(log => log.CompanyId == companyId)
                                            .OrderByDescending(order => order.TimeOfActivity)
                                            .ToList();
@@ -20,7 +20,7 @@ namespace WareMaster.Domain.Repositories
 
         public void AddActivityLog(ActivityLog activityLogToAdd)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
             {
                 activityLogToAdd.User = context.Users.Find(activityLogToAdd.UserId);
                 activityLogToAdd.Company = context.Companies.Find(activityLogToAdd.CompanyId);

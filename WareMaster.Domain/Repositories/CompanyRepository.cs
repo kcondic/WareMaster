@@ -13,7 +13,7 @@ namespace WareMaster.Domain.Repositories
     {
         public Company GetCompanyById(int companyId)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
                 return context.Companies
                     .Include(company => company.EmployeesManagers)
                     .Include(company => company.Products)
@@ -24,7 +24,7 @@ namespace WareMaster.Domain.Repositories
 
         public int AddNewCompany(string companyToAddName)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
             {
                 var companyToAdd = new Company
                 {
@@ -40,7 +40,7 @@ namespace WareMaster.Domain.Repositories
 
         public void DeleteCompany(int companyId)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
             {
                 var companyToDelete = context.Companies.FirstOrDefault(company => company.Id == companyId);
 

@@ -130,7 +130,7 @@ namespace WareMaster.Controllers
                 userToRegister.Password
             };
 
-            if(stringsToCheck.Any(str => str == null || !char.IsLetter(str[0]) || !str.All(char.IsLetterOrDigit) || str.Length < 3))
+            if(stringsToCheck.Any(str => str == null || !char.IsLetter(str[0]) || !str.All(c =>  char.IsLetterOrDigit(c) || c==' ') || str.Length < 3))
                 return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
             if(userToRegister.Username.Any(char.IsUpper) || !Regex.IsMatch(userToRegister.Username, @"^[a-z0-9]+$"))
                 return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
@@ -157,7 +157,7 @@ namespace WareMaster.Controllers
                 userToRegisterToExistingCompany.Password
             };
 
-            if (stringsToCheck.Any(str => str == null || !char.IsLetter(str[0]) || !str.All(char.IsLetterOrDigit) || str.Length < 3))
+            if (stringsToCheck.Any(str => str == null || !char.IsLetter(str[0]) || !str.All(c => char.IsLetterOrDigit(c) || c == ' ') || str.Length < 3))
                 return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
             if (userToRegisterToExistingCompany.Username.Any(char.IsUpper) || !Regex.IsMatch(userToRegisterToExistingCompany.Username, @"^[a-z0-9]+$"))
                 return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));

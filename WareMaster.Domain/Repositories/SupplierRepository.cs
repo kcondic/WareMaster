@@ -13,7 +13,7 @@ namespace WareMaster.Domain.Repositories
     {
         public List<Supplier> GetAllSuppliers(int companyId)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
             {
                 return context.Suppliers
                     .Include(supplier => supplier.Products)
@@ -23,7 +23,7 @@ namespace WareMaster.Domain.Repositories
 
         public Supplier GetSupplier(int supplierId)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
                 return context.Suppliers
                     .Include(supplier => supplier.Products)
                     .SingleOrDefault(supplier => supplier.Id == supplierId);
@@ -31,7 +31,7 @@ namespace WareMaster.Domain.Repositories
 
         public void AddNewSupplier(Supplier supplier)
         {          
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
             {
                 supplier.Company = context.Companies.Find(supplier.CompanyId);
                 context.Companies.Attach(supplier.Company);
@@ -45,7 +45,7 @@ namespace WareMaster.Domain.Repositories
 
         public void EditSupplier(Supplier editedSupplier)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
             {
                 foreach (var product in editedSupplier.Products)
                     context.Products.Attach(product);
@@ -78,7 +78,7 @@ namespace WareMaster.Domain.Repositories
 
         public void DeleteSupplier(int supplierId)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
             {
                 var supplierToDelete = context.Suppliers.SingleOrDefault(supplier => supplier.Id == supplierId);
 

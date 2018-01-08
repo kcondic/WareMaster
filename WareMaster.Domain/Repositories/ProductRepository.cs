@@ -13,13 +13,13 @@ namespace WareMaster.Domain.Repositories
     {
         public List<Product> GetAllProducts(int companyId)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
                 return context.Products.Where(product => product.CompanyId == companyId).ToList();
         }
 
         public Product GetProduct(int productId)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
                 return context.Products
                     .Include(product => product.Suppliers)
                     .SingleOrDefault(product => product.Id == productId);
@@ -27,13 +27,13 @@ namespace WareMaster.Domain.Repositories
 
         public int GetLastProductId()
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
                 return context.Products.OrderByDescending(user => user.Id).First().Id;
         }
 
         public void AddProduct(Product productToAdd)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
             {
                 productToAdd.Company = context.Companies.Find(productToAdd.CompanyId);
                 context.Companies.Attach(productToAdd.Company);
@@ -45,7 +45,7 @@ namespace WareMaster.Domain.Repositories
 
         public void EditProduct(Product editedProduct)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
             {
                 var productToEdit = context.Products
                     .SingleOrDefault(product => product.Id == editedProduct.Id);
@@ -63,7 +63,7 @@ namespace WareMaster.Domain.Repositories
 
         public void DeleteProduct(int productId)
         {
-            using (var context = new WarehouseContext())
+            using (var context = new WareMasterContext())
             {
                 var productToDelete = context.Products.Include(product => product.ProductOrders)
                                                       .FirstOrDefault(product => product.Id == productId);
