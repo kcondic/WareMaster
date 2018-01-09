@@ -52,7 +52,6 @@ namespace WareMaster.Controllers
 
         [HttpGet]
         [Route("edit")]
-        [AllowAnonymous]
         public IHttpActionResult GetEmployeeToEdit(int id)
         {
             return Ok(_employeeRepository.GetUser(id));
