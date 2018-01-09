@@ -2,6 +2,7 @@ Popis taskova koje još moramo odradit, slobodno nadopišite neki i ako æete radit
 
 Loadanje stvari malo po malo i prikazivanje spinnera dok se ne loadaju stvari
 Ako se makne proizvod sa dobavljaèa maknit ga i sa svih narudžbi tog dobavljaèa
+Bacat unauthorized ako korisnik promijeni url tako da ide dohvatit zaposlenika koji nije njegov
 Ogranièit moguænosti editiranja zapisa (npr. ako je ulazna narudžba prihvaæena onemoguæit otkazivanje 
 ili onemoguæit promjenu imena zaposlenika bez njegovog pristanka)
 Proširit postojeæi dizajn na nove rute (registracija, narudžbe) (AJŠ)
