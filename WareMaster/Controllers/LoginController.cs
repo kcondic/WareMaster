@@ -81,7 +81,7 @@ namespace WareMaster.Controllers
             if (user == null) return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.NotFound));
 
             var areCredentialsValid = HashHelper.ValidatePassword(password, user.Password);
-            if (!areCredentialsValid) return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+            if (!areCredentialsValid) return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Unauthorized));
 
             var issuer = ConfigurationManager.AppSettings["as:IssuerId"];
             var audience = ConfigurationManager.AppSettings["as:AudienceId"];
