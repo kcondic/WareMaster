@@ -185,7 +185,7 @@ namespace WareMaster.Controllers
             var accessString = accessStringAndCredentials["accessString"].ToObject<string>();
             var usernameToRegister = accessStringAndCredentials["usernameToRegister"].ToObject<string>();
             var passwordToRegister = accessStringAndCredentials["passwordToRegister"].ToObject<string>();
-
+   
             var idFromAccessString = 0;
             int.TryParse(Regex.Match(accessString, @"\d+$").Value, out idFromAccessString);
 
@@ -193,7 +193,9 @@ namespace WareMaster.Controllers
             if(employeeToRegister == null)
                 return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.NotFound));
 
-            if(employeeToRegister.Username != null || employeeToRegister.Password != null)
+            if (_userRepository.DoesUsernameExist(usernameToRegister))
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+            if (employeeToRegister.Username != null || employeeToRegister.Password != null)
                 return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
             if (accessString != char.ToLower(StringHelper.RemoveDiacritics(employeeToRegister.FirstName)[0]) + StringHelper.RemoveDiacritics(employeeToRegister.LastName).ToLower() + employeeToRegister.Id)
                 return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));

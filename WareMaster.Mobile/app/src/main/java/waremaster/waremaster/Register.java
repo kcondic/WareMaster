@@ -36,10 +36,11 @@ public class Register extends AppCompatActivity {
                @Override
                public void onFocusChange(View view, boolean hasFocus) {
                    if (!hasFocus) {
-                       StringRequest registerRequest = new StringRequest(Request.Method.POST, getString(R.string.base_url) + "/register",
+                       StringRequest usernameExistenceRequest = new StringRequest(Request.Method.GET, getString(R.string.base_url) + "/register",
                                new Response.Listener<String>() {
                                    @Override
                                    public void onResponse(String doesUsernameExist) {
+                                       accessStringInput.setText(doesUsernameExist);
                                        if (doesUsernameExist.equals("true")) {
                                            usernameTaken.setVisibility(View.VISIBLE);
                                            register.setEnabled(false);
@@ -51,7 +52,7 @@ public class Register extends AppCompatActivity {
                                }, new Response.ErrorListener() {
                            @Override
                            public void onErrorResponse(VolleyError error) {
-                               Toast.makeText(getApplicationContext(), "Došlo je do neočekivane pogreške: " + error.toString(), Toast.LENGTH_LONG).show();
+                               Toast.makeText(getApplicationContext(), "Došlo je do neočekivane pogreške: " + error.networkResponse.statusCode + error.toString(), Toast.LENGTH_LONG).show();
                            }
                        }) {
                            @Override
@@ -61,7 +62,7 @@ public class Register extends AppCompatActivity {
                                return params;
                            }
                        };
-                       RequestQueueSingleton.getInstance(getApplicationContext()).addToRequestQueue(registerRequest);
+                       RequestQueueSingleton.getInstance(getApplicationContext()).addToRequestQueue(usernameExistenceRequest);
                    }
                }
            });
@@ -69,7 +70,7 @@ public class Register extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                StringRequest registerRequest = new StringRequest(Request.Method.POST, getString(R.string.base_url) + "/register",
+                StringRequest registerRequest = new StringRequest(Request.Method.POST, getString(R.string.base_url) + "/registeremployee",
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {

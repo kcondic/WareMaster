@@ -78,6 +78,7 @@ namespace WareMaster.Domain.Repositories
 
                 userToEdit.FirstName = editedUser.FirstName;
                 userToEdit.LastName = editedUser.LastName;
+                userToEdit.Username = editedUser.Username;
                 userToEdit.Password = editedUser.Password;
                 userToEdit.ImageUrl = editedUser.ImageUrl;
                 userToEdit.Role = editedUser.Role;
