@@ -115,6 +115,8 @@ namespace WareMaster.Domain.Repositories
 
         public bool DoesUsernameExist(string username)
         {
+            if (username == null)
+                return false;
             using (var context = new WareMasterContext())
                 return context.Users.Any(user => user.Username == username);
         }
