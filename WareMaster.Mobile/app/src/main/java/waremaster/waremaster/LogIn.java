@@ -1,5 +1,6 @@
 package waremaster.waremaster;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -51,7 +52,7 @@ public class LogIn extends AppCompatActivity {
                         if(httpStatusCode == 404)
                             Toast.makeText(getApplicationContext(), "Korisnik s navedenim podacima nije pronađen.", Toast.LENGTH_LONG).show();
                         else if(httpStatusCode == 401)
-                            Toast.makeText(getApplicationContext(), "Neispravna lozinka", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Neispravna lozinka.", Toast.LENGTH_LONG).show();
                         else
                             Toast.makeText(getApplicationContext(), "Došlo je do neočekivane pogreške: " + error.toString(), Toast.LENGTH_LONG).show();
                     }
@@ -64,6 +65,14 @@ public class LogIn extends AppCompatActivity {
                 }
                 };
                 RequestQueueSingleton.getInstance(getApplicationContext()).addToRequestQueue(loginRequest);
+            }
+        });
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent registerIntent = new Intent(view.getContext(), Register.class);
+                startActivity(registerIntent);
             }
         });
     }

@@ -52,14 +52,7 @@ namespace WareMaster.Domain.Repositories
                 user.Username == username);
         }
 
-        public int GetLastEmployeeId()
-        {
-            using (var context = new WareMasterContext())
-                return context.Users.Where(user => user.Role == Role.Employee)
-                                    .OrderByDescending(user => user.Id).First().Id;
-        }
-
-        public void AddUser(User userToAdd)
+        public int AddUser(User userToAdd)
         {
             using (var context = new WareMasterContext())
             {
@@ -68,6 +61,8 @@ namespace WareMaster.Domain.Repositories
 
                 context.Users.Add(userToAdd);
                 context.SaveChanges();
+
+                return userToAdd.Id;
             }
         }
 

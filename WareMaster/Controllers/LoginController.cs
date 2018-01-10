@@ -131,9 +131,11 @@ namespace WareMaster.Controllers
                 userToRegister.Password
             };
 
-            if(stringsToCheck.Any(str => str == null || !char.IsLetter(str[0]) || !str.All(c =>  char.IsLetterOrDigit(c) || c==' ') || str.Length < 3))
+            if(_userRepository.DoesUsernameExist(userToRegister.Username))
                 return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
-            if(userToRegister.Username.Any(char.IsUpper) || !Regex.IsMatch(userToRegister.Username, @"^[a-z0-9]+$"))
+            if (stringsToCheck.Any(str => str == null || !char.IsLetter(str[0]) || !str.All(c =>  char.IsLetterOrDigit(c) || c==' ') || str.Length < 3))
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+            if(!Regex.IsMatch(userToRegister.Username, @"^[a-z0-9]+$"))
                 return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
             if(userToRegister.Password.Length < 6 || !Regex.IsMatch(userToRegister.Password, @"^[a-zA-Z0-9]+$"))
                 return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
@@ -158,6 +160,8 @@ namespace WareMaster.Controllers
                 userToRegisterToExistingCompany.Password
             };
 
+            if (_userRepository.DoesUsernameExist(userToRegisterToExistingCompany.Username))
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
             if (stringsToCheck.Any(str => str == null || !char.IsLetter(str[0]) || !str.All(c => char.IsLetterOrDigit(c) || c == ' ') || str.Length < 3))
                 return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
             if (userToRegisterToExistingCompany.Username.Any(char.IsUpper) || !Regex.IsMatch(userToRegisterToExistingCompany.Username, @"^[a-z0-9]+$"))
@@ -167,6 +171,41 @@ namespace WareMaster.Controllers
 
             userToRegisterToExistingCompany.Password = HashHelper.HashPassword(userToRegisterToExistingCompany.Password);
             _userRepository.AddUser(userToRegisterToExistingCompany);
+            return Ok(true);
+        }
+
+        [HttpPost]
+        [Route("registeremployee")]
+        public IHttpActionResult RegisterEmployee(JObject accessStringAndCredentials)
+        {
+            if (accessStringAndCredentials["accessString"] == null 
+                || accessStringAndCredentials["usernameToRegister"] == null 
+                || accessStringAndCredentials["passwordToRegister"] == null)
+                    return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+            var accessString = accessStringAndCredentials["accessString"].ToObject<string>();
+            var usernameToRegister = accessStringAndCredentials["usernameToRegister"].ToObject<string>();
+            var passwordToRegister = accessStringAndCredentials["passwordToRegister"].ToObject<string>();
+
+            var idFromAccessString = 0;
+            int.TryParse(Regex.Match(accessString, @"\d+$").Value, out idFromAccessString);
+
+            var employeeToRegister = _userRepository.GetUser(idFromAccessString);
+            if(employeeToRegister == null)
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.NotFound));
+
+            if(employeeToRegister.Username != null || employeeToRegister.Password != null)
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+            if (accessString != char.ToLower(StringHelper.RemoveDiacritics(employeeToRegister.FirstName)[0]) + StringHelper.RemoveDiacritics(employeeToRegister.LastName).ToLower() + employeeToRegister.Id)
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+            if(usernameToRegister == null || !char.IsLetter(usernameToRegister[0]) || !Regex.IsMatch(usernameToRegister, @"^[a-z0-9]+$") || usernameToRegister.Length < 3)
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+            if (passwordToRegister.Length < 6 || !Regex.IsMatch(passwordToRegister, @"^[a-zA-Z0-9]+$"))
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+
+            employeeToRegister.Username = usernameToRegister;
+            employeeToRegister.Password = HashHelper.HashPassword(passwordToRegister);
+            _userRepository.EditUser(employeeToRegister);
+ 
             return Ok(true);
         }
     }

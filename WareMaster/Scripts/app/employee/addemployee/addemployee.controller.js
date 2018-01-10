@@ -1,5 +1,5 @@
 ﻿angular.module('app').controller('AddEmployeeController',
-    function ($scope, $state, employeesRepository, functionsRepository, loginRepository, activitylogRepository) {
+    function($scope, $state, employeesRepository, functionsRepository, loginRepository, activitylogRepository) {
 
         const companyId = loginRepository.getCompanyId();
 
@@ -12,17 +12,16 @@
                 Role: 0
             };
             employeesRepository.addEmployee(newEmployee).then(function (employeeToken) {
+                alert(
+                    `Da bi se zaposlenik mogao registrirati, mora upisati sljedeću riječ pri registraciji: ${employeeToken.data}`);
                 activitylogRepository.addActivityLog({
                     Text: `${loginRepository.getManagerName()} je stvorio zaposlenika ${$scope.firstName} ${$scope.lastName}`,
                     UserId: loginRepository.getManagerId(),
                     CompanyId: companyId
                 });
-                employeesRepository.getIdNeededForImageName().then(function(id) {
-                    $scope.id = id.data;
-                }).then(function() {
-                    functionsRepository.uploadEmployeeImage($scope.file, $scope.firstName, $scope.lastName, $scope.id, companyId);
-                    $state.go('employees', {}, { reload: true });
-                });
+                $scope.id = parseInt(employeeToken.data.match(/\d+$/));
+                functionsRepository.uploadEmployeeImage($scope.file, $scope.firstName, $scope.lastName, $scope.id, companyId);
+                $state.go('employees', {}, { reload: true });
             });
         }
     });

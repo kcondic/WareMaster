@@ -29,25 +29,18 @@ namespace WareMaster.Controllers
             return Ok(_employeeRepository.GetAllEmployees(companyId));
         }
 
-        [HttpGet]
-        [Route("add")]
-        public IHttpActionResult GetIdNeededForImageName()
-        {
-            return Ok(_employeeRepository.GetLastEmployeeId());
-        }
-
         [HttpPost]
         [Route("add")]
         public IHttpActionResult AddEmployee(User employeeToAdd)
         {
             var companyName = _companyRepository.GetCompanyById(employeeToAdd.CompanyId).Name;
-            _employeeRepository.AddUser(employeeToAdd);
-            var lastId = _employeeRepository.GetLastEmployeeId();
+            var employeeId = _employeeRepository.AddUser(employeeToAdd);
             employeeToAdd.ImageUrl = "Uploads\\" + companyName + "\\Zaposlenici\\" + 
                                       employeeToAdd.FirstName + employeeToAdd.LastName + 
-                                      lastId + ".jpg";
+                                      employeeId + ".jpg";
             _employeeRepository.EditUser(employeeToAdd);
-            return Ok(true);
+            return Ok(char.ToLower(StringHelper.RemoveDiacritics(employeeToAdd.FirstName)[0]) 
+                + StringHelper.RemoveDiacritics(employeeToAdd.LastName).ToLower() + employeeId);
         }
 
         [HttpGet]
