@@ -45,11 +45,11 @@ namespace WareMaster.Domain.Repositories
                     .FirstOrDefault(user => user.Id == userId);
         }
 
-        public User GetManagerByUsername(string username)
+        public User GetByUsername(string username)
         {
             using (var context = new WareMasterContext())
                 return context.Users.SingleOrDefault(user => 
-                user.Username == username && user.Role == Role.Manager);
+                user.Username == username);
         }
 
         public int GetLastEmployeeId()

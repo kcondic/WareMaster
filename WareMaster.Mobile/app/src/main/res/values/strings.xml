@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">WareMaster</string>
+    <string name="base_url">https://waremaster.azurewebsites.net/api</string>
 </resources>

@@ -11,7 +11,7 @@
                 ImageUrl: '',
                 Role: 0
             };
-            employeesRepository.addEmployee(newEmployee).then(function () {
+            employeesRepository.addEmployee(newEmployee).then(function (employeeToken) {
                 activitylogRepository.addActivityLog({
                     Text: `${loginRepository.getManagerName()} je stvorio zaposlenika ${$scope.firstName} ${$scope.lastName}`,
                     UserId: loginRepository.getManagerId(),

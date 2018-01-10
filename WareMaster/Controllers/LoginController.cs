@@ -77,7 +77,7 @@ namespace WareMaster.Controllers
             var userName = userCredentials["username"].ToObject<string>();
             var password = userCredentials["password"].ToObject<string>();
 
-            var user = _userRepository.GetManagerByUsername(userName);
+            var user = _userRepository.GetByUsername(userName);
             if (user == null) return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.NotFound));
 
             var areCredentialsValid = HashHelper.ValidatePassword(password, user.Password);
@@ -98,7 +98,8 @@ namespace WareMaster.Controllers
                 {"companyname", _companyRepository.GetCompanyById(user.CompanyId).Name},
                 {"username", user.Username},
                 {"firstname", user.FirstName},
-                {"lastname", user.LastName}
+                {"lastname", user.LastName},
+                {"role", user.Role.ToString()}
             };
 
             var token = JWT.Encode(payload, Encoding.UTF8.GetBytes(secret), JwsAlgorithm.HS256);

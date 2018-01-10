@@ -2,7 +2,11 @@ package waremaster.waremaster;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -10,6 +14,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import org.json.JSONObject;
 
@@ -17,44 +22,49 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LogIn extends AppCompatActivity {
-    private TextView firstName, lastName;
+    private EditText usernameInput, passwordInput;
+    private TextView register;
+    private Button login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
-        firstName = (TextView)findViewById(R.id.firstNameView);
-        lastName = (TextView)findViewById(R.id.lastNameView);
+        usernameInput = (EditText)findViewById(R.id.usernameText);
+        passwordInput = (EditText)findViewById(R.id.passwordText);
+        register = (TextView)findViewById(R.id.registerView);
+        login = (Button)findViewById(R.id.loginButton);
 
-
-
-// Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://waremaster.azurewebsites.net/api/employees/edit?id=2";
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StringRequest loginRequest = new StringRequest(Request.Method.POST, getString(R.string.base_url) + "/login",
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String token) {
+                                register.setText(token);
+                            }
+                        }, new Response.ErrorListener() {
                     @Override
-                    public void onResponse(JSONObject employee) {
-                        firstName.setText(employee.optString("FirstName"));
-                        lastName.setText(employee.optString("LastName"));
+                    public void onErrorResponse(VolleyError error) {
+                        int httpStatusCode = error.networkResponse.statusCode;
+                        if(httpStatusCode == 404)
+                            Toast.makeText(getApplicationContext(), "Korisnik s navedenim podacima nije pronađen.", Toast.LENGTH_LONG).show();
+                        else if(httpStatusCode == 401)
+                            Toast.makeText(getApplicationContext(), "Neispravna lozinka", Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(getApplicationContext(), "Došlo je do neočekivane pogreške: " + error.toString(), Toast.LENGTH_LONG).show();
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                firstName.setText(error.toString());
+                }){@Override
+                public Map<String, String> getParams(){
+                    Map<String, String> params = new HashMap<>();
+                    params.put("username", usernameInput.getText().toString());
+                    params.put("password", passwordInput.getText().toString());
+                    return params;
+                }
+                };
+                RequestQueueSingleton.getInstance(getApplicationContext()).addToRequestQueue(loginRequest);
             }
-        })
-        {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjY0NzQ4IiwiYXVkIjoid2FyZW1hc3RlcmF1ZGllbmNlIiwiZXhwIjoiMTUxNTUzMzU2OCIsImlkIjoiMSIsImNvbXBhbnlpZCI6IjEiLCJjb21wYW55bmFtZSI6IlBydmEgT25saW5lIiwidXNlcm5hbWUiOiJrb29sY3Jhc2giLCJmaXJzdG5hbWUiOiJLcmXFoWltaXIiLCJsYXN0bmFtZSI6IsSMb25kacSHIn0.ppUvJf0q75fUr2KHzoLVz_xkdMSXA37H0jY1K1rhK-w");
-                return params;
-            }
-        };
-// Add the request to the RequestQueue.
-        queue.add(jsonObjectRequest);
-
+        });
     }
 }
