@@ -38,13 +38,16 @@ namespace WareMaster.Domain.Repositories
             }
         }
 
-        public int GetLastProductId()
+        public Product GetProductByBarcode(string productBarcode)
         {
             using (var context = new WareMasterContext())
-                return context.Products.OrderByDescending(user => user.Id).First().Id;
+                return context.Products
+                    .Include(product => product.Suppliers)
+                    .SingleOrDefault(product => product.Barcode == productBarcode);
         }
 
-        public void AddProduct(Product productToAdd)
+
+        public int AddProduct(Product productToAdd)
         {
             using (var context = new WareMasterContext())
             {
@@ -53,6 +56,8 @@ namespace WareMaster.Domain.Repositories
 
                 context.Products.Add(productToAdd);
                 context.SaveChanges();
+
+                return productToAdd.Id;
             }
         }
 
@@ -68,6 +73,7 @@ namespace WareMaster.Domain.Repositories
 
                 productToEdit.Name = editedProduct.Name;
                 productToEdit.Counter = editedProduct.Counter;
+                productToEdit.Barcode = editedProduct.Barcode;
                 productToEdit.ImageUrl = editedProduct.ImageUrl;
 
                 context.SaveChanges();

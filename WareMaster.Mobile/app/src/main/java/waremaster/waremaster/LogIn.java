@@ -38,12 +38,14 @@ public class LogIn extends AppCompatActivity {
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 StringRequest loginRequest = new StringRequest(Request.Method.POST, getString(R.string.base_url) + "/login",
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String token) {
-                                register.setText(token);
+                                Intent goToMainScreen = new Intent(view.getContext(), MainScreen.class);
+                                goToMainScreen.putExtra("waremasterToken", token);
+                                startActivity(goToMainScreen);
                             }
                         }, new Response.ErrorListener() {
                     @Override

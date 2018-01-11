@@ -36,7 +36,7 @@ public class Register extends AppCompatActivity {
                @Override
                public void onFocusChange(View view, boolean hasFocus) {
                    if (!hasFocus) {
-                       StringRequest usernameExistenceRequest = new StringRequest(Request.Method.GET, getString(R.string.base_url) + "/register",
+                       StringRequest usernameExistenceRequest = new StringRequest(Request.Method.GET, getString(R.string.base_url) + "/register?username=" + registerUsernameInput.getText(),
                                new Response.Listener<String>() {
                                    @Override
                                    public void onResponse(String doesUsernameExist) {
@@ -54,14 +54,7 @@ public class Register extends AppCompatActivity {
                            public void onErrorResponse(VolleyError error) {
                                Toast.makeText(getApplicationContext(), "Došlo je do neočekivane pogreške: " + error.networkResponse.statusCode + error.toString(), Toast.LENGTH_LONG).show();
                            }
-                       }) {
-                           @Override
-                           public Map<String, String> getParams() {
-                               Map<String, String> params = new HashMap<>();
-                               params.put("username", registerUsernameInput.getText().toString());
-                               return params;
-                           }
-                       };
+                       });
                        RequestQueueSingleton.getInstance(getApplicationContext()).addToRequestQueue(usernameExistenceRequest);
                    }
                }

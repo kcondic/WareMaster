@@ -31,29 +31,28 @@ namespace WareMaster.Controllers
             return Ok(_productRepository.GetAllProducts(companyId));
         }
 
-        [HttpGet]
-        [Route("add")]
-        public IHttpActionResult GetIdNeededForImageName()
-        {
-            return Ok(_productRepository.GetLastProductId());
-        }
-
         [HttpPost]
         [Route("add")]
         public IHttpActionResult AddProduct(Product productToAdd)
         {
             var companyName = _companyRepository.GetCompanyById(productToAdd.CompanyId).Name;
-            _productRepository.AddProduct(productToAdd);
-            var lastId = _productRepository.GetLastProductId();
+            var productId = _productRepository.AddProduct(productToAdd);
             productToAdd.ImageUrl = "Uploads\\" + companyName + "\\Proizvodi\\" +
-                                    productToAdd.Name + lastId + ".jpg";
+                                    productToAdd.Name + productId + ".jpg";
             _productRepository.EditProduct(productToAdd);
-            return Ok(true);
+            return Ok(productId);
+        }
+
+        [HttpGet]
+        [Route("get")]
+        public IHttpActionResult GetProductByBarcode(string barcode)
+        {
+            return Ok(_productRepository.GetProductByBarcode(barcode));
         }
 
         [HttpGet]
         [Route("edit")]
-        public IHttpActionResult GetProductToEdit(int id)
+        public IHttpActionResult GetProduct(int id)
         {
             return Ok(_productRepository.GetProduct(id));
         }

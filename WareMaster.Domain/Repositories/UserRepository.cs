@@ -26,7 +26,6 @@ namespace WareMaster.Domain.Repositories
                             && user.CompanyId == companyId).ToList();
         }
 
-
         public List<User> GetAllManagers(int companyId)
         {
             using (var context = new WareMasterContext())
@@ -131,6 +130,8 @@ namespace WareMaster.Domain.Repositories
 
         public bool DoesUsernameExist(string username)
         {
+            if (username == null)
+                return false;
             using (var context = new WareMasterContext())
                 return context.Users.Any(user => user.Username == username);
         }

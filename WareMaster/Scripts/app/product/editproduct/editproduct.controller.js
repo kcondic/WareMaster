@@ -5,11 +5,13 @@
             $scope.productToEdit = product.data;
             $scope.name = $scope.productToEdit.Name;
             $scope.quantity = $scope.productToEdit.Counter;
+            $scope.barcode = $scope.productToEdit.Barcode;
         });
 
         $scope.editProduct = function () {
             $scope.productToEdit.Name = $scope.name;
             $scope.productToEdit.Counter = $scope.quantity;
+            $scope.productToEdit.Barcode = $scope.barcode;
             productsRepository.editProduct($scope.productToEdit).then(function () {
                 activitylogRepository.addActivityLog({
                     Text: `${loginRepository.getManagerName()} je uredio proizvod ${$scope.productToEdit.Name}`,
