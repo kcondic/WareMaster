@@ -43,6 +43,7 @@ public class LogIn extends AppCompatActivity {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String token) {
+                                token = token.substring(1,token.length()-1);
                                 Intent goToMainScreen = new Intent(view.getContext(), MainScreen.class);
                                 goToMainScreen.putExtra("waremasterToken", token);
                                 startActivity(goToMainScreen);
@@ -50,13 +51,18 @@ public class LogIn extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        int httpStatusCode = error.networkResponse.statusCode;
-                        if(httpStatusCode == 404)
-                            Toast.makeText(getApplicationContext(), "Korisnik s navedenim podacima nije pronađen.", Toast.LENGTH_LONG).show();
-                        else if(httpStatusCode == 401)
-                            Toast.makeText(getApplicationContext(), "Neispravna lozinka.", Toast.LENGTH_LONG).show();
+                        if(error == null)
+                            Toast.makeText(getApplicationContext(), "Došlo je do nepoznate pogreške.", Toast.LENGTH_LONG).show();
                         else
-                            Toast.makeText(getApplicationContext(), "Došlo je do neočekivane pogreške: " + error.toString(), Toast.LENGTH_LONG).show();
+                        {
+                            int httpStatusCode = error.networkResponse.statusCode;
+                            if(httpStatusCode == 404)
+                                Toast.makeText(getApplicationContext(), "Korisnik s navedenim podacima nije pronađen.", Toast.LENGTH_LONG).show();
+                            else if(httpStatusCode == 401)
+                                Toast.makeText(getApplicationContext(), "Neispravna lozinka.", Toast.LENGTH_LONG).show();
+                            else
+                                Toast.makeText(getApplicationContext(), "Došlo je do neočekivane pogreške: " + error.toString(), Toast.LENGTH_LONG).show();
+                        }
                     }
                 }){@Override
                 public Map<String, String> getParams(){

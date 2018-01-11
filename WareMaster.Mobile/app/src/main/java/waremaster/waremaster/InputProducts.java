@@ -21,6 +21,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.journeyapps.barcodescanner.CaptureActivity;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -31,6 +32,7 @@ public class InputProducts extends AppCompatActivity {
     private Button addNewProduct, scanProduct, saveChanges;
     private EditText barcode, quantity;
     private JSONObject productObject;
+    private String token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +45,10 @@ public class InputProducts extends AppCompatActivity {
         quantity = (EditText)findViewById(R.id.quantityEditText);
 
         saveChanges.setEnabled(false);
+
+        token = getIntent().getStringExtra("waremasterToken");
+
+        barcode.setText(token);
 
         scanProduct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +77,8 @@ public class InputProducts extends AppCompatActivity {
                     @Override
                     public Map<String, String> getHeaders() throws AuthFailureError {
                         Map<String, String>  authParams = new HashMap<String, String>();
-                        authParams.put("Authorization", "Bearer: " + getIntent().getStringExtra("waremasterToken"));
+
+                        authParams.put("Authorization", "Bearer " + token);
                         return authParams;
                     }
                     @Override
@@ -129,7 +136,7 @@ public class InputProducts extends AppCompatActivity {
                     @Override
                     public Map<String, String> getHeaders() throws AuthFailureError {
                         Map<String, String>  params = new HashMap<String, String>();
-                        params.put("Authorization", "Bearer: " + getIntent().getStringExtra("waremasterToken"));
+                        params.put("Authorization", "Bearer " + token);
                         return params;
                     }
                 };
