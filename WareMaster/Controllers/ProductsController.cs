@@ -43,8 +43,15 @@ namespace WareMaster.Controllers
         }
 
         [HttpGet]
+        [Route("get")]
+        public IHttpActionResult GetProductByBarcode(string barcode)
+        {
+            return Ok(_productRepository.GetProductByBarcode(barcode));
+        }
+
+        [HttpGet]
         [Route("edit")]
-        public IHttpActionResult GetProductToEdit(int id)
+        public IHttpActionResult GetProduct(int id)
         {
             return Ok(_productRepository.GetProduct(id));
         }

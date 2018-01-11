@@ -24,6 +24,14 @@ namespace WareMaster.Domain.Repositories
                     .Include(product => product.Suppliers)
                     .SingleOrDefault(product => product.Id == productId);
         }
+        public Product GetProductByBarcode(string productBarcode)
+        {
+            using (var context = new WareMasterContext())
+                return context.Products
+                    .Include(product => product.Suppliers)
+                    .SingleOrDefault(product => product.Barcode == productBarcode);
+        }
+
 
         public int AddProduct(Product productToAdd)
         {

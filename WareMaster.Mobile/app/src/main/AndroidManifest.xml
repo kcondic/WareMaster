@@ -25,7 +25,9 @@
         <activity android:name=".OutgoingOrders" />
         <activity android:name=".IncomingOrders" />
         <activity android:name=".ActivityLogs" />
-        <activity android:name=".InputProducts"></activity>
+        <activity android:name=".InputProducts" />
+        <activity android:name=".AnyOrientationCaptureActivity"
+            android:screenOrientation="fullSensor" />
     </application>
 
 </manifest>
