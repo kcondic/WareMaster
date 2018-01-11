@@ -25,8 +25,22 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WareMasterContext())
                 return context.Suppliers
-                    .Include(supplier => supplier.Products)
-                    .SingleOrDefault(supplier => supplier.Id == supplierId);
+                   .Include(s => s.Products)
+                   .SingleOrDefault(s => s.Id == supplierId);
+
+        }
+
+        public Supplier GetSupplierDetails(int supplierId, int companyId)
+        {
+            using (var context = new WareMasterContext())
+            {
+                Supplier supplier = context.Suppliers
+                   .Include(s => s.Products)
+                   .SingleOrDefault(s => s.Id == supplierId);
+                if (supplier != null && supplier.CompanyId == companyId)
+                    return supplier;
+                return null;
+            }
         }
 
         public void AddNewSupplier(Supplier supplier)

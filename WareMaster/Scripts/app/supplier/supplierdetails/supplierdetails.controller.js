@@ -3,9 +3,9 @@
 
         const companyId = loginRepository.getCompanyId();
 
-        suppliersRepository.getSupplierToEdit($stateParams.id).then(function (supplier) {
+        suppliersRepository.getSupplierDetails($stateParams.id, companyId).then(function (supplier) {
             $scope.supplier = supplier.data;
-        });
+        }, function () { });
 
         $scope.deleteSupplier = function (id, name) {
             if (confirm(`Jeste li sigurni da želite izbrisati dobavljača ${name}?\n Time se moraju izbrisati i sve njegove narudžbe.`)) {

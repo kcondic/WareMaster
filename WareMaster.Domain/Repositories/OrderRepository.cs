@@ -69,7 +69,7 @@ namespace WareMaster.Domain.Repositories
                    .Include(o => o.Supplier)
                    .Include(o => o.Supplier.Products)
                    .SingleOrDefault(o => o.Id == orderId);
-                if (order.CompanyId == companyId)
+                if (order != null && order.CompanyId == companyId)
                     return order;
                 return null;
             }

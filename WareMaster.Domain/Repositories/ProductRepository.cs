@@ -32,7 +32,7 @@ namespace WareMaster.Domain.Repositories
                 Product product = context.Products
                    .Include(p => p.Suppliers)
                    .SingleOrDefault(p => p.Id == productId);
-                if (product.CompanyId == companyId)
+                if (product != null && product.CompanyId == companyId)
                     return product;
                 return null;
             }

@@ -11,9 +11,7 @@
                 $scope.nameOfEmployee = $scope.order.AssignedEmployee.FirstName + ' ' + $scope.order.AssignedEmployee.LastName;
             else
                 $scope.nameOfEmployee = 'Nije pridijeljen zaposlenik';
-        }, function () {
-            console.log("Unauthorised");
-        });
+        }, function () { });
 
         $scope.deleteOrder = function (id) {
             if (confirm(`Jeste li sigurni da želite otkazati narudžbu?`)) {
