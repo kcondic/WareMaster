@@ -25,13 +25,7 @@ namespace WareMaster.Domain.Repositories
                     .SingleOrDefault(product => product.Id == productId);
         }
 
-        public int GetLastProductId()
-        {
-            using (var context = new WareMasterContext())
-                return context.Products.OrderByDescending(user => user.Id).First().Id;
-        }
-
-        public void AddProduct(Product productToAdd)
+        public int AddProduct(Product productToAdd)
         {
             using (var context = new WareMasterContext())
             {
@@ -40,6 +34,8 @@ namespace WareMaster.Domain.Repositories
 
                 context.Products.Add(productToAdd);
                 context.SaveChanges();
+
+                return productToAdd.Id;
             }
         }
 
@@ -55,6 +51,7 @@ namespace WareMaster.Domain.Repositories
 
                 productToEdit.Name = editedProduct.Name;
                 productToEdit.Counter = editedProduct.Counter;
+                productToEdit.Barcode = editedProduct.Barcode;
                 productToEdit.ImageUrl = editedProduct.ImageUrl;
 
                 context.SaveChanges();

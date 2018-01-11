@@ -7,20 +7,18 @@
             const newProduct = {
                 Name: $scope.name,
                 Counter: $scope.quantity,
+                Barcode: $scope.barcode,
                 CompanyId: companyId
             };
-            productsRepository.addProduct(newProduct).then(function () {
+            productsRepository.addProduct(newProduct).then(function (productId) {
                 activitylogRepository.addActivityLog({
                     Text: `${loginRepository.getManagerName()} je stvorio proizvod ${$scope.name}`,
                     UserId: loginRepository.getManagerId(),
                     CompanyId: companyId
                 });
-                productsRepository.getIdNeededForImageName().then(function(id) {
-                    $scope.id = id.data;
-                }).then(function () {
-                    functionsRepository.uploadProductImage($scope.file, $scope.name, $scope.id, companyId);
-                    $state.go('products', {}, { reload: true });
-                });
+                $scope.id = parseInt(productId.data);
+                functionsRepository.uploadProductImage($scope.file, $scope.name, $scope.id, companyId);
+                $state.go('products', {}, { reload: true });
             });
         }
     });

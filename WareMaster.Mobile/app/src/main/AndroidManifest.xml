@@ -3,6 +3,8 @@
     package="waremaster.waremaster">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
 
     <application
         android:allowBackup="true"
@@ -18,7 +20,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Register"></activity>
+        <activity android:name=".Register" />
+        <activity android:name=".MainScreen" />
+        <activity android:name=".OutgoingOrders" />
+        <activity android:name=".IncomingOrders" />
+        <activity android:name=".ActivityLogs" />
+        <activity android:name=".InputProducts"></activity>
     </application>
 
 </manifest>

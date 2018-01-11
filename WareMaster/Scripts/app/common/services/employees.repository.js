@@ -10,10 +10,6 @@
                 });
         }
 
-        function getIdNeededForImageName() {
-            return $http.get('/api/employees/add');
-        }
-
         function addEmployee(newEmployee) {
             return $http.post('/api/employees/add', newEmployee);
         }
@@ -42,7 +38,6 @@
 
         return {
             getAllEmployees: getAllEmployees,
-            getIdNeededForImageName: getIdNeededForImageName,
             addEmployee: addEmployee,
             getEmployeeToEdit: getEmployeeToEdit,
             editEmployee: editEmployee,
