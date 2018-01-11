@@ -54,7 +54,7 @@ namespace WareMaster.Controllers
 
         [HttpGet]
         [Route("details")]
-        public IHttpActionResult GetEmployeeToEdit(int id, int companyId)
+        public IHttpActionResult GetEmployeeDetails(int id, int companyId)
         {
             User user = _employeeRepository.GetUserDetails(id, companyId);
             if (user != null)

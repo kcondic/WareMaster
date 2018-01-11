@@ -55,7 +55,7 @@ namespace WareMaster.Domain.Repositories
                    .Include(u => u.ManagerOrders)
                    .Include(u => u.ActivityLogs)
                    .FirstOrDefault(u => u.Id == userId);
-                if (user.CompanyId == companyId)
+                if (user.CompanyId == companyId && user.Role != Role.Manager)
                     return user;
                 return null;
             }
