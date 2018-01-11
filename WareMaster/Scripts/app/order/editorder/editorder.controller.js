@@ -5,7 +5,7 @@
 
         const companyId = loginRepository.getCompanyId();
 
-        ordersRepository.getOrder($stateParams.id).then(function (order) {
+        ordersRepository.getOrderToEdit($stateParams.id).then(function (order) {
             $scope.order = order.data;
 
             $scope.selectedEmployee = $scope.order.AssignedEmployee;

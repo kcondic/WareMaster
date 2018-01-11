@@ -57,6 +57,24 @@ namespace WareMaster.Domain.Repositories
                     .SingleOrDefault(order => order.Id == orderId);
         }
 
+        public Order GetOrderDetails(int orderId, int companyId)
+        {
+            using (var context = new WareMasterContext())
+            {
+                Order order =  context.Orders
+                   .Include(o => o.AssignedEmployee)
+                   .Include(o => o.ProductOrders)
+                   .Include(o => o.ProductOrders.Select(x => x.Product))
+                   .Include(o => o.Company)
+                   .Include(o => o.Supplier)
+                   .Include(o => o.Supplier.Products)
+                   .SingleOrDefault(o => o.Id == orderId);
+                if (order.CompanyId == companyId)
+                    return order;
+                return null;
+            }
+        }
+
         public void AddNewOrder(Order order)
         {
             using (var context = new WareMasterContext())
