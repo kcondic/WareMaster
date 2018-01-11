@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Results;
 using WareMaster.Data.Models.Entities;
 using WareMaster.Domain.Repositories;
 using System.Linq;
@@ -48,6 +50,17 @@ namespace WareMaster.Controllers
         public IHttpActionResult GetEmployeeToEdit(int id)
         {
             return Ok(_employeeRepository.GetUser(id));
+        }
+
+        [HttpGet]
+        [Route("details")]
+        public IHttpActionResult GetEmployeeToEdit(int id, int companyId)
+        {
+            User user = _employeeRepository.GetUserDetails(id, companyId);
+            if (user != null)
+                return Ok(user);
+            else
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Unauthorized));
         }
 
         [HttpPost]

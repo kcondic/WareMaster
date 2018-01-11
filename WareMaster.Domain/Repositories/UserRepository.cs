@@ -39,10 +39,26 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WareMasterContext())
                 return context.Users
-                    .Include(user => user.EmployeeOrders)
-                    .Include(user => user.ManagerOrders)
-                    .Include(user => user.ActivityLogs)
-                    .FirstOrDefault(user => user.Id == userId);
+                   .Include(u => u.EmployeeOrders)
+                   .Include(u => u.ManagerOrders)
+                   .Include(u => u.ActivityLogs)
+                   .FirstOrDefault(u => u.Id == userId);
+
+        }
+
+        public User GetUserDetails(int userId, int companyId)
+        {
+            using (var context = new WareMasterContext())
+            {
+                var user = context.Users
+                   .Include(u => u.EmployeeOrders)
+                   .Include(u => u.ManagerOrders)
+                   .Include(u => u.ActivityLogs)
+                   .FirstOrDefault(u => u.Id == userId);
+                if (user.CompanyId == companyId)
+                    return user;
+                return null;
+            }
         }
 
         public User GetByUsername(string username)
