@@ -15,6 +15,7 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -60,7 +61,7 @@ public class InputProducts extends AppCompatActivity {
         saveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                StringRequest getProductRequest = new StringRequest(Request.Method.POST, getString(R.string.base_url) + "/products/edit",
+                StringRequest editProductRequest = new StringRequest(Request.Method.POST, getString(R.string.base_url) + "/products/edit",
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String product) {
@@ -88,7 +89,7 @@ public class InputProducts extends AppCompatActivity {
                         return jsonParams;
                     }
                 };
-                RequestQueueSingleton.getInstance(getApplicationContext()).addToRequestQueue(getProductRequest);
+                RequestQueueSingleton.getInstance(getApplicationContext()).addToRequestQueue(editProductRequest);
             }
         });
 
@@ -123,7 +124,7 @@ public class InputProducts extends AppCompatActivity {
                                 {
                                     productObject = product;
                                     barcode.setText(product.optString("Barcode"));
-                                    quantity.setText(product.optInt("Counter"));
+                                    quantity.setText(product.optString("Counter"));
                                     saveChanges.setEnabled(true);
                                 }
                             }

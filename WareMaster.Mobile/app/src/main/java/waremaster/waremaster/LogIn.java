@@ -51,18 +51,13 @@ public class LogIn extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        if(error == null)
-                            Toast.makeText(getApplicationContext(), "Došlo je do nepoznate pogreške.", Toast.LENGTH_LONG).show();
+                        int httpStatusCode = error.networkResponse.statusCode;
+                        if (httpStatusCode == 404)
+                            Toast.makeText(getApplicationContext(), "Korisnik s navedenim podacima nije pronađen.", Toast.LENGTH_LONG).show();
+                        else if (httpStatusCode == 401)
+                            Toast.makeText(getApplicationContext(), "Neispravna lozinka.", Toast.LENGTH_LONG).show();
                         else
-                        {
-                            int httpStatusCode = error.networkResponse.statusCode;
-                            if(httpStatusCode == 404)
-                                Toast.makeText(getApplicationContext(), "Korisnik s navedenim podacima nije pronađen.", Toast.LENGTH_LONG).show();
-                            else if(httpStatusCode == 401)
-                                Toast.makeText(getApplicationContext(), "Neispravna lozinka.", Toast.LENGTH_LONG).show();
-                            else
-                                Toast.makeText(getApplicationContext(), "Došlo je do neočekivane pogreške: " + error.toString(), Toast.LENGTH_LONG).show();
-                        }
+                            Toast.makeText(getApplicationContext(), "Došlo je do neočekivane pogreške: " + error.toString(), Toast.LENGTH_LONG).show();
                     }
                 }){@Override
                 public Map<String, String> getParams(){

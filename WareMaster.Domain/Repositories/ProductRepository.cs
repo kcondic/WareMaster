@@ -28,7 +28,6 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WareMasterContext())
                 return context.Products
-                    .Include(product => product.Suppliers)
                     .SingleOrDefault(product => product.Barcode == productBarcode);
         }
 
