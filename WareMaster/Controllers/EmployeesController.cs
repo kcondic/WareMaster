@@ -59,8 +59,7 @@ namespace WareMaster.Controllers
             User user = _employeeRepository.GetUserDetails(id, companyId);
             if (user != null)
                 return Ok(user);
-            else
-                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Unauthorized));
+            return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Unauthorized));
         }
 
         [HttpPost]

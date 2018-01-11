@@ -25,6 +25,19 @@ namespace WareMaster.Domain.Repositories
                     .SingleOrDefault(product => product.Id == productId);
         }
 
+        public Product GetProductDetails(int productId, int companyId)
+        {
+            using (var context = new WareMasterContext())
+            {
+                Product product = context.Products
+                   .Include(p => p.Suppliers)
+                   .SingleOrDefault(p => p.Id == productId);
+                if (product.CompanyId == companyId)
+                    return product;
+                return null;
+            }
+        }
+
         public int GetLastProductId()
         {
             using (var context = new WareMasterContext())

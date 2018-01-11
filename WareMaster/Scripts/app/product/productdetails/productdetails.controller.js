@@ -3,8 +3,9 @@
 
         const companyId = loginRepository.getCompanyId();
 
-        productsRepository.getProductToEdit($stateParams.id).then(function (product) {
+        productsRepository.getProductDetails($stateParams.id, companyId).then(function (product) {
             $scope.product = product.data;
+        }, function () {
         });
 
         $scope.deleteProduct = function (id, name) {
