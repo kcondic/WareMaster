@@ -43,7 +43,7 @@
                 Radnik:
                 <span class="selectedEmployeeName">
                     {{selectedEmployee.FirstName}} {{selectedEmployee.LastName}}
-                    <i class="fa fa-times" aria-hidden="true" ng-click="deselectEmployee(selectedEmployee); showDeselectX=false" ng-if="showDeselectX"></i>
+                    <i class="fa fa-times" aria-hidden="true" ng-click="deselectEmployee(selectedEmployee)" ng-if="showDeselectX"></i>
                 </span>
             </div>
             <div class="order-columns-row">
@@ -52,7 +52,7 @@
                     <div class="order-table-container">
                         <div class="order-table">
                             <div ng-repeat="employee in allEmployees" ng-click="selectEmployee(employee)" class="single-table-row">
-                                <span ng-click="showDeselectX=true">{{employee.FirstName}} {{employee.LastName}}</span>
+                                <span>{{employee.FirstName}} {{employee.LastName}}</span>
                             </div>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
             <div class="modal-buttons">
                 <div class="single-button" ng-show="(order.Type===1)&&(phase===2)"><button ng-click="phase=1">Natrag</button></div>
                 <div class="single-button" ng-show="(order.Type===1)&&(phase===1)"><button ng-click="phase=2">Dalje</button></div>
-                <div class="single-button" ng-show="!((order.Type===1)&&(phase===1))"><button ng-click="editOrder(); phase=1">Uredi</button></div>
+                <div class="single-button" ng-show="!((order.Type===1)&&(phase===1))"><button ng-click="editOrder()">Uredi</button></div>
                 <div class="single-button cancel-button"><button ui-sref="orders">Odustani</button></div>
             </div>
         </div>

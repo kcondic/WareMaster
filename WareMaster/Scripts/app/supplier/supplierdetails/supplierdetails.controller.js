@@ -3,8 +3,10 @@
 
         const companyId = loginRepository.getCompanyId();
 
-        suppliersRepository.getSupplierToEdit($stateParams.id).then(function (supplier) {
+        suppliersRepository.getSupplierDetails($stateParams.id, companyId).then(function (supplier) {
             $scope.supplier = supplier.data;
+        }, function () {
+            console.log("Nemate dozvolu za pristup tim podacima");
         });
 
         $scope.deleteSupplier = function (id, name) {

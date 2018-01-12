@@ -22,6 +22,16 @@
                 });
         }
 
+        function getProductDetails(id, companyId) {
+            return $http.get('api/products/details',
+                {
+                    params: {
+                        id: id,
+                        companyId: companyId
+                    }
+                });
+        }
+
         function editProduct(editedProduct) {
             return $http.post('api/products/edit', editedProduct);
         }
@@ -39,6 +49,7 @@
             getAllProducts: getAllProducts,
             addProduct: addProduct,
             getProductToEdit: getProductToEdit,
+            getProductDetails: getProductDetails,
             editProduct: editProduct,
             deleteProduct: deleteProduct
         }

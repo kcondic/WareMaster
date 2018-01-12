@@ -22,6 +22,15 @@
                 }
             });
         }
+        function getEmployeeDetails(id, companyId) {
+            return $http.get('api/employees/details',
+                {
+                    params: {
+                        id: id,
+                        companyId: companyId
+                    }
+                });
+        }
 
         function editEmployee(editedEmployee) {
             return $http.post('api/employees/edit', editedEmployee);
@@ -40,6 +49,7 @@
             getAllEmployees: getAllEmployees,
             addEmployee: addEmployee,
             getEmployeeToEdit: getEmployeeToEdit,
+            getEmployeeDetails: getEmployeeDetails,
             editEmployee: editEmployee,
             deleteEmployee: deleteEmployee
         }

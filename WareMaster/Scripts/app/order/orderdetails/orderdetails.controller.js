@@ -3,7 +3,7 @@
         
         const companyId = loginRepository.getCompanyId();
 
-        ordersRepository.getOrder($stateParams.id).then(function (order) {
+        ordersRepository.getOrderDetails($stateParams.id, companyId).then(function (order) {
             $scope.order = order.data;
             if($scope.order.Supplier)
                 $scope.nameOfSupplier = $scope.order.Supplier.Name;
@@ -11,6 +11,8 @@
                 $scope.nameOfEmployee = $scope.order.AssignedEmployee.FirstName + ' ' + $scope.order.AssignedEmployee.LastName;
             else
                 $scope.nameOfEmployee = 'Nije pridijeljen zaposlenik';
+        }, function () {
+            console.log("Nemate dozvolu za pristup tim podacima");
         });
 
         $scope.deleteOrder = function (id) {

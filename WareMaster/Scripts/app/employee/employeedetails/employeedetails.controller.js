@@ -3,10 +3,12 @@
 
         const companyId = loginRepository.getCompanyId();
 
-        employeesRepository.getEmployeeToEdit($stateParams.id).then(function(employee) {
+        employeesRepository.getEmployeeDetails($stateParams.id, companyId).then(function (employee) {
             $scope.employee = employee.data;
             $scope.orders = $scope.employee.EmployeeOrders;
             $scope.chosenOrderFilter = "3";
+        }, function () {
+            console.log("Nemate dozvolu za pristup tim podacima");
         });
 
         $scope.updateOrderList = function () {

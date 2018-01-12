@@ -22,6 +22,16 @@
                 });
         }
 
+        function getSupplierDetails(id, companyId) {
+            return $http.get('api/suppliers/details',
+                {
+                    params: {
+                        id: id,
+                        companyId: companyId
+                    }
+                });
+        }
+
         function editSupplier(editedSupplier) {
             return $http.post('api/suppliers/edit', editedSupplier);
         }
@@ -39,6 +49,7 @@
             getAllSuppliers: getAllSuppliers,
             addNewSupplier: addNewSupplier,
             getSupplierToEdit: getSupplierToEdit,
+            getSupplierDetails: getSupplierDetails,
             editSupplier: editSupplier,
             deleteSupplier: deleteSupplier
         }
