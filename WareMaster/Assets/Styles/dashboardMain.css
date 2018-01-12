@@ -32,10 +32,9 @@
 #dashboard .button-container button{
     display: block;
     margin: auto;
-    margin-top: 12px;
-    margin-bottom: 10px;
-    width: 300px;
-    height: 137.5px;
+    margin-top: 3.5%;
+    width: 90%;
+    height: 22.5%;
     background-color: white;
     border: none;
     border-radius: 2.5px;
@@ -48,6 +47,10 @@
     cursor: pointer;
     transition-delay: 0.1s;
     transition-duration: 0.5s;
+}
+
+#dashboard .button-container button:first-of-type{
+    margin-top: 4%;
 }
 
 #dashboard .button-container button:hover{
@@ -65,23 +68,24 @@
 /* GRAFOVI I BROJKE */
 #dashboard .useful-info-container{
     width: 70%;
+    height: 100%;
     display: block;
     justify-content: space-around;
 }
 
 /* KRUGOVI S POSTOTCIMA */
 #dashboard .percent-circles-container{
-    height: auto;
+    height: 50.7%;
     display: flex;
     position:relative;
 }
 
 #dashboard .left-circle,
 #dashboard .right-circle{
-    margin-top: 10px;
+    margin-top: 1.3%;
     margin-bottom: 5px;
-    width: 270px;
-    height: 290px;
+    width: 35.5%;
+    height: 94%;
     background-color: white;
     color: black;
     box-shadow: 0px 5px 16px 0px rgba(0, 0, 0, 0.2);
@@ -103,73 +107,51 @@
     height: 50px;
     width: 100%;
     background-color: rgb(34,34,34);
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #dashboard .percent-circle-header div{
-    padding-top: 15px;
     font-size: 21px;
     color: white;
 }
 
 #dashboard .circle-item{
-    display: block;
-    margin:auto;
-    margin-top:10px;
-    margin-bottom: 15px;
-    height: 120px;
-    width: 120px;
-    border-radius: 50%;
+    height: 50%;
+    width: 100%;
     border-color: rgb(220,220,220);
+    background-color: paleturquoise;
     text-align: center;
     position: relative;
-    background-image:
-        linear-gradient(90deg, rgb(220,220,220) 50%, #A2ECFB 50%),
-        linear-gradient(80deg, #A2ECFB 50%, rgb(220,220,220) 50%);
-}
-
-#dashboard .inner-circle{
-    display: block;
-    margin:auto;
-    position: relative;
-    top: 10px; 
-    height: 80px;
-    width: 80px;
-    border-radius: 50%;
-    border: 10px solid;
-    border-color: transparent;
-    background-color: white;
-    text-align: center;
-}
-
-#dashboard .circle-item .orders-number{
-    font-size: 30px;
-    display: block;
-    margin: auto;
-    margin-top: +21px;
-    z-index: 5;
 }
 
 #dashboard .circle-description{
-    height: 50px;
-    display: block;
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    position: relative;
+    justify-content:flex-start;
+    align-items: center;
 }
 
 #dashboard .color-row{
-    display: block;
-    margin:auto;
-    margin-top: 5px;
-    margin-left: 80px;
-    height: 20px;
-    width:50%;
-    justify-content:space-around;
+    display: flex;
+    flex-flow: row;
+    height: 20%;
+    padding-bottom: 2%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    margin-top: -3%;
 }
 
 #dashboard .circle-text{
     display: block;
-    margin-top: -17.5px;
-    font-size: 15px;
+    font-size: 0.9em;
+    margin-left: 16px;
 }
 
 #dashboard .order-planned-color,
@@ -207,10 +189,9 @@
 #dashboard .current-numbers-container{
     display: block;
     margin-left: 5px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    width: 185px;
-    height: 290px;
+    margin-top: 1.3%;
+    width: 24%;
+    height: 94%;
     background-color: white;
     box-shadow: 0px 5px 16px 0px rgba(0, 0, 0, 0.2);
     border-radius: 2.5px;
@@ -244,11 +225,17 @@
 }
 /* GRAF S POSTOTCIMA IZVRŠENIH NARUDŽBI PO DANU */
 #dashboard .orders-bar-chart-container{
-    display: block;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    width: 745px;
-    height: 290px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    height: 49.3%;
+}
+
+#dashboard .bar-chart-content{
+    display: flex;
+    width: 97.5%;
+    height: 97%;
     background-color: white;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     border-radius: 2.5px;
@@ -274,16 +261,13 @@
 
 #dashboard .activity-header{
     border-bottom: steelblue 1px solid;
+    display: flex;
     color: rgb(34,34,34);
     height: 4.5%;
     width: 100%;
-    text-align: center;
+    align-items: center;
     justify-content: center;
     font-size: 20px;
-}
-
-#dashboard .activity-header div{
-    height: 20px;
 }
 
 #dashboard .activity-container{
@@ -313,4 +297,48 @@
 
 .activity-content span{
     font-size: 15px;
+}
+
+@media screen and (min-width: 1370px){
+    #dashboard .circle-text{
+        font-size: 1.2em;
+    }
+
+    #dashboard .current-numbers-container li{
+        font-size: 1.2em;
+    }
+
+    #dashboard .current-numbers-container li span{
+        font-size: 2.4em;
+    }
+
+    #dashboard .percent-circle-header div{
+        font-size: 1.5em;
+    }
+
+    #dashboard .activity-header{
+        font-size: 1.6em;
+    }
+
+    #dashboard .button-container button{
+        font-size: 1.8em;
+        margin-top: 3.8%;
+    }
+
+    #dashboard .left-circle{
+        margin-right: 0.7%;
+    }
+
+    #dashboard .right-circle{
+        margin-left: 0.7%;
+        margin-right: 1.1%;
+    }
+
+    #dashboard .circle-item{
+        height: 56%;
+    }
+
+    .activity-content{
+        font-size: 1.2em;
+    }
 }
