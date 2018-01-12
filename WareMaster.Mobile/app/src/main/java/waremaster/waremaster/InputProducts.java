@@ -128,9 +128,6 @@ public class InputProducts extends AppCompatActivity {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject product) {
-                                if(product == null)
-                                    Toast.makeText(getApplicationContext(), "Ne postoji proizvod s tim barkodom.", Toast.LENGTH_LONG).show();
-                                else
                                 {
                                     productObject = product;
                                     barcode.setText(product.optString("Barcode"));
@@ -141,6 +138,10 @@ public class InputProducts extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        int httpStatusCode = error.networkResponse.statusCode;
+                        if(httpStatusCode == 404)
+                            Toast.makeText(getApplicationContext(), "Proizvod s tim barkodom ne postoji.", Toast.LENGTH_LONG).show();
+                        else
                             Toast.makeText(getApplicationContext(), "Došlo je do neočekivane pogreške: " + error.toString(), Toast.LENGTH_LONG).show();
                     }
                 }){
