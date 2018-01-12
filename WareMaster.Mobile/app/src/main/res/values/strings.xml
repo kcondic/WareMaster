@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">WareMaster</string>
-    <string name="base_url">http://waremaster.azurewebsites.net/api</string>
+    <string name="base_url">https://waremaster.azurewebsites.net/api</string>
     <string name="scan_bar_code">Skeniraj barkod</string>
 </resources>
