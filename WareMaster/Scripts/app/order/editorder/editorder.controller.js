@@ -9,6 +9,8 @@
             $scope.order = order.data;
 
             $scope.selectedEmployee = $scope.order.AssignedEmployee;
+            if ($scope.selectedEmployee)
+                $scope.showDeselectX = true;
             $scope.order.ProductOrders.forEach(function(item) {
                 $scope.selectedProducts.push(item.Product);
             });
@@ -51,11 +53,13 @@
             }
             $scope.selectedEmployee = employee;
             $scope.allEmployees.splice($scope.allEmployees.indexOf(employee), 1);
+            $scope.showDeselectX = true;
         }
 
         $scope.deselectEmployee = function (employee) {
             $scope.allEmployees.push(employee);
             $scope.selectedEmployee = null;
+            $scope.showDeselectX = false;
         }
 
         $scope.selectProduct = function (product) {

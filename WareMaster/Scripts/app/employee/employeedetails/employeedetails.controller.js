@@ -7,7 +7,9 @@
             $scope.employee = employee.data;
             $scope.orders = $scope.employee.EmployeeOrders;
             $scope.chosenOrderFilter = "3";
-        }, function () { });
+        }, function () {
+            console.log("Nemate dozvolu za pristup tim podacima");
+        });
 
         $scope.updateOrderList = function () {
             if (parseInt($scope.chosenOrderFilter) === 3)

@@ -418,7 +418,7 @@
     <Content Include="Scripts\app\supplier\editsupplier\editsupplier.controller.js" />
     <Content Include="Scripts\app\supplier\editsupplier\editsupplier.state.js" />
     <Content Include="Scripts\app\supplier\editsupplier\editsupplier.template.html" />
-    <Content Include="Scripts\app\employee\employeedetails\employeedetails.controler.js" />
+    <Content Include="Scripts\app\employee\employeedetails\employeedetails.controller.js" />
     <Content Include="Scripts\app\employee\employeedetails\employeedetails.state.js" />
     <Content Include="Scripts\app\employee\employeedetails\employeedetails.template.html" />
     <Content Include="Scripts\app\account\login\login.controller.js" />
