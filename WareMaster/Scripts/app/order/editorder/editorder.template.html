@@ -83,7 +83,7 @@
             <div class="modal-buttons">
                 <div class="single-button" ng-show="(order.Type===1)&&(phase===2)"><button ng-click="phase=1">Natrag</button></div>
                 <div class="single-button" ng-show="(order.Type===1)&&(phase===1)"><button ng-click="phase=2">Dalje</button></div>
-                <div class="single-button" ng-show="!((order.Type===1)&&(phase===1))"><button ng-click="editOrder(); phase=1">Uredi</button></div>
+                <div class="single-button" ng-show="!((order.Type===1)&&(phase===1))"><button ng-click="editOrder()">Uredi</button></div>
                 <div class="single-button cancel-button"><button ui-sref="orders">Odustani</button></div>
             </div>
         </div>
