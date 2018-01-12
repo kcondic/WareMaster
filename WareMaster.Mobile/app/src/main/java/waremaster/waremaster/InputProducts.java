@@ -18,11 +18,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.journeyapps.barcodescanner.CaptureActivity;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -61,6 +63,12 @@ public class InputProducts extends AppCompatActivity {
         saveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    productObject.put("Barcode", barcode.getText().toString());
+                    productObject.put("Counter", Integer.parseInt(quantity.getText().toString()));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 StringRequest editProductRequest = new StringRequest(Request.Method.POST, getString(R.string.base_url) + "/products/edit",
                         new Response.Listener<String>() {
                             @Override
@@ -77,16 +85,18 @@ public class InputProducts extends AppCompatActivity {
                 }){
                     @Override
                     public Map<String, String> getHeaders() throws AuthFailureError {
-                        Map<String, String>  authParams = new HashMap<String, String>();
+                        Map<String, String>  authParams = new HashMap<>();
 
                         authParams.put("Authorization", "Bearer " + token);
                         return authParams;
                     }
                     @Override
-                    public Map<String, String> getParams() {
-                        Map<String, String> jsonParams = new HashMap<>();
-                        jsonParams.put("Product", productObject.toString());
-                        return jsonParams;
+                    public byte[] getBody() throws AuthFailureError {
+                        return productObject.toString().getBytes();
+                    }
+                    @Override
+                    public String getBodyContentType() {
+                        return "application/json";
                     }
                 };
                 RequestQueueSingleton.getInstance(getApplicationContext()).addToRequestQueue(editProductRequest);
