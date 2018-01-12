@@ -44,10 +44,12 @@ namespace WareMaster.Domain.Repositories
                 return context.Products.SingleOrDefault(product => product.CompanyId == companyId && product.Barcode == productBarcode);
         }
 
-        public bool DoesBarcodeExist(string barcode, int companyId)
+        public bool DoesBarcodeExist(Product productToTest)
         {
             using (var context = new WareMasterContext())
-                return context.Products.Where(product => product.CompanyId == companyId).Any(product => product.Barcode == barcode);
+                return context.Products.Where(p => p.Id != productToTest.Id)
+                              .Any(p => p.Barcode == productToTest.Barcode 
+                                && p.CompanyId == productToTest.CompanyId);
         }
 
         public int AddProduct(Product productToAdd)
