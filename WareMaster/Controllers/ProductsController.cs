@@ -47,7 +47,8 @@ namespace WareMaster.Controllers
         [Route("get")]
         public IHttpActionResult GetProductByBarcode(string barcode)
         {
-            return Ok(_productRepository.GetProductByBarcode(barcode));
+            var product = _productRepository.GetProductByBarcode(barcode);
+            return product == null ? null : Ok(product);
         }
 
         [HttpGet]
