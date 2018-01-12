@@ -77,7 +77,10 @@ public class InputProducts extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), "Došlo je do neočekivane pogreške: " + error.toString(), Toast.LENGTH_LONG).show();
+                        if(error.networkResponse.statusCode == 403)
+                            Toast.makeText(getApplicationContext(), "Već postoji proizvod s tim barkodom!", Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(getApplicationContext(), "Došlo je do neočekivane pogreške: " + error.toString(), Toast.LENGTH_LONG).show();
                     }
                 }){
                     @Override

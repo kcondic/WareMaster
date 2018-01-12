@@ -85,6 +85,9 @@ namespace WareMaster.Controllers
 
             editedProduct.ImageUrl = "Uploads\\" + companyName + "\\Proizvodi\\" +
                                       editedProduct.Name + editedProduct.Id + ".jpg";
+            if(_productRepository.DoesBarcodeExist(editedProduct.Barcode, editedProduct.CompanyId))
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+
             _productRepository.EditProduct(editedProduct);
             return Ok(true);
         }
