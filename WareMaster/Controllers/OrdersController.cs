@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Results;
 using WareMaster.Data.Models.Entities;
 using WareMaster.Domain.Repositories;
 
@@ -35,10 +36,20 @@ namespace WareMaster.Controllers
         }
 
         [HttpGet]
-        [Route("details")]
-        public IHttpActionResult GetOrder(int id)
+        [Route("edit")]
+        public IHttpActionResult GetOrderToEdit(int id)
         {
             return Ok(_orderRepository.GetOrderDetails(id));
+        }
+
+        [HttpGet]
+        [Route("details")]
+        public IHttpActionResult GetOrderDetails(int id, int companyId)
+        {
+            Order order = _orderRepository.GetOrderDetails(id, companyId);
+            if (order != null)
+                return Ok(order);
+            return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Unauthorized));
         }
 
         [HttpPost]

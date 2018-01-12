@@ -25,8 +25,22 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WareMasterContext())
                 return context.Suppliers
-                    .Include(supplier => supplier.Products)
-                    .SingleOrDefault(supplier => supplier.Id == supplierId);
+                   .Include(s => s.Products)
+                   .SingleOrDefault(s => s.Id == supplierId);
+
+        }
+
+        public Supplier GetSupplierDetails(int supplierId, int companyId)
+        {
+            using (var context = new WareMasterContext())
+            {
+                Supplier supplier = context.Suppliers
+                   .Include(s => s.Products)
+                   .SingleOrDefault(s => s.Id == supplierId);
+                if (supplier != null && supplier.CompanyId == companyId)
+                    return supplier;
+                return null;
+            }
         }
 
         public void AddNewSupplier(Supplier supplier)
@@ -56,6 +70,17 @@ namespace WareMaster.Domain.Repositories
 
                 if (supplierToEdit == null)
                     return;
+
+                var deletedProducts = supplierToEdit.Products.Except(editedSupplier.Products).ToArray();
+                var productOrdersToDelete = new List<ProductOrders>();
+                foreach (var product in deletedProducts)
+                {
+                    productOrdersToDelete.AddRange(context.ProductOrders.Where(productOrder =>
+                        productOrder.Order.SupplierId == editedSupplier.Id &&
+                        productOrder.ProductId == product.Id &&
+                        productOrder.Order.Status == Status.Created));
+                }
+                context.ProductOrders.RemoveRange(productOrdersToDelete);
 
                 supplierToEdit.Name = editedSupplier.Name;
                 supplierToEdit.Products = editedSupplier.Products;
