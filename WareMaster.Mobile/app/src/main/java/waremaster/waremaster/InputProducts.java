@@ -48,10 +48,7 @@ public class InputProducts extends AppCompatActivity {
         quantity = (EditText)findViewById(R.id.quantityEditText);
 
         saveChanges.setEnabled(false);
-
         token = getIntent().getStringExtra("waremasterToken");
-
-        barcode.setText(token);
 
         scanProduct.setOnClickListener(new View.OnClickListener() {
             @Override
