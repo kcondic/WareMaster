@@ -1,9 +1,20 @@
 Popis taskova koje još moramo odradit, slobodno nadopišite neki i ako æete radit na nekome zapišite svoje ime pokraj:
 
-Loadanje stvari malo po malo i prikazivanje spinnera dok se ne loadaju stvari
-Ako se makne proizvod sa dobavljaèa maknit ga i sa svih narudžbi tog dobavljaèa
-Bacat unauthorized ako korisnik promijeni url tako da ide dohvatit zaposlenika koji nije njegov
+Loadanje stvari malo po malo i prikazivanje spinnera dok se ne loadaju stvari (VUKA)
 Ogranièit moguænosti editiranja zapisa (npr. ako je ulazna narudžba prihvaæena onemoguæit otkazivanje 
 ili onemoguæit promjenu imena zaposlenika bez njegovog pristanka)
-Proširit postojeæi dizajn na nove rute (registracija, narudžbe) (AJŠ)
+
+MOBILNA:
+TO-DO:
+
+Dodavanje novih proizvoda (VUKA)
+Aktivnosti na proizvodima (VUKA)
+Kompletna obrada ulaznih narudžbi (KREŠO)
+Kompletna obrada izlaznih narudžbi (možda KREŠO)
+Dohvaæanje activity logova
+
+NAPRAVLJENO:
+Login
+Registracija
+Skeniranje i editiranje postojeæih proizvoda
 
