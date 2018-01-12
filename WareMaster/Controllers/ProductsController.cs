@@ -45,9 +45,9 @@ namespace WareMaster.Controllers
 
         [HttpGet]
         [Route("get")]
-        public IHttpActionResult GetProductByBarcode(string barcode)
+        public IHttpActionResult GetProductByBarcode(string barcode, int companyId)
         {
-            var product = _productRepository.GetProductByBarcode(barcode);
+            var product = _productRepository.GetProductByBarcode(barcode, companyId);
             if(product == null)
                 return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.NotFound));
             return Ok(product);

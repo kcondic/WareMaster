@@ -29,7 +29,7 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WareMasterContext())
             {
-                Product product = context.Products
+                var product = context.Products
                    .Include(p => p.Suppliers)
                    .SingleOrDefault(p => p.Id == productId);
                 if (product != null && product.CompanyId == companyId)
@@ -38,17 +38,16 @@ namespace WareMaster.Domain.Repositories
             }
         }
 
-        public Product GetProductByBarcode(string productBarcode)
+        public Product GetProductByBarcode(string productBarcode, int companyId)
         {
             using (var context = new WareMasterContext())
-                return context.Products
-                    .SingleOrDefault(product => product.Barcode == productBarcode);
+                return context.Products.SingleOrDefault(product => product.CompanyId == companyId && product.Barcode == productBarcode);
         }
 
         public bool DoesBarcodeExist(string barcode, int companyId)
         {
             using (var context = new WareMasterContext())
-                return context.Products.Where(p => p.CompanyId == companyId).Any(p => p.Barcode == barcode);
+                return context.Products.Where(product => product.CompanyId == companyId).Any(product => product.Barcode == barcode);
         }
 
         public int AddProduct(Product productToAdd)

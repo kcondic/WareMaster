@@ -18,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.auth0.android.jwt.JWT;
 import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -33,9 +34,11 @@ import java.util.Map;
 public class InputProducts extends AppCompatActivity {
 
     private Button addNewProduct, scanProduct, saveChanges;
+    private TextView productName;
     private EditText barcode, quantity;
     private JSONObject productObject;
     private String token;
+    int companyId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,12 +47,13 @@ public class InputProducts extends AppCompatActivity {
         addNewProduct = (Button)findViewById(R.id.addNewProductButton);
         scanProduct = (Button)findViewById(R.id.scanButton);
         saveChanges = (Button)findViewById(R.id.saveButton);
+        productName = (TextView)findViewById(R.id.productNameView);
         barcode = (EditText)findViewById(R.id.barcodeEditText);
         quantity = (EditText)findViewById(R.id.quantityEditText);
 
         saveChanges.setEnabled(false);
         token = getIntent().getStringExtra("waremasterToken");
-
+        companyId = Integer.parseInt(new JWT(token).getClaim("companyid").asString());
         scanProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,6 +74,7 @@ public class InputProducts extends AppCompatActivity {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String product) {
+                                productName.setText("");
                                 barcode.setText("");
                                 quantity.setText("");
                                 saveChanges.setEnabled(false);
@@ -124,12 +129,13 @@ public class InputProducts extends AppCompatActivity {
             if(scanningResult.getContents() != null)
             {
                 JsonObjectRequest getProductRequest = new JsonObjectRequest(Request.Method.GET, getString(R.string.base_url) + "/products/get?barcode="
-                        + scanningResult.getContents(), null,
+                        + scanningResult.getContents() + "&companyId=" + companyId, null,
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject product) {
                                 {
                                     productObject = product;
+                                    productName.setText(product.optString("Name"));
                                     barcode.setText(product.optString("Barcode"));
                                     quantity.setText(product.optString("Counter"));
                                     saveChanges.setEnabled(true);
