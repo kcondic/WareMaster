@@ -1,7 +1,11 @@
 package waremaster.waremaster;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -57,7 +61,10 @@ public class InputProducts extends AppCompatActivity {
         scanProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                scanNow(view);
+                if (ContextCompat.checkSelfPermission(InputProducts.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+                    ActivityCompat.requestPermissions(InputProducts.this, new String[]{Manifest.permission.CAMERA}, 0);
+                else
+                    scanNow(view);
             }
         });
 
@@ -166,4 +173,13 @@ public class InputProducts extends AppCompatActivity {
         else
             Toast.makeText(getApplicationContext(),"Nisu dobiveni podaci o skeniranju.", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                    scanNow(findViewById(R.id.scanButton));
+                else
+                    Toast.makeText(getApplicationContext(), "Skener ne može raditi bez pristupa kameri!", Toast.LENGTH_LONG).show();
+                return;
+            }
 }
