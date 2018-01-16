@@ -114,7 +114,6 @@ public class InputProducts extends AppCompatActivity {
                 RequestQueueSingleton.getInstance(getApplicationContext()).addToRequestQueue(editProductRequest);
             }
         });
-
     }
 
     public void scanNow(View view){
@@ -140,13 +139,11 @@ public class InputProducts extends AppCompatActivity {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject product) {
-                                {
-                                    productObject = product;
-                                    productName.setText(product.optString("Name"));
-                                    barcode.setText(product.optString("Barcode"));
-                                    quantity.setText(product.optString("Counter"));
-                                    saveProduct.setEnabled(true);
-                                }
+                                productObject = product;
+                                productName.setText(product.optString("Name"));
+                                barcode.setText(product.optString("Barcode"));
+                                quantity.setText(product.optString("Counter"));
+                                saveProduct.setEnabled(true);
                             }
                         }, new Response.ErrorListener() {
                     @Override

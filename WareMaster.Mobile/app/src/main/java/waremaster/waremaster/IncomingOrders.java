@@ -135,7 +135,6 @@ public class IncomingOrders extends AppCompatActivity {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject order) {
-                                {
                                     if(order.optString("Type").equals("1") || order.optString("Status").equals("2"))
                                     {
                                         Toast.makeText(getApplicationContext(),"Narudžba nije dostupna za obradu.", Toast.LENGTH_LONG).show();
@@ -152,7 +151,6 @@ public class IncomingOrders extends AppCompatActivity {
                                     }
                                     productsList.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, listContents));
                                     saveOrder.setEnabled(true);
-                                }
                             }
                         }, new Response.ErrorListener() {
                     @Override
