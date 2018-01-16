@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.Entity.Migrations;
+using System.Diagnostics;
 using System.Security.Cryptography.X509Certificates;
 using WareMaster.Data.Models;
 using WareMaster.Data.Models.Entities;
@@ -61,7 +62,7 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WareMasterContext())
             {
-                Order order =  context.Orders
+                var order =  context.Orders
                    .Include(o => o.AssignedEmployee)
                    .Include(o => o.ProductOrders)
                    .Include(o => o.ProductOrders.Select(x => x.Product))
@@ -118,7 +119,8 @@ namespace WareMaster.Domain.Repositories
                 else if (editedOrder.AssignedEmployee == null)
                     orderToEdit.AssignedEmployee = null;
 
-                orderToEdit.ProductOrders = editedOrder.ProductOrders;                
+                orderToEdit.ProductOrders = editedOrder.ProductOrders;
+                orderToEdit.Note = editedOrder.Note; 
 
                 context.SaveChanges();
             }

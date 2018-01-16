@@ -1,6 +1,8 @@
 Popis taskova koje još moramo odradit, slobodno nadopišite neki i ako æete radit na nekome zapišite svoje ime pokraj:
 
+PRELOADER za stranicu (!!!)
 Loadanje stvari malo po malo i prikazivanje spinnera dok se ne loadaju stvari (VUKA)
+Pripazit na pristup tuðim podacima (proširit sa get metoda i na edit i delete i ostale) (VUKA)
 Ogranièit moguænosti editiranja zapisa (npr. ako je ulazna narudžba prihvaæena onemoguæit otkazivanje 
 ili onemoguæit promjenu imena zaposlenika bez njegovog pristanka)
 

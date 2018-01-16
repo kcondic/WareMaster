@@ -35,5 +35,6 @@ namespace WareMaster.Data.Models.Entities
         public Type Type { get; set; }
         public Company Company { get; set; }
         public int CompanyId { get; set; }
+        public string Note { get; set; }
     }
 }

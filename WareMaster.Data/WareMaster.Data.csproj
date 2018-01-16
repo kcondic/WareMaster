@@ -53,6 +53,10 @@
     <Compile Include="Migrations\201801071232007_InitialCreate.Designer.cs">
       <DependentUpon>201801071232007_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801161028183_AddNoteToOrders.cs" />
+    <Compile Include="Migrations\201801161028183_AddNoteToOrders.Designer.cs">
+      <DependentUpon>201801161028183_AddNoteToOrders.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entities\ActivityLog.cs" />
     <Compile Include="Models\Entities\Company.cs" />
@@ -71,6 +75,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801071232007_InitialCreate.resx">
       <DependentUpon>201801071232007_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801161028183_AddNoteToOrders.resx">
+      <DependentUpon>201801161028183_AddNoteToOrders.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
