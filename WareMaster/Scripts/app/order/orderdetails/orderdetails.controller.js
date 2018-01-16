@@ -11,17 +11,6 @@
                 $scope.nameOfEmployee = $scope.order.AssignedEmployee.FirstName + ' ' + $scope.order.AssignedEmployee.LastName;
             else
                 $scope.nameOfEmployee = 'Nije pridijeljen zaposlenik';
-            $scope.options = {
-                width: 2,
-                height: 100,
-                quite: 10,
-                displayValue: true,
-                font: "monospace",
-                textAlign: "center",
-                fontSize: 12,
-                backgroundColor: "",
-                lineColor: "#000"
-            };
             $scope.barcode = padString('000000', $scope.order.Id, true);
         }, function () {
             console.log("Nemate dozvolu za pristup tim podacima");

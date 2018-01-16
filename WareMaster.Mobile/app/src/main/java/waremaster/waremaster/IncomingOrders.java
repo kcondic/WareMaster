@@ -81,7 +81,8 @@ public class IncomingOrders extends AppCompatActivity {
         {
             if(scanningResult.getContents() != null)
             {
-                String orderId = scanningResult.getContents().replaceFirst("^0+(?!$)", "");
+                String orderId = scanningResult.getContents();
+                orderId = orderId.replaceFirst("^0+(?!$)", "");
                 JsonObjectRequest getOrderRequest = new JsonObjectRequest(Request.Method.GET, getString(R.string.base_url) + "/orders/details?id="
                         + orderId + "&companyId=" + companyId, null,
                         new Response.Listener<JSONObject>() {
