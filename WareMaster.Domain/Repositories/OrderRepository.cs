@@ -118,7 +118,8 @@ namespace WareMaster.Domain.Repositories
                 else if (editedOrder.AssignedEmployee == null)
                     orderToEdit.AssignedEmployee = null;
 
-                orderToEdit.ProductOrders = editedOrder.ProductOrders;                
+                orderToEdit.ProductOrders = editedOrder.ProductOrders;
+                orderToEdit.Note = editedOrder.Note;                
 
                 context.SaveChanges();
             }

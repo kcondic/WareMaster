@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,11 +20,13 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.auth0.android.jwt.JWT;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -35,7 +38,8 @@ public class IncomingOrders extends AppCompatActivity {
 
     private Button scanOrder, saveOrder;
     private ListView productsList;
-    private TextView note;
+    private EditText note;
+    private JSONObject orderObject;
     private String token;
     private int companyId;
     @Override
@@ -46,7 +50,7 @@ public class IncomingOrders extends AppCompatActivity {
         scanOrder = (Button)findViewById(R.id.scanIncomingOrderButton);
         saveOrder = (Button)findViewById(R.id.saveIncomingOrderButton);
         productsList = (ListView)findViewById(R.id.incomingProductsList);
-        note = (TextView)findViewById(R.id.incomingNoteText);
+        note = (EditText) findViewById(R.id.incomingNoteText);
 
         saveOrder.setEnabled(false);
         token = getIntent().getStringExtra("waremasterToken");
@@ -59,6 +63,49 @@ public class IncomingOrders extends AppCompatActivity {
                     ActivityCompat.requestPermissions(IncomingOrders.this, new String[]{Manifest.permission.CAMERA}, 0);
                 else
                     scanNow(view);
+            }
+        });
+
+        saveOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    orderObject.put("Status", "2");
+                    orderObject.put("Note", note.getText().toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                StringRequest editOrderRequest = new StringRequest(Request.Method.POST, getString(R.string.base_url) + "/orders/edit",
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String order) {
+                                note.setText("");
+                                productsList.setAdapter(null);
+                                saveOrder.setEnabled(false);
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Došlo je do neočekivane pogreške: " + error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }){
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String>  authParams = new HashMap<>();
+
+                        authParams.put("Authorization", "Bearer " + token);
+                        return authParams;
+                    }
+                    @Override
+                    public byte[] getBody() throws AuthFailureError {
+                        return orderObject.toString().getBytes();
+                    }
+                    @Override
+                    public String getBodyContentType() {
+                        return "application/json";
+                    }
+                };
+                RequestQueueSingleton.getInstance(getApplicationContext()).addToRequestQueue(editOrderRequest);
             }
         });
     }
@@ -83,12 +130,18 @@ public class IncomingOrders extends AppCompatActivity {
             {
                 String orderId = scanningResult.getContents();
                 orderId = orderId.replaceFirst("^0+(?!$)", "");
-                JsonObjectRequest getOrderRequest = new JsonObjectRequest(Request.Method.GET, getString(R.string.base_url) + "/orders/details?id="
-                        + orderId + "&companyId=" + companyId, null,
+                JsonObjectRequest getOrderRequest = new JsonObjectRequest(Request.Method.GET, getString(R.string.base_url) + "/orders/details?companyId="
+                        + companyId + "&id=" + orderId, null,
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject order) {
                                 {
+                                    if(order.optString("Type").equals("1") || order.optString("Status").equals("2"))
+                                    {
+                                        Toast.makeText(getApplicationContext(),"Narudžba nije dostupna za obradu.", Toast.LENGTH_LONG).show();
+                                        return;
+                                    }
+                                    orderObject = order;
                                     JSONArray productOrders = order.optJSONArray("ProductOrders");
                                     List<String> listContents = new ArrayList<String>(productOrders.length());
                                     for (int i = 0; i < productOrders.length(); i++)
@@ -105,7 +158,7 @@ public class IncomingOrders extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         int httpStatusCode = error.networkResponse.statusCode;
-                        if(httpStatusCode == 401)
+                        if(httpStatusCode == 401 || httpStatusCode == 400)
                             Toast.makeText(getApplicationContext(), "Narudžba s tim barkodom ne postoji.", Toast.LENGTH_LONG).show();
                         else
                             Toast.makeText(getApplicationContext(), "Došlo je do neočekivane pogreške: " + error.toString(), Toast.LENGTH_LONG).show();
