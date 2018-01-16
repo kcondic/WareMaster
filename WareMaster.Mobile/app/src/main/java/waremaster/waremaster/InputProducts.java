@@ -37,7 +37,7 @@ import java.util.Map;
 
 public class InputProducts extends AppCompatActivity {
 
-    private Button addNewProduct, scanProduct, saveChanges;
+    private Button addNewProduct, scanProduct, saveProduct;
     private TextView productName;
     private EditText barcode, quantity;
     private JSONObject productObject;
@@ -50,12 +50,12 @@ public class InputProducts extends AppCompatActivity {
 
         addNewProduct = (Button)findViewById(R.id.addNewProductButton);
         scanProduct = (Button)findViewById(R.id.scanButton);
-        saveChanges = (Button)findViewById(R.id.saveButton);
+        saveProduct = (Button)findViewById(R.id.saveButton);
         productName = (TextView)findViewById(R.id.productNameView);
         barcode = (EditText)findViewById(R.id.barcodeEditText);
         quantity = (EditText)findViewById(R.id.quantityEditText);
 
-        saveChanges.setEnabled(false);
+        saveProduct.setEnabled(false);
         token = getIntent().getStringExtra("waremasterToken");
         companyId = Integer.parseInt(new JWT(token).getClaim("companyid").asString());
         scanProduct.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +68,7 @@ public class InputProducts extends AppCompatActivity {
             }
         });
 
-        saveChanges.setOnClickListener(new View.OnClickListener() {
+        saveProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
@@ -84,7 +84,7 @@ public class InputProducts extends AppCompatActivity {
                                 productName.setText("");
                                 barcode.setText("");
                                 quantity.setText("");
-                                saveChanges.setEnabled(false);
+                                saveProduct.setEnabled(false);
                             }
                         }, new Response.ErrorListener() {
                     @Override
@@ -145,7 +145,7 @@ public class InputProducts extends AppCompatActivity {
                                     productName.setText(product.optString("Name"));
                                     barcode.setText(product.optString("Barcode"));
                                     quantity.setText(product.optString("Counter"));
-                                    saveChanges.setEnabled(true);
+                                    saveProduct.setEnabled(true);
                                 }
                             }
                         }, new Response.ErrorListener() {

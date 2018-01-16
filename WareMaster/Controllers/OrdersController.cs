@@ -46,7 +46,7 @@ namespace WareMaster.Controllers
         [Route("details")]
         public IHttpActionResult GetOrderDetails(int id, int companyId)
         {
-            Order order = _orderRepository.GetOrderDetails(id, companyId);
+            var order = _orderRepository.GetOrderDetails(id, companyId);
             if (order != null)
                 return Ok(order);
             return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Unauthorized));
