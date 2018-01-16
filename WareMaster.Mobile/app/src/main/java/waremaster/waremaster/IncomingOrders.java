@@ -70,7 +70,7 @@ public class IncomingOrders extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    orderObject.put("Status", "2");
+                    orderObject.put("Status", 2);
                     orderObject.put("Note", note.getText().toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -86,7 +86,7 @@ public class IncomingOrders extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), "Došlo je do neočekivane pogreške: " + error.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Došlo je do neočekivane pogreške: " + error.networkResponse.statusCode + error.toString(), Toast.LENGTH_LONG).show();
                     }
                 }){
                     @Override
