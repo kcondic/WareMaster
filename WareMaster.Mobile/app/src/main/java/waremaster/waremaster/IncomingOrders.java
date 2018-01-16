@@ -69,12 +69,12 @@ public class IncomingOrders extends AppCompatActivity {
         saveOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
+/*                try {
                     orderObject.put("Status", 2);
                     orderObject.put("Note", note.getText().toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
+                }*/
                 StringRequest editOrderRequest = new StringRequest(Request.Method.POST, getString(R.string.base_url) + "/orders/edit",
                         new Response.Listener<String>() {
                             @Override

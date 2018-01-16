@@ -119,7 +119,7 @@ namespace WareMaster.Domain.Repositories
                     orderToEdit.AssignedEmployee = null;
 
                 orderToEdit.ProductOrders = editedOrder.ProductOrders;
-                //orderToEdit.Note = editedOrder.Note;                
+                orderToEdit.Note = editedOrder.Note;                
 
                 context.SaveChanges();
             }
