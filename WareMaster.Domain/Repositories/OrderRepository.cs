@@ -65,7 +65,7 @@ namespace WareMaster.Domain.Repositories
                 var order =  context.Orders
                    .Include(o => o.AssignedEmployee)
                    .Include(o => o.ProductOrders)
-                   //.Include(o => o.ProductOrders.Select(x => x.Product))
+                   .Include(o => o.ProductOrders.Select(x => x.Product))
                    .Include(o => o.Company)
                    .Include(o => o.Supplier)
                    .Include(o => o.Supplier.Products)
