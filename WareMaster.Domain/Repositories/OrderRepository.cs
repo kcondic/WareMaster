@@ -108,7 +108,9 @@ namespace WareMaster.Domain.Repositories
                     .Include(order => order.AssignedEmployee)
                     .SingleOrDefault(order => order.Id == editedOrder.Id);
 
-                if (orderToEdit == null || orderToEdit.Status == Status.Finished)
+                if (orderToEdit == null 
+                    || orderToEdit.Status == Status.Finished
+                    || orderToEdit.Status == Status.InProgress)
                     return false;
 
                 orderToEdit.Status = editedOrder.Status;
