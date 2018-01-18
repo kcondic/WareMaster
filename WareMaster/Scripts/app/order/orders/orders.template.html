@@ -18,7 +18,7 @@
                 <div class="content-column">
                     <div class="content-column-title"><label class="column-title-label">Planirane</label></div>
                     <div class="column-body">
-                        <div ng-repeat="order in allOrders" class="content-row" ng-if="order.Type===orderType" ui-sref="orderdetails({id: order.Id})">
+                        <div ng-repeat="order in allOrders | filter:{Status:0}" class="content-row" ng-if="order.Type===orderType" ui-sref="orderdetails({id: order.Id})">
                             <div class="row-element">
                                 {{getOrderName(order.Supplier.Name, order.AssignedEmployee)}}
                             </div>
@@ -30,11 +30,29 @@
                 </div>
                 <div class="content-column">
                     <div class="content-column-title"><label class="column-title-label">U tijeku</label></div>
-                    <div class="column-body"></div>
+                    <div class="column-body">
+                        <div ng-repeat="order in allOrders | filter:{Status:1}" class="content-row" ng-if="order.Type===orderType" ui-sref="orderdetails({id: order.Id})">
+                            <div class="row-element">
+                                {{getOrderName(order.Supplier.Name, order.AssignedEmployee)}}
+                            </div>
+                            <div class="row-element">
+                                {{order.TimeOfCreation | date: "dd.MM.yyyy."}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="content-column">
                     <div class="content-column-title"><label class="column-title-label">Izvršene</label></div>
-                    <div class="column-body"></div>
+                    <div class="column-body">
+                        <div ng-repeat="order in allOrders | filter:{Status:2}" class="content-row" ng-if="order.Type===orderType" ui-sref="orderdetails({id: order.Id})">
+                            <div class="row-element">
+                                {{getOrderName(order.Supplier.Name, order.AssignedEmployee)}}
+                            </div>
+                            <div class="row-element">
+                                {{order.TimeOfCreation | date: "dd.MM.yyyy."}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
