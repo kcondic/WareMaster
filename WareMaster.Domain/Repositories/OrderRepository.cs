@@ -138,7 +138,8 @@ namespace WareMaster.Domain.Repositories
                     .Include(order => order.ProductOrders)
                     .FirstOrDefault(order => order.Id == orderId);
 
-                if (orderToDelete == null)
+                if (orderToDelete == null || orderToDelete.Status == Status.InProgress 
+                                          || orderToDelete.Status == Status.Finished)
                     return;
 
                 context.Orders.Remove(orderToDelete);

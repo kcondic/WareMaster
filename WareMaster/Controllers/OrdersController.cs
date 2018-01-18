@@ -56,6 +56,8 @@ namespace WareMaster.Controllers
         [Route("edit")]
         public IHttpActionResult EditOrder(Order editedOrder)
         {
+            if (editedOrder.Status == Status.InProgress || editedOrder.Status == Status.Finished)
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
             _orderRepository.EditOrder(editedOrder);
             return Ok(true);
         }
