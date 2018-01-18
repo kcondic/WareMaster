@@ -109,6 +109,9 @@ namespace WareMaster.Domain.Repositories
 
                 if (orderToEdit == null)
                     return;
+
+                orderToEdit.Status = editedOrder.Status;
+
                 if (orderToEdit.AssignedEmployee != null && editedOrder.AssignedEmployee != null
                     && orderToEdit.AssignedEmployee.Id != editedOrder.AssignedEmployee.Id ||
                     orderToEdit.AssignedEmployee == null && editedOrder.AssignedEmployee != null)
@@ -119,7 +122,8 @@ namespace WareMaster.Domain.Repositories
                 else if (editedOrder.AssignedEmployee == null)
                     orderToEdit.AssignedEmployee = null;
 
-                orderToEdit.ProductOrders = editedOrder.ProductOrders;
+                orderToEdit.Status = editedOrder.Status;
+                orderToEdit.ProductOrders = editedOrder.ProductOrders;             
                 orderToEdit.Note = editedOrder.Note; 
 
                 context.SaveChanges();
