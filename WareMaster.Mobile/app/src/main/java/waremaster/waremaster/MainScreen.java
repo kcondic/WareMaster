@@ -34,9 +34,9 @@ public class MainScreen extends AppCompatActivity {
         outgoingOrders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent goToOutgoingOrders = new Intent(view.getContext(), OutgoingOrders.class);
-                goToOutgoingOrders.putExtra("waremasterToken", token);
-                startActivity(goToOutgoingOrders);
+                Intent goToOutgoingOrdersList = new Intent(view.getContext(), OutgoingOrdersList.class);
+                goToOutgoingOrdersList.putExtra("waremasterToken", token);
+                startActivity(goToOutgoingOrdersList);
             }
         });
 

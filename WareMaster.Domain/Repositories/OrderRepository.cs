@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Security.Cryptography.X509Certificates;
 using WareMaster.Data.Models;
 using WareMaster.Data.Models.Entities;
+using Type = WareMaster.Data.Models.Entities.Type;
 
 namespace WareMaster.Domain.Repositories
 {
@@ -144,6 +145,25 @@ namespace WareMaster.Domain.Repositories
 
                 context.Orders.Remove(orderToDelete);
                 context.SaveChanges();
+            }
+        }
+
+        public List<Order> GetOrdersAssignedToEmployee(int employeeId)
+        {
+            using (var context = new WareMasterContext())
+            {
+                var employeeToGetOrdersFor = context.Users.Find(employeeId);
+
+                if (employeeToGetOrdersFor == null || employeeToGetOrdersFor.Role == Role.Manager)
+                    return null;
+
+                return context.Orders.Include(order => order.AssignedEmployee)
+                                     .Include(order => order.ProductOrders)
+                                     .Include(order => order.ProductOrders.Select(x => x.Product))
+                                     .Include(order => order.Supplier)
+                                     .Where(order => order.AssignedEmployeeId == employeeId 
+                                                     && order.Type == Type.Outgoing 
+                                                     && order.Status != Status.Finished).ToList();
             }
         }
     }

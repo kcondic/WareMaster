@@ -56,7 +56,7 @@ namespace WareMaster.Controllers
         [Route("details")]
         public IHttpActionResult GetEmployeeDetails(int id, int companyId)
         {
-            User user = _employeeRepository.GetUserDetails(id, companyId);
+            var user = _employeeRepository.GetUserDetails(id, companyId);
             if (user != null)
                 return Ok(user);
             return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Unauthorized));

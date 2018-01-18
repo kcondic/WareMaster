@@ -69,5 +69,15 @@ namespace WareMaster.Controllers
             _orderRepository.DeleteOrder(id);
             return Ok(true);
         }
+
+        [HttpGet]
+        [Route("assigned")]
+        public IHttpActionResult GetOrdersAssignedToEmployee(int employeeId)
+        {
+            var ordersToGet = _orderRepository.GetOrdersAssignedToEmployee(employeeId);
+            if (ordersToGet == null)
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+            return Ok(ordersToGet);
+        }
     }
 }
