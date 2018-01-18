@@ -40,7 +40,6 @@ public class Register extends AppCompatActivity {
                                new Response.Listener<String>() {
                                    @Override
                                    public void onResponse(String doesUsernameExist) {
-                                       accessStringInput.setText(doesUsernameExist);
                                        if (doesUsernameExist.equals("true")) {
                                            usernameTaken.setVisibility(View.VISIBLE);
                                            register.setEnabled(false);

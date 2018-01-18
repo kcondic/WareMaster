@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Security.Cryptography.X509Certificates;
 using WareMaster.Data.Models;
 using WareMaster.Data.Models.Entities;
+using Type = WareMaster.Data.Models.Entities.Type;
 
 namespace WareMaster.Domain.Repositories
 {
@@ -98,7 +99,7 @@ namespace WareMaster.Domain.Repositories
             }
         }
 
-        public void EditOrder(Order editedOrder)
+        public bool EditOrder(Order editedOrder)
         {
             using (var context = new WareMasterContext())
             {
@@ -107,8 +108,11 @@ namespace WareMaster.Domain.Repositories
                     .Include(order => order.AssignedEmployee)
                     .SingleOrDefault(order => order.Id == editedOrder.Id);
 
-                if (orderToEdit == null)
-                    return;
+                if (orderToEdit == null || orderToEdit.Status == Status.Finished)
+                    return false;
+
+                orderToEdit.Status = editedOrder.Status;
+
                 if (orderToEdit.AssignedEmployee != null && editedOrder.AssignedEmployee != null
                     && orderToEdit.AssignedEmployee.Id != editedOrder.AssignedEmployee.Id ||
                     orderToEdit.AssignedEmployee == null && editedOrder.AssignedEmployee != null)
@@ -119,14 +123,17 @@ namespace WareMaster.Domain.Repositories
                 else if (editedOrder.AssignedEmployee == null)
                     orderToEdit.AssignedEmployee = null;
 
-                orderToEdit.ProductOrders = editedOrder.ProductOrders;
+                orderToEdit.Status = editedOrder.Status;
+                orderToEdit.ProductOrders = editedOrder.ProductOrders;             
                 orderToEdit.Note = editedOrder.Note; 
 
                 context.SaveChanges();
+
+                return true;
             }
         }
 
-        public void DeleteOrder(int orderId)
+        public bool DeleteOrder(int orderId)
         {
             using (var context = new WareMasterContext())
             {
@@ -134,11 +141,34 @@ namespace WareMaster.Domain.Repositories
                     .Include(order => order.ProductOrders)
                     .FirstOrDefault(order => order.Id == orderId);
 
-                if (orderToDelete == null)
-                    return;
+                if (orderToDelete == null 
+                    || orderToDelete.Status == Status.InProgress 
+                    || orderToDelete.Status == Status.Finished)
+                    return false;
 
                 context.Orders.Remove(orderToDelete);
                 context.SaveChanges();
+
+                return true;
+            }
+        }
+
+        public List<Order> GetOrdersAssignedToEmployee(int employeeId)
+        {
+            using (var context = new WareMasterContext())
+            {
+                var employeeToGetOrdersFor = context.Users.Find(employeeId);
+
+                if (employeeToGetOrdersFor == null || employeeToGetOrdersFor.Role == Role.Manager)
+                    return null;
+
+                return context.Orders.Include(order => order.AssignedEmployee)
+                                     .Include(order => order.ProductOrders)
+                                     .Include(order => order.ProductOrders.Select(x => x.Product))
+                                     .Include(order => order.Supplier)
+                                     .Where(order => order.AssignedEmployeeId == employeeId 
+                                                     && order.Type == Type.Outgoing 
+                                                     && order.Status != Status.Finished).ToList();
             }
         }
     }

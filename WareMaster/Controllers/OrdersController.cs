@@ -56,7 +56,9 @@ namespace WareMaster.Controllers
         [Route("edit")]
         public IHttpActionResult EditOrder(Order editedOrder)
         {
-            _orderRepository.EditOrder(editedOrder);
+            var wasOrderEdited = _orderRepository.EditOrder(editedOrder);
+            if (!wasOrderEdited)
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
             return Ok(true);
         }
 
@@ -64,8 +66,20 @@ namespace WareMaster.Controllers
         [Route("delete")]
         public IHttpActionResult DeleteOrder(int id)
         {
-            _orderRepository.DeleteOrder(id);
+            var wasOrderDeleted = _orderRepository.DeleteOrder(id);
+            if (!wasOrderDeleted)
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
             return Ok(true);
+        }
+
+        [HttpGet]
+        [Route("assigned")]
+        public IHttpActionResult GetOrdersAssignedToEmployee(int employeeId)
+        {
+            var ordersToGet = _orderRepository.GetOrdersAssignedToEmployee(employeeId);
+            if (ordersToGet == null || !ordersToGet.Any())
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+            return Ok(ordersToGet);
         }
     }
 }

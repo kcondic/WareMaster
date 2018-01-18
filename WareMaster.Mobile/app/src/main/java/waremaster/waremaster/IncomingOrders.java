@@ -31,6 +31,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -69,9 +70,25 @@ public class IncomingOrders extends AppCompatActivity {
         saveOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                JSONArray productOrders = orderObject.optJSONArray("ProductOrders");
+                JSONArray newProductOrders = new JSONArray();
+                for(int i=0; i<productOrders.length(); i++)
+                {
+                    JSONObject productOrder = productOrders.optJSONObject(i);
+                    JSONObject newProductOrder = new JSONObject();
+                    try {
+                        newProductOrder.put("ProductId", productOrder.optString("ProductId"));
+                        newProductOrder.put("OrderId", productOrder.optString("OrderId"));
+                        newProductOrder.put("ProductQuantity", productOrder.optString("ProductQuantity"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    newProductOrders.put(newProductOrder);
+                }
                 try {
                     orderObject.put("Status", 2);
                     orderObject.put("Note", note.getText().toString());
+                    orderObject.put("ProductOrders", newProductOrders);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
