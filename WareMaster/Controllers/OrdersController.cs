@@ -56,9 +56,9 @@ namespace WareMaster.Controllers
         [Route("edit")]
         public IHttpActionResult EditOrder(Order editedOrder)
         {
-            if (editedOrder.Status == Status.InProgress || editedOrder.Status == Status.Finished)
+            var wasOrderEdited = _orderRepository.EditOrder(editedOrder);
+            if (!wasOrderEdited)
                 return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
-            _orderRepository.EditOrder(editedOrder);
             return Ok(true);
         }
 
@@ -66,7 +66,9 @@ namespace WareMaster.Controllers
         [Route("delete")]
         public IHttpActionResult DeleteOrder(int id)
         {
-            _orderRepository.DeleteOrder(id);
+            var wasOrderDeleted = _orderRepository.DeleteOrder(id);
+            if (!wasOrderDeleted)
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
             return Ok(true);
         }
 

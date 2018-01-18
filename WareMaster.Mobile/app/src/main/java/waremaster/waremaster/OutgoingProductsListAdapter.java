@@ -1,3 +1,5 @@
+package waremaster.waremaster;
+
 import android.content.Context;
 import android.text.InputFilter;
 import android.view.LayoutInflater;

@@ -99,7 +99,7 @@ namespace WareMaster.Domain.Repositories
             }
         }
 
-        public void EditOrder(Order editedOrder)
+        public bool EditOrder(Order editedOrder)
         {
             using (var context = new WareMasterContext())
             {
@@ -108,8 +108,10 @@ namespace WareMaster.Domain.Repositories
                     .Include(order => order.AssignedEmployee)
                     .SingleOrDefault(order => order.Id == editedOrder.Id);
 
-                if (orderToEdit == null)
-                    return;
+                if (orderToEdit == null 
+                    || orderToEdit.Status == Status.InProgress 
+                    || orderToEdit.Status == Status.Finished)
+                    return false;
 
                 orderToEdit.Status = editedOrder.Status;
 
@@ -128,10 +130,12 @@ namespace WareMaster.Domain.Repositories
                 orderToEdit.Note = editedOrder.Note; 
 
                 context.SaveChanges();
+
+                return true;
             }
         }
 
-        public void DeleteOrder(int orderId)
+        public bool DeleteOrder(int orderId)
         {
             using (var context = new WareMasterContext())
             {
@@ -139,12 +143,15 @@ namespace WareMaster.Domain.Repositories
                     .Include(order => order.ProductOrders)
                     .FirstOrDefault(order => order.Id == orderId);
 
-                if (orderToDelete == null || orderToDelete.Status == Status.InProgress 
-                                          || orderToDelete.Status == Status.Finished)
-                    return;
+                if (orderToDelete == null 
+                    || orderToDelete.Status == Status.InProgress 
+                    || orderToDelete.Status == Status.Finished)
+                    return false;
 
                 context.Orders.Remove(orderToDelete);
                 context.SaveChanges();
+
+                return true;
             }
         }
 
