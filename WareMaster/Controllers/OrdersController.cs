@@ -75,7 +75,7 @@ namespace WareMaster.Controllers
         public IHttpActionResult GetOrdersAssignedToEmployee(int employeeId)
         {
             var ordersToGet = _orderRepository.GetOrdersAssignedToEmployee(employeeId);
-            if (ordersToGet == null)
+            if (ordersToGet == null || !ordersToGet.Any())
                 return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
             return Ok(ordersToGet);
         }
