@@ -9,6 +9,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -44,6 +45,7 @@ public class OutgoingOrders extends AppCompatActivity {
     private String orderId;
     private JSONArray productOrders;
     private OutgoingProductsListAdapter adapter;
+    private JSONObject takenProducts;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +59,7 @@ public class OutgoingOrders extends AppCompatActivity {
         companyId = Integer.parseInt(new JWT(token).getClaim("companyid").asString());
         orderId = getIntent().getStringExtra("orderid");
 
-        saveOutgoingOrder.setEnabled(false);
+        takenProducts = new JSONObject();
 
         JsonObjectRequest getOrderRequest = new JsonObjectRequest(Request.Method.GET, getString(R.string.base_url) + "/orders/details?companyId="
                 + companyId + "&id=" + orderId, null,
@@ -123,11 +125,27 @@ public class OutgoingOrders extends AppCompatActivity {
                 for (int i = 0; i < productOrders.length(); i++)
                 {
                     JSONObject productOrder = productOrders.optJSONObject(i);
-                    JSONObject product = productOrder.optJSONObject("Product");
+                    final JSONObject product = productOrder.optJSONObject("Product");
                     if(product.optString("Barcode").equals(scannedBarcode))
                     {
-                       View view = getViewByPosition(i, productsWithInputsList);
-                       view.findViewById(R.id.numberOfTakenEditText).setVisibility(View.VISIBLE);
+                       EditText listRow = getViewByPosition(i, productsWithInputsList).findViewById(R.id.numberOfTakenEditText);
+                       String listRowText = listRow.getText().toString();
+                       int takenQuantity;
+                       if(TextUtils.isEmpty(listRowText))
+                           takenQuantity = 0;
+                       else
+                           takenQuantity = Integer.parseInt(listRowText);
+                       if(takenQuantity <= productOrder.optInt("ProductQuantity") && takenQuantity >= 0)
+                       {
+                           try {
+                               takenProducts.put(product.optString("Id"), takenQuantity);
+                           } catch (JSONException e) {
+                               e.printStackTrace();
+                           }
+                       }
+                       else
+                           Toast.makeText(getApplicationContext(), "Ne možete uzeti više od tražene količine niti manje od 0.", Toast.LENGTH_LONG).show();
+                        break;
                     }
                 }
             }
