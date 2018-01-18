@@ -24,7 +24,8 @@
                     </div>
                     <div class="products-container">
                         <span ng-repeat="product in products | filter: addedsearch" class="single-product">
-                            <span ng-click="deselectProduct(product)">{{product.Name}}</span>
+                            <span>{{product.Name}}</span>
+                            <i class="fa fa-times" aria-hidden="true" ng-click="deselectProduct(product)"></i>
                         </span>
                     </div>
                 </div>
@@ -37,8 +38,8 @@
                         </span>
                     </div>
                     <div class="products-container">
-                        <span ng-repeat="product in allProducts | filter: toaddsearch" class="single-product">
-                            <span ng-click="selectProduct(product)">{{product.Name}}</span>
+                        <span ng-repeat="product in allProducts | filter: toaddsearch" class="single-product" ng-click="selectProduct(product)">
+                            <span>{{product.Name}}</span>
                         </span>
                     </div>
                 </div>

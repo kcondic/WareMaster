@@ -1,5 +1,5 @@
 ﻿angular.module('app').controller('AddOrderController',
-    function ($scope, $state, employeesRepository, productsRepository, ordersRepository, suppliersRepository, loginRepository, activitylogRepository) {
+    function ($scope, $state, employeesRepository, productsRepository, ordersRepository, suppliersRepository, loginRepository, activitylogRepository, $rootScope) {
 
         $scope.incomingSelected = false;
         $scope.outgoingSelected = false;

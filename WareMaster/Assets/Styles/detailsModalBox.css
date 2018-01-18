@@ -14,16 +14,24 @@
     align-items: center;
 }
 
+.details-name-container{
+    overflow: auto;
+    -ms-overflow-style: auto;
+}
+
 .details-name-div{
     width: 200px;
-    height: 20px;
+    min-height: 20px;
     padding: 2px 0px;
     margin-left: 3px;
+    margin-top: 2px;
     border-radius: 3px;
     border: solid 1px cadetblue;
     display: flex;
+    flex-flow: column;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .details-image-container{
@@ -50,4 +58,8 @@
     overflow-x: hidden;
     overflow-y: auto;
     -ms-overflow-style: auto;
+    display: flex;
+    flex-flow: column;
+    height: 30%;
+    padding-top: 17px;
 }

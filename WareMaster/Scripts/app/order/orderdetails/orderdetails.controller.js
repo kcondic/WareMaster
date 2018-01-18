@@ -38,4 +38,7 @@
                 return (str + pad).substring(0, pad.length);
             }
         }
+
+        $scope.showNote = 1;
+
     });

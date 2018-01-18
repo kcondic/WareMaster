@@ -1,5 +1,5 @@
 ﻿angular.module('app').controller('MainMenuController',
-    function ($scope, $state, loginRepository, activitylogRepository) {
+    function ($scope, $state, loginRepository, activitylogRepository, $rootScope) {
         $scope.wantsToChangePassword = false;
         $scope.wantsToManipulateManagers = false;
 
@@ -62,7 +62,7 @@
             $scope.wantsToManipulateManagers = false;
         }
 
-        $scope.logout = function() {
+        $scope.logout = function () {
             localStorage.removeItem('bearerToken');
             localStorage.removeItem('authDetails');
             $state.go('login');

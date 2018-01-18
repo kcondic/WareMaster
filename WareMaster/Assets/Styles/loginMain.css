@@ -64,7 +64,7 @@
 }
 
 #signin .signin-form-content .input-box input{
-    font-size: 18px;
+    font-size: 19px;
     font-weight: 400;
     font-family: 'Cormorant Infant', serif, sans-serif;
     width: 60%;
@@ -86,7 +86,7 @@
 }
 
 #signin .signin-button button{
-    font-size: 18px;
+    font-size: 19px;
     font-weight: 400;
     font-family: 'Cormorant Infant', serif, sans-serif;
     width: 100%;
@@ -107,7 +107,7 @@
     padding-top: 6px;
     cursor: pointer;
     color: rgb(34,34,34);
-    font-size: 15px;
+    font-size: 16px;
 }
 
 #signin .forgot-password:hover{
