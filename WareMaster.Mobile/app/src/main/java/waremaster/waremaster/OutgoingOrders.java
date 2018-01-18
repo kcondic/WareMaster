@@ -38,7 +38,8 @@ public class OutgoingOrders extends AppCompatActivity {
     private ListView productsWithInputsList;
     private Button saveOutgoingOrder;
     private String token;
-    private JSONObject order;
+    private int companyId;
+    private String orderId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,21 +49,38 @@ public class OutgoingOrders extends AppCompatActivity {
         saveOutgoingOrder = (Button)findViewById(R.id.saveOutgoingOrderButton);
 
         token = getIntent().getStringExtra("waremasterToken");
-        try {
-            order = new JSONObject(getIntent().getStringExtra("order"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        companyId = Integer.parseInt(new JWT(token).getClaim("companyid").asString());
+        orderId = getIntent().getStringExtra("orderid");
 
-        JSONArray productOrders = order.optJSONArray("ProductOrders");
-        ArrayList<String> listContents = new ArrayList<String>(productOrders.length());
-        for (int i = 0; i < productOrders.length(); i++)
-        {
-            JSONObject productOrder = productOrders.optJSONObject(i);
-            JSONObject product = productOrder.optJSONObject("Product");
-            listContents.add(product.optString("Name") + " Količina: " + productOrder.optInt("ProductQuantity"));
-        }
-        OutgoingProductsListAdapter adapter = new OutgoingProductsListAdapter(listContents, this);
-        productsWithInputsList.setAdapter(adapter);
+        JsonObjectRequest getOrderRequest = new JsonObjectRequest(Request.Method.GET, getString(R.string.base_url) + "/orders/details?companyId="
+                + companyId + "&id=" + orderId, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject order) {
+                        JSONArray productOrders = order.optJSONArray("ProductOrders");
+                        ArrayList<String> listContents = new ArrayList<String>(productOrders.length());
+                        for (int i = 0; i < productOrders.length(); i++)
+                        {
+                            JSONObject productOrder = productOrders.optJSONObject(i);
+                            JSONObject product = productOrder.optJSONObject("Product");
+                            listContents.add(product.optString("Name") + " Količina: " + productOrder.optInt("ProductQuantity"));
+                        }
+                        OutgoingProductsListAdapter adapter = new OutgoingProductsListAdapter(listContents, getApplicationContext());
+                        productsWithInputsList.setAdapter(adapter);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "Došlo je do neočekivane pogreške: " + error.toString(), Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer " + token);
+                return params;
+            }
+        };
+        RequestQueueSingleton.getInstance(getApplicationContext()).addToRequestQueue(getOrderRequest);
     }
 }

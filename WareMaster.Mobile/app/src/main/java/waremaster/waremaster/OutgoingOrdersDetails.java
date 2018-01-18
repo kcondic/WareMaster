@@ -83,10 +83,10 @@ public class OutgoingOrdersDetails extends AppCompatActivity {
                     StringRequest startWorkingOnOrderRequest = new StringRequest(Request.Method.POST, getString(R.string.base_url) + "/orders/edit",
                             new Response.Listener<String>() {
                                 @Override
-                                public void onResponse(String order) {
+                                public void onResponse(String orderResponse) {
                                     Intent goWorkOnOrder = new Intent(view.getContext(), OutgoingOrders.class);
                                     goWorkOnOrder.putExtra("waremasterToken", token);
-                                    goWorkOnOrder.putExtra("order", order.toString());
+                                    goWorkOnOrder.putExtra("orderid", order.optString("Id"));
                                     startActivity(goWorkOnOrder);
                                 }
                             }, new Response.ErrorListener() {
