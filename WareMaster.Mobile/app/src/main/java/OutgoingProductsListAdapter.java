@@ -1,4 +1,5 @@
 import android.content.Context;
+import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,14 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-
+import waremaster.waremaster.MinMaxFilter;
 import waremaster.waremaster.R;
 
-/**
- * Created by Kreso on 18.1.2018..
- */
 
 public class OutgoingProductsListAdapter extends BaseAdapter implements ListAdapter {
     private ArrayList<String> list = new ArrayList<String>();
@@ -54,23 +51,7 @@ public class OutgoingProductsListAdapter extends BaseAdapter implements ListAdap
         productName.setText(list.get(position));
 
         EditText numberTaken = (EditText)view.findViewById(R.id.numberOfTakenEditText);
-        numberTaken.setEnabled(false);
-        //Handle buttons and add onClickListeners
-        deleteBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                //do something
-                list.remove(position); //or some other task
-                notifyDataSetChanged();
-            }
-        });
-        addBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                //do something
-                notifyDataSetChanged();
-            }
-        });
+        numberTaken.setText("0");
 
         return view;
     }

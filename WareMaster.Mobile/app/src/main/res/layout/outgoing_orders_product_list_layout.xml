@@ -24,6 +24,6 @@
         android:layout_marginRight="57dp"
         android:ems="10"
         android:hint="Uzeto"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
 </RelativeLayout>
