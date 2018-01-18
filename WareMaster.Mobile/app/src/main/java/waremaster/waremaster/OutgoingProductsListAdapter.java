@@ -36,7 +36,7 @@ public class OutgoingProductsListAdapter extends BaseAdapter implements ListAdap
 
     @Override
     public long getItemId(int pos) {
-        return 0;
+        return pos;
         //just return 0 if your list items do not have an Id variable.
     }
 
@@ -53,8 +53,10 @@ public class OutgoingProductsListAdapter extends BaseAdapter implements ListAdap
         productName.setText(list.get(position));
 
         EditText numberTaken = (EditText)view.findViewById(R.id.numberOfTakenEditText);
-        numberTaken.setText("0");
+        numberTaken.setEnabled(false);
 
         return view;
     }
+
+
 }

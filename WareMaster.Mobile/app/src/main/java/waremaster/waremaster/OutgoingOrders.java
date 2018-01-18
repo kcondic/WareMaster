@@ -1,6 +1,8 @@
 package waremaster.waremaster;
 
 import android.Manifest;
+import android.app.LauncherActivity;
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
@@ -36,10 +38,12 @@ import java.util.Map;
 public class OutgoingOrders extends AppCompatActivity {
 
     private ListView productsWithInputsList;
-    private Button saveOutgoingOrder;
+    private Button saveOutgoingOrder, scanProduct;
     private String token;
     private int companyId;
     private String orderId;
+    private JSONArray productOrders;
+    private OutgoingProductsListAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,17 +51,20 @@ public class OutgoingOrders extends AppCompatActivity {
 
         productsWithInputsList = (ListView)findViewById(R.id.productsWithNumberInputsListView);
         saveOutgoingOrder = (Button)findViewById(R.id.saveOutgoingOrderButton);
+        scanProduct = (Button)findViewById(R.id.scanOutgoingProductButton);
 
         token = getIntent().getStringExtra("waremasterToken");
         companyId = Integer.parseInt(new JWT(token).getClaim("companyid").asString());
         orderId = getIntent().getStringExtra("orderid");
+
+        saveOutgoingOrder.setEnabled(false);
 
         JsonObjectRequest getOrderRequest = new JsonObjectRequest(Request.Method.GET, getString(R.string.base_url) + "/orders/details?companyId="
                 + companyId + "&id=" + orderId, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject order) {
-                        JSONArray productOrders = order.optJSONArray("ProductOrders");
+                        productOrders = order.optJSONArray("ProductOrders");
                         ArrayList<String> listContents = new ArrayList<String>(productOrders.length());
                         for (int i = 0; i < productOrders.length(); i++)
                         {
@@ -65,7 +72,7 @@ public class OutgoingOrders extends AppCompatActivity {
                             JSONObject product = productOrder.optJSONObject("Product");
                             listContents.add(product.optString("Name") + " Količina: " + productOrder.optInt("ProductQuantity"));
                         }
-                        OutgoingProductsListAdapter adapter = new OutgoingProductsListAdapter(listContents, getApplicationContext());
+                        adapter = new OutgoingProductsListAdapter(listContents, getApplicationContext());
                         productsWithInputsList.setAdapter(adapter);
                     }
                 }, new Response.ErrorListener() {
@@ -82,5 +89,73 @@ public class OutgoingOrders extends AppCompatActivity {
             }
         };
         RequestQueueSingleton.getInstance(getApplicationContext()).addToRequestQueue(getOrderRequest);
+
+        scanProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ContextCompat.checkSelfPermission(OutgoingOrders.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+                    ActivityCompat.requestPermissions(OutgoingOrders.this, new String[]{Manifest.permission.CAMERA}, 0);
+                else
+                    scanNow(view);
+            }
+        });
+    }
+
+    public void scanNow(View view){
+        IntentIntegrator integrator = new IntentIntegrator(OutgoingOrders.this);
+        integrator.setCaptureActivity(AnyOrientationCaptureActivity.class);
+        integrator.setOrientationLocked(false);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+        integrator.setPrompt(getString(R.string.scan_bar_code));
+        integrator.setCameraId(0);
+        integrator.setBarcodeImageEnabled(true);
+        integrator.initiateScan();
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+
+        if (scanningResult != null)
+        {
+            if(scanningResult.getContents() != null)
+            {
+                String scannedBarcode = scanningResult.getContents();
+                for (int i = 0; i < productOrders.length(); i++)
+                {
+                    JSONObject productOrder = productOrders.optJSONObject(i);
+                    JSONObject product = productOrder.optJSONObject("Product");
+                    if(product.optString("Barcode").equals(scannedBarcode))
+                    {
+                       View view = getViewByPosition(i, productsWithInputsList);
+                       view.findViewById(R.id.numberOfTakenEditText).setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+            else
+                Toast.makeText(this, "Otkazano", Toast.LENGTH_LONG).show();
+        }
+        else
+            Toast.makeText(getApplicationContext(),"Nisu dobiveni podaci o skeniranju.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            scanNow(findViewById(R.id.scanOutgoingProductButton));
+        else
+            Toast.makeText(getApplicationContext(), "Skener ne može raditi bez pristupa kameri!", Toast.LENGTH_LONG).show();
+        return;
+    }
+
+    public View getViewByPosition(int pos, ListView listView) {
+        final int firstListItemPosition = listView.getFirstVisiblePosition();
+        final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
+
+        if (pos < firstListItemPosition || pos > lastListItemPosition ) {
+            return listView.getAdapter().getView(pos, null, listView);
+        } else {
+            final int childIndex = pos - firstListItemPosition;
+            return listView.getChildAt(childIndex);
+        }
     }
 }
