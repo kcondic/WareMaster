@@ -3,20 +3,22 @@ Popis taskova koje još moramo odradit, slobodno nadopišite neki i ako æete radit
 PRELOADER za stranicu (!!!)
 Loadanje stvari malo po malo i prikazivanje spinnera dok se ne loadaju stvari (VUKA)
 Pripazit na pristup tuðim podacima (proširit sa get metoda i na edit i delete i ostale) (VUKA)
+Disableat pristup botunima uredi i otkaži kod narudžbi koje su završene (AJ)
+Media queryji, micanje menua nakon odjave (AJ)
 Ogranièit moguænosti editiranja zapisa (npr. ako je ulazna narudžba prihvaæena onemoguæit otkazivanje 
 ili onemoguæit promjenu imena zaposlenika bez njegovog pristanka)
 
 MOBILNA:
 TO-DO:
 
-Dodavanje novih proizvoda (VUKA)
-Aktivnosti na proizvodima (VUKA)
-Kompletna obrada ulaznih narudžbi (KREŠO)
+Dodavanje novih proizvoda
 Kompletna obrada izlaznih narudžbi (možda KREŠO)
 Dohvaæanje activity logova
+Stvaranje activity logova na svemu u mobilnoj
 
 NAPRAVLJENO:
 Login
 Registracija
 Skeniranje i editiranje postojeæih proizvoda
+Obrada ulaznih narudžbi
 
