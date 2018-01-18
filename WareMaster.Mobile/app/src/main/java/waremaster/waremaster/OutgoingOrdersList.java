@@ -29,7 +29,7 @@ import java.util.Map;
 public class OutgoingOrdersList extends AppCompatActivity {
 
     private ListView outgoingOrdersList;
-    private TextView orderDetailsHint;
+    private TextView noOrdersView;
     private String token;
     private int employeeId;
     @Override
@@ -38,7 +38,7 @@ public class OutgoingOrdersList extends AppCompatActivity {
         setContentView(R.layout.activity_outgoing_orders_list);
 
         outgoingOrdersList = (ListView)findViewById(R.id.outgoingOrdersListView);
-        orderDetailsHint = (TextView)findViewById(R.id.outgoingOrderDetailsHintView);
+        noOrdersView = (TextView)findViewById(R.id.outgoingOrderDetailsNoOrdersView);
 
         token = getIntent().getStringExtra("waremasterToken");
         employeeId = Integer.parseInt(new JWT(token).getClaim("id").asString());
@@ -69,7 +69,7 @@ public class OutgoingOrdersList extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if(error.networkResponse.statusCode == 403)
-                    orderDetailsHint.setText("Trenutno Vam nije dodijeljena niti jedna narudžba.");
+                    noOrdersView.setVisibility(View.VISIBLE);
                 else
                     Toast.makeText(getApplicationContext(), "Došlo je do neočekivane pogreške: " + error.toString(), Toast.LENGTH_LONG).show();
             }
