@@ -106,6 +106,7 @@ namespace WareMaster.Domain.Repositories
             {
                 var orderToEdit = context.Orders
                     .Include(order => order.ProductOrders)
+                    .Include(o => o.ProductOrders.Select(x => x.Product))
                     .Include(order => order.AssignedEmployee)
                     .SingleOrDefault(order => order.Id == editedOrder.Id);
 
@@ -125,6 +126,10 @@ namespace WareMaster.Domain.Repositories
                 }
                 else if (editedOrder.AssignedEmployee == null)
                     orderToEdit.AssignedEmployee = null;
+
+                if (editedOrder.Status == Status.Finished)
+                    foreach (var productOrder in orderToEdit.ProductOrders)
+                        productOrder.Product.Counter += productOrder.ProductQuantity;
 
                 orderToEdit.Status = editedOrder.Status;
                 orderToEdit.ProductOrders = editedOrder.ProductOrders;             
