@@ -5,6 +5,8 @@ Loadanje stvari malo po malo i prikazivanje spinnera dok se ne loadaju stvari (V
 Pripazit na pristup tuðim podacima (proširit sa get metoda i na edit i delete i ostale) (VUKA)
 Disableat pristup botunima uredi i otkaži kod narudžbi koje su završene (AJ)
 Media queryji, micanje menua nakon odjave (AJ)
+SMTP mailovi za ulazne narudžbe (ako ostane vremena)
+Maknit hack sa logina i implementirat uloge (ako ostane vremena)
 Ogranièit moguænosti editiranja zapisa (npr. ako je ulazna narudžba prihvaæena onemoguæit otkazivanje 
 ili onemoguæit promjenu imena zaposlenika bez njegovog pristanka)
 
@@ -12,7 +14,6 @@ MOBILNA:
 TO-DO:
 
 Dodavanje novih proizvoda
-Kompletna obrada izlaznih narudžbi (možda KREŠO)
 Dohvaæanje activity logova
 Stvaranje activity logova na svemu u mobilnoj
 
@@ -21,4 +22,5 @@ Login
 Registracija
 Skeniranje i editiranje postojeæih proizvoda
 Obrada ulaznih narudžbi
+Obrada izlaznih narudžbi
 
