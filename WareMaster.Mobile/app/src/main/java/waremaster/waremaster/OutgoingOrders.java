@@ -113,7 +113,7 @@ public class OutgoingOrders extends AppCompatActivity {
                 StringRequest finishOutgoingRequest = new StringRequest(Request.Method.POST, getString(R.string.base_url) + "/orders/finish",
                         new Response.Listener<String>() {
                             @Override
-                            public void onResponse(String order) {
+                            public void onResponse(String orderFinished) {
                                 Toast.makeText(getApplicationContext(), "Narudžba uspješno izvršena.", Toast.LENGTH_LONG).show();
                                 Intent goToOutgoingOrdersList = new Intent(view.getContext(), OutgoingOrdersList.class);
                                 goToOutgoingOrdersList.putExtra("waremasterToken", token);
