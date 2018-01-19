@@ -42,7 +42,7 @@ public class IncomingOrders extends AppCompatActivity {
     private EditText note;
     private JSONObject orderObject;
     private String token;
-    private int companyId;
+    private int companyId, employeeId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +56,7 @@ public class IncomingOrders extends AppCompatActivity {
         saveOrder.setEnabled(false);
         token = getIntent().getStringExtra("waremasterToken");
         companyId = Integer.parseInt(new JWT(token).getClaim("companyid").asString());
+        employeeId = Integer.parseInt(new JWT(token).getClaim("id").asString());
 
         scanOrder.setOnClickListener(new View.OnClickListener() {
             @Override

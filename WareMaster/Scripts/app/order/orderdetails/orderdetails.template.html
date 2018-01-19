@@ -24,8 +24,8 @@
                     </div>
                 </div>
             </div>
-            <div ng-show="order.Status!==2">Barkod: <barcode type="code128b" render="img" string="{{barcode}}"></barcode></div>
-            <div ng-show="order.Status===2">Bilješka zaposlenika: {{order.Note}}</div>            
+            <div ng-show="order.Type==0 && order.Status!==2">Barkod: <barcode type="code128b" render="img" string="{{barcode}}"></barcode></div>
+            <div ng-show="order.Status===2">Bilješka: {{order.Note}}</div>            
         </div>
         <div class="modal-footer">
             <div class="modal-buttons">
