@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Results;
+using Newtonsoft.Json.Linq;
 using WareMaster.Data.Models.Entities;
 using WareMaster.Domain.Repositories;
 
@@ -80,6 +81,17 @@ namespace WareMaster.Controllers
             if (ordersToGet == null || !ordersToGet.Any())
                 return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
             return Ok(ordersToGet);
+        }
+
+        [HttpPost]
+        [Route("finish")]
+        public IHttpActionResult FinishOutgoingOrder(JObject takenProducts)
+        {
+            var orderId = takenProducts["orderId"].ToObject<int>();
+            takenProducts["orderId"].Remove();
+            if(!_orderRepository.FinishOrder(orderId, takenProducts))
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+            return Ok(true);
         }
     }
 }

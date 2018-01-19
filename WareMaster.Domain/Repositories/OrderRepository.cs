@@ -8,6 +8,7 @@ using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.Entity.Migrations;
 using System.Diagnostics;
 using System.Security.Cryptography.X509Certificates;
+using Newtonsoft.Json.Linq;
 using WareMaster.Data.Models;
 using WareMaster.Data.Models.Entities;
 using Type = WareMaster.Data.Models.Entities.Type;
@@ -171,6 +172,43 @@ namespace WareMaster.Domain.Repositories
                                      .Where(order => order.AssignedEmployeeId == employeeId 
                                                      && order.Type == Type.Outgoing 
                                                      && order.Status != Status.Finished).ToList();
+            }
+        }
+
+        public bool FinishOrder(int orderId, JObject takenProducts)
+        {
+            using (var context = new WareMasterContext())
+            {
+                var orderToFinish = context.Orders.Include(order => order.ProductOrders)
+                                                  .Include(o => o.ProductOrders.Select(x => x.Product))
+                                                  .Include(order => order.AssignedEmployee)
+                                                  .SingleOrDefault(order => order.Id == orderId);
+                if (orderToFinish == null)
+                    return false;
+
+                orderToFinish.Note = "Narudžbu obradio: " + orderToFinish.AssignedEmployee.FirstName + 
+                                                         " " + orderToFinish.AssignedEmployee.LastName + Environment.NewLine;
+                var productsToCheck = orderToFinish.ProductOrders;
+                foreach (var takenProduct in takenProducts)
+                {
+                    var productOrder = orderToFinish.ProductOrders.SingleOrDefault(pOrder => pOrder.ProductId == int.Parse(takenProduct.Key));
+                    productsToCheck.Remove(productOrder);
+                    var numberOfTaken = takenProduct.Value.ToObject<int>();
+                    if (productOrder == null || numberOfTaken > productOrder.ProductQuantity || numberOfTaken < 0)
+                        return false;
+                    if (numberOfTaken < productOrder.ProductQuantity)
+                        orderToFinish.Note += "Uzeto je " + numberOfTaken + "/" + productOrder.ProductQuantity +
+                                              "proizvoda" + productOrder.Product.Name + Environment.NewLine;
+                }
+                foreach (var unsentProductOrder in productsToCheck)
+                        orderToFinish.Note += "Uzeto je 0" + "/" + unsentProductOrder.ProductQuantity +
+                                              "proizvoda" + unsentProductOrder.Product.Name + Environment.NewLine;
+
+                orderToFinish.Note += "Svi ostali proizvodi su dobro prikupljeni.";
+                orderToFinish.Status = Status.Finished;
+
+                context.SaveChanges();
+                return true;
             }
         }
     }

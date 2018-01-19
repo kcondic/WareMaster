@@ -60,6 +60,11 @@ public class OutgoingOrders extends AppCompatActivity {
         orderId = getIntent().getStringExtra("orderid");
 
         takenProducts = new JSONObject();
+        try {
+            takenProducts.put("orderId", orderId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         JsonObjectRequest getOrderRequest = new JsonObjectRequest(Request.Method.GET, getString(R.string.base_url) + "/orders/details?companyId="
                 + companyId + "&id=" + orderId, null,
@@ -99,6 +104,47 @@ public class OutgoingOrders extends AppCompatActivity {
                     ActivityCompat.requestPermissions(OutgoingOrders.this, new String[]{Manifest.permission.CAMERA}, 0);
                 else
                     scanNow(view);
+            }
+        });
+
+        saveOutgoingOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                StringRequest finishOutgoingRequest = new StringRequest(Request.Method.POST, getString(R.string.base_url) + "/orders/finish",
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String order) {
+                                Toast.makeText(getApplicationContext(), "Narudžba uspješno izvršena.", Toast.LENGTH_LONG).show();
+                                Intent goToOutgoingOrdersList = new Intent(view.getContext(), OutgoingOrdersList.class);
+                                goToOutgoingOrdersList.putExtra("waremasterToken", token);
+                                startActivity(goToOutgoingOrdersList);
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if(error.networkResponse.statusCode == 403)
+                            Toast.makeText(getApplicationContext(), "Neispravno obrađena narudžba. Zahtjev odbijen.", Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(getApplicationContext(), "Došlo je do neočekivane pogreške: " + error.networkResponse.statusCode + error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }){
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String>  authParams = new HashMap<>();
+
+                        authParams.put("Authorization", "Bearer " + token);
+                        return authParams;
+                    }
+                    @Override
+                    public byte[] getBody() throws AuthFailureError {
+                        return takenProducts.toString().getBytes();
+                    }
+                    @Override
+                    public String getBodyContentType() {
+                        return "application/json";
+                    }
+                };
+                RequestQueueSingleton.getInstance(getApplicationContext()).addToRequestQueue(finishOutgoingRequest);
             }
         });
     }
