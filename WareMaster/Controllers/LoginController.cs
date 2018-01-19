@@ -77,7 +77,46 @@ namespace WareMaster.Controllers
             var userName = userCredentials["username"].ToObject<string>();
             var password = userCredentials["password"].ToObject<string>();
 
-            var user = _userRepository.GetByUsername(userName);
+            var user = _userRepository.GetByUsername(userName, false);
+            if (user == null) return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.NotFound));
+
+            var areCredentialsValid = HashHelper.ValidatePassword(password, user.Password);
+            if (!areCredentialsValid) return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Unauthorized));
+
+            var issuer = ConfigurationManager.AppSettings["as:IssuerId"];
+            var audience = ConfigurationManager.AppSettings["as:AudienceId"];
+            var secret = ConfigurationManager.AppSettings["as:SecretToken"];
+            var span = DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc));
+            var timestamp = Math.Round(span.TotalSeconds);
+            var payload = new Dictionary<string, string>()
+            {
+                {"iss", issuer},
+                {"aud", audience},
+                {"exp", (timestamp + 28800).ToString()},
+                {"id", user.Id.ToString()},
+                {"companyid", user.CompanyId.ToString()},
+                {"companyname", _companyRepository.GetCompanyById(user.CompanyId).Name},
+                {"username", user.Username},
+                {"firstname", user.FirstName},
+                {"lastname", user.LastName},
+                {"role", user.Role.ToString()}
+            };
+
+            var token = JWT.Encode(payload, Encoding.UTF8.GetBytes(secret), JwsAlgorithm.HS256);
+            return Ok(token);
+        }
+
+        [HttpPost]
+        [Route("employeelogin")]
+        public IHttpActionResult EmployeeLogin(JObject userCredentials)
+        {
+            if (userCredentials["username"] == null || userCredentials["password"] == null)
+                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.NotFound));
+
+            var userName = userCredentials["username"].ToObject<string>();
+            var password = userCredentials["password"].ToObject<string>();
+
+            var user = _userRepository.GetByUsername(userName, true);
             if (user == null) return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.NotFound));
 
             var areCredentialsValid = HashHelper.ValidatePassword(password, user.Password);

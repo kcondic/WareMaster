@@ -192,7 +192,7 @@ namespace WareMaster.Domain.Repositories
                     return false;
 
                 orderToFinish.Note = "Narudžbu obradio: " + orderToFinish.AssignedEmployee.FirstName + 
-                                                         " " + orderToFinish.AssignedEmployee.LastName + Environment.NewLine;
+                                                         " " + orderToFinish.AssignedEmployee.LastName + "\n";
                 var productsToCheck = new List<ProductOrders>(orderToFinish.ProductOrders);
                 foreach (var takenProduct in takenProducts)
                 {
@@ -204,11 +204,11 @@ namespace WareMaster.Domain.Repositories
                     productOrder.Product.Counter -= numberOfTaken;
                     if (numberOfTaken < productOrder.ProductQuantity)
                         orderToFinish.Note += "Uzeto je " + numberOfTaken + "/" + productOrder.ProductQuantity +
-                                              "proizvoda" + productOrder.Product.Name + Environment.NewLine;
+                                              "proizvoda" + productOrder.Product.Name + "\n";
                 }
                 foreach (var unsentProductOrder in productsToCheck)
                         orderToFinish.Note += "Uzeto je 0" + "/" + unsentProductOrder.ProductQuantity +
-                                              "proizvoda" + unsentProductOrder.Product.Name + Environment.NewLine;
+                                              " proizvoda" + unsentProductOrder.Product.Name + "\n";
 
                 orderToFinish.Note += "Svi ostali proizvodi su dobro prikupljeni.";
                 orderToFinish.Status = Status.Finished;
