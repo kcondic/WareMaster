@@ -193,7 +193,7 @@ namespace WareMaster.Domain.Repositories
 
                 orderToFinish.Note = "Narudžbu obradio: " + orderToFinish.AssignedEmployee.FirstName + 
                                                          " " + orderToFinish.AssignedEmployee.LastName + Environment.NewLine;
-                var productsToCheck = orderToFinish.ProductOrders;
+                var productsToCheck = new List<ProductOrders>(orderToFinish.ProductOrders);
                 foreach (var takenProduct in takenProducts)
                 {
                     var productOrder = orderToFinish.ProductOrders.SingleOrDefault(pOrder => pOrder.ProductId == int.Parse(takenProduct.Key));
