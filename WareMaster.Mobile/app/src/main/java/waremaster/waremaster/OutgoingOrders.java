@@ -193,6 +193,8 @@ public class OutgoingOrders extends AppCompatActivity {
                            Toast.makeText(getApplicationContext(), "Ne možete uzeti više od tražene količine niti manje od 0.", Toast.LENGTH_LONG).show();
                         break;
                     }
+                    else
+                        Toast.makeText(getApplicationContext(), "Ne postoji proizvod s tim barkodom u narudžbi.", Toast.LENGTH_LONG).show();
                 }
             }
             else
