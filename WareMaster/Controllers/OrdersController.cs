@@ -87,8 +87,9 @@ namespace WareMaster.Controllers
         [Route("finish")]
         public IHttpActionResult FinishOutgoingOrder(JObject takenProducts)
         {
-            return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
             var orderId = takenProducts["orderId"].ToObject<int>();
+            return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+            
             takenProducts["orderId"].Remove();
             if(!_orderRepository.FinishOrder(orderId, takenProducts))
                 return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
