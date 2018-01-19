@@ -194,8 +194,9 @@ namespace WareMaster.Domain.Repositories
                     var productOrder = orderToFinish.ProductOrders.SingleOrDefault(pOrder => pOrder.ProductId == int.Parse(takenProduct.Key));
                     productsToCheck.Remove(productOrder);
                     var numberOfTaken = takenProduct.Value.ToObject<int>();
-                    if (productOrder == null || numberOfTaken > productOrder.ProductQuantity || numberOfTaken < 0)
+                    if (productOrder == null || numberOfTaken > productOrder.ProductQuantity || numberOfTaken < 0 || numberOfTaken > productOrder.Product.Counter)
                         return false;
+                    productOrder.Product.Counter -= numberOfTaken;
                     if (numberOfTaken < productOrder.ProductQuantity)
                         orderToFinish.Note += "Uzeto je " + numberOfTaken + "/" + productOrder.ProductQuantity +
                                               "proizvoda" + productOrder.Product.Name + Environment.NewLine;
