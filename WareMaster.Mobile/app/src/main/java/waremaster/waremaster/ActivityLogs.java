@@ -50,7 +50,7 @@ public class ActivityLogs extends AppCompatActivity {
                         for (int i = 0; i < activityLogs.length(); i++)
                         {
                             JSONObject activityLog = activityLogs.optJSONObject(i);
-                            listContents.add(activityLog.optString("TimeOfCreation") + " " + activityLog.optString("Text"));
+                            listContents.add(activityLog.optString("TimeOfActivity") + " " + activityLog.optString("Text"));
                         }
                         activityLogsList.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, listContents));
                     }

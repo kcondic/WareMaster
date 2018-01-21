@@ -1,8 +1,5 @@
-Popis taskova koje još moramo odradit, slobodno nadopišite neki i ako æete radit na nekome zapišite svoje ime pokraj:
-
 PRELOADER za stranicu (!!!)
 Loadanje stvari malo po malo i prikazivanje spinnera dok se ne loadaju stvari (VUKA)
-Pripazit na pristup tuðim podacima (proširit sa get metoda i na edit i delete i ostale) (VUKA)
 Disableat pristup botunima uredi i otkaži kod narudžbi koje su završene (AJ)
 Media queryji, micanje menua nakon odjave (AJ)
 SMTP mailovi za ulazne narudžbe (ako ostane vremena)
@@ -13,8 +10,7 @@ ili onemoguæit promjenu imena zaposlenika bez njegovog pristanka)
 MOBILNA:
 TO-DO:
 
-Dohvaæanje activity logova
-Stvaranje activity logova na svemu u mobilnoj
+GOTOVO
 
 NAPRAVLJENO:
 Login
@@ -22,4 +18,6 @@ Registracija
 Skeniranje i editiranje postojeæih proizvoda
 Obrada ulaznih narudžbi
 Obrada izlaznih narudžbi
+Stvaranje activity logova na svemu u mobilnoj
+Dohvaæanje activity logova
 
