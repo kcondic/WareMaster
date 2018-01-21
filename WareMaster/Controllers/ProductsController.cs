@@ -55,16 +55,19 @@ namespace WareMaster.Controllers
 
         [HttpGet]
         [Route("edit")]
-        public IHttpActionResult GetProduct(int id)
+        public IHttpActionResult GetProductToEdit(int id, int companyId)
         {
-            return Ok(_productRepository.GetProduct(id));
+            var product = _productRepository.GetProductDetails(id, companyId);
+            if (product != null)
+                return Ok(product);
+            return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Unauthorized));
         }
 
         [HttpGet]
         [Route("details")]
         public IHttpActionResult GetProductDetails(int id, int companyId)
         {
-            Product product = _productRepository.GetProductDetails(id, companyId);
+            var product = _productRepository.GetProductDetails(id, companyId);
             if (product != null)
                 return Ok(product);
             return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Unauthorized));

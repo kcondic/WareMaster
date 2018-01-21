@@ -13,11 +13,12 @@
             return $http.post('/api/suppliers/add', newSupplier);
         }
 
-        function getSupplierToEdit(id) {
+        function getSupplierToEdit(id, companyId) {
             return $http.get('api/suppliers/edit',
                 {
                     params: {
-                        id: id
+                        id: id,
+                        companyId: companyId
                     }
                 });
         }
