@@ -243,14 +243,87 @@
     background-color: white;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     border-radius: 2.5px;
-    flex-flow: row;
+    flex-flow: column;
     overflow: hidden;
     -ms-overflow-style: none;
 }
+/* DIZAJN OPISA STUPČASTOG GRAFA */
+#dashboard .bar-chart-description{
+    width: 100%;
+    height: 10%;
+    background-color: rgb(34,34,34);
+    border-bottom-right-radius: 2.5px;
+    border-top-right-radius: 2.5px;
+    color: white;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-around;
+}
 
-#dashboard .bar-chart-graph{
-    width: 75.5%;
+#dashboard .description-title{
+    font-size: 1em;
+}
+
+#dashboard .week-selection{
+    width: 21%;
     height: 100%;
+    display: flex;
+    position: relative;
+}
+
+#dashboard .selected-week{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    font-size: 1em;
+    cursor: pointer;
+    width: 100%;
+}
+
+#dashboard .selected-week i{
+    font-size: 0.55em;
+}
+
+#dashboard .week-selection:hover .selected-week{
+    background-color: rgb(57, 57, 57);
+}
+
+#dashboard .week-content{
+    display: none;
+    position: absolute;
+    background-color: rgb(249,249,249);
+    min-width: 100%;
+    box-shadow: 0px 8px 16px 4px rgba(0, 0, 0, 0.2);
+    z-index: 3;
+    color: black;
+    font-size: 16px;
+}
+
+#dashboard .week-selection:hover .week-content{
+    display: flex;
+    flex-flow: column;
+    top: 1.8em;
+}
+
+#dashboard .week-content .current-selection{
+    border-right: solid 4px steelblue;
+    cursor: pointer;
+}
+
+#dashboard .week-content .week{
+    padding: 2px;
+}
+
+#dashboard .week-content .week:not(.current-selection):hover{
+    cursor: pointer;
+    border-right: solid 4px lightsteelblue;
+}
+/* DIZAJN STUPČASTOG GRAFA */
+#dashboard .bar-chart-graph{
+    width: 100%;
+    height: 90%;
     border-bottom-left-radius: 2.5px;
     border-top-left-radius: 2.5px;
 }
@@ -269,7 +342,20 @@
 }
 
 #dashboard .txt-zero {
-    transform: translateY(25.8em) translateX(19.5px);
+    transform: translateY(10em) translateX(19.5px);
+}
+
+#dashboard .txt-twenty-five{
+    transform: translateY(8em) translateX(19.5px);
+}
+#dashboard .txt-fifty{
+    transform: translateY(6em) translateX(19.5px);
+}
+#dashboard .txt-seventy-five{
+    transform: translateY(4em) translateX(19.5px);
+}
+#dashboard .txt-hundred{
+    transform: translateY(2em) translateX(19.5px);
 }
 
 #dashboard .tspan-svg {
@@ -279,15 +365,6 @@
 #dashboard .path-svg {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     transform: translateY(0em);
-}
-
-#dashboard .bar-chart-description{
-    width: 24.5%;
-    height: 100%;
-    background-color: rgb(34,34,34);
-    border-bottom-right-radius: 2.5px;
-    border-top-right-radius: 2.5px;
-    color: white;
 }
 
 /* DESNI STUPAC */
@@ -492,5 +569,39 @@
     #dashboard .activity-header{
         font-size: smaller;
         height: 7%;
+    }
+}
+
+@media screen and (max-width: 1270px) and (max-height: 620px){
+    #dashboard .activity-header{
+        font-size: medium;
+        height: 7%;
+    }
+
+    #dashboard .current-numbers-container ul{
+        overflow-y: auto;
+        overflow-x: hidden;
+        -ms-overflow-style: auto;
+        overflow-wrap: normal;
+    }
+
+    #dashboard .current-numbers-container li{
+        font-size: 0.75em;
+    }
+
+    #dashboard .current-numbers-container li span{
+        font-size: 3.2em;
+    }
+
+    #dashboard .percent-circle-header div{
+        font-size: small;
+    }
+
+    #dashboard .circle-description .circle-text{
+        font-size: small;
+    }
+
+    #dashboard .button-container button{
+        font-size: medium;
     }
 }
