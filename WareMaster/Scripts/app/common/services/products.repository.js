@@ -13,11 +13,12 @@
             return $http.post('/api/products/add', newProduct);
         }
 
-        function getProductToEdit(id) {
+        function getProductToEdit(id, companyId) {
             return $http.get('api/products/edit',
                 {
                     params: {
-                        id: id
+                        id: id,
+                        companyId: companyId
                     }
                 });
         }

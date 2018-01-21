@@ -14,11 +14,12 @@
             return $http.post('/api/employees/add', newEmployee);
         }
 
-        function getEmployeeToEdit(id) {
+        function getEmployeeToEdit(id, companyId) {
             return $http.get('api/employees/edit', 
                 {
                 params: {
-                    id: id
+                    id: id,
+                    companyId: companyId
                 }
             });
         }

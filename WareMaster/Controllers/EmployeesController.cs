@@ -47,9 +47,12 @@ namespace WareMaster.Controllers
 
         [HttpGet]
         [Route("edit")]
-        public IHttpActionResult GetEmployeeToEdit(int id)
+        public IHttpActionResult GetEmployeeToEdit(int id, int companyId)
         {
-            return Ok(_employeeRepository.GetUser(id));
+            var user = _employeeRepository.GetUserDetails(id, companyId);
+            if (user != null)
+                return Ok(user);
+            return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Unauthorized));
         }
 
         [HttpGet]

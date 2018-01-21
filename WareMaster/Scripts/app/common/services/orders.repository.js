@@ -8,11 +8,12 @@
             });
         }
 
-        function getOrderToEdit(id) {
+        function getOrderToEdit(id, companyId) {
             return $http.get('api/orders/edit',
                 {
                     params: {
-                        id: id
+                        id: id,
+                        companyId: companyId
                     }                       
                 });
         }

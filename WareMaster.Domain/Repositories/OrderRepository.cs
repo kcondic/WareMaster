@@ -47,19 +47,6 @@ namespace WareMaster.Domain.Repositories
                                             order.Status == Status.Finished).ToList();
         }
 
-        public Order GetOrderDetails(int orderId)
-        {
-            using (var context = new WareMasterContext())
-                return context.Orders
-                    .Include(order => order.AssignedEmployee)
-                    .Include(order => order.ProductOrders)
-                    .Include(order => order.ProductOrders.Select(x => x.Product))
-                    .Include(order => order.Company)
-                    .Include(order => order.Supplier)
-                    .Include(order => order.Supplier.Products)
-                    .SingleOrDefault(order => order.Id == orderId);
-        }
-
         public Order GetOrderDetails(int orderId, int companyId)
         {
             using (var context = new WareMasterContext())
