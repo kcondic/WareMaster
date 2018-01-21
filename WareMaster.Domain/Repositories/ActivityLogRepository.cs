@@ -18,6 +18,14 @@ namespace WareMaster.Domain.Repositories
                                            .ToList();
         }
 
+        public List<ActivityLog> GetActivityLogsForEmployee(int employeeId)
+        {
+            using (var context = new WareMasterContext())
+                return context.ActivityLogs.Where(log => log.UserId == employeeId)
+                    .OrderByDescending(order => order.TimeOfActivity)
+                    .ToList();
+        }
+
         public void AddActivityLog(ActivityLog activityLogToAdd)
         {
             using (var context = new WareMasterContext())

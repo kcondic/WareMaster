@@ -26,6 +26,13 @@ namespace WareMaster.Controllers
             return Ok(_activityLogRepository.GetAllActivityLogs(companyId));
         }
 
+        [HttpGet]
+        [Route("getspecific")]
+        public IHttpActionResult GetActivityLogsForEmployee(int employeeId)
+        {
+            return Ok(_activityLogRepository.GetActivityLogsForEmployee(employeeId));
+        }
+
         [HttpPost]
         [Route("add")]
         public IHttpActionResult AddActivityLog(ActivityLog activityLogToAdd)
