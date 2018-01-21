@@ -25,7 +25,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-content-row barcode-row" ng-show="order.Status!==2">
+            <div class="modal-content-row barcode-row" ng-show="order.Type==0 && order.Status!==2">
                 <div class="modal-row-element">Barkod: <barcode type="code128b" render="img" string="{{barcode}}" class="modal-barcode"></barcode></div>
             </div>
             <div class="modal-content-row note-row" ng-show="order.Status===2">
