@@ -175,3 +175,20 @@ header li .icon-button{
     transform: rotate(45deg);
     margin-top: -6px;
 }
+
+@media screen and (max-width: 710px){
+    .user-info{
+        display: none;
+    }
+
+    header li .icon-button{
+        padding-left: 0.3em;
+        padding-right: 0.2em;
+    }
+}
+
+@media screen and (max-width: 319px){
+    body{
+        display: none;
+    }
+}

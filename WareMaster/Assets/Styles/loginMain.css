@@ -5,69 +5,84 @@
     z-index: 10;
     position: relative;
     background-color: rgb(249,249,249);
-    justify-content: space-around;
+    justify-content: center;
+    display: flex;
 }
 /* GLAVNI STUPAC SA SADRŽAJ */
 #signin .signin-form-column{
-    display: block;
-    margin: auto;
-    width: 50%;
+    min-width: 50%;
+    width: auto;
     height: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
 }
 /* DIO KOJI SADRŽI LOGO */
 #signin .signin-logo-container{
-    width: 70%;
-    height: 50%;
-    display: block;
-    margin: auto;
-    overflow: hidden;
+    height: 45%;
+    max-height: 300px;
+    min-width: 65%;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #signin .signin-logo-container img{
-    display: block;
-    margin: auto;
-    margin-top: 15px;
+    max-width: 90%;
+    width: auto;
+    height: auto;
+    max-height: 90%;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
     border-radius: 50%;
 }
 
 /* DIO S FORMAMA ZA UNOS */
 #signin .signin-form-container{
-    height: 40%;
+    height: 42%;
+    max-height: 280px;
     width: 60%;
-    display: block;
-    margin: auto;
-    overflow: hidden;
+    max-width: 500px;
     background-color: white;
-    border-radius: 2.5px;
+    border-radius: 3px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
     text-align: center;
+    display: flex;
+    flex-flow: column;
 }
 
 #signin .signin-form-header{
-    height: 40px;
+    height: 15%;
     width: 100%;
     background-color: rgb(34,34,34);
     color: white;
     font-size: 32px;
-    padding-bottom: 5px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 }
 
 #signin .signin-form-content{
-    margin-top: 30px;
-    margin-bottom: 15px;
+    height: 85%;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: stretch;
+    justify-content: center;
 }
 
 #signin .signin-form-content .input-box{
-    display: block;
-    margin-top: 10px;
+    width: 100%;
+    height: 20%;
 }
 
 #signin .signin-form-content .input-box input{
     font-size: 19px;
     font-weight: 400;
     font-family: 'Cormorant Infant', serif, sans-serif;
-    width: 60%;
+    max-width: 80%;
+    min-width: 60%;
+    width: auto;
     padding: 5px 2px;
     border-radius: 3px;
     border: solid 1px rgb(34, 34, 34);
@@ -80,16 +95,17 @@
 }
 
 #signin .signin-button{
-    display: block;
-    margin: auto;
-    width: 40%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #signin .signin-button button{
     font-size: 19px;
     font-weight: 400;
     font-family: 'Cormorant Infant', serif, sans-serif;
-    width: 100%;
+    width: 40%;
     padding: 5px 2px;
     border-radius: 5px;
     background-color: rgb(34,34,34);

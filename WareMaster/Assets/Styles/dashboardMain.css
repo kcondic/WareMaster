@@ -195,25 +195,29 @@
     background-color: white;
     box-shadow: 0px 5px 16px 0px rgba(0, 0, 0, 0.2);
     border-radius: 2.5px;
+    font-size: 12px;
 }
 
 #dashboard .current-numbers-container ul{
     list-style: none;
-    display: inline-block;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
+    height: 100%;
 }
 
 #dashboard .current-numbers-container li{
     display: block;
-    font-size: 14px;
     text-align: center;
-    margin-top: 4px;
     text-transform: uppercase;
     color: black;
+    font-size: 120%;
 }
 
 #dashboard .current-numbers-container li span{
-    font-size: 34px;
+    font-size: 260%;
     border-bottom: dashed 1px darkslategrey;
     color: steelblue;
 }
@@ -239,9 +243,52 @@
     background-color: white;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     border-radius: 2.5px;
+    flex-flow: row;
+    overflow: hidden;
+    -ms-overflow-style: none;
 }
 
+#dashboard .bar-chart-graph{
+    width: 75.5%;
+    height: 100%;
+    border-bottom-left-radius: 2.5px;
+    border-top-left-radius: 2.5px;
+}
 
+#dashboard .bar-chart-grid{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#dashboard .text-svg {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    font-family: sans-serif;
+    font-weight: normal;
+    text-anchor: middle;
+}
+
+#dashboard .txt-zero {
+    transform: translateY(25.8em) translateX(19.5px);
+}
+
+#dashboard .tspan-svg {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+#dashboard .path-svg {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    transform: translateY(0em);
+}
+
+#dashboard .bar-chart-description{
+    width: 24.5%;
+    height: 100%;
+    background-color: rgb(34,34,34);
+    border-bottom-right-radius: 2.5px;
+    border-top-right-radius: 2.5px;
+    color: white;
+}
 
 /* DESNI STUPAC */
 #dashboard .right-column{
@@ -341,5 +388,109 @@
 
     .activity-content{
         font-size: 1.2em;
+    }
+}
+
+@media screen and (orientation: portrait){
+    #dashboard .left-column{
+        flex-flow: column;
+        min-height: 100%;
+        overflow: auto;
+        width: 65%;
+    }
+
+    #dashboard .button-container{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        height: 25%;
+        padding: 5px 0px;
+        justify-content: space-around;
+    }
+
+    #dashboard .button-container button{
+        min-width: 40%;
+        width: auto;
+        font-size: 1em;
+        height: 40%;
+        margin: 2px 0px;
+    }
+
+    #dashboard .button-container button:first-of-type{
+        margin: 2px 0px;
+    }
+
+    #dashboard .useful-info-container{
+        width: 100%;
+        min-height: 75%;
+        overflow: visible;
+    }
+
+    #dashboard .percent-circles-container{
+        display: flex;
+        flex-flow: column;
+        height: auto;
+        width: 100%;
+        align-items: center;
+        justify-content: space-around;
+        padding-bottom: 8px;
+    }
+
+    #dashboard .left-circle,
+    #dashboard .right-circle{
+        margin: 0;
+        margin-bottom: 8px;
+        padding: 0;
+        width: 90%;
+        height: 60%;
+        font-size: 1.2em;
+    }
+
+    #dashboard .current-numbers-container{
+        width: 50%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+    }
+
+    #dashboard .current-numbers-container ul{
+        display: flex;
+        flex-flow: column;
+        height: auto;
+        align-items: center;
+        justify-content: center;
+        width: 95%;
+        padding: 15px;
+    }
+
+    #dashboard .current-numbers-container li{
+        font-size: 1em;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 5%;
+    }
+
+    #dashboard .current-numbers-container li span{
+        font-size: 3.5em;
+    }
+
+    #dashboard .orders-bar-chart-container{
+        width: 100%;
+        height: 50%;
+        justify-content: center;
+    }
+
+    #dashboard .right-column{
+        width: 35%;
+    }
+
+    #dashboard .activity-header{
+        font-size: smaller;
+        height: 7%;
     }
 }
