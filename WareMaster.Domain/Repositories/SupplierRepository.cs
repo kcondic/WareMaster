@@ -21,15 +21,6 @@ namespace WareMaster.Domain.Repositories
             }
         }
 
-        public Supplier GetSupplier(int supplierId)
-        {
-            using (var context = new WareMasterContext())
-                return context.Suppliers
-                   .Include(s => s.Products)
-                   .SingleOrDefault(s => s.Id == supplierId);
-
-        }
-
         public Supplier GetSupplierDetails(int supplierId, int companyId)
         {
             using (var context = new WareMasterContext())

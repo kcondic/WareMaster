@@ -13,15 +13,6 @@
             return $http.post('/api/products/add', newProduct);
         }
 
-        function getProductToEdit(id) {
-            return $http.get('api/products/edit',
-                {
-                    params: {
-                        id: id
-                    }
-                });
-        }
-
         function getProductDetails(id, companyId) {
             return $http.get('api/products/details',
                 {
@@ -48,7 +39,6 @@
         return {
             getAllProducts: getAllProducts,
             addProduct: addProduct,
-            getProductToEdit: getProductToEdit,
             getProductDetails: getProductDetails,
             editProduct: editProduct,
             deleteProduct: deleteProduct

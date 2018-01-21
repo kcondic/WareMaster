@@ -1,18 +1,13 @@
 package waremaster.waremaster;
 
 import android.content.Context;
-import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 import java.util.ArrayList;
-import waremaster.waremaster.MinMaxFilter;
-import waremaster.waremaster.R;
 
 
 public class OutgoingProductsListAdapter extends BaseAdapter implements ListAdapter {
@@ -36,7 +31,7 @@ public class OutgoingProductsListAdapter extends BaseAdapter implements ListAdap
 
     @Override
     public long getItemId(int pos) {
-        return 0;
+        return pos;
         //just return 0 if your list items do not have an Id variable.
     }
 
@@ -52,9 +47,8 @@ public class OutgoingProductsListAdapter extends BaseAdapter implements ListAdap
         TextView productName = (TextView)view.findViewById(R.id.productNameView);
         productName.setText(list.get(position));
 
-        EditText numberTaken = (EditText)view.findViewById(R.id.numberOfTakenEditText);
-        numberTaken.setText("0");
-
         return view;
     }
+
+
 }

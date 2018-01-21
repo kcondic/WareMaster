@@ -3,7 +3,7 @@
 
         const companyId = loginRepository.getCompanyId();
 
-        suppliersRepository.getSupplierToEdit($stateParams.id).then(function (supplier) {
+        suppliersRepository.getSupplierDetails($stateParams.id, companyId).then(function (supplier) {
             $scope.supplierToEdit = supplier.data;
             $scope.name = $scope.supplierToEdit.Name;
             $scope.products = $scope.supplierToEdit.Products;
@@ -13,6 +13,8 @@
                     return ($scope.products.findIndex(x=> x.Id === el.Id) === -1);
                 });
             });
+        }, function () {
+            console.log('Nemate dozvolu za pristup tim podacima');
         });
 
         $scope.selectProduct = function (product) {

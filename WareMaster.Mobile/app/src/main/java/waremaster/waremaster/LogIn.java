@@ -39,7 +39,7 @@ public class LogIn extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                StringRequest loginRequest = new StringRequest(Request.Method.POST, getString(R.string.base_url) + "/login",
+                StringRequest loginRequest = new StringRequest(Request.Method.POST, getString(R.string.base_url) + "/employeelogin",
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String token) {

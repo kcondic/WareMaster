@@ -60,11 +60,13 @@ namespace WareMaster.Domain.Repositories
             }
         }
 
-        public User GetByUsername(string username)
+        public User GetByUsername(string username, bool isEmployeeLogin)
         {
             using (var context = new WareMasterContext())
-                return context.Users.SingleOrDefault(user => 
-                user.Username == username);
+                if(isEmployeeLogin)
+                    return context.Users.SingleOrDefault(user => user.Username == username && user.Role == Role.Employee);
+                else
+                    return context.Users.SingleOrDefault(user => user.Username == username && user.Role == Role.Manager);
         }
 
         public int AddUser(User userToAdd)

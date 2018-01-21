@@ -52,15 +52,29 @@ public class OutgoingOrdersList extends AppCompatActivity {
                         for (int i = 0; i < assignedOrders.length(); i++)
                         {
                             JSONObject assignedOrder = assignedOrders.optJSONObject(i);
-                            listContents.add(assignedOrder.optString("TimeOfCreation"));
+                            if(assignedOrder.optString("Status").equals("0"))
+                                listContents.add("Planirana: " + assignedOrder.optString("TimeOfCreation"));
+                            if(assignedOrder.optString("Status").equals("1"))
+                                listContents.add("U tijeku: " + assignedOrder.optString("TimeOfCreation"));
                         }
                         outgoingOrdersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                Intent goToOrderDetails = new Intent(view.getContext(), OutgoingOrdersDetails.class);
-                                goToOrderDetails.putExtra("waremasterToken", token);
-                                goToOrderDetails.putExtra("order", assignedOrders.optJSONObject(i).toString());
-                                startActivity(goToOrderDetails);
+                                JSONObject order = assignedOrders.optJSONObject(i);
+                                if(order.optString("Status").equals("1"))
+                                {
+                                    Intent goWorkOnOrder = new Intent(view.getContext(), OutgoingOrders.class);
+                                    goWorkOnOrder.putExtra("waremasterToken", token);
+                                    goWorkOnOrder.putExtra("orderid", order.optString("Id"));
+                                    startActivity(goWorkOnOrder);
+                                }
+                                else
+                                {
+                                    Intent goToOrderDetails = new Intent(view.getContext(), OutgoingOrdersDetails.class);
+                                    goToOrderDetails.putExtra("waremasterToken", token);
+                                    goToOrderDetails.putExtra("order", assignedOrders.optJSONObject(i).toString());
+                                    startActivity(goToOrderDetails);
+                                }
                             }
                         });
                         outgoingOrdersList.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, listContents));

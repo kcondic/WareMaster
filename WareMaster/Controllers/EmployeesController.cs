@@ -46,13 +46,6 @@ namespace WareMaster.Controllers
         }
 
         [HttpGet]
-        [Route("edit")]
-        public IHttpActionResult GetEmployeeToEdit(int id)
-        {
-            return Ok(_employeeRepository.GetUser(id));
-        }
-
-        [HttpGet]
         [Route("details")]
         public IHttpActionResult GetEmployeeDetails(int id, int companyId)
         {
