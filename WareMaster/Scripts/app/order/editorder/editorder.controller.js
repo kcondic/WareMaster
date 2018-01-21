@@ -5,7 +5,7 @@
 
         const companyId = loginRepository.getCompanyId();
 
-        ordersRepository.getOrderToEdit($stateParams.id, companyId).then(function (order) {
+        ordersRepository.getOrderDetails($stateParams.id, companyId).then(function (order) {
             $scope.order = order.data;
 
             $scope.selectedEmployee = $scope.order.AssignedEmployee;
@@ -45,12 +45,12 @@
                     $scope.allEmployees.splice($scope.allEmployees.map(function(val){return val.Id}).indexOf($scope.selectedEmployee.Id), 1);
                 });
         }, function () {
-            console.log("Nemate dozvolu za pristup tim podacima");
+            console.log('Nemate dozvolu za pristup tim podacima');
         });
 
         $scope.selectEmployee = function (employee) {
             if ($scope.selectedEmployee !== null) {
-                alert("Već je odabran radnik");
+                alert('Već je odabran radnik');
                 return;
             }
             $scope.selectedEmployee = employee;
@@ -76,7 +76,7 @@
 
         $scope.editOrder = function () {
             if ($scope.selectedProducts.length === 0) {
-                alert("Morate naručiti barem jedan proizvod");
+                alert('Morate naručiti barem jedan proizvod');
                 return;
             }
 

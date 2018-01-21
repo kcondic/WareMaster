@@ -37,16 +37,6 @@ namespace WareMaster.Controllers
         }
 
         [HttpGet]
-        [Route("edit")]
-        public IHttpActionResult GetSupplierToEdit(int id, int companyId)
-        {
-            var supplier = _supplierRepository.GetSupplierDetails(id, companyId);
-            if (supplier != null)
-                return Ok(supplier);
-            return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Unauthorized));
-        }
-
-        [HttpGet]
         [Route("details")]
         public IHttpActionResult GetSupplierDetails(int id, int companyId)
         {

@@ -3,7 +3,7 @@
 
         const companyId = loginRepository.getCompanyId();
 
-        productsRepository.getProductToEdit($stateParams.id, companyId).then(function (product) {
+        productsRepository.getProductDetails($stateParams.id, companyId).then(function (product) {
             $scope.productToEdit = product.data;
             $scope.name = $scope.productToEdit.Name;
             $scope.quantity = $scope.productToEdit.Counter;

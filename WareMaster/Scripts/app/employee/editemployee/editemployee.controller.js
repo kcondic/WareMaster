@@ -3,7 +3,7 @@
 
         const companyId = loginRepository.getCompanyId();
 
-        employeesRepository.getEmployeeToEdit($stateParams.id, companyId).then(function(employee) {
+        employeesRepository.getEmployeeDetails($stateParams.id, companyId).then(function(employee) {
             $scope.employeeToEdit = employee.data;
             $scope.firstName = $scope.employeeToEdit.FirstName;
             $scope.lastName = $scope.employeeToEdit.LastName;

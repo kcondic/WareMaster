@@ -8,16 +8,6 @@
             });
         }
 
-        function getOrderToEdit(id, companyId) {
-            return $http.get('api/orders/edit',
-                {
-                    params: {
-                        id: id,
-                        companyId: companyId
-                    }                       
-                });
-        }
-
         function getOrderDetails(id, companyId) {
             return $http.get('api/orders/details',
                 {
@@ -48,7 +38,6 @@
         return {
             getAllOrders: getAllOrders,
             addNewOrder: addNewOrder,
-            getOrderToEdit: getOrderToEdit,
             getOrderDetails:getOrderDetails,
             editOrder: editOrder,
             deleteOrder: deleteOrder

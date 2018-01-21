@@ -14,15 +14,6 @@
             return $http.post('/api/employees/add', newEmployee);
         }
 
-        function getEmployeeToEdit(id, companyId) {
-            return $http.get('api/employees/edit', 
-                {
-                params: {
-                    id: id,
-                    companyId: companyId
-                }
-            });
-        }
         function getEmployeeDetails(id, companyId) {
             return $http.get('api/employees/details',
                 {
@@ -49,7 +40,6 @@
         return {
             getAllEmployees: getAllEmployees,
             addEmployee: addEmployee,
-            getEmployeeToEdit: getEmployeeToEdit,
             getEmployeeDetails: getEmployeeDetails,
             editEmployee: editEmployee,
             deleteEmployee: deleteEmployee

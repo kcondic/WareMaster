@@ -37,16 +37,6 @@ namespace WareMaster.Controllers
         }
 
         [HttpGet]
-        [Route("edit")]
-        public IHttpActionResult GetOrderToEdit(int id, int companyId)
-        {
-            var order = _orderRepository.GetOrderDetails(id, companyId);
-            if (order != null)
-                return Ok(order);
-            return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Unauthorized));
-        }
-
-        [HttpGet]
         [Route("details")]
         public IHttpActionResult GetOrderDetails(int id, int companyId)
         {
