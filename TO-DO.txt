@@ -13,7 +13,6 @@ ili onemoguæit promjenu imena zaposlenika bez njegovog pristanka)
 MOBILNA:
 TO-DO:
 
-Dodavanje novih proizvoda
 Dohvaæanje activity logova
 Stvaranje activity logova na svemu u mobilnoj
 

@@ -29,7 +29,9 @@ public class OutgoingOrdersDetails extends AppCompatActivity {
 
     private ListView productsList;
     private Button startWorkOnOutgoing;
-    private String token;
+    private JWT decoded;
+    private String token, firstName, lastName;
+    private int companyId, employeeId;
     private JSONObject order;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,13 @@ public class OutgoingOrdersDetails extends AppCompatActivity {
         startWorkOnOutgoing = (Button)findViewById(R.id.startWorkOnOutgoingButton);
 
         token = getIntent().getStringExtra("waremasterToken");
+        decoded = new JWT(token);
+        companyId = Integer.parseInt(decoded.getClaim("companyid").asString());
+        employeeId = Integer.parseInt(decoded.getClaim("id").asString());
+        firstName = decoded.getClaim("firstname").asString();
+        lastName = decoded.getClaim("lastname").asString();
+
+
         try {
             order = new JSONObject(getIntent().getStringExtra("order"));
         } catch (JSONException e) {
@@ -84,6 +93,8 @@ public class OutgoingOrdersDetails extends AppCompatActivity {
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String orderResponse) {
+                                    AddActivityLog.Add(employeeId, companyId,
+                                            firstName + " " + lastName + " (Zaposlenik) je započeo s radom na izlaznoj narudžbi.", token, getApplicationContext());
                                     Intent goWorkOnOrder = new Intent(view.getContext(), OutgoingOrders.class);
                                     goWorkOnOrder.putExtra("waremasterToken", token);
                                     goWorkOnOrder.putExtra("orderid", order.optString("Id"));
@@ -92,7 +103,7 @@ public class OutgoingOrdersDetails extends AppCompatActivity {
                             }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(getApplicationContext(), "Došlo je do neočekivane pogreške: " + error.networkResponse.statusCode + error.toString(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Došlo je do neočekivane pogreške: " + error.toString(), Toast.LENGTH_LONG).show();
                         }
                     }){
                         @Override

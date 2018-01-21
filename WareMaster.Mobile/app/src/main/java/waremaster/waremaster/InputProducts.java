@@ -41,8 +41,9 @@ public class InputProducts extends AppCompatActivity {
     private TextView productName;
     private EditText barcode, quantity;
     private JSONObject productObject;
-    private String token;
-    int companyId;
+    private JWT decoded;
+    private String token, firstName, lastName;
+    int companyId, employeeId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +58,12 @@ public class InputProducts extends AppCompatActivity {
 
         saveProduct.setEnabled(false);
         token = getIntent().getStringExtra("waremasterToken");
-        companyId = Integer.parseInt(new JWT(token).getClaim("companyid").asString());
+        decoded = new JWT(token);
+        companyId = Integer.parseInt(decoded.getClaim("companyid").asString());
+        employeeId = Integer.parseInt(decoded.getClaim("id").asString());
+        firstName = decoded.getClaim("firstname").asString();
+        lastName = decoded.getClaim("lastname").asString();
+
         scanProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,6 +87,9 @@ public class InputProducts extends AppCompatActivity {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String product) {
+                                AddActivityLog.Add(employeeId, companyId,
+                                        firstName + " " + lastName + " (Zaposlenik) je uredio proizvod " +
+                                         productName.getText().toString(), token, getApplicationContext());
                                 productName.setText("");
                                 barcode.setText("");
                                 quantity.setText("");

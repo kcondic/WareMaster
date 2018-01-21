@@ -40,9 +40,10 @@ public class OutgoingOrders extends AppCompatActivity {
 
     private ListView productsWithInputsList;
     private Button saveOutgoingOrder, scanProduct;
+    private JWT decoded;
     private String token;
-    private int companyId;
-    private String orderId;
+    private int companyId, employeeId;
+    private String orderId, firstName, lastName;
     private JSONArray productOrders;
     private OutgoingProductsListAdapter adapter;
     private JSONObject takenProducts;
@@ -56,7 +57,11 @@ public class OutgoingOrders extends AppCompatActivity {
         scanProduct = (Button)findViewById(R.id.scanOutgoingProductButton);
 
         token = getIntent().getStringExtra("waremasterToken");
-        companyId = Integer.parseInt(new JWT(token).getClaim("companyid").asString());
+        decoded = new JWT(token);
+        companyId = Integer.parseInt(decoded.getClaim("companyid").asString());
+        employeeId = Integer.parseInt(decoded.getClaim("id").asString());
+        firstName = decoded.getClaim("firstname").asString();
+        lastName = decoded.getClaim("lastname").asString();
         orderId = getIntent().getStringExtra("orderid");
 
         takenProducts = new JSONObject();
@@ -115,6 +120,8 @@ public class OutgoingOrders extends AppCompatActivity {
                             @Override
                             public void onResponse(String orderFinished) {
                                 Toast.makeText(getApplicationContext(), "Narudžba uspješno izvršena.", Toast.LENGTH_LONG).show();
+                                AddActivityLog.Add(employeeId, companyId,
+                                        firstName + " " + lastName + " (Zaposlenik) je obradio izlaznu narudžbu.", token, getApplicationContext());
                                 Intent goToOutgoingOrdersList = new Intent(view.getContext(), OutgoingOrdersList.class);
                                 goToOutgoingOrdersList.putExtra("waremasterToken", token);
                                 startActivity(goToOutgoingOrdersList);
