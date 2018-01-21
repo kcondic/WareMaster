@@ -37,7 +37,7 @@ import java.util.Map;
 
 public class InputProducts extends AppCompatActivity {
 
-    private Button addNewProduct, scanProduct, saveProduct;
+    private Button scanProduct, saveProduct;
     private TextView productName;
     private EditText barcode, quantity;
     private JSONObject productObject;
@@ -49,7 +49,6 @@ public class InputProducts extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_products);
 
-        addNewProduct = (Button)findViewById(R.id.addNewProductButton);
         scanProduct = (Button)findViewById(R.id.scanButton);
         saveProduct = (Button)findViewById(R.id.saveButton);
         productName = (TextView)findViewById(R.id.productNameView);
