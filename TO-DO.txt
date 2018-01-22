@@ -1,11 +1,8 @@
-PRELOADER za stranicu (!!!)
-Loadanje stvari malo po malo i prikazivanje spinnera dok se ne loadaju stvari (VUKA)
-Disableat pristup botunima uredi i otkaži kod narudžbi koje su završene (AJ)
-Media queryji, micanje menua nakon odjave (AJ)
+PRELOADER za stranicu (!!!) (VUKA)
+Loadanje malo po malo, searchanje, poredak pri izlistu (KREŠO)
 SMTP mailovi za ulazne narudžbe (ako ostane vremena)
 Maknit hack sa logina i implementirat uloge (ako ostane vremena)
-Ogranièit moguænosti editiranja zapisa (npr. ako je ulazna narudžba prihvaæena onemoguæit otkazivanje 
-ili onemoguæit promjenu imena zaposlenika bez njegovog pristanka)
+
 
 MOBILNA:
 TO-DO:
