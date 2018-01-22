@@ -85,7 +85,7 @@
 
 .order-table-container{
     width: 100%;
-    height: 100%;
+    height: 82%;
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -94,6 +94,7 @@
 .order-table{
     width: 90%;
     height: 90%;
+    max-height: 90%;
     border-radius: 3px;
     border: steelblue solid 1px;
     overflow-x: hidden;

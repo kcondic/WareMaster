@@ -259,6 +259,7 @@
     flex-flow: row;
     align-items: center;
     justify-content: space-around;
+    font-size: 16px;
 }
 
 #dashboard .description-title{
@@ -326,6 +327,9 @@
     height: 90%;
     border-bottom-left-radius: 2.5px;
     border-top-left-radius: 2.5px;
+    overflow: auto;
+    -ms-overflow-style: auto;
+    font-size: 16px;
 }
 
 #dashboard .bar-chart-grid{
@@ -336,13 +340,10 @@
 
 #dashboard .text-svg {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    font-family: sans-serif;
+    font-family: inherit;
     font-weight: normal;
     text-anchor: middle;
-}
-
-#dashboard .txt-zero {
-    transform: translateY(10em) translateX(19.5px);
+    font-size: 1.1em;
 }
 
 #dashboard .txt-twenty-five{
@@ -364,7 +365,6 @@
 
 #dashboard .path-svg {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    transform: translateY(0em);
 }
 
 /* DESNI STUPAC */
