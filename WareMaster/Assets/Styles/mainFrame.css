@@ -212,6 +212,10 @@
     justify-content: space-around;
 }
 
+.order-row{
+    cursor: pointer;
+}
+
 .row-element{
     height: 100%;
     width: 25.3%;
@@ -295,17 +299,26 @@
 }
 /* SNACKBAR DESIGN*/
 .snackbar {
-    min-width: 250px;
-    background-color: rgba(34,34,34, 0.92);
-    color: white;
+    width: 100%;
     text-align: center;
-    font-size: 14.45px;
-    border-radius: 2px;
+    font-size: 16px;
     padding: 16px;
     position: fixed;
-    bottom: 20px;
-    margin-left: 30%;
+    bottom: 10px;
     z-index: 10;
     opacity: 0;
     animation: fadeinout 8s linear 0s forwards normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.snackbar-content{
+    width: auto;
+    height: 100%;
+    padding: 8px 16px;
+    opacity: 0.8;
+    background-color: rgba(34,34,34, 0.92);
+    color: white;
+    border-radius: 2px;
 }

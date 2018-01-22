@@ -360,6 +360,7 @@
   <ItemGroup>
     <Content Include="Assets\fontstyles\font-awesome.css" />
     <Content Include="Assets\fontstyles\font-awesome.min.css" />
+    <Content Include="Assets\fontstyles\fontCormorantInfant.css" />
     <Content Include="Assets\images\thumbnails\defaultemployee.png" />
     <Content Include="Assets\images\thumbnails\defaultproduct.png" />
     <Content Include="Assets\styles\detailsModalBox.css" />
@@ -412,7 +413,6 @@
     <Content Include="Scripts\app\order\editorder\editorder.state.js" />
     <Content Include="Scripts\app\order\editorder\editorder.template.html" />
     <Content Include="Assets\styles\dashboardMain.css" />
-    <Content Include="Assets\fontstyles\fontPlayfairDisplay.css" />
     <Content Include="Assets\styles\loginMain.css" />
     <Content Include="Assets\styles\mainHeader.css" />
     <Content Include="Scripts\app\supplier\editsupplier\editsupplier.controller.js" />
@@ -502,11 +502,16 @@
     <Content Include="Views\Shared\_MainNavigationLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\fonts\PlayfairDisplay-Black.ttf" />
-    <Content Include="Assets\fonts\PlayfairDisplay-Bold.ttf" />
-    <Content Include="Assets\fonts\PlayfairDisplay-BoldItalic.ttf" />
-    <Content Include="Assets\fonts\PlayfairDisplay-Italic.ttf" />
-    <Content Include="Assets\fonts\PlayfairDisplay-Regular.ttf" />
+    <Content Include="Assets\fonts\CormorantInfant-Bold.ttf" />
+    <Content Include="Assets\fonts\CormorantInfant-BoldItalic.ttf" />
+    <Content Include="Assets\fonts\CormorantInfant-Italic.ttf" />
+    <Content Include="Assets\fonts\CormorantInfant-Light.ttf" />
+    <Content Include="Assets\fonts\CormorantInfant-LightItalic.ttf" />
+    <Content Include="Assets\fonts\CormorantInfant-Medium.ttf" />
+    <Content Include="Assets\fonts\CormorantInfant-MediumItalic.ttf" />
+    <Content Include="Assets\fonts\CormorantInfant-Regular.ttf" />
+    <Content Include="Assets\fonts\CormorantInfant-SemiBold.ttf" />
+    <Content Include="Assets\fonts\CormorantInfant-SemiBoldItalic.ttf" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

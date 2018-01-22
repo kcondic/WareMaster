@@ -19,8 +19,8 @@
             </div>
             <div class="modal-content-row products-row">
                 <div class="products-container">
-                    <div ng-repeat="product in supplier.Products|filter: search" class="single-product">
-                        <span ui-sref="productdetails({id:product.Id})">{{product.Name}}</span>
+                    <div ng-repeat="product in supplier.Products|filter: search" class="single-product" ui-sref="productdetails({id:product.Id})">
+                        <span>{{product.Name}}</span>
                     </div>
                 </div>
             </div>

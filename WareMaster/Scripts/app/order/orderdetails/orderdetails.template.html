@@ -2,10 +2,11 @@
     <div class="modal-box details-box">
         <div class="modal-header">
             <div class="modal-header-row">
-                <div class="modal-title"><label>Detalji o narudžbi</label></div>
+                <div class="modal-title" ng-show="showNote===1"><label>Detalji o narudžbi</label></div>
+                <div class="modal-title" ng-show="showNote===0"><label>Bilješka zaposlenika {{nameOfEmployee}}</label></div>
             </div>
         </div>
-        <div class="modal-content">
+        <div class="modal-content" ng-show="showNote===1">
             <div class="modal-content-row creation-time-row">
                 <div class="modal-row-element">Stvorena: {{order.TimeOfCreation | date:"dd. MM. yyyy.'god.'  'u'  H:m:s 'sati'"}}</div>
             </div>
@@ -18,20 +19,32 @@
             </div>
             <div class="modal-content-row products-row">
                 <div class="products-container">
-                    <div ng-repeat="productOrder in order.ProductOrders" class="single-product">
+                    <div ng-repeat="productOrder in order.ProductOrders" class="single-product" ui-sref="productdetails({id:productOrder.Product.Id})">
                         <div>{{productOrder.Product.Name}}</div>
                         <div class="selectedEmployeeName">Količina: {{productOrder.ProductQuantity}}</div>
                     </div>
                 </div>
             </div>
-            <div ng-show="order.Type==0 && order.Status!==2">Barkod: <barcode type="code128b" render="img" string="{{barcode}}"></barcode></div>
-            <div ng-show="order.Status===2">Bilješka: {{order.Note}}</div>            
+            <div class="modal-content-row barcode-row" ng-show="order.Type==0 && order.Status!==2">
+                <div class="modal-row-element">Barkod: <barcode type="code128b" render="img" string="{{barcode}}" class="modal-barcode"></barcode></div>
+            </div>
+            <div class="modal-content-row note-row" ng-show="order.Status===2">
+                <div class="modal-row-element single-button note-button"><button ng-click="showNote=0">Pogledaj bilješku zaposlenika</button></div>
+            </div>
+        </div>
+        <div class="modal-content" ng-show="showNote===0">
+            <div class="modal-note-row">
+                <div class="note-row-element">{{order.Note}}</div>
+            </div>
         </div>
         <div class="modal-footer">
-            <div class="modal-buttons">
-                <div class="single-button"><button ui-sref="editorder({id:order.Id})">Uredi</button></div>
-                <div class="single-button cancel-button"><button ng-click="deleteOrder(order.Id)">Otkaži</button></div>
+            <div class="modal-buttons" ng-show="showNote===1">
+                <div class="single-button" ng-if="order.Status!==2"><button ui-sref="editorder({id:order.Id})">Uredi</button></div>
+                <div class="single-button cancel-button" ng-if="order.Status!==2"><button ng-click="deleteOrder(order.Id)">Otkaži</button></div>
                 <div class="single-button cancel-button"><button ui-sref="orders">Zatvori</button></div>
+            </div>
+            <div class="modal-buttons" ng-show="showNote===0">
+                <div class="single-button cancel-button"><button ng-click="showNote=1">Natrag</button></div>
             </div>
         </div>
     </div>

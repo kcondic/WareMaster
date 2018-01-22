@@ -12,9 +12,7 @@
                 <div class="left-circle">
                     <div class="percent-circle-header"><div>ULAZNE NARUDŽBE</div></div>
                     <div class="circle-item">
-                        <div class="inner-circle">
-                            <label class="orders-number">NN</label>
-                        </div>
+                        OVdje će doći svg graf
                     </div>
                     <div class="circle-description">
                         <div class="color-row">
@@ -34,9 +32,7 @@
                 <div class="right-circle">
                     <div class="percent-circle-header"><div>IZLAZNE NARUDŽBE</div></div>
                     <div class="circle-item">
-                        <div class="inner-circle">
-                            <label class="orders-number">NN</label>
-                        </div>
+                        OVdje će doći svg graf
                     </div>
                     <div class="circle-description">
                         <div class="color-row">
@@ -67,7 +63,79 @@
                 </div>
             </div>
             <div class="orders-bar-chart-container">
-                <canvas id="bar-chart" width="600" height="200"></canvas>
+                <div class="bar-chart-content">
+                    <div class="bar-chart-description">
+                        <div class="description-title">IZVRŠENE NARUDŽBE PO DANU</div>
+                        <div class="week-selection">
+                            <div class="selected-week">
+                                <div>dd.MM.-dd.MM. yyyy.</div>
+                                <i aria-hidden="true" class="fa fa-chevron-down"></i>
+                            </div>
+                            <div class="week-content">
+                                <div class="week current-selection">dd.MM.-dd.MM. yyyy.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bar-chart-graph">
+                        <svg class="bar-chart-grid" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">WareMaster bar chart grid</desc>
+                            <defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs>
+
+                            <text class="text-svg txt-zero" fill="#222222">
+                                <tspan class="tspan-svg" dy="4">0%</tspan>
+                            </text>
+                            <path class="path-svg" fill="none" stroke="#aaaaaa" d="M32,1H550" stroke-width="0.5"></path>
+
+                            <text class="text-svg txt-twenty-five" fill="#222222">
+                                <tspan class="tspan-svg" dy="4">25%</tspan>
+                            </text>
+                            <path class="path-svg" fill="none" stroke="#aaaaaa" d="M32,1H550" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+
+                            <text class="text-svg txt-fifty" fill="#222222">
+                                <tspan class="tspan-svg" dy="4">50%</tspan>
+                            </text>
+                            <path class="path-svg" fill="none" stroke="#aaaaaa" d="M32,1H550" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+
+                            <text class="text-svg txt-seventy-five" fill="#222222">
+                                <tspan class="tspan-svg" dy="4">75%</tspan>
+                            </text>
+                            <path class="path-svg" fill="none" stroke="#aaaaaa" d="M32,1H550" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+
+                            <text class="text-svg txt-hundred" fill="#222222">
+                                <tspan class="tspan-svg" dy="4">100%</tspan>
+                            </text>
+                            <path class="path-svg" fill="none" stroke="#aaaaaa" d="M32,1H550" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+
+                            <text class="text-svg" x="700" y="221.5" fill="#222222" transform="matrix(1,0,0,1,0,7)">
+                                <tspan class="tspan-svg" dy="4">Ned</tspan>
+                            </text>
+
+                            <text class="text-svg" x="600" y="221.5" fill="#222222" transform="matrix(1,0,0,1,0,7)">
+                                <tspan class="tspan-svg" dy="4">Sub</tspan>
+                            </text>
+
+                            <text class="text-svg" x="500" y="221.5" fill="#222222" transform="matrix(1,0,0,1,0,7)">
+                                <tspan class="tspan-svg" dy="4">Pet</tspan>
+                            </text>
+
+                            <text class="text-svg" x="400" y="221.5" fill="#222222" transform="matrix(1,0,0,1,0,7)">
+                                <tspan class="tspan-svg" dy="4">Čet</tspan>
+                            </text>
+
+                            <text class="text-svg" x="300" y="221.5" fill="#222222" transform="matrix(1,0,0,1,0,7)">
+                                <tspan class="tspan-svg" dy="4">Sri</tspan>
+                            </text>
+
+                            <text class="text-svg" x="200" y="221.5" fill="#222222" transform="matrix(1,0,0,1,0,7)">
+                                <tspan class="tspan-svg" dy="4">Uto</tspan>
+                            </text>
+
+                            <text class="text-svg" x="100" y="221.5" fill="#222222" transform="matrix(1,0,0,1,0,7)">
+                                <tspan class="tspan-svg" dy="4">Pon</tspan>
+                            </text>
+                        </svg>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -1,5 +1,5 @@
 ﻿angular.module('app').controller('AddOrderController',
-    function ($scope, $state, employeesRepository, productsRepository, ordersRepository, suppliersRepository, loginRepository, activitylogRepository) {
+    function ($scope, $state, employeesRepository, productsRepository, ordersRepository, suppliersRepository, loginRepository, activitylogRepository, $rootScope) {
 
         $scope.incomingSelected = false;
         $scope.outgoingSelected = false;
@@ -81,7 +81,7 @@
                 alert("Morate naručiti barem jedan proizvod");
                 return;
             }
-
+            
             const productOrder = [];
             for (let product of $scope.selectedProducts)
                 productOrder.push({
@@ -122,5 +122,7 @@
                     });
                 $state.go('orders', {}, { reload: true });
             });
+
+            
         }
     });
