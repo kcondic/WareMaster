@@ -26,9 +26,9 @@ namespace WareMaster.Controllers
 
         [HttpGet]
         [Route("")]
-        public IHttpActionResult GetAllEmployees(int companyId)
+        public IHttpActionResult GetEmployees(int companyId, int currentPosition)
         {
-            return Ok(_employeeRepository.GetAllEmployees(companyId));
+            return Ok(_employeeRepository.GetEmployees(companyId, currentPosition));
         }
 
         [HttpPost]

@@ -22,10 +22,17 @@ namespace WareMaster.Controllers
         private readonly SupplierRepository _supplierRepository;
 
         [HttpGet]
-        [Route("")]
+        [Route("getall")]
         public IHttpActionResult GetAllSuppliers(int companyId)
         {
             return Ok(_supplierRepository.GetAllSuppliers(companyId));
+        }
+
+        [HttpGet]
+        [Route("")]
+        public IHttpActionResult GetSuppliers(int companyId, int currentPosition)
+        {
+            return Ok(_supplierRepository.GetSuppliers(companyId, currentPosition));
         }
 
         [HttpPost]

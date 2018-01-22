@@ -12,18 +12,14 @@ namespace WareMaster.Domain.Repositories
 {
     public class UserRepository
     {
-        public List<User> GetAllUsers(int companyId)
+        public List<User> GetEmployees(int companyId, int currentPosition)
         {
             using (var context = new WareMasterContext())
-                return context.Users.Where(user => user.CompanyId == companyId).ToList();
-        }
-
-        public List<User> GetAllEmployees(int companyId)
-        {
-            using (var context = new WareMasterContext())
-                return context.Users
-                    .Where(user => user.Role == Role.Employee
-                            && user.CompanyId == companyId).ToList();
+                return context.Users.Where(user => user.Role == Role.Employee && user.CompanyId == companyId)
+                    .OrderBy(user => user.Id)
+                    .Skip(currentPosition)
+                    .Take(10)
+                    .ToList();
         }
 
         public List<User> GetAllManagers(int companyId)

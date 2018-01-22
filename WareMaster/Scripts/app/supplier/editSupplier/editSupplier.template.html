@@ -38,7 +38,7 @@
                         </span>
                     </div>
                     <div class="products-container">
-                        <span ng-repeat="product in allProducts | filter: toaddsearch" class="single-product" ng-click="selectProduct(product)">
+                        <span ng-repeat="product in otherProducts | filter: toaddsearch" class="single-product" ng-click="selectProduct(product)">
                             <span>{{product.Name}}</span>
                         </span>
                     </div>

@@ -2,11 +2,12 @@
     function ($http) {
 
         function getAllSuppliers(companyId) {
-            return $http.get('/api/suppliers', {
-                params: {
-                    companyId: companyId
-                }
-            });
+            return $http.get('api/suppliers/getall',
+                {
+                    params: {
+                        companyId: companyId
+                    }
+                });
         }
 
         function addNewSupplier(newSupplier) {

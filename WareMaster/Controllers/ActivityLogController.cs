@@ -20,10 +20,10 @@ namespace WareMaster.Controllers
         private readonly ActivityLogRepository _activityLogRepository;
 
         [HttpGet]
-        [Route("get")]
-        public IHttpActionResult GetActivityLogs(int companyId)
+        [Route("")]
+        public IHttpActionResult GetActivityLogs(int companyId, int currentPosition)
         {
-            return Ok(_activityLogRepository.GetAllActivityLogs(companyId));
+            return Ok(_activityLogRepository.GetActivityLogs(companyId, currentPosition));
         }
 
         [HttpGet]

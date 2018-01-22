@@ -23,8 +23,10 @@
             </div>
             <div class="modal-content-row products-row">
                 <div class="products-container">
-                    <div ng-repeat="product in products|filter: search" class="single-product">
-                        <span ng-click="selectProduct(product)">{{product.Name}}</span>
+                    <div infinite-scroll="loadMore()" infinite-scroll-distance="0" infinite-scroll-parent="true">
+                        <div ng-repeat="product in products|filter: search" class="single-product">
+                            <span ng-click="selectProduct(product)">{{product.Name}}</span>
+                        </div>
                     </div>
                 </div>
             </div>

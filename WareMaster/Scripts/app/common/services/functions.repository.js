@@ -1,5 +1,5 @@
 ﻿angular.module('app').service('functionsRepository',
-    function(Upload) {
+    function(Upload, $http) {
 
         function uploadEmployeeImage(file, firstName, lastName, id, companyId) {
             if (file) {
@@ -27,8 +27,19 @@
             }
         }
 
+        function getTen(entityType, currentPosition, companyId) {
+            return $http.get(`/api/${entityType}`,
+                {
+                    params: {
+                        companyId: companyId,
+                        currentPosition: currentPosition
+                    }
+                });
+        }
+
         return {
             uploadEmployeeImage: uploadEmployeeImage,
-            uploadProductImage: uploadProductImage
+            uploadProductImage: uploadProductImage,
+            getTen: getTen
         }
     });

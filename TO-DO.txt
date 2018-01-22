@@ -1,5 +1,5 @@
-PRELOADER za stranicu (!!!) (VUKA)
-Loadanje malo po malo, searchanje, poredak pri izlistu (KREŠO)
+PRELOADER za stranicu (!!!)
+Searchanje (KREŠO)
 SMTP mailovi za ulazne narudžbe (ako ostane vremena)
 Maknit hack sa logina i implementirat uloge (ako ostane vremena)
 

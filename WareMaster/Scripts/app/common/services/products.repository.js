@@ -1,16 +1,28 @@
 ﻿angular.module('app').service('productsRepository',
-    function($http) {
+    function ($http) {
 
-        function getAllProducts(companyId) {
-            return $http.get('/api/products', {
-                params: {
-                    companyId: companyId
-                }
-            });
+        function getProductsUncontainedInSupplier(supplierId, companyId) {
+            return $http.get(`/api/products/getuncontainedsupplier`,
+                {
+                    params: {
+                        supplierId: supplierId,
+                        companyId: companyId
+                    }
+                });
+        }
+
+        function getProductsUncontainedInOrder(orderId, companyId) {
+            return $http.get(`/api/products/getuncontainedorder`,
+                {
+                    params: {
+                        orderId: orderId,
+                        companyId: companyId
+                    }
+                });
         }
 
         function addProduct(newProduct) {
-            return $http.post('/api/products/add', newProduct);
+            return $http.post('api/products/add', newProduct);
         }
 
         function getProductDetails(id, companyId) {
@@ -37,7 +49,8 @@
         }
 
         return {
-            getAllProducts: getAllProducts,
+            getProductsUncontainedInSupplier: getProductsUncontainedInSupplier,
+            getProductsUncontainedInOrder: getProductsUncontainedInOrder,
             addProduct: addProduct,
             getProductDetails: getProductDetails,
             editProduct: editProduct,

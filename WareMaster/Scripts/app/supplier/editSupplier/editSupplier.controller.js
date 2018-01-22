@@ -7,11 +7,9 @@
             $scope.supplierToEdit = supplier.data;
             $scope.name = $scope.supplierToEdit.Name;
             $scope.products = $scope.supplierToEdit.Products;
-
-            productsRepository.getAllProducts(companyId).then(function (allproducts) {
-                $scope.allProducts = allproducts.data.filter(function (el) {
-                    return ($scope.products.findIndex(x=> x.Id === el.Id) === -1);
-                });
+            
+            productsRepository.getProductsUncontainedInSupplier($stateParams.id, companyId).then(function (products) {
+                $scope.otherProducts = products.data;
             });
         }, function () {
             console.log('Nemate dozvolu za pristup tim podacima');
@@ -19,11 +17,11 @@
 
         $scope.selectProduct = function (product) {
             $scope.products.push(product);
-            $scope.allProducts.splice($scope.allProducts.indexOf(product), 1);
+            $scope.otherProducts.splice($scope.otherProducts.indexOf(product), 1);
         };
 
         $scope.deselectProduct = function (product) {
-            $scope.allProducts.push(product);
+            $scope.otherProducts.push(product);
             $scope.products.splice($scope.products.indexOf(product), 1);
         };
 

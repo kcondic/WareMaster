@@ -1,9 +1,11 @@
 ﻿angular.module('app').controller('EditOrderController',
-    function ($scope, $state, $stateParams, ordersRepository, employeesRepository, productsRepository, loginRepository, activitylogRepository) {
+    function ($scope, $state, $stateParams, ordersRepository, employeesRepository, productsRepository, loginRepository, activitylogRepository, functionsRepository) {
         $scope.selectedProducts = [];
         $scope.phase = 1;
 
+        $scope.allEmployees = [];
         const companyId = loginRepository.getCompanyId();
+        let currentPosition = 0;
 
         ordersRepository.getOrderDetails($stateParams.id, companyId).then(function (order) {
             $scope.order = order.data;
@@ -24,11 +26,8 @@
                     product.Counter = 1;
             }
             else
-                productsRepository.getAllProducts(companyId).then(function (products) {
+                productsRepository.getProductsUncontainedInOrder($stateParams.id, companyId).then(function (products) {
                     $scope.allProducts = products.data;
-                    $scope.selectedProducts.forEach(function (item) {
-                        $scope.allProducts.splice($scope.allProducts.map(function (val) { return val.Id }).indexOf(item.Id), 1);
-                    });
                     for (let product of $scope.allProducts)
                         product.Counter = 1;
                 });
@@ -38,15 +37,22 @@
                     return (productOrder.ProductId === product.Id);
                 }).ProductQuantity;
             }
-            if($scope.order.Type === 1)
-                employeesRepository.getAllEmployees(companyId).then(function (employees) {
-                    $scope.allEmployees = employees.data;
-                    if($scope.selectedEmployee !== null)
-                    $scope.allEmployees.splice($scope.allEmployees.map(function(val){return val.Id}).indexOf($scope.selectedEmployee.Id), 1);
-                });
+            if ($scope.order.Type === 1)
+                load();
         }, function () {
             console.log('Nemate dozvolu za pristup tim podacima');
         });
+
+        function load() {
+            functionsRepository.getTen('employees', currentPosition, companyId).then(function(employees) {
+                $scope.allEmployees.push(...employees.data);
+            });
+        }
+
+        $scope.loadMore = function () {
+            load();
+            currentPosition += 10;
+        }
 
         $scope.selectEmployee = function (employee) {
             if ($scope.selectedEmployee !== null) {
@@ -58,8 +64,7 @@
             $scope.showDeselectX = true;
         }
 
-        $scope.deselectEmployee = function (employee) {
-            $scope.allEmployees.push(employee);
+        $scope.deselectEmployee = function () {
             $scope.selectedEmployee = null;
             $scope.showDeselectX = false;
         }

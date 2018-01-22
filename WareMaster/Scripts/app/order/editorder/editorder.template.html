@@ -43,7 +43,7 @@
                 Radnik:
                 <span class="selectedEmployeeName">
                     {{selectedEmployee.FirstName}} {{selectedEmployee.LastName}}
-                    <i class="fa fa-times" aria-hidden="true" ng-click="deselectEmployee(selectedEmployee)" ng-if="showDeselectX"></i>
+                    <i class="fa fa-times" aria-hidden="true" ng-click="deselectEmployee()" ng-if="showDeselectX"></i>
                 </span>
             </div>
             <div class="order-columns-row">
@@ -51,8 +51,10 @@
                     <div class="order-modal-row">Svi radnici:</div>
                     <div class="order-table-container">
                         <div class="order-table">
-                            <div ng-repeat="employee in allEmployees" ng-click="selectEmployee(employee)" class="single-table-row">
-                                <span>{{employee.FirstName}} {{employee.LastName}}</span>
+                            <div infinite-scroll="loadMore()" infinite-scroll-distance="0" infinite-scroll-parent="true">
+                                <div ng-repeat="employee in allEmployees" ng-click="selectEmployee(employee)" class="single-table-row">
+                                    <span>{{employee.FirstName}} {{employee.LastName}}</span>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -11,10 +11,40 @@ namespace WareMaster.Domain.Repositories
 {
     public class ProductRepository
     {
-        public List<Product> GetAllProducts(int companyId)
+        public List<Product> GetProducts(int companyId, int currentPosition)
         {
             using (var context = new WareMasterContext())
-                return context.Products.Where(product => product.CompanyId == companyId).ToList();
+                return context.Products.Where(product => product.CompanyId == companyId)
+                                       .OrderBy(product => product.Id)
+                                       .Skip(currentPosition)
+                                       .Take(10)
+                                       .ToList();
+        }
+
+        public List<Product> GetProductsUncontainedInSupplier(int supplierId, int companyId)
+        {
+            using (var context = new WareMasterContext())
+            {
+                var supplierToExcludeFrom = context.Suppliers.Include(supplier => supplier.Products).SingleOrDefault(supplier => supplier.Id == supplierId);
+                if (supplierToExcludeFrom == null)
+                    return null;
+                var supplierProductIdsToLeaveOut = supplierToExcludeFrom.Products.Select(product => product.Id);
+                return context.Products.Where(product => product.CompanyId == companyId && supplierProductIdsToLeaveOut.All(pr => pr != product.Id))
+                                       .ToList();
+            }
+        }
+
+        public List<Product> GetProductsUncontainedInOrder(int orderId, int companyId)
+        {
+            using (var context = new WareMasterContext())
+            {
+                var orderToExcludeFrom = context.Orders.Include(order => order.ProductOrders).SingleOrDefault(order => order.Id == orderId);
+                if (orderToExcludeFrom == null)
+                    return null;
+                var orderProductIdsToLeaveOut = orderToExcludeFrom.ProductOrders.Select(product => product.ProductId);
+                return context.Products.Where(product => product.CompanyId == companyId && orderProductIdsToLeaveOut.All(pr => pr != product.Id))
+                                       .ToList();
+            }
         }
 
         public Product GetProduct(int productId)
