@@ -2,7 +2,6 @@ PRELOADER za stranicu (!!!)
 SMTP mailovi za ulazne narudžbe (ako ostane vremena)
 Maknit hack sa logina i implementirat uloge (ako ostane vremena)
 
-
 MOBILNA:
 TO-DO:
 
