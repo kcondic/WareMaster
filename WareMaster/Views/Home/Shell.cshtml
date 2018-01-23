@@ -6,16 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WareMaster</title>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
-    <!-- Vendor Scripts -->
-    <script src="~/Scripts/vendor/angular.js"></script>
-    <script src="~/Scripts/vendor/underscore.min.js"></script>
-    <script src="~/Scripts/vendor/angular-ui-router.min.js"></script>
-    <script src="~/Scripts/vendor/angular-jwt.min.js"></script>
-    <script src="~/Scripts/vendor/ng-file-upload.min.js"></script>
-    <script src="~/Scripts/vendor/ng-file-upload-shim.min.js"></script>
-    <script src="~/Scripts/vendor/angular-barcode.min.js"></script>
-    <script src="~/Scripts/vendor/ng-infinite-scroll.min.js"></script>
 
     <!-- Link for loading font-awesome.css for icons -->
     <link href="~/Assets/fontstyles/font-awesome.css" type="text/css" rel="stylesheet" />
@@ -32,7 +22,16 @@
     <link href="~/Assets/styles/modalBox.css" type="text/css" rel="stylesheet" />
     <link href="~/Assets/Styles/orderModalBox.css" type="text/css" rel="stylesheet" />
     <link href="~/Assets/Styles/detailsModalBox.css" type="text/css" rel="stylesheet" />
-    <link href="~/Assets/Styles/cloak.css" type="text/css" rel="stylesheet" />
+    
+    <!-- Vendor Scripts -->
+    <script src="~/Scripts/vendor/angular.js"></script>
+    <script src="~/Scripts/vendor/underscore.min.js"></script>
+    <script src="~/Scripts/vendor/angular-ui-router.min.js"></script>
+    <script src="~/Scripts/vendor/angular-jwt.min.js"></script>
+    <script src="~/Scripts/vendor/ng-file-upload.min.js"></script>
+    <script src="~/Scripts/vendor/ng-file-upload-shim.min.js"></script>
+    <script src="~/Scripts/vendor/angular-barcode.min.js"></script>
+    <script src="~/Scripts/vendor/ng-infinite-scroll.min.js"></script>
     
     <!-- General app scripts -->
     <script src="~/Scripts/app/main/app.module.js"></script>
@@ -110,8 +109,8 @@
 </head>
 
 <body>
-    <div ng-controller="displayLayoutController" ng-cloak>
-        <header ng-cloak ng-if="showHeader(currentTemplate)">
+    <div ng-controller="displayLayoutController">
+        <header ng-if="showHeader(currentTemplate)">
             <div class="logo-container">
                 <img ui-sref="dashboard" class="logo-img" src="~/Assets/images/logos/logo6262.png" alt="logo" />
                 <label class="app-title"><span class="uppercase-title-letter">W</span>are<span class="uppercase-title-letter">M</span>aster</label>
@@ -214,7 +213,7 @@
                 </li>
             </ul>
         </header>
-        <div id="subheader" ng-cloak ng-if="showSubHeader(currentTemplate)">
+        <div id="subheader" ng-if="showSubHeader(currentTemplate)">
             <!-- ARROW BUTTON WITH A LINK TO DASHBOARD -->
             <div class="link-to-dashboard-box">
                 <button ui-sref="dashboard">
@@ -270,7 +269,7 @@
             </div>
         </div>
     </div>
-<div ng-cloak>
+<div>
     <div ui-view></div>
 </div>
 </body>
