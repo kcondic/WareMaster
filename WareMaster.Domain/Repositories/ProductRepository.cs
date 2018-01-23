@@ -129,5 +129,13 @@ namespace WareMaster.Domain.Repositories
                 context.SaveChanges();
             }
         }
+
+        public List<Product> SearchProducts(int companyId, string searchText)
+        {
+            using (var context = new WareMasterContext())
+                return context.Products.Where(product => product.CompanyId == companyId &&
+                                              product.Name.ToLower().StartsWith(searchText.ToLower()))
+                                       .ToList();
+        }
     }
 }

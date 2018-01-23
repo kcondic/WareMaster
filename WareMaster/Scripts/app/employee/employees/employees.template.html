@@ -14,7 +14,7 @@
             </div>
             <div class="content-body">
                 <div infinite-scroll="loadMore()" infinite-scroll-distance="0" infinite-scroll-parent="true">
-                    <div ng-repeat="employee in employees| filter: global.search" class="content-row">
+                    <div ng-repeat="employee in employees" class="content-row">
                         <div class="row-element">
                             <div class="row-image-container">
                                 <img ng-src="{{employee.ImageUrl}}" ng-model="image" alt="Korisnik nema sliku" onerror="this.src = '../../../Assets/Images/thumbnails/defaultemployee.png'" />

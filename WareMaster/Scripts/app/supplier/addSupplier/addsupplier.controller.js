@@ -36,4 +36,16 @@
                 $state.go('suppliers', {}, { reload: true });
             });
         }
+
+        $scope.search = function () {
+            functionsRepository.searchRequest('products', companyId, $scope.searchText).then(function (foundProducts) {
+                if (!$scope.searchText) {
+                    $scope.products = [];
+                    currentPosition = 0;
+                    $scope.loadMore();
+                }
+                else
+                    $scope.products = foundProducts.data;
+            });
+        }
     });

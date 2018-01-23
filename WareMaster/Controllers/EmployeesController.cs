@@ -112,5 +112,12 @@ namespace WareMaster.Controllers
             }
             return Ok(true);
         }
+
+        [HttpGet]
+        [Route("search")]
+        public IHttpActionResult SearchEmployees(int companyid, string searchText)
+        {
+            return Ok(_employeeRepository.SearchEmployees(companyid, searchText));
+        }
     }
 }

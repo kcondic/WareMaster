@@ -108,5 +108,13 @@ namespace WareMaster.Domain.Repositories
                 context.SaveChanges();
             }
         }
+
+        public List<Supplier> SearchSuppliers(int companyId, string searchText)
+        {
+            using (var context = new WareMasterContext())
+                return context.Suppliers.Where(supplier => supplier.CompanyId == companyId &&
+                                               supplier.Name.ToLower().StartsWith(searchText.ToLower()))
+                                        .ToList();
+        }
     }
 }

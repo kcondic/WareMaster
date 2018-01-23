@@ -30,4 +30,16 @@ function ($scope, $state, ordersRepository, $rootScope, loginRepository, functio
     ordersRepository.getAllOrders(companyId).then(function(allOrders) {
         $scope.allOrders = allOrders.data;
     });
+
+    $rootScope.search = function (searchText) {
+        functionsRepository.searchRequest('orders', companyId, searchText).then(function (foundOrders) {
+            if (!searchText) {
+                ordersRepository.getAllOrders(companyId).then(function (allOrders) {
+                    $scope.allOrders = allOrders.data;
+                });
+            }
+            else
+                $scope.allOrders = foundOrders.data;
+        });
+    }
 });

@@ -37,19 +37,5 @@ namespace WareMaster.Domain.Repositories
                 return companyToAdd.Id;
             }
         }
-
-        public void DeleteCompany(int companyId)
-        {
-            using (var context = new WareMasterContext())
-            {
-                var companyToDelete = context.Companies.FirstOrDefault(company => company.Id == companyId);
-
-                if (companyToDelete == null)
-                    return;
-
-                context.Companies.Remove(companyToDelete);
-                context.SaveChanges();
-            }
-        }
     }
 }

@@ -16,14 +16,8 @@
             <div class="modal-content-row products-rows-container">
                 <div class="modal-content-row products-row">
                     <div class="modal-row-element">Proizvodi dobavljača:</div>
-                    <div class="modal-row-element">
-                        <input ng-model="addedsearch" placeholder="Pretraži..." size="20" />
-                        <span class="row-search-icon" aria-hidden="true">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </span>
-                    </div>
                     <div class="products-container">
-                        <span ng-repeat="product in products | filter: addedsearch" class="single-product">
+                        <span ng-repeat="product in products" class="single-product">
                             <span>{{product.Name}}</span>
                             <i class="fa fa-times" aria-hidden="true" ng-click="deselectProduct(product)"></i>
                         </span>
@@ -31,14 +25,8 @@
                 </div>
                 <div class="modal-content-row products-row">
                     <div class="modal-row-element">Ostali proizvodi:</div>
-                    <div class="modal-row-element">
-                        <input ng-model="toaddsearch" placeholder="Pretraži..." size="20" />
-                        <span class="row-search-icon" aria-hidden="true">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </span>
-                    </div>
                     <div class="products-container">
-                        <span ng-repeat="product in otherProducts | filter: toaddsearch" class="single-product" ng-click="selectProduct(product)">
+                        <span ng-repeat="product in otherProducts" class="single-product" ng-click="selectProduct(product)">
                             <span>{{product.Name}}</span>
                         </span>
                     </div>

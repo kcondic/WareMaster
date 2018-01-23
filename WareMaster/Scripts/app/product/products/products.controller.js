@@ -16,8 +16,20 @@ function ($scope, $state, productsRepository, $rootScope, loginRepository, funct
         });
     };   
 
-    $scope.loadMore = function () {
+    $scope.loadMore = function() {
         load();
         currentPosition += 10;
-        }
+    }
+
+    $rootScope.search = function (searchText) {
+        functionsRepository.searchRequest('products', companyId, searchText).then(function (foundProducts) {
+            if (!searchText) {
+                $scope.products = [];
+                currentPosition = 0;
+                $scope.loadMore();
+            }
+            else
+                $scope.products = foundProducts.data;
+        });
+    }
 });

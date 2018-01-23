@@ -16,4 +16,16 @@
             load();
             currentPosition += 10;
         }
+
+        $rootScope.search = function (searchText) {
+            functionsRepository.searchRequest('suppliers', companyId, searchText).then(function (foundSuppliers) {
+                if (!searchText) {
+                    $scope.suppliers = [];
+                    currentPosition = 0;
+                    $scope.loadMore();
+                }
+                else
+                    $scope.suppliers = foundSuppliers.data;
+            });
+        }
     });

@@ -20,4 +20,16 @@ function ($scope, $state, employeesRepository, $rootScope, loginRepository, func
         load();
         currentPosition += 10;
     }
+
+    $rootScope.search = function (searchText) {
+        functionsRepository.searchRequest('employees', companyId, searchText).then(function (foundEmployees) {
+            if (!searchText) {
+                $scope.employees = [];
+                currentPosition = 0;
+                $scope.loadMore();
+            }
+            else
+                $scope.employees = foundEmployees.data;
+        });
+    }
 });

@@ -137,5 +137,12 @@ namespace WareMaster.Controllers
             }
             return Ok(true);
         }
+
+        [HttpGet]
+        [Route("search")]
+        public IHttpActionResult SearchProducts(int companyid, string searchText)
+        {
+            return Ok(_productRepository.SearchProducts(companyid, searchText));
+        }
     }
 }

@@ -37,9 +37,20 @@
                 });
         }
 
+        function searchRequest(entityType, companyId, searchText) {
+            return $http.get(`/api/${entityType}/search`,
+                {
+                    params: {
+                        companyId: companyId,
+                        searchText: searchText
+                    }
+                });
+        }
+
         return {
             uploadEmployeeImage: uploadEmployeeImage,
             uploadProductImage: uploadProductImage,
-            getTen: getTen
+            getTen: getTen,
+            searchRequest: searchRequest
         }
     });

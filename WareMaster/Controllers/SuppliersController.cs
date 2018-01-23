@@ -68,5 +68,12 @@ namespace WareMaster.Controllers
             _supplierRepository.DeleteSupplier(id);
             return Ok(true);
         }
+
+        [HttpGet]
+        [Route("search")]
+        public IHttpActionResult SearchSuppliers(int companyid, string searchText)
+        {
+            return Ok(_supplierRepository.SearchSuppliers(companyid, searchText));
+        }
     }
 }

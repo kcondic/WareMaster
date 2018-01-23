@@ -12,7 +12,7 @@
             </div>
             <div class="content-body">
                 <div infinite-scroll="loadMore()" infinite-scroll-distance="0" infinite-scroll-parent="true">
-                    <div ng-repeat="supplier in suppliers| filter: global.search" class="content-row">
+                    <div ng-repeat="supplier in suppliers" class="content-row">
                         <div class="row-element suppliers-name-row-element">{{supplier.Name}}</div>
                         <div class="row-element suppliers-button-row-element">
                             <button ui-sref="supplierdetails({id: supplier.Id})">Detaljnije...</button>

@@ -184,5 +184,17 @@ namespace WareMaster.Domain.Repositories
                 return true;
             }
         }
+
+        public List<Order> SearchOrders(int companyId, string searchText)
+        {
+            using (var context = new WareMasterContext())
+                return context.Orders.Include(order => order.Supplier)
+                                     .Include(order => order.AssignedEmployee)
+                                     .Where(order => order.CompanyId == companyId &&
+                                            (order.Supplier.Name.ToLower().StartsWith(searchText.ToLower()) || 
+                                            order.AssignedEmployee.FirstName.ToLower().StartsWith(searchText.ToLower()) || 
+                                            order.AssignedEmployee.LastName.ToLower().StartsWith(searchText.ToLower())))
+                                     .ToList();
+        }
     }
 }

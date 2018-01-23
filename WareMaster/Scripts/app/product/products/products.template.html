@@ -14,7 +14,7 @@
             </div>
             <div class="content-body">
                 <div infinite-scroll="loadMore()" infinite-scroll-distance="0" infinite-scroll-parent="true">
-                    <div ng-repeat="product in products| filter: global.search" class="content-row">
+                    <div ng-repeat="product in products" class="content-row">
                         <div class="row-element">
                             <div class="row-image-container">
                                 <img ng-src="{{product.ImageUrl}}" ng-model="image" alt="Proizvod nema sliku" onerror="this.src = '../../../Assets/Images/thumbnails/defaultproduct.png'" />
