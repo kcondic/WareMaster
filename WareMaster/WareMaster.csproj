@@ -363,6 +363,7 @@
     <Content Include="Assets\fontstyles\fontCormorantInfant.css" />
     <Content Include="Assets\images\thumbnails\defaultemployee.png" />
     <Content Include="Assets\images\thumbnails\defaultproduct.png" />
+    <Content Include="Assets\styles\cloak.css" />
     <Content Include="Assets\styles\detailsModalBox.css" />
     <Content Include="Assets\styles\modalBox.css" />
     <Content Include="Assets\styles\mainFrame.css" />
