@@ -1,5 +1,4 @@
 PRELOADER za stranicu (!!!)
-Searchanje (KREŠO)
 SMTP mailovi za ulazne narudžbe (ako ostane vremena)
 Maknit hack sa logina i implementirat uloge (ako ostane vremena)
 
