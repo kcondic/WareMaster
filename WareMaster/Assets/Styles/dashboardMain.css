@@ -121,11 +121,17 @@
     height: 50%;
     width: 100%;
     border-color: rgb(220,220,220);
-    background-color: paleturquoise;
     text-align: center;
     position: relative;
 }
+/* SVG KRUŽNI GRAF */
+#dashboard .svg-circle{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
 
+/* OPIS KRUŽNOG GRAFA */
 #dashboard .circle-description{
     height: 50%;
     width: 100%;
@@ -346,25 +352,17 @@
     font-size: 1.1em;
 }
 
-#dashboard .txt-twenty-five{
-    transform: translateY(8em) translateX(19.5px);
-}
-#dashboard .txt-fifty{
-    transform: translateY(6em) translateX(19.5px);
-}
-#dashboard .txt-seventy-five{
-    transform: translateY(4em) translateX(19.5px);
-}
-#dashboard .txt-hundred{
-    transform: translateY(2em) translateX(19.5px);
-}
-
 #dashboard .tspan-svg {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 #dashboard .path-svg {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+#dashboard .rect-svg {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    fill-opacity: 1;
 }
 
 /* DESNI STUPAC */
