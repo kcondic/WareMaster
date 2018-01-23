@@ -1,12 +1,20 @@
 ﻿angular.module('app').controller('AddSupplierController',
-    function ($scope, $state, suppliersRepository, productsRepository, loginRepository, activitylogRepository) {
+    function($scope, $state, suppliersRepository, productsRepository, loginRepository, activitylogRepository, functionsRepository) {
         $scope.productsSelected = [];
-
+        $scope.products = [];
         const companyId = loginRepository.getCompanyId();
+        let currentPosition = 0;
 
-        productsRepository.getAllProducts(companyId).then(function (allProducts) {
-            $scope.products = allProducts.data;
-        });
+        function load() {
+            functionsRepository.getTen('products', currentPosition, companyId).then(function(products) {
+                $scope.products.push(...products.data);
+            });
+        }
+
+        $scope.loadMore = function () {
+            load();
+            currentPosition += 10;
+        }
 
         $scope.selectProduct = function (product) {
             $scope.productsSelected.push(product);
@@ -26,6 +34,18 @@
                     CompanyId: companyId
                 });
                 $state.go('suppliers', {}, { reload: true });
+            });
+        }
+
+        $scope.search = function () {
+            functionsRepository.searchRequest('products', companyId, $scope.searchText).then(function (foundProducts) {
+                if (!$scope.searchText) {
+                    $scope.products = [];
+                    currentPosition = 0;
+                    $scope.loadMore();
+                }
+                else
+                    $scope.products = foundProducts.data;
             });
         }
     });

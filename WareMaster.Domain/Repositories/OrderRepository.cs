@@ -20,31 +20,11 @@ namespace WareMaster.Domain.Repositories
         public List<Order> GetAllOrders(int companyId)
         {
             using (var context = new WareMasterContext())
-                return context.Orders
-                    .Include(order => order.AssignedEmployee)
-                    .Include(order => order.Supplier)
-                    .Where(order => order.CompanyId == companyId).ToList();
-        }
-
-        public List<Order> GetAllCreatedOrders(int companyId)
-        {
-            using (var context = new WareMasterContext())
-                return context.Orders.Where(order => order.CompanyId == companyId && 
-                                            order.Status == Status.Created).ToList();
-        }
-
-        public List<Order> GetAllInProgressOrders(int companyId)
-        {
-            using (var context = new WareMasterContext())
-                return context.Orders.Where(order => order.CompanyId == companyId &&
-                                            order.Status == Status.InProgress).ToList();
-        }
-
-        public List<Order> GetAllFinishedOrders(int companyId)
-        {
-            using (var context = new WareMasterContext())
-                return context.Orders.Where(order => order.CompanyId == companyId &&
-                                            order.Status == Status.Finished).ToList();
+                return context.Orders.Include(order => order.AssignedEmployee)
+                                     .Include(order => order.Supplier)
+                                     .OrderByDescending(order => order.TimeOfCreation)
+                                     .Where(order => order.CompanyId == companyId)
+                                     .ToList();
         }
 
         public Order GetOrderDetails(int orderId, int companyId)
@@ -203,6 +183,18 @@ namespace WareMaster.Domain.Repositories
                 context.SaveChanges();
                 return true;
             }
+        }
+
+        public List<Order> SearchOrders(int companyId, string searchText)
+        {
+            using (var context = new WareMasterContext())
+                return context.Orders.Include(order => order.Supplier)
+                                     .Include(order => order.AssignedEmployee)
+                                     .Where(order => order.CompanyId == companyId &&
+                                            (order.Supplier.Name.ToLower().StartsWith(searchText.ToLower()) || 
+                                            order.AssignedEmployee.FirstName.ToLower().StartsWith(searchText.ToLower()) || 
+                                            order.AssignedEmployee.LastName.ToLower().StartsWith(searchText.ToLower())))
+                                     .ToList();
         }
     }
 }

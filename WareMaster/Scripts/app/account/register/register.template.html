@@ -16,7 +16,7 @@
                 <div class="modal-row-element"><input type="text" ng-model="managerLastName" placeholder="Vaše prezime"></div>
             </div>
             <div class="order-modal-row">
-                <div class="modal-row-element"><input type="text" ng-model="username" ng-change="checkUsername()" placeholder="Korisničko ime"></div>
+                <div class="modal-row-element"><input type="text" ng-model="username" ng-change="checkUsername()" ng-model-options="{debounce: 750}" placeholder="Korisničko ime"></div>
             </div>
             <div class="order-modal-row">
                 <div class="modal-row-element"><input type="password" ng-model="password" placeholder="Lozinka"></div>

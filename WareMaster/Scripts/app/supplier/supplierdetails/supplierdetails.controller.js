@@ -6,7 +6,7 @@
         suppliersRepository.getSupplierDetails($stateParams.id, companyId).then(function (supplier) {
             $scope.supplier = supplier.data;
         }, function () {
-            console.log("Nemate dozvolu za pristup tim podacima");
+            console.log('Nemate dozvolu za pristup tim podacima');
         });
 
         $scope.deleteSupplier = function (id, name) {

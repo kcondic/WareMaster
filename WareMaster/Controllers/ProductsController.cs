@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Results;
+using Newtonsoft.Json.Linq;
 using WareMaster.Data.Models.Entities;
 using WareMaster.Domain.Repositories;
 
@@ -26,9 +27,23 @@ namespace WareMaster.Controllers
 
         [HttpGet]
         [Route("")]
-        public IHttpActionResult GetAllProducts(int companyId)
+        public IHttpActionResult GetProducts(int companyId, int currentPosition)
         {
-            return Ok(_productRepository.GetAllProducts(companyId));
+            return Ok(_productRepository.GetProducts(companyId, currentPosition));
+        }
+
+        [HttpGet]
+        [Route("getuncontainedsupplier")]
+        public IHttpActionResult GetProductsUncontainedInSupplier(int supplierId, int companyId)
+        {
+            return Ok(_productRepository.GetProductsUncontainedInSupplier(supplierId, companyId));
+        }
+
+        [HttpGet]
+        [Route("getuncontainedorder")]
+        public IHttpActionResult GetProductsUncontainedInOrder(int orderId, int companyId)
+        {
+            return Ok(_productRepository.GetProductsUncontainedInOrder(orderId, companyId));
         }
 
         [HttpPost]
@@ -121,6 +136,13 @@ namespace WareMaster.Controllers
                 file.InputStream.Close();
             }
             return Ok(true);
+        }
+
+        [HttpGet]
+        [Route("search")]
+        public IHttpActionResult SearchProducts(int companyid, string searchText)
+        {
+            return Ok(_productRepository.SearchProducts(companyid, searchText));
         }
     }
 }

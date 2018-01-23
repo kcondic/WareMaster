@@ -1,1 +1,1 @@
-﻿angular.module('app', ['ui.router', 'ngFileUpload', 'angular-jwt', 'barcode']);
+﻿angular.module('app', ['ui.router', 'ngFileUpload', 'angular-jwt', 'barcode', 'infinite-scroll']);

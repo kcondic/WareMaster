@@ -1,4 +1,4 @@
-@{ Layout = "../Shared/_MainNavigationLayout.cshtml"; }
+
 <!DOCTYPE html>
 
 <html ng-app="app">
@@ -22,7 +22,7 @@
     <link href="~/Assets/styles/modalBox.css" type="text/css" rel="stylesheet" />
     <link href="~/Assets/Styles/orderModalBox.css" type="text/css" rel="stylesheet" />
     <link href="~/Assets/Styles/detailsModalBox.css" type="text/css" rel="stylesheet" />
-
+    
     <!-- Vendor Scripts -->
     <script src="~/Scripts/vendor/angular.js"></script>
     <script src="~/Scripts/vendor/underscore.min.js"></script>
@@ -31,6 +31,7 @@
     <script src="~/Scripts/vendor/ng-file-upload.min.js"></script>
     <script src="~/Scripts/vendor/ng-file-upload-shim.min.js"></script>
     <script src="~/Scripts/vendor/angular-barcode.min.js"></script>
+    <script src="~/Scripts/vendor/ng-infinite-scroll.min.js"></script>
     
     <!-- General app scripts -->
     <script src="~/Scripts/app/main/app.module.js"></script>
@@ -108,8 +109,168 @@
 </head>
 
 <body>
-    <div>
-        <div ui-view></div>
+    <div ng-controller="displayLayoutController">
+        <header ng-if="showHeader(currentTemplate)">
+            <div class="logo-container">
+                <img ui-sref="dashboard" class="logo-img" src="~/Assets/images/logos/logo6262.png" alt="logo" />
+                <label class="app-title"><span class="uppercase-title-letter">W</span>are<span class="uppercase-title-letter">M</span>aster</label>
+            </div>
+
+            <div class="user-info" ng-controller="HeaderController">
+                <article>
+                    <label>Korisnik:<span class="user-name">{{userName}}</span>     Tvrtka:<span class="company-name">{{companyName}}</span></label>
+                </article>
+            </div>
+
+            <ul>
+                <li class="dropdown">
+                    <div class="icon-button" ng-click="iconClicked(1)">
+                        <span class="notification-icon" aria-hidden="true">
+                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div class="button-content notification-content icon-button-content" ng-class="amIDisplayed(1)">
+                        <div class="button-content-item"><p>Ovo je 1. obavijest</p></div>
+                        <div class="button-content-item"><p>Ovo je 2. obavijest</p></div>
+                        <div class="button-content-item"><p>Ovo je 3. obavijest</p></div>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <div class="icon-button" ng-click="iconClicked(2)">
+                        <span class="help-icon" aria-hidden="true">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div class="button-content icon-button-content" ng-class="amIDisplayed(2)">
+                        <div class="button-content-item">Pomoæ</div>
+                        <div class="button-content-item">O WareMasteru</div>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <div class="icon-button" ng-click="iconClicked(3)">
+                        <div class="menu-icon" ng-if="getMyClass()">
+                            <div class="bar1" ng-class="myClass1"></div>
+                            <div class="bar2" ng-class="myClass2"></div>
+                            <div class="bar3" ng-class="myClass3"></div>
+                        </div>
+                    </div>
+                    <div class="button-content icon-button-content" ng-controller="MainMenuController" ng-class="amIDisplayed(3)">
+                        <div class="button-content-item" ng-click="wantsToChangePassword = true">Promijeni lozinku</div>
+                        <div class="modal-overlay" ng-show="wantsToChangePassword">
+                            <div class="modal-box select-order-type-box">
+                                <div class="modal-header">
+                                    <div class="modal-header-row">
+                                        <div class="modal-title"><label>Promijeni lozinku</label></div>
+                                    </div>
+                                </div>
+                                <div class="modal-content">
+                                    <div class="modal-content-row">
+                                        <div class="modal-row-element">Stara lozinka:</div>
+                                        <div class="modal-row-element"><input type="password" ng-model="oldPassword" /></div>
+                                    </div>
+                                    <div class="modal-content-row">
+                                        <div class="modal-row-element">Nova lozinka:</div>
+                                        <div class="modal-row-element"><input type="password" ng-model="newPassword" /></div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="modal-buttons">
+                                        <div class="single-button"><button ng-click="changePassword()">Promijeni</button></div>
+                                        <div class="single-button cancel-button"><button ng-click="wantsToChangePassword = false">Odustani</button></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button-content-item" ng-click="loadManagers()">Uredi upravitelje</div>
+                        <div class="modal-overlay" ng-show="wantsToManipulateManagers">
+                            <div class="modal-box">
+                                <div class="modal-header">
+                                    <div class="modal-header-row">
+                                        <div class="modal-title"><label>Uredi upravitelje</label></div>
+                                    </div>
+                                </div>
+                                <div class="modal-content">
+                                    <div class="modal-content-row"><div class="modal-row-element">Upravitelji:</div></div>
+                                    <div class="modal-content-row products-row">
+                                        <div class="products-container">
+                                            <div ng-repeat="manager in allManagers" class="single-product">
+                                                <span>{{manager.FirstName}} {{manager.LastName}}</span>
+                                                <button ng-click="deleteManager(manager.Id, manager.FirstName, manager.LastName)">Izbriši</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="modal-buttons">
+                                        <div class="single-button"><button ng-click="wantsToManipulateManagers = false" ui-sref="registerexisting({companyid: companyId})">Dodaj novoga</button></div>
+                                        <div class="single-button cancel-button"><button ng-click="wantsToManipulateManagers = false">Odustani</button></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button-content-item" ng-click="iconClicked(0); logout()">Odjava</div>
+                    </div>
+                </li>
+            </ul>
+        </header>
+        <div id="subheader" ng-if="showSubHeader(currentTemplate)">
+            <!-- ARROW BUTTON WITH A LINK TO DASHBOARD -->
+            <div class="link-to-dashboard-box">
+                <button ui-sref="dashboard">
+                    <span class="arrow-to-left" aria-hidden="true">
+                        <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                    </span>
+                </button>
+            </div>
+            <!-- BREADCRUMBS BOX -->
+            <div class="breadcrumbs-box">
+                <label ui-sref="dashboard">Dashboard</label>
+                <span class="breadcrumb-sign" aria-hidden="true">
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                </span>
+                <label>{{ getBreadcrumbsText(currentTemplate) }}</label>
+            </div>
+            <!-- NAVBAR BUTTON ELEMENTS -->
+            <div class="template-navbar">
+                <div class="add-button-box">
+                    <button ui-sref="addproduct" ng-if="currentTemplate==='products'">Dodaj proizvod</button>
+                    <button ui-sref="addemployee" ng-if="currentTemplate==='employees'">Dodaj zaposlenika</button>
+                    <button ui-sref="addsupplier" ng-if="currentTemplate==='suppliers'">Dodaj dobavljaèa</button>
+                    <button ui-sref="addorder" ng-if="currentTemplate==='orders'">Nova narudžba</button>
+                </div>
+            </div>
+            <div class="sort-by-box">
+                <div class="dropdown">
+                    <div class="sort-button icon-button">
+                        <p>Sortiraj po:<span class="sort-type">Vremenu dodavanja</span></p>
+                        <span class="sort-chevron-down" aria-hidden="true">
+                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div class="button-content">
+                        <div class="button-content-item selected-sort-choice">Vremenu dodavanja</div>
+                        <div class="button-content-item">
+                            {{getButtonFirstItem(currentTemplate)}}
+                        </div>
+                        <div class="button-content-item" ng-if="currentTemplate==='products' || currentTemplate==='employees'">
+                            {{getButtonSecondItem(currentTemplate)}}
+                        </div>
+                        <div class="button-content-item" ng-if="currentTemplate==='products'">
+                            {{templates[0].buttonContentItems.third}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="search-content-box">
+                <input ng-model="searchText" ng-change="search(searchText)" ng-model-options="{debounce: 1000}" placeholder="Pretraži..." size="15" />
+                <span class="search-icon" aria-hidden="true">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </span>
+            </div>
+        </div>
     </div>
+<div>
+    <div ui-view></div>
+</div>
 </body>
 </html>

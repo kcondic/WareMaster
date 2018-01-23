@@ -12,18 +12,14 @@ namespace WareMaster.Domain.Repositories
 {
     public class UserRepository
     {
-        public List<User> GetAllUsers(int companyId)
+        public List<User> GetEmployees(int companyId, int currentPosition)
         {
             using (var context = new WareMasterContext())
-                return context.Users.Where(user => user.CompanyId == companyId).ToList();
-        }
-
-        public List<User> GetAllEmployees(int companyId)
-        {
-            using (var context = new WareMasterContext())
-                return context.Users
-                    .Where(user => user.Role == Role.Employee
-                            && user.CompanyId == companyId).ToList();
+                return context.Users.Where(user => user.Role == Role.Employee && user.CompanyId == companyId)
+                    .OrderBy(user => user.Id)
+                    .Skip(currentPosition)
+                    .Take(10)
+                    .ToList();
         }
 
         public List<User> GetAllManagers(int companyId)
@@ -63,10 +59,8 @@ namespace WareMaster.Domain.Repositories
         public User GetByUsername(string username, bool isEmployeeLogin)
         {
             using (var context = new WareMasterContext())
-                if(isEmployeeLogin)
-                    return context.Users.SingleOrDefault(user => user.Username == username && user.Role == Role.Employee);
-                else
-                    return context.Users.SingleOrDefault(user => user.Username == username && user.Role == Role.Manager);
+                return isEmployeeLogin ? context.Users.SingleOrDefault(user => user.Username == username && user.Role == Role.Employee) : 
+                                         context.Users.SingleOrDefault(user => user.Username == username && user.Role == Role.Manager);
         }
 
         public int AddUser(User userToAdd)
@@ -136,6 +130,15 @@ namespace WareMaster.Domain.Repositories
                 return false;
             using (var context = new WareMasterContext())
                 return context.Users.Any(user => user.Username == username);
+        }
+
+        public List<User> SearchEmployees(int companyId, string searchText)
+        {
+            using (var context = new WareMasterContext())
+                return context.Users.Where(user => user.CompanyId == companyId && user.Role == Role.Employee &&
+                                           (user.FirstName.ToLower().StartsWith(searchText.ToLower()) ||
+                                            user.LastName.ToLower().StartsWith(searchText.ToLower())))
+                                    .ToList();
         }
     }
 }

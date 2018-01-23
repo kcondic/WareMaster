@@ -1,10 +1,19 @@
 ﻿angular.module('app').controller('DashboardController',
-function ($scope, $rootScope, $state, loginRepository, activitylogRepository) {
+function ($scope, $rootScope, $state, loginRepository, functionsRepository) {
 
-        $rootScope.currentTemplate = 'dashboard';
+    $rootScope.currentTemplate = 'dashboard';
+    $scope.activityLogs = [];
+    let currentPosition = 0;
+    const companyId = loginRepository.getCompanyId();
 
-        const companyId = loginRepository.getCompanyId();
-        activitylogRepository.getActivityLogs(companyId).then(function(activitylogs) {
-            $scope.ActivityLogs = activitylogs.data;
+    function load() {
+        functionsRepository.getTen('activitylogs', currentPosition, companyId).then(function (activityLogs) {
+        $scope.activityLogs.push(...activityLogs.data);
         });
-    });
+    }
+
+    $scope.loadMore = function() {
+        load();
+        currentPosition += 20;
+    }
+});

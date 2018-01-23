@@ -32,7 +32,7 @@
         </div>
         <div class="modal-content">
             <div class="order-modal-row">
-                Dobavljač: <select ng-options="supplier as supplier.Name for supplier in allSuppliers track by supplier.Id" ng-model="selectedSupplier" ng-change="getProductsForSupplier()"></select>
+              Dobavljač: <select ng-options="supplier as supplier.Name for supplier in suppliers track by supplier.Id" ng-model="selectedSupplier" ng-change="getProductsForSupplier()"></select>
             </div>
             <div class="order-columns-row">
                 <div class="order-modal-column">
@@ -42,7 +42,7 @@
                             <div ng-repeat="product in selectedProducts" class="single-table-row">
                                 <div>{{product.Name}}</div>
                                 <div>Količina:<input type="number" min="1" value="1" ng-init="product.Counter=1" ng-model="product.Counter" /></div>
-                                <i class="fa fa-times" aria-hidden="true" ng-click="deselectProduct(product)"></i>
+                                <i class="fa fa-times" aria-hidden="true" ng-click="deselectIncomingProduct(product)"></i>
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                     <div class="order-modal-row">Ostali proizvodi dobavljača:</div>
                     <div class="order-table-container">
                         <div class="order-table">
-                            <span ng-repeat="product in allProducts" ng-click="selectProduct(product)" class="single-table-row">{{product.Name}} </span>
+                            <span ng-repeat="product in products" ng-click="selectIncomingProduct(product)" class="single-table-row">{{product.Name}} </span>
                         </div>
                     </div>
                 </div>
@@ -91,8 +91,10 @@
                     <div class="order-modal-row">Svi radnici:</div>
                     <div class="order-table-container">
                         <div class="order-table">
-                            <div ng-repeat="employee in allEmployees" ng-click="selectEmployee(employee)" class="single-table-row">
-                                <span ng-click="showDeselectX=true">{{employee.FirstName}} {{employee.LastName}}</span>
+                            <div infinite-scroll="loadMoreEmployees()" infinite-scroll-distance="0" infinite-scroll-parent="true">
+                                <div ng-repeat="employee in employees" ng-click="selectEmployee(employee)" class="single-table-row">
+                                    <span ng-click="showDeselectX=true">{{employee.FirstName}} {{employee.LastName}}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -104,7 +106,7 @@
                             <div ng-repeat="product in selectedProducts" class="single-table-row">
                                 <div>{{product.Name}}</div>
                                 <div>Količina:<input type="number" min="1" value="1" ng-init="product.Counter=1" ng-model="product.Counter" /></div>
-                                <i class="fa fa-times" aria-hidden="true" ng-click="deselectProduct(product)"></i>
+                                <i class="fa fa-times" aria-hidden="true" ng-click="deselectOutgoingProduct(product)"></i>
                             </div>
                         </div>
                     </div>
@@ -113,7 +115,9 @@
                     <div class="order-modal-row">Proizvodi:</div>
                     <div class="order-table-container">
                         <div class="order-table">
-                            <span ng-click="selectProduct(product)" ng-repeat="product in allProducts" class="single-table-row">{{product.Name}} </span>
+                            <div infinite-scroll="loadMoreProducts()" infinite-scroll-distance="0" infinite-scroll-parent="true">
+                                <span ng-click="selectOutgoingProduct(product)" ng-repeat="product in allProducts" class="single-table-row">{{product.Name}} </span>
+                            </div>
                         </div>
                     </div>
                 </div>

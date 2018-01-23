@@ -1,15 +1,6 @@
 ﻿angular.module('app').service('employeesRepository',
     function ($http) {
 
-        function getAllEmployees(companyId) {
-            return $http.get('/api/employees',
-                {
-                    params: {
-                        companyId: companyId
-                    }
-                });
-        }
-
         function addEmployee(newEmployee) {
             return $http.post('/api/employees/add', newEmployee);
         }
@@ -38,7 +29,6 @@
         }
 
         return {
-            getAllEmployees: getAllEmployees,
             addEmployee: addEmployee,
             getEmployeeDetails: getEmployeeDetails,
             editEmployee: editEmployee,

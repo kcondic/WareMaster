@@ -13,20 +13,22 @@
                 </div>
             </div>
             <div class="content-body">
-                <div ng-repeat="employee in allEmployees| filter: global.search" class="content-row">
-                    <div class="row-element">
-                        <div class="row-image-container">
-                            <img ng-src="{{employee.ImageUrl}}" ng-model="image" alt="Korisnik nema sliku" onerror="this.src = '../../../Assets/Images/thumbnails/defaultemployee.png'" />
+                <div infinite-scroll="loadMore()" infinite-scroll-distance="0" infinite-scroll-parent="true">
+                    <div ng-repeat="employee in employees" class="content-row">
+                        <div class="row-element">
+                            <div class="row-image-container">
+                                <img ng-src="{{employee.ImageUrl}}" ng-model="image" alt="Korisnik nema sliku" onerror="this.src = '../../../Assets/Images/thumbnails/defaultemployee.png'" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="row-element">
-                        {{employee.FirstName}}
-                    </div>
-                    <div class="row-element">
-                        {{employee.LastName}}
-                    </div>
-                    <div class="row-element button-row-element">
-                        <button ui-sref="employeedetails({id: employee.Id})">Detaljnije...</button>
+                        <div class="row-element">
+                            {{employee.FirstName}}
+                        </div>
+                        <div class="row-element">
+                            {{employee.LastName}}
+                        </div>
+                        <div class="row-element button-row-element">
+                            <button ui-sref="employeedetails({id: employee.Id})">Detaljnije...</button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -10,11 +10,13 @@ namespace WareMaster.Domain.Repositories
 {
     public class ActivityLogRepository
     {
-        public List<ActivityLog> GetAllActivityLogs(int companyId)
+        public List<ActivityLog> GetActivityLogs(int companyId, int currentPosition)
         {
             using (var context = new WareMasterContext())
                 return context.ActivityLogs.Where(log => log.CompanyId == companyId)
                                            .OrderByDescending(order => order.TimeOfActivity)
+                                           .Skip(currentPosition)
+                                           .Take(20)
                                            .ToList();
         }
 
