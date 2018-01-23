@@ -13,20 +13,22 @@
                 </div>
             </div>
             <div class="content-body">
-                <div ng-repeat="product in allProducts| filter: global.search" class="content-row">
-                    <div class="row-element">
-                        <div class="row-image-container">
-                            <img ng-src="{{product.ImageUrl}}" ng-model="image" alt="Proizvod nema sliku" onerror="this.src = '../../../Assets/Images/thumbnails/defaultproduct.png'" />
+                <div infinite-scroll="loadMore()" infinite-scroll-distance="0" infinite-scroll-parent="true">
+                    <div ng-repeat="product in products" class="content-row">
+                        <div class="row-element">
+                            <div class="row-image-container">
+                                <img ng-src="{{product.ImageUrl}}" ng-model="image" alt="Proizvod nema sliku" onerror="this.src = '../../../Assets/Images/thumbnails/defaultproduct.png'" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="row-element">
-                        {{product.Name}}
-                    </div>
-                    <div class="row-element amount-element">
-                        {{product.Counter}}
-                    </div>
-                    <div class="row-element button-row-element">
-                        <button ui-sref="productdetails({id: product.Id})">Detaljnije...</button>
+                        <div class="row-element">
+                            {{product.Name}}
+                        </div>
+                        <div class="row-element amount-element">
+                            {{product.Counter}}
+                        </div>
+                        <div class="row-element button-row-element">
+                            <button ui-sref="productdetails({id: product.Id})">Detaljnije...</button>
+                        </div>
                     </div>
                 </div>
             </div>

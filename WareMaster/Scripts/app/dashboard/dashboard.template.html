@@ -178,10 +178,12 @@
         <div class="activity-column">
             <div class="activity-header"><div>NEDAVNE AKTIVNOSTI</div></div>
             <div class="activity-container">
-                <div ng-repeat="activity in ActivityLogs" class="activity-content">
-                    <span aria-hidden="true">
-                        <i class="fa fa-caret-right" aria-hidden="true"></i>
-                    </span> {{activity.Text}} {{activity.TimeOfActivity | date:'d.M. H:mm'}}
+                <div infinite-scroll="loadMore()" infinite-scroll-distance="0" infinite-scroll-parent="true">
+                    <div ng-repeat="activity in activityLogs" class="activity-content">
+                        <span aria-hidden="true">
+                            <i class="fa fa-caret-right" aria-hidden="true"></i>
+                        </span> {{activity.Text}} {{activity.TimeOfActivity | date:'d.M. H:mm'}}
+                    </div>
                 </div>
             </div>
         </div>

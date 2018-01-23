@@ -1,11 +1,13 @@
 ﻿angular.module('app').service('ordersRepository',
     function ($http) {
+
         function getAllOrders(companyId) {
-            return $http.get('api/orders', {
-                params: {
-                    companyId: companyId
-                }
-            });
+            return $http.get('api/orders',
+                {
+                    params: {
+                        companyId: companyId
+                    }
+                });
         }
 
         function getOrderDetails(id, companyId) {

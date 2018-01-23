@@ -1,5 +1,5 @@
 ﻿angular.module('app').controller('AddOrderController',
-    function ($scope, $state, employeesRepository, productsRepository, ordersRepository, suppliersRepository, loginRepository, activitylogRepository, $rootScope) {
+    function ($scope, $state, employeesRepository, productsRepository, ordersRepository, suppliersRepository, loginRepository, activitylogRepository, functionsRepository) {
 
         $scope.incomingSelected = false;
         $scope.outgoingSelected = false;
@@ -8,34 +8,52 @@
         $scope.showDeselectX = false;
         $scope.phase = 1;
 
+        $scope.employees = [];
+        $scope.allProducts = [];
         const companyId = loginRepository.getCompanyId();
+        let currentPositionEmployees = 0;
+        let currentPositionProducts = 0;
 
-        employeesRepository.getAllEmployees(companyId).then(function (employees) {
-            $scope.allEmployees = employees.data;
+        suppliersRepository.getAllSuppliers(companyId).then(function(allSuppliers) {
+            $scope.suppliers = allSuppliers.data;
+            $scope.selectedSupplier = $scope.suppliers[0];
         });
 
-        productsRepository.getAllProducts(companyId).then(function (products) {
-            $scope.allProducts = products.data;
-        });
+        function loadEmployees() {
+            functionsRepository.getTen('employees', currentPositionEmployees, companyId).then(function (employees) {
+                $scope.employees.push(...employees.data);
+            });
+        };
 
-        suppliersRepository.getAllSuppliers(companyId).then(function (suppliers) {
-            $scope.allSuppliers = suppliers.data;
-            $scope.selectedSupplier = $scope.allSuppliers[0];
-        });
+        function loadProducts() {
+            functionsRepository.getTen('products', currentPositionProducts, companyId).then(function (allProducts) {
+                $scope.allProducts.push(...allProducts.data);
+            });
+        };
+
+        $scope.loadMoreEmployees = function () {
+            loadEmployees();
+            currentPositionEmployees += 10;
+        }
+
+        $scope.loadMoreProducts = function () {
+            loadProducts();
+            currentPositionProducts += 10;
+        }
 
         $scope.getProductsForSupplier = function () {
             if ($scope.selectedSupplier)
-                $scope.allProducts = $scope.selectedSupplier.Products;
+                $scope.products = $scope.selectedSupplier.Products;
             else
-                $scope.allProducts = null;
+                $scope.products = null;
             $scope.selectedProducts = [];
         }
 
         $scope.incomingSelect = function() {
             $scope.incomingSelected = true;
 
-            if ($scope.allSuppliers.length === 0) {
-                alert("Nemate nijednog dobavljača!\nPrije stvaranja ulazne narudžbe morate dodati barem jednog dobavljača");
+            if ($scope.suppliers.length === 0) {
+                alert('Nemate nijednog dobavljača!\nPrije stvaranja ulazne narudžbe morate dodati barem jednog dobavljača');
                 $state.go('orders', {}, { reload: true });
             }
             else
@@ -48,17 +66,17 @@
 
         $scope.selectEmployee = function (employee) {
             if ($scope.selectedEmployee !== null) {
-                alert("Već je odabran radnik");
+                alert('Već je odabran radnik');
                 return;
             }
             $scope.showDeselectX = true;
             $scope.selectedEmployee = employee;
-            $scope.allEmployees.splice($scope.allEmployees.indexOf(employee), 1);
+            $scope.employees.splice($scope.employees.indexOf(employee), 1);
         }
 
         $scope.deselectEmployee = function (employee) {
             $scope.showDeselectX = false;
-            $scope.allEmployees.push(employee);
+            $scope.employees.push(employee);
             $scope.selectedEmployee = null;
         }
 
@@ -66,19 +84,29 @@
             return $scope.showDeselectX;
         }
 
-        $scope.selectProduct = function (product) {
+        $scope.selectIncomingProduct = function (product) {
+            $scope.selectedProducts.push(product);
+            $scope.products.splice($scope.products.indexOf(product), 1);
+        }
+
+        $scope.deselectIncomingProduct = function (product) {
+            $scope.products.push(product);
+            $scope.selectedProducts.splice($scope.selectedProducts.indexOf(product), 1);
+        }
+
+        $scope.selectOutgoingProduct = function (product) {
             $scope.selectedProducts.push(product);
             $scope.allProducts.splice($scope.allProducts.indexOf(product), 1);
         }
 
-        $scope.deselectProduct = function (product) {
+        $scope.deselectOutgoingProduct = function (product) {
             $scope.allProducts.push(product);
             $scope.selectedProducts.splice($scope.selectedProducts.indexOf(product), 1);
         }
 
         $scope.addNewOrder = function () {
             if ($scope.selectedProducts.length === 0) {
-                alert("Morate naručiti barem jedan proizvod");
+                alert('Morate naručiti barem jedan proizvod');
                 return;
             }
             

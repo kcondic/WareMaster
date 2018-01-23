@@ -464,6 +464,7 @@
     <Content Include="Scripts\vendor\ng-file-upload.min.js" />
     <Content Include="Scripts\vendor\angular-ui-router.min.js" />
     <Content Include="Scripts\vendor\angular.js" />
+    <Content Include="Scripts\vendor\ng-infinite-scroll.min.js" />
     <Content Include="Scripts\vendor\underscore.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

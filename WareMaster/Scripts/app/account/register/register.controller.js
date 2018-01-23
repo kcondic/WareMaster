@@ -3,16 +3,12 @@ function ($scope, $state, loginRepository, $timeout, $rootScope) {
 
         $rootScope.currentTemplate = 'register';
 
-        var timeoutPromise;
         $scope.checkUsername = function () {
             $scope.userNameExists = false;
-            $timeout.cancel(timeoutPromise);
-            timeoutPromise = $timeout(function () {
                 loginRepository.checkIfUsernameExists($scope.username).then(function (doesUsernameExist) {
                     if (doesUsernameExist.data)
                         $scope.userNameExists = true;
                 });
-            }, 1000);
         };
 
 

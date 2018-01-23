@@ -14,10 +14,20 @@ namespace WareMaster.Domain.Repositories
         public List<Supplier> GetAllSuppliers(int companyId)
         {
             using (var context = new WareMasterContext())
+                return context.Suppliers.Where(supplier => supplier.CompanyId == companyId)
+                                        .Include(supplier => supplier.Products)
+                                        .ToList();
+        }
+
+        public List<Supplier> GetSuppliers(int companyId, int currentPosition)
+        {
+            using (var context = new WareMasterContext())
             {
-                return context.Suppliers
-                    .Include(supplier => supplier.Products)
-                    .Where(supplier => supplier.CompanyId == companyId).ToList();
+                return context.Suppliers.Where(supplier => supplier.CompanyId == companyId)
+                                        .OrderBy(supplier => supplier.Id)
+                                        .Skip(currentPosition)
+                                        .Take(10)
+                                        .ToList();
             }
         }
 
@@ -25,7 +35,7 @@ namespace WareMaster.Domain.Repositories
         {
             using (var context = new WareMasterContext())
             {
-                Supplier supplier = context.Suppliers
+                var supplier = context.Suppliers
                    .Include(s => s.Products)
                    .SingleOrDefault(s => s.Id == supplierId);
                 if (supplier != null && supplier.CompanyId == companyId)
@@ -97,6 +107,14 @@ namespace WareMaster.Domain.Repositories
                 context.Suppliers.Remove(supplierToDelete);
                 context.SaveChanges();
             }
+        }
+
+        public List<Supplier> SearchSuppliers(int companyId, string searchText)
+        {
+            using (var context = new WareMasterContext())
+                return context.Suppliers.Where(supplier => supplier.CompanyId == companyId &&
+                                               supplier.Name.ToLower().StartsWith(searchText.ToLower()))
+                                        .ToList();
         }
     }
 }

@@ -86,5 +86,12 @@ namespace WareMaster.Controllers
                 return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
             return Ok(true);
         }
+
+        [HttpGet]
+        [Route("search")]
+        public IHttpActionResult SearchOrders(int companyid, string searchText)
+        {
+            return Ok(_orderRepository.SearchOrders(companyid, searchText));
+        }
     }
 }
