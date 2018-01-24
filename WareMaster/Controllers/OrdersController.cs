@@ -79,9 +79,7 @@ namespace WareMaster.Controllers
         {
             var orderId = orderIdObject["orderId"].ToObject<int>();
             var didOrderConfirm = _orderRepository.ConfirmIncomingOrder(orderId);
-            if (!didOrderConfirm)
-                return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Unauthorized));
-            return Ok("Narudžba je uspješno prihvaćena. Hvala!");
+            return Ok(!didOrderConfirm ? "Ta narudžba je već prihvaćena! Pristup odbijen." : "Narudžba je uspješno prihvaćena. Hvala!");
         }
 
         [HttpGet]
