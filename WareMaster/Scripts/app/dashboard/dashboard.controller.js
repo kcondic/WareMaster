@@ -21,67 +21,68 @@ function ($scope, $rootScope, $state, loginRepository, functionsRepository, orde
         $scope.allOrders = allOrders.data;
     });
 
-    $scope.myDataset = [100, 200, 300, 400, 500];
+    functionsRepository.getGeneralInfo(companyId).then(function (info) {
+        var data = info.data;
+        $scope.employeeCount = data.employeeCount;
+        $scope.productCount = data.productCount;
+        $scope.supplierCount = data.supplierCount;
+        $scope.allOrdersCount = data.allOrdersCount;
 
-    //$scope.showWeeks = function () {
-    //    if ($scope.allOrders === null)
-    //        return false;
-    //    else {
-    //        $scope.areWeeksSet = SetWeeks();
-    //        if ($scope.areWeeksSet) alert($scope.weeks);
-    //        return $scope.areWeeksSet;
-    //    }
-    //}
+        var incomingOrdersCount = [data.incomingOrdersPlannedCount, data.incomingOrdersActiveCount, data.incomingOrdersFinishedCount]
+        var allIncomingOrdersCount = incomingOrdersCount[0]+incomingOrdersCount[1]+incomingOrdersCount[2];
 
-    //$scope.weeks = [];
+        var outgoingOrdersCount = [data.outgoingOrdersPlannedCount, data.outgoingOrdersActiveCount, data.outgoingOrdersFinishedCount]
+        var allOutgoingOrdersCount = outgoingOrdersCount[0] + outgoingOrdersCount[1] + outgoingOrdersCount[2];
 
-    //$scope.SetWeeks = function () {
-    //    for (let order in $scope.allOrders) {
-    //        var orderTime = order.TimeOfCreation;
-    //        var orderWeekDay = new Date(orderTime).getDay();
-    //        var firstWeekDay = new Date();
-    //        var lastWeekDay = new Date();
-    //        var today = new Date();
+        if (allIncomingOrdersCount === 0) {
+            $scope.incomingPlannedOrdersPercentage = 0;
+            $scope.incomingActiveOrdersPercentage = 0;
+            $scope.incomingFinishedOrdersPercentage = 0;
+        } else {
+            $scope.incomingPlannedOrdersPercentage = (incomingOrdersCount[0] / allIncomingOrdersCount) * 100;
+            $scope.incomingActiveOrdersPercentage = (incomingOrdersCount[1] / allIncomingOrdersCount) * 100;
+            $scope.incomingFinishedOrdersPercentage = (incomingOrdersCount[2] / allIncomingOrdersCount) * 100;
+        }
+        
+        if (allOutgoingOrdersCount === 0) {
+            $scope.outgoingPlannedOrdersPercentage = 0;
+            $scope.outgoingActiveOrdersPercentage = 0;
+            $scope.outgoingFinishedOrdersPercentage = 0;
+        } else {
+            $scope.outgoingPlannedOrdersPercentage = (outgoingOrdersCount[0] / allOutgoingOrdersCount) * 100;
+            $scope.outgoingActiveOrdersPercentage = (outgoingOrdersCount[1] / allOutgoingOrdersCount) * 100;
+            $scope.outgoingFinishedOrdersPercentage = (outgoingOrdersCount[2] / allOutgoingOrdersCount) * 100;
+        }
 
-    //        if (order === $scope.allOrders[0] && today.getDay()===1) {
-    //            firstWeekDay.setDate(today.getDate());
-    //            lastWeekDay.setDate(today.getDate() + 6);
-    //            $scope.weeks.push(firstWeekDay, lastWeekDay);
-    //        }
-            
-    //        firstWeekDay.setDate(orderTime.getDate() - (6 + orderWeekDay)%7);
-    //        lastWeekDay.setDate(orderTime.getDate() + (7 - orderWeekDay)%7);
-    //        $scope.weeks.push(firstWeekDay, lastWeekDay);
-    //    }
+        
+        var emptyIncomingDonut = 0;
+        var emptyOutgoingDonut = 0;
 
-    //    if (weeks === null)
-    //        return false;
-    //    else
-    //        return true;
-    //}
+        if (allIncomingOrdersCount === 0)
+            emptyIncomingDonut = 1;
+        else
+            emptyIncomingDonut = 0;
 
-    //$scope.selectedWeek = [];
+        if (allOutgoingOrdersCount === 0)
+            emptyOutgoingDonut = 1;
+        else
+            emptyOutgoingDonut = 0;
 
-    //if (weeks !== null)
-    //    $scope.selectedWeek = weeks[0];
+        $scope.incomingDonutColours = ['#808080', '#cd5c5c', '#801d1d', '#e6e6e6'];
+        $scope.outgoingDonutColours = ['#808080', '#add8e6', '#4682b4', '#e6e6e6'];
 
-    //$scope.setSelectedWeek = function (week) {
-    //    $scope.selectedWeek = week;
-    //}
+        $scope.labels = ["Planirane", "U tijeku", "Izvršene", "Nema narudžbi!"];
+        $scope.incomingData = [data.incomingOrdersPlannedCount, data.incomingOrdersActiveCount, data.incomingOrdersFinishedCount, emptyIncomingDonut];
+        $scope.outgoingData = [data.outgoingOrdersPlannedCount, data.outgoingOrdersActiveCount, data.outgoingOrdersFinishedCount, emptyOutgoingDonut];
 
-    //$scope.getSelectedWeek = function () {
-    //    var mWeek1 = $filter('date')($scope.selectedWeek[0], "dd.MM.yyyy.");
-    //    var mWeek2 = $filter('date')($scope.selectedWeek[1], "dd.MM.yyyy.");
 
-    //    return mWeek1+'-'+mWeek2;
-    //}
+        $scope.series = ['Ulazne izvršene', 'Izlazne izvršene'];
+        $scope.barLabels = ['Pon', 'Uto', 'Sri', 'Čet', 'Pet', 'Sub', 'Ned'];
+        $scope.barData = [
+            [65, 59, 80, 81, 56, 55, 40],
+            [28, 48, 40, 19, 86, 27, 90]
+        ];
 
-    //$scope.setBarHeight = function (barIndex, barOrderType) {
-    //    var numberOfOrders = 0;
-    //    for ($scope.order in $scope.allOrders) {
-    //        if ($scope.order.Status === 0 && barOrderType === $scope.order.Type) {
-                
-    //        }
-    //    }
-    //}
+        $scope.barColors = ['#4682b4', '#add8e6'];
+    });
 });

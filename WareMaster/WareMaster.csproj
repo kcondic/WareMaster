@@ -458,12 +458,10 @@
     <Content Include="Scripts\app\product\products\products.controller.js" />
     <Content Include="Scripts\app\product\products\products.state.js" />
     <Content Include="Scripts\app\product\products\products.template.html" />
-    <Content Include="Scripts\d3\d3.js" />
-    <Content Include="Scripts\d3\d3.min.js" />
     <Content Include="Scripts\vendor\angular-barcode.min.js" />
+    <Content Include="Scripts\vendor\angular-chart.min.js" />
     <Content Include="Scripts\vendor\angular-jwt.min.js" />
-    <Content Include="Scripts\vendor\ng-donut.js" />
-    <Content Include="Scripts\vendor\ng-donut.min.js" />
+    <Content Include="Scripts\vendor\Chart.min.js" />
     <Content Include="Scripts\vendor\ng-file-upload-shim.min.js" />
     <Content Include="Scripts\vendor\ng-file-upload.min.js" />
     <Content Include="Scripts\vendor\angular-ui-router.min.js" />
@@ -505,27 +503,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\fonts\CormorantInfant-Bold.ttf" />
-    <Content Include="Assets\fonts\CormorantInfant-BoldItalic.ttf" />
-    <Content Include="Assets\fonts\CormorantInfant-Italic.ttf" />
-    <Content Include="Assets\fonts\CormorantInfant-Light.ttf" />
-    <Content Include="Assets\fonts\CormorantInfant-LightItalic.ttf" />
     <Content Include="Assets\fonts\CormorantInfant-Medium.ttf" />
-    <Content Include="Assets\fonts\CormorantInfant-MediumItalic.ttf" />
     <Content Include="Assets\fonts\CormorantInfant-Regular.ttf" />
     <Content Include="Assets\fonts\CormorantInfant-SemiBold.ttf" />
-    <Content Include="Assets\fonts\CormorantInfant-SemiBoldItalic.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Scripts\d3\README.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Scripts\d3\LICENSE" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Scripts\d3\CHANGES.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Scripts\d3\API.md" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

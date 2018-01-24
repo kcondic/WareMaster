@@ -123,12 +123,9 @@
     border-color: rgb(220,220,220);
     text-align: center;
     position: relative;
-}
-/* SVG KRUŽNI GRAF */
-#dashboard .svg-circle{
-    width: 100%;
-    height: 100%;
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* OPIS KRUŽNOG GRAFA */
@@ -272,61 +269,6 @@
     font-size: 1em;
 }
 
-#dashboard .week-selection{
-    width: 21%;
-    height: 100%;
-    display: flex;
-    position: relative;
-}
-
-#dashboard .selected-week{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    position: relative;
-    font-size: 1em;
-    cursor: pointer;
-    width: 100%;
-}
-
-#dashboard .selected-week i{
-    font-size: 0.55em;
-}
-
-#dashboard .week-selection:hover .selected-week{
-    background-color: rgb(57, 57, 57);
-}
-
-#dashboard .week-content{
-    display: none;
-    position: absolute;
-    background-color: rgb(249,249,249);
-    min-width: 100%;
-    box-shadow: 0px 8px 16px 4px rgba(0, 0, 0, 0.2);
-    z-index: 3;
-    color: black;
-    font-size: 16px;
-}
-
-#dashboard .week-selection:hover .week-content{
-    display: flex;
-    flex-flow: column;
-    top: 1.8em;
-}
-
-#dashboard .week-content .current-selection{
-    border-right: solid 4px steelblue;
-    cursor: pointer;
-}
-
-#dashboard .week-content .week{
-    padding: 2px;
-}
-
-#dashboard .week-content .week:not(.current-selection):hover{
-    cursor: pointer;
-    border-right: solid 4px lightsteelblue;
-}
 /* DIZAJN STUPČASTOG GRAFA */
 #dashboard .bar-chart-graph{
     width: 100%;
@@ -334,30 +276,9 @@
     border-bottom-left-radius: 2.5px;
     border-top-left-radius: 2.5px;
     font-size: 16px;
-}
-
-#dashboard .bar-chart-grid{
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-#dashboard .text-svg,
-#dashboard .rect-svg,
-#dashboard .path-svg,
-#dashboard .tspan-svg {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-#dashboard .text-svg {
-    font-family: inherit;
-    font-weight: normal;
-    text-anchor: middle;
-    font-size: 1.1em;
-}
-
-#dashboard .rect-svg {
-    fill-opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* DESNI STUPAC */

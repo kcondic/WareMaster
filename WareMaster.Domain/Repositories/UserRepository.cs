@@ -140,5 +140,11 @@ namespace WareMaster.Domain.Repositories
                                             user.LastName.ToLower().StartsWith(searchText.ToLower())))
                                     .ToList();
         }
+
+        public int GetEmployeeCount(int companyId)
+        {
+            using (var context = new WareMasterContext())
+                return context.Users.Where(user => user.Role == Role.Employee && user.CompanyId == companyId).Count();
+        }
     }
 }

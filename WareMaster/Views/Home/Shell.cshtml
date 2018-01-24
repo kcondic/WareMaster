@@ -31,11 +31,9 @@
     <script src="~/Scripts/vendor/ng-file-upload-shim.min.js"></script>
     <script src="~/Scripts/vendor/angular-barcode.min.js"></script>
     <script src="~/Scripts/vendor/ng-infinite-scroll.min.js"></script>
-    <script src="~/Scripts/d3/d3.js"></script>
-    <script src="~/Scripts/d3/d3.min.js"></script>
-    <script src="~/Scripts/vendor/ng-donut.js"></script>
-    <script src="~/Scripts/vendor/ng-donut.min.js"></script>
-        
+    <script src="~/Scripts/vendor/Chart.min.js"></script>   
+    <script src="~/Scripts/vendor/angular-chart.min.js"></script> 
+
     <!-- General app scripts -->
     <script src="~/Scripts/app/main/app.module.js"></script>
     <script src="~/Scripts/app/main/app.config.js"></script>
@@ -228,28 +226,6 @@
                     <button ui-sref="addemployee" ng-if="currentTemplate==='employees'">Dodaj zaposlenika</button>
                     <button ui-sref="addsupplier" ng-if="currentTemplate==='suppliers'">Dodaj dobavljaèa</button>
                     <button ui-sref="addorder" ng-if="currentTemplate==='orders'">Nova narudžba</button>
-                </div>
-            </div>
-            <div class="sort-by-box">
-                <div class="dropdown">
-                    <div class="sort-button icon-button">
-                        <p>Sortiraj po:<span class="sort-type">Vremenu dodavanja</span></p>
-                        <span class="sort-chevron-down" aria-hidden="true">
-                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                    <div class="button-content">
-                        <div class="button-content-item selected-sort-choice">Vremenu dodavanja</div>
-                        <div class="button-content-item">
-                            {{getButtonFirstItem(currentTemplate)}}
-                        </div>
-                        <div class="button-content-item" ng-if="currentTemplate==='products' || currentTemplate==='employees'">
-                            {{getButtonSecondItem(currentTemplate)}}
-                        </div>
-                        <div class="button-content-item" ng-if="currentTemplate==='products'">
-                            {{templates[0].buttonContentItems.third}}
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="search-content-box">
