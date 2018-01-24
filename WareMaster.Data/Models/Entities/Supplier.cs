@@ -9,5 +9,6 @@ namespace WareMaster.Data.Models.Entities
         public ICollection<Product> Products { get; set; }
         public Company Company { get; set; }
         public int CompanyId { get; set; }
+        public string Email { get; set; }
     }
 }

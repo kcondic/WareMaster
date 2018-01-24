@@ -6,6 +6,7 @@
         suppliersRepository.getSupplierDetails($stateParams.id, companyId).then(function (supplier) {
             $scope.supplierToEdit = supplier.data;
             $scope.name = $scope.supplierToEdit.Name;
+            $scope.email = $scope.supplierToEdit.Email;
             $scope.products = $scope.supplierToEdit.Products;
             
             productsRepository.getProductsUncontainedInSupplier($stateParams.id, companyId).then(function (products) {
@@ -27,6 +28,7 @@
 
         $scope.editSupplier = function () {
             $scope.supplierToEdit.Name = $scope.name;
+            $scope.supplierToEdit.Email = $scope.email;
             $scope.supplierToEdit.Products = $scope.products;
             suppliersRepository.editSupplier($scope.supplierToEdit).then(function () {
                 activitylogRepository.addActivityLog({

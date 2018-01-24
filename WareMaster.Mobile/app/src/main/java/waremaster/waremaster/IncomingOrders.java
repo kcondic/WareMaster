@@ -92,7 +92,7 @@ public class IncomingOrders extends AppCompatActivity {
                 }
                 try {
                     orderObject.put("Status", 2);
-                    orderObject.put("Note", note.getText().toString());
+                    orderObject.put("Note", "Zaposlenik " + firstName + " " + lastName + ": " + note.getText().toString());
                     orderObject.put("ProductOrders", newProductOrders);
                 } catch (JSONException e) {
                     e.printStackTrace();
