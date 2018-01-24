@@ -66,13 +66,13 @@
                 <div class="bar-chart-content">
                     <div class="bar-chart-description">
                         <div class="description-title">IZVRŠENE NARUDŽBE PO DANU</div>
-                        <div class="week-selection">
+                        <div class="week-selection" ng-show="showWeeks()">
                             <div class="selected-week">
-                                <div>dd.MM.-dd.MM. yyyy.</div>
+                                <div></div>
                                 <i aria-hidden="true" class="fa fa-chevron-down"></i>
                             </div>
                             <div class="week-content">
-                                <div class="week current-selection">dd.MM.-dd.MM. yyyy.</div>
+                                <div class="week current-selection" ng-repeat="week in weeks" ng-click="setSelectedWeek(indexOf(week))">{{week[0]| date: 'dd.MM.yyyy.'}}-{{week[1]| date: 'dd.MM.yyyy.'}}</div>
                             </div>
                         </div>
                     </div>
