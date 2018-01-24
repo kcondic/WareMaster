@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html ng-app="app">
@@ -32,7 +31,11 @@
     <script src="~/Scripts/vendor/ng-file-upload-shim.min.js"></script>
     <script src="~/Scripts/vendor/angular-barcode.min.js"></script>
     <script src="~/Scripts/vendor/ng-infinite-scroll.min.js"></script>
-    
+    <script src="~/Scripts/d3/d3.js"></script>
+    <script src="~/Scripts/d3/d3.min.js"></script>
+    <script src="~/Scripts/vendor/ng-donut.js"></script>
+    <script src="~/Scripts/vendor/ng-donut.min.js"></script>
+        
     <!-- General app scripts -->
     <script src="~/Scripts/app/main/app.module.js"></script>
     <script src="~/Scripts/app/main/app.config.js"></script>
@@ -124,26 +127,14 @@
 
             <ul>
                 <li class="dropdown">
-                    <div class="icon-button" ng-click="iconClicked(1)">
-                        <span class="notification-icon" aria-hidden="true">
-                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                    <div class="button-content notification-content icon-button-content" ng-class="amIDisplayed(1)">
-                        <div class="button-content-item"><p>Ovo je 1. obavijest</p></div>
-                        <div class="button-content-item"><p>Ovo je 2. obavijest</p></div>
-                        <div class="button-content-item"><p>Ovo je 3. obavijest</p></div>
-                    </div>
-                </li>
-                <li class="dropdown">
                     <div class="icon-button" ng-click="iconClicked(2)">
                         <span class="help-icon" aria-hidden="true">
                             <i class="fa fa-question-circle" aria-hidden="true"></i>
                         </span>
                     </div>
                     <div class="button-content icon-button-content" ng-class="amIDisplayed(2)">
-                        <div class="button-content-item">Pomoæ</div>
-                        <div class="button-content-item">O WareMasteru</div>
+                        <div class="button-content-item" ng-click="iconClicked(0)">Pomoæ</div>
+                        <div class="button-content-item" ng-click="iconClicked(0)">O WareMasteru</div>
                     </div>
                 </li>
                 <li class="dropdown">

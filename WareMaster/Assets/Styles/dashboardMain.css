@@ -333,8 +333,6 @@
     height: 90%;
     border-bottom-left-radius: 2.5px;
     border-top-left-radius: 2.5px;
-    overflow: auto;
-    -ms-overflow-style: auto;
     font-size: 16px;
 }
 
@@ -344,24 +342,21 @@
     position: relative;
 }
 
-#dashboard .text-svg {
+#dashboard .text-svg,
+#dashboard .rect-svg,
+#dashboard .path-svg,
+#dashboard .tspan-svg {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+#dashboard .text-svg {
     font-family: inherit;
     font-weight: normal;
     text-anchor: middle;
     font-size: 1.1em;
 }
 
-#dashboard .tspan-svg {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-#dashboard .path-svg {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
 #dashboard .rect-svg {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     fill-opacity: 1;
 }
 
@@ -403,6 +398,8 @@
 .activity-content{
     padding: 2px 0px 4px 8px;
     font-size: 17px;
+    opacity: 0;
+    animation: fadein 0.5s linear 0.4s forwards normal;
 }
 
 .activity-content:nth-of-type(2n+1){

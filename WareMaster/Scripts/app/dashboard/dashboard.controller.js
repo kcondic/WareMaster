@@ -16,4 +16,6 @@ function ($scope, $rootScope, $state, loginRepository, functionsRepository) {
         load();
         currentPosition += 20;
     }
+
+    $rootScope.myDataset = [100, 200, 300, 400, 500];
 });
