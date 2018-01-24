@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Mail;
+using System.Text;
 using System.Web.Http;
 using System.Web.Http.Results;
 using Newtonsoft.Json.Linq;
 using WareMaster.Data.Models.Entities;
 using WareMaster.Domain.Repositories;
+using Type = WareMaster.Data.Models.Entities.Type;
 
 namespace WareMaster.Controllers
 {
@@ -18,8 +21,12 @@ namespace WareMaster.Controllers
         public OrdersController()
         {
             _orderRepository = new OrderRepository();
+            _supplierRepository = new SupplierRepository();
+            _companyRepository = new CompanyRepository();
         }
         private readonly OrderRepository _orderRepository;
+        private readonly SupplierRepository _supplierRepository;
+        private readonly CompanyRepository _companyRepository;
 
         [HttpGet]
         [Route("")]
@@ -32,8 +39,47 @@ namespace WareMaster.Controllers
         [Route("add")]
         public IHttpActionResult AddNewOrder(Order order)
         {
-            _orderRepository.AddNewOrder(order);
+            var orderId = _orderRepository.AddNewOrder(order);
+
+            if (order.Type == Type.Incoming)
+            {
+                if (order.SupplierId == null)
+                    return new ResponseMessageResult(Request.CreateResponse(HttpStatusCode.Forbidden));
+                var supplierMail = _supplierRepository.GetSupplierDetails(order.SupplierId.Value, order.CompanyId).Email;
+                if (supplierMail == null)
+                    return Ok(true);
+
+                var mail = new MailMessage();
+                var smtpServer = new SmtpClient("smtp.gmail.com");
+
+                mail.From = new MailAddress("waremasterapp@gmail.com");
+                mail.To.Add(supplierMail);
+                mail.Subject = "Nova narudžba od tvrtke " + _companyRepository.GetCompanyById(order.CompanyId).Name;
+
+                mail.Body =
+                    "Molimo Vas da kliknete na link kako bi potvrdili da ćete započeti s narudžbom: " +
+                    "<form method=\"post\" action=\"https://waremaster.azurewebsites.net/api/orders/confirmincoming\" " +
+                    "class=\"inline\">\r\n  <input type=\"hidden\" name=\"orderId\" value=\"" + orderId + "\">\r\n  " +
+                    "<button type=\"submit\" name=\"submit_param\" value=\"submit_value\" " +
+                    "class=\"link-button\">\r\nPotvrdi narudžbu\r\n  </button>\r\n</form>";
+                mail.IsBodyHtml = true;
+                smtpServer.Port = 587;
+                smtpServer.Credentials = new NetworkCredential("waremasterapp@gmail.com", "Skladospodar00");
+                smtpServer.EnableSsl = true;
+
+                smtpServer.Send(mail);
+            }
             return Ok(true);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("confirmincoming")]
+        public IHttpActionResult ConfirmIncomingOrder(JObject orderIdObject)
+        {
+            var orderId = orderIdObject["orderId"].ToObject<int>();
+            var didOrderConfirm = _orderRepository.ConfirmIncomingOrder(orderId);
+            return Ok(!didOrderConfirm ? "Ta narudžba je već prihvaćena! Pristup odbijen." : "Narudžba je uspješno prihvaćena. Hvala!");
         }
 
         [HttpGet]

@@ -84,6 +84,7 @@ namespace WareMaster.Domain.Repositories
                 context.ProductOrders.RemoveRange(productOrdersToDelete);
 
                 supplierToEdit.Name = editedSupplier.Name;
+                supplierToEdit.Email = editedSupplier.Email;
                 supplierToEdit.Products = editedSupplier.Products;
 
                 context.SaveChanges();

@@ -149,8 +149,6 @@
                         CompanyId: companyId
                     });
                 $state.go('orders', {}, { reload: true });
-            });
-
-            
+            });          
         }
     });

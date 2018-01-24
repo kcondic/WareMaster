@@ -35,6 +35,7 @@ namespace WareMaster.Domain.Repositories
                 activityLogToAdd.User = context.Users.Find(activityLogToAdd.UserId);
                 activityLogToAdd.Company = context.Companies.Find(activityLogToAdd.CompanyId);
 
+                if (activityLogToAdd.User != null)
                 context.Users.Attach(activityLogToAdd.User);
                 context.Companies.Attach(activityLogToAdd.Company);
 

@@ -45,7 +45,7 @@ namespace WareMaster.Domain.Repositories
             }
         }
 
-        public void AddNewOrder(Order order)
+        public int AddNewOrder(Order order)
         {
             using (var context = new WareMasterContext())
             {
@@ -64,6 +64,8 @@ namespace WareMaster.Domain.Repositories
 
                 context.Orders.Add(newOrder);
                 context.SaveChanges();
+
+                return newOrder.Id;
             }
         }
 
@@ -195,6 +197,27 @@ namespace WareMaster.Domain.Repositories
                                             order.AssignedEmployee.FirstName.ToLower().StartsWith(searchText.ToLower()) || 
                                             order.AssignedEmployee.LastName.ToLower().StartsWith(searchText.ToLower())))
                                      .ToList();
+        }
+
+        public bool ConfirmIncomingOrder(int orderId)
+        {
+            using (var context = new WareMasterContext())
+            {
+                var orderToConfirm = context.Orders.Include(order => order.Supplier).SingleOrDefault(order => order.Id == orderId);
+                if (orderToConfirm == null || orderToConfirm.Status != Status.Created)
+                    return false;
+                orderToConfirm.Status = Status.InProgress;
+                context.SaveChanges();
+                var activityLog = new ActivityLog()
+                {
+                    CompanyId = orderToConfirm.CompanyId,
+                    Text = "Dobavljač " + orderToConfirm.Supplier.Name + " je potvrdio ulaznu narudžbu."
+                };
+                var activityLogRepository = new ActivityLogRepository();
+                activityLogRepository.AddActivityLog(activityLog);
+
+                return true;
+            }
         }
     }
 }
