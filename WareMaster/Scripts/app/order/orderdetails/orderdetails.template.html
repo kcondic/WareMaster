@@ -8,7 +8,7 @@
         </div>
         <div class="modal-content" ng-show="showNote===1">
             <div class="modal-content-row creation-time-row">
-                <div class="modal-row-element">Stvorena: {{order.TimeOfCreation | date:"dd. MM. yyyy.'god.'  'u'  H:m:s 'sati'"}}</div>
+                <div class="modal-row-element">Stvorena: {{order.TimeOfCreation | date:"dd. MM. yyyy.'god.'  'u'  HH:mm:ss 'sati'"}}</div>
             </div>
             <div class="modal-content-row">
                 <div class="modal-row-element" ng-show="order.Type===0">Dobavljač: {{nameOfSupplier}}</div>
