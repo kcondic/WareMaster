@@ -18,15 +18,15 @@
                     <div class="circle-description">
                         <div class="color-row">
                             <div class="order-planned-color"></div>
-                            <div class="circle-text">Planirane <span>{{incomingPlannedOrdersPercentage}}%</span></div>
+                            <div class="circle-text">Planirane <span>{{incomingPlannedOrdersPercentage| number: 1}}%</span></div>
                         </div>
                         <div class="color-row">
                             <div class="order-active-red-color"></div>
-                            <div class="circle-text">U tijeku <span>{{incomingActiveOrdersPercentage}}%</span></div>
+                            <div class="circle-text">U tijeku <span>{{incomingActiveOrdersPercentage| number: 1}}%</span></div>
                         </div>
                         <div class="color-row">
                             <div class="order-finished-red-color"></div>
-                            <div class="circle-text">Izvršene <span>{{incomingFinishedOrdersPercentage}}%</span></div>
+                            <div class="circle-text">Izvršene <span>{{incomingFinishedOrdersPercentage| number: 1}}%</span></div>
                         </div>
                     </div>
                 </div>
@@ -39,15 +39,15 @@
                     <div class="circle-description">
                         <div class="color-row">
                             <div class="order-planned-color"></div>
-                            <div class="circle-text">Planirane <span>{{outgoingPlannedOrdersPercentage}}%</span></div>
+                            <div class="circle-text">Planirane <span>{{outgoingPlannedOrdersPercentage| number: 1}}%</span></div>
                         </div>
                         <div class="color-row">
                             <div class="order-active-blue-color"></div>
-                            <div class="circle-text">U tijeku <span>{{outgoingActiveOrdersPercentage}}%</span></div>
+                            <div class="circle-text">U tijeku <span>{{outgoingActiveOrdersPercentage| number: 1}}%</span></div>
                         </div>
                         <div class="color-row">
                             <div class="order-finished-blue-color"></div>
-                            <div class="circle-text">Izvršene <span>{{outgoingFinishedOrdersPercentage}}%</span></div>
+                            <div class="circle-text">Izvršene <span>{{outgoingFinishedOrdersPercentage| number: 1}}%</span></div>
                         </div>
                     </div>
                 </div>
