@@ -47,10 +47,19 @@
                 });
         }
 
+        function getGeneralInfo(companyId) {
+            return $http.get('api/dashboard/generalinfo', {
+                params: {
+                    companyId: companyId
+                }
+            });
+        }
+
         return {
             uploadEmployeeImage: uploadEmployeeImage,
             uploadProductImage: uploadProductImage,
             getTen: getTen,
-            searchRequest: searchRequest
+            searchRequest: searchRequest,
+            getGeneralInfo: getGeneralInfo
         }
     });

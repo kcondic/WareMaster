@@ -137,5 +137,11 @@ namespace WareMaster.Domain.Repositories
                                               product.Name.ToLower().StartsWith(searchText.ToLower()))
                                        .ToList();
         }
+
+        public int GetProductCount(int companyId)
+        {
+            using (var context = new WareMasterContext())
+                return context.Products.Where(product => product.CompanyId == companyId).Count();
+        }
     }
 }

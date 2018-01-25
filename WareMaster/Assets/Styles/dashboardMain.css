@@ -121,11 +121,14 @@
     height: 50%;
     width: 100%;
     border-color: rgb(220,220,220);
-    background-color: paleturquoise;
     text-align: center;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* OPIS KRUŽNOG GRAFA */
 #dashboard .circle-description{
     height: 50%;
     width: 100%;
@@ -259,112 +262,23 @@
     flex-flow: row;
     align-items: center;
     justify-content: space-around;
+    font-size: 16px;
 }
 
 #dashboard .description-title{
     font-size: 1em;
 }
 
-#dashboard .week-selection{
-    width: 21%;
-    height: 100%;
-    display: flex;
-    position: relative;
-}
-
-#dashboard .selected-week{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    position: relative;
-    font-size: 1em;
-    cursor: pointer;
-    width: 100%;
-}
-
-#dashboard .selected-week i{
-    font-size: 0.55em;
-}
-
-#dashboard .week-selection:hover .selected-week{
-    background-color: rgb(57, 57, 57);
-}
-
-#dashboard .week-content{
-    display: none;
-    position: absolute;
-    background-color: rgb(249,249,249);
-    min-width: 100%;
-    box-shadow: 0px 8px 16px 4px rgba(0, 0, 0, 0.2);
-    z-index: 3;
-    color: black;
-    font-size: 16px;
-}
-
-#dashboard .week-selection:hover .week-content{
-    display: flex;
-    flex-flow: column;
-    top: 1.8em;
-}
-
-#dashboard .week-content .current-selection{
-    border-right: solid 4px steelblue;
-    cursor: pointer;
-}
-
-#dashboard .week-content .week{
-    padding: 2px;
-}
-
-#dashboard .week-content .week:not(.current-selection):hover{
-    cursor: pointer;
-    border-right: solid 4px lightsteelblue;
-}
 /* DIZAJN STUPČASTOG GRAFA */
 #dashboard .bar-chart-graph{
     width: 100%;
     height: 90%;
     border-bottom-left-radius: 2.5px;
     border-top-left-radius: 2.5px;
-}
-
-#dashboard .bar-chart-grid{
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-#dashboard .text-svg {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    font-family: sans-serif;
-    font-weight: normal;
-    text-anchor: middle;
-}
-
-#dashboard .txt-zero {
-    transform: translateY(10em) translateX(19.5px);
-}
-
-#dashboard .txt-twenty-five{
-    transform: translateY(8em) translateX(19.5px);
-}
-#dashboard .txt-fifty{
-    transform: translateY(6em) translateX(19.5px);
-}
-#dashboard .txt-seventy-five{
-    transform: translateY(4em) translateX(19.5px);
-}
-#dashboard .txt-hundred{
-    transform: translateY(2em) translateX(19.5px);
-}
-
-#dashboard .tspan-svg {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-#dashboard .path-svg {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    transform: translateY(0em);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* DESNI STUPAC */
@@ -405,6 +319,8 @@
 .activity-content{
     padding: 2px 0px 4px 8px;
     font-size: 17px;
+    opacity: 0;
+    animation: fadein 0.5s linear 0.4s forwards normal;
 }
 
 .activity-content:nth-of-type(2n+1){

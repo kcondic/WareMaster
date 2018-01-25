@@ -10,7 +10,7 @@
                 <div class="details-modal-column">
                     <div class="order-modal-row">Naziv: {{product.Name}}</div>
                     <div class="order-modal-row">Dobavljač:</div>
-                    <div class="order-modal-row details-name-container">
+                    <div class="order-modal-row details-name-container orders-listed">
                         <div ng-repeat="supplier in product.Suppliers" class="details-name-div">
                             <div ui-sref="supplierdetails({id:supplier.Id})">{{supplier.Name}}</div>
                         </div>

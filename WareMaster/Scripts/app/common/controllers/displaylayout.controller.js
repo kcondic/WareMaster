@@ -93,30 +93,17 @@
 
     $scope.iconClicked = function(iconIndex){
         if($scope.clickCounter===0){
-            if(iconIndex===1)
-                $scope.clickCounter = 1;
-            else if(iconIndex===2)
+            if(iconIndex===2)
                 $scope.clickCounter = 2;
             else 
                 $scope.clickCounter = 3;
-        } else if($scope.clickCounter===1){
-            if (iconIndex === 2)
-                $scope.clickCounter = 2;
-            else if (iconIndex === 3)
-                $scope.clickCounter = 3;
-            else
-                $scope.clickCounter = 0;
         } else if ($scope.clickCounter === 2) {
-            if (iconIndex === 1)
-                $scope.clickCounter = 1;
-            else if (iconIndex === 3)
+            if (iconIndex === 3)
                 $scope.clickCounter = 3;
             else
                 $scope.clickCounter = 0;
         } else {
-            if (iconIndex === 1)
-                $scope.clickCounter = 1;
-            else if (iconIndex === 2)
+            if (iconIndex === 2)
                 $scope.clickCounter = 2;
             else
                 $scope.clickCounter = 0;

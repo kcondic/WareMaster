@@ -9,7 +9,9 @@
             <div class="modal-content-row">
                 <div class="modal-row-element">Naziv: {{supplier.Name}}</div>
             </div>
-            <div class="modal-row-element">Proizvodi dobavljača:</div>
+            <div class="modal-content-row">
+                <div class="modal-row-element">Proizvodi dobavljača:</div>
+            </div>
             <div class="modal-content-row products-row">
                 <div class="products-container">
                     <div ng-repeat="product in supplier.Products" class="single-product" ui-sref="productdetails({id:product.Id})">
