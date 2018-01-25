@@ -80,8 +80,7 @@ namespace WareMaster.Domain.Repositories
                     .SingleOrDefault(order => order.Id == editedOrder.Id);
 
                 if (orderToEdit == null 
-                    || orderToEdit.Status == Status.Finished
-                    || orderToEdit.Status == Status.InProgress)
+                    || orderToEdit.Status == Status.Finished)
                     return false;
 
                 orderToEdit.Status = editedOrder.Status;
